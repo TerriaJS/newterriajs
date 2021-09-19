@@ -1,4 +1,4 @@
-import React from "react";
+import { ComponentClass, FunctionComponent, ComponentProps } from "react";
 import PropTypes from "prop-types";
 
 import ViewState from "../../ReactViewModels/ViewState";
@@ -11,8 +11,8 @@ interface WithTerriaRefProps {
 /*
     HOC to set a ref and store it in viewState
 */
-export const withTerriaRef = <P extends React.ComponentProps<any>>(
-  WrappedComponent: React.ComponentClass<P> | React.FunctionComponent<P>,
+export const withTerriaRef = <P extends ComponentProps<any>>(
+  WrappedComponent: ComponentClass<P> | FunctionComponent<P>,
   refName: string
 ) => {
   const WithTerriaRef = (props: P & WithTerriaRefProps) => {

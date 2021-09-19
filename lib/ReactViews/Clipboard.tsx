@@ -1,5 +1,5 @@
 import clipboard from "clipboard";
-import React, { useEffect, useState } from "react";
+import { ReactElement, FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import Box from "../Styled/Box";
@@ -16,13 +16,13 @@ enum CopyStatus {
 
 interface ClipboardProps {
   id: string;
-  source: React.ReactElement;
+  source: ReactElement;
   theme: "dark" | "light";
   rounded?: boolean;
   onCopy?: (contents: string) => void;
 }
 
-const Clipboard: React.FC<ClipboardProps> = props => {
+const Clipboard: FC<ClipboardProps> = props => {
   const { id, source, theme, rounded } = props;
   const { t } = useTranslation();
   const [status, setStatus] = useState<CopyStatus>(

@@ -1,6 +1,6 @@
 import { WithT } from "i18next";
 import isEmpty from "lodash-es/isEmpty";
-import React, { useEffect, useState } from "react";
+import { ChangeEvent, FC, FormEvent, useEffect, useState } from "react";
 import {
   useTranslation,
   WithTranslation,
@@ -16,12 +16,12 @@ import ItemSearchProvider, {
   NumericItemSearchParameter,
   TextItemSearchParameter
 } from "../../../Models/ItemSearchProviders/ItemSearchProvider";
+import Box from "../../../Styled/Box";
+import Button from "../../../Styled/Button";
+import Text from "../../../Styled/Text";
 import ErrorComponent from "./ErrorComponent";
 import { ItemSearchQuery } from "./ItemSearchTool";
 import Loading from "./Loading";
-import Text from "../../../Styled/Text";
-import Box from "../../../Styled/Box";
-import Button from "../../../Styled/Button";
 
 export interface SearchFormProps extends WithTranslation {
   itemSearchProvider: ItemSearchProvider;
@@ -38,7 +38,7 @@ type State =
   | { is: "error"; error: Error }
   | { is: "results"; results: ItemSearchResult[] };
 
-const SearchForm: React.FC<SearchFormProps> = props => {
+const SearchForm: FC<SearchFormProps> = props => {
   const { parameters, itemSearchProvider } = props;
   const [t] = useTranslation();
   const [state, setState] = useState<State>({ is: "initial" });
@@ -81,7 +81,7 @@ const SearchForm: React.FC<SearchFormProps> = props => {
       });
   }
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = (e: FormEvent) => {
     try {
       search();
     } finally {
@@ -133,7 +133,7 @@ interface ParameterProps extends WithT {
   disabled: boolean;
 }
 
-const Parameter: React.FC<ParameterProps> = props => {
+const Parameter: FC<ParameterProps> = props => {
   const { parameter } = props;
   switch (parameter.type) {
     case "numeric":
@@ -151,12 +151,12 @@ interface NumericParameterProps extends WithT {
   value?: { start: number; end: number };
 }
 
-export const NumericParameter: React.FC<NumericParameterProps> = props => {
+export const NumericParameter: FC<NumericParameterProps> = props => {
   const { parameter, value, t } = props;
   const { min, max } = parameter.range;
 
   const onChange = (tag: "start" | "end") => (
-    e: React.ChangeEvent<HTMLInputElement>
+    e: ChangeEvent<HTMLInputElement>
   ) => {
     const parsed = parseFloat(e.target.value);
     const newValue: any = { ...props.value };
@@ -220,7 +220,7 @@ type SelectOnChangeHandler<OptionType, IsMulti extends boolean> = (
   actionMeta: ActionMeta<OptionType>
 ) => void;
 
-const EnumParameter: React.FC<EnumParameterProps> = props => {
+const EnumParameter: FC<EnumParameterProps> = props => {
   const { parameter, disabled } = props;
   const options = parameter.values.map(({ id }) => ({
     value: id,
@@ -261,7 +261,7 @@ interface TextParameterProps {
   onChange: (value: string | undefined) => void;
 }
 
-const TextParameter: React.FC<TextParameterProps> = props => {
+const TextParameter: FC<TextParameterProps> = props => {
   const { parameter, value, onChange } = props;
   return (
     <Box column>

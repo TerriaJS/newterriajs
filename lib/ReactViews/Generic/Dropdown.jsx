@@ -1,11 +1,8 @@
 "use strict";
-
-import React from "react";
-import PropTypes from "prop-types";
-import createReactClass from "create-react-class";
-import defined from "terriajs-cesium/Source/Core/defined";
 import classNames from "classnames";
-
+import createReactClass from "create-react-class";
+import PropTypes from "prop-types";
+import defined from "terriajs-cesium/Source/Core/defined";
 import Styles from "./dropdown.scss";
 
 // Use this as drop down rather than the html <select> tag so we have more consistent styling

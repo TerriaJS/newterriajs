@@ -1,14 +1,12 @@
 "use strict";
-
-import React from "react";
 import { findWithClass } from "react-shallow-testutils";
-import { getShallowRenderedOutput } from "./MoreShallowTools";
-import {
-  StandardUserInterfaceWithoutTranslation as StandardUserInterface,
-  showStoryPrompt
-} from "../../lib/ReactViews/StandardUserInterface/StandardUserInterface";
 import Terria from "../../lib/Models/Terria";
 import ViewState from "../../lib/ReactViewModels/ViewState";
+import {
+  showStoryPrompt,
+  StandardUserInterfaceWithoutTranslation as StandardUserInterface
+} from "../../lib/ReactViews/StandardUserInterface/StandardUserInterface";
+import { getShallowRenderedOutput } from "./MoreShallowTools";
 
 describe("StandardUserInterface", function() {
   let terria;

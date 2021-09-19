@@ -2,7 +2,6 @@ import createReactClass from "create-react-class";
 import { observer } from "mobx-react";
 import { runInAction } from "mobx";
 import PropTypes from "prop-types";
-import React from "react";
 import defined from "terriajs-cesium/Source/Core/defined";
 import addedByUser from "../../Core/addedByUser";
 import getPath from "../../Core/getPath";

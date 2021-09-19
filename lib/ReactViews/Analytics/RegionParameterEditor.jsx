@@ -1,14 +1,9 @@
 "use strict";
-
-import React from "react";
-
 import createReactClass from "create-react-class";
-
 import PropTypes from "prop-types";
-
+import MapInteractionMode from "../../Models/MapInteractionMode";
 import Styles from "./parameter-editors.scss";
 import RegionPicker, { getDisplayValue } from "./RegionPicker";
-import MapInteractionMode from "../../Models/MapInteractionMode";
 
 const RegionParameterEditor = createReactClass({
   displayName: "RegionParameterEditor",

@@ -1,4 +1,3 @@
-import React from "react";
 import Box from "../../../../Styled/Box";
 import { RawButton } from "../../../../Styled/Button";
 import Ul, { Li } from "../../../../Styled/List";

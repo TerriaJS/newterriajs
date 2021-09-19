@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import Styles from "./input.scss";
 import classNames from "classnames";

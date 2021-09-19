@@ -1,10 +1,8 @@
 "use strict";
-
 import classNames from "classnames";
-import Icon from "../../../Styled/Icon";
-import React from "react";
 import createReactClass from "create-react-class";
 import PropTypes from "prop-types";
+import Icon from "../../../Styled/Icon";
 import Styles from "./concept-viewer.scss";
 
 const Concept = createReactClass({

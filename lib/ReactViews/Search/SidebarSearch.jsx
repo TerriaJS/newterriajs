@@ -1,7 +1,6 @@
 import createReactClass from "create-react-class";
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
-import React from "react";
 import { withTranslation } from "react-i18next";
 import { addMarker } from "../../Models/LocationMarkerUtils";
 import BadgeBar from "../BadgeBar";

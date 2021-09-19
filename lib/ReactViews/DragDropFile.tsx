@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { action, flow, runInAction } from "mobx";
 import { observer } from "mobx-react";
-import React from "react";
+import { DragEvent, MouseEvent, Component } from "react";
 import { Trans, withTranslation, WithTranslation } from "react-i18next";
 import isDefined from "../Core/isDefined";
 import CatalogMemberMixin, { getName } from "../ModelMixins/CatalogMemberMixin";
@@ -19,10 +19,10 @@ interface PropsType extends WithTranslation {
 }
 
 @observer
-class DragDropFile extends React.Component<PropsType> {
+class DragDropFile extends Component<PropsType> {
   target: EventTarget | undefined;
 
-  async handleDrop(e: React.DragEvent) {
+  async handleDrop(e: DragEvent) {
     e.preventDefault();
     e.stopPropagation();
 
@@ -80,19 +80,19 @@ class DragDropFile extends React.Component<PropsType> {
   }
 
   @action
-  handleDragEnter(e: React.DragEvent) {
+  handleDragEnter(e: DragEvent) {
     e.preventDefault();
     e.stopPropagation();
     e.dataTransfer.dropEffect = "copy";
     this.target = e.target;
   }
 
-  handleDragOver(e: React.DragEvent) {
+  handleDragOver(e: DragEvent) {
     e.preventDefault();
   }
 
   @action
-  handleDragLeave(e: React.MouseEvent) {
+  handleDragLeave(e: MouseEvent) {
     e.preventDefault();
     if (e.screenX === 0 && e.screenY === 0) {
       this.props.viewState.isDraggingDroppingFile = false;

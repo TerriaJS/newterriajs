@@ -1,30 +1,23 @@
 "use strict";
-
-import React from "react";
-
 import createReactClass from "create-react-class";
-
 import PropTypes from "prop-types";
-
-import PointParameterEditor from "./PointParameterEditor";
-import LineParameterEditor from "./LineParameterEditor";
-// import RectangleParameterEditor from "./RectangleParameterEditor";
-import PolygonParameterEditor from "./PolygonParameterEditor";
-import RegionParameterEditor from "./RegionParameterEditor";
-import RegionTypeParameterEditor from "./RegionTypeParameterEditor";
-import RegionDataParameterEditor from "./RegionDataParameterEditor";
+import defined from "terriajs-cesium/Source/Core/defined";
+import parseCustomMarkdownToReact from "../Custom/parseCustomMarkdownToReact";
 import BooleanParameterEditor from "./BooleanParameterEditor";
 import BooleanParameterGroupEditor from "./BooleanParameterGroupEditor";
 import DateTimeParameterEditor from "./DateTimeParameterEditor";
 import EnumerationParameterEditor from "./EnumerationParameterEditor";
 import GenericParameterEditor from "./GenericParameterEditor";
 import GeoJsonParameterEditor from "./GeoJsonParameterEditor";
-import defined from "terriajs-cesium/Source/Core/defined";
-
-import Styles from "./parameter-editors.scss";
 import InfoParameterEditor from "./InfoParameterEditor";
-
-import parseCustomMarkdownToReact from "../Custom/parseCustomMarkdownToReact";
+import LineParameterEditor from "./LineParameterEditor";
+import Styles from "./parameter-editors.scss";
+import PointParameterEditor from "./PointParameterEditor";
+// import RectangleParameterEditor from "./RectangleParameterEditor";
+import PolygonParameterEditor from "./PolygonParameterEditor";
+import RegionDataParameterEditor from "./RegionDataParameterEditor";
+import RegionParameterEditor from "./RegionParameterEditor";
+import RegionTypeParameterEditor from "./RegionTypeParameterEditor";
 
 const ParameterEditor = createReactClass({
   displayName: "ParameterEditor",

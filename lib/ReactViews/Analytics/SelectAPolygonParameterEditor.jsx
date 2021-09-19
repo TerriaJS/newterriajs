@@ -1,7 +1,6 @@
 import createReactClass from "create-react-class";
 import { reaction, runInAction } from "mobx";
 import PropTypes from "prop-types";
-import React from "react";
 import { withTranslation } from "react-i18next";
 import createGuid from "terriajs-cesium/Source/Core/createGuid";
 import defined from "terriajs-cesium/Source/Core/defined";

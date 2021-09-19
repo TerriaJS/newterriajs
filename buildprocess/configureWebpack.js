@@ -112,7 +112,7 @@ function configureWebpack(terriaJSBasePath, config, devMode, hot, MiniCssExtract
                           useBuiltIns: "usage"
                         }
                       ],
-                      '@babel/preset-react',
+                      ['@babel/preset-react', {"runtime": "automatic"}],
                       ['@babel/typescript', {allowNamespaces: true}]
                     ],
                     plugins: [

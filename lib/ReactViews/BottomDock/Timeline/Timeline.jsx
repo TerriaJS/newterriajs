@@ -1,6 +1,5 @@
 import createReactClass from "create-react-class";
 import dateFormat from "dateformat";
-import React from "react";
 import PropTypes from "prop-types";
 import { observer } from "mobx-react";
 

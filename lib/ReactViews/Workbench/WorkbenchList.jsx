@@ -1,4 +1,4 @@
-import React from "react";
+import { Component } from "react";
 import PropTypes from "prop-types";
 import Sortable from "react-anything-sortable";
 
@@ -11,7 +11,7 @@ import Styles from "./workbench-list.scss";
 import "!!style-loader!css-loader?sourceMap!./sortable.css";
 
 @observer
-class WorkbenchList extends React.Component {
+class WorkbenchList extends Component {
   static propTypes = {
     terria: PropTypes.object.isRequired,
     viewState: PropTypes.object.isRequired

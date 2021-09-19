@@ -1,12 +1,10 @@
 "use strict";
-
-import React from "react";
 import createReactClass from "create-react-class";
 import PropTypes from "prop-types";
-import isDefined from "../../../Core/isDefined";
 import { withTranslation } from "react-i18next";
-import Styles from "./colorscalerange-section.scss";
+import isDefined from "../../../Core/isDefined";
 import TerriaError from "../../../Core/TerriaError";
+import Styles from "./colorscalerange-section.scss";
 
 const ColorScaleRangeSection = createReactClass({
   displayName: "ColorScaleRangeSection",

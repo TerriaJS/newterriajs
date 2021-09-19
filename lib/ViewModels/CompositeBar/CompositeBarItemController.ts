@@ -1,6 +1,6 @@
 import { computed, observable } from "mobx";
 import ViewerMode from "../../Models/ViewerMode";
-import React from "react";
+import { RefObject, createRef } from "react";
 
 export interface ICompositeBarItemController {
   readonly id: string;
@@ -11,13 +11,13 @@ export interface ICompositeBarItemController {
   visible: boolean;
   readonly glyph: any;
   readonly viewerMode: ViewerMode | undefined;
-  itemRef: React.RefObject<HTMLDivElement>;
+  itemRef: RefObject<HTMLDivElement>;
 }
 
 export abstract class CompositeBarItemController
   implements ICompositeBarItemController {
   static id: string;
-  itemRef: React.RefObject<HTMLDivElement> = React.createRef();
+  itemRef: RefObject<HTMLDivElement> = createRef();
 
   get id() {
     return CompositeBarItemController.id;

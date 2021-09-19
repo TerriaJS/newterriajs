@@ -1,4 +1,4 @@
-import React from "react";
+import { createRef, Component } from "react";
 import { removeMarker } from "../../Models/LocationMarkerUtils";
 import { reaction, runInAction } from "mobx";
 import { Trans } from "react-i18next";
@@ -71,10 +71,10 @@ const PresentationBox = styled(Box).attrs({
 `;
 
 export const LOCATION_SEARCH_INPUT_NAME = "LocationSearchInput";
-export class SearchBoxAndResultsRaw extends React.Component {
+export class SearchBoxAndResultsRaw extends Component {
   constructor(props) {
     super(props);
-    this.locationSearchRef = React.createRef();
+    this.locationSearchRef = createRef();
   }
   componentDidMount() {
     this.props.viewState.updateAppRef(

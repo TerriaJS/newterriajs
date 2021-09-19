@@ -1,5 +1,5 @@
 "use strict";
-import React from "react";
+import { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import Icon from "../Styled/Icon";
@@ -9,7 +9,7 @@ import { observer } from "mobx-react";
 import { reaction } from "mobx";
 
 @observer
-class DragDropNotification extends React.Component {
+class DragDropNotification extends Component {
   constructor(props) {
     super(props);
     this.state = {

@@ -1,11 +1,9 @@
 "use strict";
-
 // import knockout from 'terriajs-cesium/Source/ThirdParty/knockout';
-import React from "react";
 import Terria from "../../lib/Models/Terria";
+import { MeasureTool } from "../../lib/ReactViews/Map/Navigation/MeasureTool";
 import { getMountedInstance } from "./MoreShallowTools";
 
-import { MeasureTool } from "../../lib/ReactViews/Map/Navigation/MeasureTool";
 const Entity = require("terriajs-cesium/Source/DataSources/Entity.js").default;
 const Ellipsoid = require("terriajs-cesium/Source/Core/Ellipsoid.js").default;
 const ConstantPositionProperty = require("terriajs-cesium/Source/DataSources/ConstantPositionProperty.js")

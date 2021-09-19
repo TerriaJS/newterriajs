@@ -3,11 +3,11 @@ import { action } from "mobx";
 import loadCsv from "../../Core/loadCsv";
 import loadJson5 from "../../Core/loadJson5";
 import { SearchParameterTraits } from "../../Traits/TraitsClasses/SearchableItemTraits";
+import { Index, IndexRoot, IndexType, parseIndexRoot } from "./Index";
 import ItemSearchProvider, {
   ItemSearchParameter,
   ItemSearchResult
 } from "./ItemSearchProvider";
-import { Index, IndexRoot, IndexType, parseIndexRoot } from "./Index";
 import joinUrl from "./joinUrl";
 
 const t = i18next.t.bind(i18next);

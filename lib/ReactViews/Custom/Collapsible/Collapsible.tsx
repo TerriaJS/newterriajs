@@ -1,7 +1,7 @@
 "use strict";
 
 import { observer } from "mobx-react";
-import React from "react";
+import { FC, Component, Fragment } from "react";
 import Box from "../../../Styled/Box";
 import { RawButton } from "../../../Styled/Button";
 import { SpacingSpan } from "../../../Styled/Spacing";
@@ -31,7 +31,7 @@ interface CollapsibleProps extends CollapsibleIconProps {
   bodyTextProps?: any;
 }
 
-export const CollapseIcon: React.FC<CollapsibleIconProps> = props => (
+export const CollapseIcon: FC<CollapsibleIconProps> = props => (
   <StyledIcon
     displayInline
     styledWidth={"8px"}
@@ -49,7 +49,7 @@ export const CollapseIcon: React.FC<CollapsibleIconProps> = props => (
 );
 
 @observer
-export default class Collapsible extends React.Component<
+export default class Collapsible extends Component<
   CollapsibleProps,
   { isOpen: boolean }
 > {
@@ -65,7 +65,7 @@ export default class Collapsible extends React.Component<
 
   render() {
     return (
-      <React.Fragment>
+      <Fragment>
         <RawButton
           fullWidth
           onClick={this.toggleOpen.bind(this)}
@@ -106,7 +106,7 @@ export default class Collapsible extends React.Component<
             </Text>
           )}
         </Box>
-      </React.Fragment>
+      </Fragment>
     );
   }
 }

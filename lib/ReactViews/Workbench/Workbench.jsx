@@ -2,7 +2,6 @@ import createReactClass from "create-react-class";
 import { runInAction } from "mobx";
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
-import React from "react";
 import { withTranslation } from "react-i18next";
 import getPath from "../../Core/getPath";
 // eslint-disable-next-line no-unused-vars

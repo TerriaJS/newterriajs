@@ -8,9 +8,9 @@ import NumericIndex from "./NumericIndex";
 import TextIndex from "./TextIndex";
 import { IndexType, indexTypes } from "./Types";
 
-export { IndexType, indexTypes } from "./Types";
 export { default as EnumIndex } from "./EnumIndex";
 export { default as NumericIndex } from "./NumericIndex";
+export { IndexType, indexTypes } from "./Types";
 
 // IndexRoot holds the indexes for each property and top level options
 export type IndexRoot = {

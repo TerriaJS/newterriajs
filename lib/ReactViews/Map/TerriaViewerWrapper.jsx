@@ -1,4 +1,4 @@
-import React from "react";
+import { Component } from "react";
 import PropTypes from "prop-types";
 import { observer } from "mobx-react";
 
@@ -16,7 +16,7 @@ import TerriaViewer from "../../ViewModels/TerriaViewer";
  * @extends {React.Component<Props>}
  */
 @observer
-class TerriaViewerWrapper extends React.Component {
+class TerriaViewerWrapper extends Component {
   static propTypes = {
     terria: PropTypes.object.isRequired,
     viewState: PropTypes.object.isRequired

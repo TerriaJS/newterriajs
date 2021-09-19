@@ -1,7 +1,7 @@
 import createReactClass from "create-react-class";
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
-import React from "react";
+import { forwardRef } from "react";
 import { withTranslation } from "react-i18next";
 import styled, { withTheme } from "styled-components";
 import Icon, { StyledIcon } from "../../Styled/Icon";
@@ -100,7 +100,7 @@ EmptyWorkbench.propTypes = {
   theme: PropTypes.object.isRequired
 };
 
-const SidePanelButton = React.forwardRef((props, ref) => {
+const SidePanelButton = forwardRef((props, ref) => {
   const { btnText, ...rest } = props;
   return (
     <Button

@@ -2,7 +2,7 @@
 
 import { runInAction } from "mobx";
 import { observer } from "mobx-react";
-import React from "react";
+import { Component, Fragment } from "react";
 import isDefined from "../../../Core/isDefined";
 import CatalogMemberMixin from "../../../ModelMixins/CatalogMemberMixin";
 import CommonStrata from "../../../Models/Definition/CommonStrata";
@@ -13,7 +13,7 @@ import Collapsible from "../../Custom/Collapsible/Collapsible";
 import parseCustomMarkdownToReact from "../../Custom/parseCustomMarkdownToReact";
 
 @observer
-export default class ShortReport extends React.Component<{
+export default class ShortReport extends Component<{
   item: CatalogMemberMixin.Instance;
 }> {
   clickShortReport(reportName: string | undefined, isOpen: boolean) {
@@ -67,7 +67,7 @@ export default class ShortReport extends React.Component<{
         {shortReportSections
           .filter(r => r.content && r.name)
           .map((r, i) => (
-            <React.Fragment key={r.name}>
+            <Fragment key={r.name}>
               <Collapsible
                 title={r.name!}
                 isOpen={r.show}
@@ -80,7 +80,7 @@ export default class ShortReport extends React.Component<{
                 })}
               </Collapsible>
               {i < shortReportSections.length - 1 && <Spacing bottom={2} />}
-            </React.Fragment>
+            </Fragment>
           ))}
       </Box>
     );

@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import styled, { withTheme } from "styled-components";
 import createReactClass from "create-react-class";

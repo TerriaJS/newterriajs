@@ -1,6 +1,6 @@
 import { action, observable } from "mobx";
 import { observer } from "mobx-react";
-import React from "react";
+import { Component } from "react";
 import createGuid from "terriajs-cesium/Source/Core/createGuid";
 import LatLonHeight from "../../../Core/LatLonHeight";
 import CommonStrata from "../../../Models/Definition/CommonStrata";
@@ -16,7 +16,7 @@ interface PropsType {
 }
 
 @observer
-export default class PointOnMap extends React.Component<PropsType> {
+export default class PointOnMap extends Component<PropsType> {
   @observable
   pointItem?: GeoJsonCatalogItem;
 

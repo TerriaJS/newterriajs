@@ -4,7 +4,6 @@ import { runInAction } from "mobx";
 import { observer } from "mobx-react";
 import Mustache from "mustache";
 import PropTypes from "prop-types";
-import React from "react";
 import { withTranslation } from "react-i18next";
 import isDefined from "../../Core/isDefined";
 import CommonStrata from "../../Models/Definition/CommonStrata";

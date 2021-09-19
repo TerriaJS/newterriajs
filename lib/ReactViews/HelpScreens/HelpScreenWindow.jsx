@@ -1,15 +1,13 @@
 "use strict";
-
-import ObserverModelMixin from "../ObserveModelMixin";
-import React from "react";
+import classNames from "classnames";
 import createReactClass from "create-react-class";
 import PropTypes from "prop-types";
-import parseCustomHtmlToReact from "../Custom/parseCustomHtmlToReact";
-import Styles from "./help-screen-window.scss";
-import classNames from "classnames";
+import { withTranslation } from "react-i18next";
 import defined from "terriajs-cesium/Source/Core/defined";
 import HelpViewState from "../../ReactViewModels/HelpViewState";
-import { withTranslation } from "react-i18next";
+import parseCustomHtmlToReact from "../Custom/parseCustomHtmlToReact";
+import ObserverModelMixin from "../ObserveModelMixin";
+import Styles from "./help-screen-window.scss";
 
 const HelpScreenWindow = createReactClass({
   displayName: "HelpScreenWindow",

@@ -1,13 +1,10 @@
 "use strict";
-
 import classNames from "classnames";
-import Concept from "../Concept";
-import Icon from "../../../../Styled/Icon";
-import React from "react";
 import createReactClass from "create-react-class";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
-
+import Icon from "../../../../Styled/Icon";
+import Concept from "../Concept";
 import Styles from "./summary-concept.scss";
 
 /*

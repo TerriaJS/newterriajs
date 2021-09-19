@@ -1,14 +1,12 @@
 "use strict";
-
-import React from "react";
 import createReactClass from "create-react-class";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import ObserverModelMixin from "../../../ObserveModelMixin";
 import MenuPanel from "../../../StandardUserInterface/customizable/MenuPanel";
-import CountDatasets from "./CountDatasets";
-import { withTranslation } from "react-i18next";
-import Styles from "./tools-panel.scss";
 import DropdownStyles from "../panel.scss";
+import CountDatasets from "./CountDatasets";
+import Styles from "./tools-panel.scss";
 
 const ToolsPanel = createReactClass({
   displayName: "ToolsPanel",

@@ -1,4 +1,4 @@
-import React from "react";
+import { ChangeEvent, Component } from "react";
 
 import Styles from "./parameter-editors.scss";
 import FunctionParameter from "../../Models/FunctionParameters/FunctionParameter";
@@ -7,11 +7,11 @@ import { observer } from "mobx-react";
 import CommonStrata from "../../Models/Definition/CommonStrata";
 
 @observer
-export default class GenericParameterEditor extends React.Component<{
+export default class GenericParameterEditor extends Component<{
   parameter: FunctionParameter;
 }> {
   @action
-  onChange(e: React.ChangeEvent<HTMLInputElement>) {
+  onChange(e: ChangeEvent<HTMLInputElement>) {
     this.props.parameter.setValue(CommonStrata.user, e.target.value);
   }
 

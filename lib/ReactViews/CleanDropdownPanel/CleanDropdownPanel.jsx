@@ -1,19 +1,16 @@
 "use strict";
-
 // Ref now needs to be passed in via refForCaret as there is no longer a button
 // in CleanDropdownPanel
 
 // proptypes are in mixin
 /* eslint react/prop-types:0*/
 
-import React from "react";
 import createReactClass from "create-react-class";
-// import Icon from "../../Icon";
-import InnerPanel from "../Map/Panels/InnerPanel";
-import BaseOuterPanel from "../Map/Panels/BaseOuterPanel";
-
 // import Styles from "./panel.scss";
 import Box from "../../Styled/Box";
+import BaseOuterPanel from "../Map/Panels/BaseOuterPanel";
+// import Icon from "../../Icon";
+import InnerPanel from "../Map/Panels/InnerPanel";
 
 // import defined from "terriajs-cesium/Source/Core/defined";
 

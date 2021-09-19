@@ -19,7 +19,8 @@ module.exports = function() {
       extensions: [".ts", ".js", ".jsx", ".tsx", ".json"]
     },
     externals: {
-      vue: "vue"
+      vue: "vue",
+      consolidate: "commonjs consolidate"
     },
     plugins: [
       new MiniCssExtractPlugin({

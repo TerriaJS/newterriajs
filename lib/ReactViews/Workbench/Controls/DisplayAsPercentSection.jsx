@@ -1,7 +1,5 @@
 "use strict";
-
 import classNames from "classnames";
-import React from "react";
 import createReactClass from "create-react-class";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";

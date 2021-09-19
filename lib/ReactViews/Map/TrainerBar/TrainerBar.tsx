@@ -1,6 +1,6 @@
 import i18next, { TFunction } from "i18next";
 import { observer } from "mobx-react";
-import React from "react";
+import { ChangeEvent, Component, Fragment } from "react";
 import { WithTranslation, withTranslation } from "react-i18next";
 import styled, { DefaultTheme, withTheme } from "styled-components";
 import Terria from "../../../Models/Terria";
@@ -116,10 +116,10 @@ const renderOrderedStepList = function(
   viewState: ViewState
 ) {
   return steps.map((step: StepItem, index: number) => (
-    <React.Fragment key={index}>
+    <Fragment key={index}>
       {renderStep(step, index + 1, viewState)}
       {index + 1 !== steps.length && <Spacing bottom={3} />}
-    </React.Fragment>
+    </Fragment>
   ));
 };
 
@@ -140,7 +140,7 @@ interface StepAccordionState {
 }
 
 // Originally written as a SFC but measureElement only supports class components at the moment
-class StepAccordionRaw extends React.Component<
+class StepAccordionRaw extends Component<
   StepAccordionProps,
   StepAccordionState
 > {
@@ -376,7 +376,7 @@ export const TrainerBar = observer((props: TrainerBarProps) => {
                 glyph={GLYPHS.oneTwoThree}
               />
             )}
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+            onChange={(e: ChangeEvent<HTMLSelectElement>) =>
               viewState.setCurrentTrainerItemIndex(Number(e.target.value))
             }
             value={viewState.currentTrainerItemIndex}

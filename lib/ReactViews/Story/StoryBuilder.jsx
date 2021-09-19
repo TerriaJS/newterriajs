@@ -2,7 +2,7 @@ import createReactClass from "create-react-class";
 import { runInAction } from "mobx";
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
-import React from "react";
+import { createRef } from "react";
 import Sortable from "react-anything-sortable";
 import { Trans, useTranslation, withTranslation } from "react-i18next";
 import styled, { withTheme } from "styled-components";
@@ -34,7 +34,7 @@ const STORY_VIDEO = "storyVideo";
 const StoryBuilder = observer(
   createReactClass({
     displayName: "StoryBuilder",
-    storiesWrapperRef: React.createRef(),
+    storiesWrapperRef: createRef(),
     propTypes: {
       terria: PropTypes.object.isRequired,
       isVisible: PropTypes.bool,

@@ -13,7 +13,6 @@ It gets the `t` function and `i18n` instance inside your **functional components
 **Usage**
 
 ```js
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 export function MyComponent() {
@@ -33,7 +32,6 @@ The `withTranslation` is a classic HOC (higher order component) and gets the `t`
 **Usage**
 
 ```js
-import React from 'react';
 import { withTranslation } from 'react-i18next';
 
 function MyComponent({ t, i18n }) {
@@ -53,7 +51,6 @@ While the Trans component gives you a lot of power by letting you interpolate or
 As long you have no react nodes you like to be integrated into a translated text (text formatting, like strong, i, ...) or adding some link component - you won't need it - most can be done by using the good old t function.
 
 ```js
-import React from 'react';
 import { Trans, useTranslation } from 'react-i18next'
 
 function MyComponent() {

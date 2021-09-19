@@ -1,14 +1,14 @@
-import React from "react";
+import { ReactNode, FC } from "react";
 import styled from "styled-components";
 
 export type ToastProps = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 /**
  * A toast component that positions its children bottom center of the map
  */
-const Toast: React.FC<ToastProps> = ({ children }) => {
+const Toast: FC<ToastProps> = ({ children }) => {
   return <Container>{children}</Container>;
 };
 

@@ -1,9 +1,9 @@
 import { LinePath } from "@visx/shape";
 import { line } from "d3-shape";
 import PropTypes from "prop-types";
-import React from "react";
+import { PureComponent } from "react";
 
-export default class LineChart extends React.PureComponent {
+export default class LineChart extends PureComponent {
   static propTypes = {
     id: PropTypes.string.isRequired,
     chartItem: PropTypes.object.isRequired,

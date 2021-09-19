@@ -1,5 +1,4 @@
 const create: any = require("react-test-renderer").create;
-import React from "react";
 import { runInAction } from "mobx";
 import { ThemeProvider } from "styled-components";
 import { act } from "react-dom/test-utils";

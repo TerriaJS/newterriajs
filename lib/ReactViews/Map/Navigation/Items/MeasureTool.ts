@@ -1,7 +1,7 @@
 "use strict";
 import i18next from "i18next";
 import { action, observable } from "mobx";
-import React from "react";
+import { RefObject, createRef } from "react";
 import Cartesian3 from "terriajs-cesium/Source/Core/Cartesian3";
 import Ellipsoid from "terriajs-cesium/Source/Core/Ellipsoid";
 import EllipsoidGeodesic from "terriajs-cesium/Source/Core/EllipsoidGeodesic";
@@ -35,7 +35,7 @@ export default class MeasureTool extends MapNavigationItemController {
   @observable
   userDrawing: UserDrawing;
   onClose: () => void;
-  itemRef: React.RefObject<HTMLDivElement> = React.createRef();
+  itemRef: RefObject<HTMLDivElement> = createRef();
 
   constructor(props: PropTypes) {
     super();

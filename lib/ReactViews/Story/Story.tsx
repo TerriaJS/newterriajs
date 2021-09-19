@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useEffect, useRef } from "react";
+import { RefObject, MouseEventHandler, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import styled, { useTheme } from "styled-components";
 import { sortable } from "react-anything-sortable";
@@ -138,7 +138,7 @@ const recaptureStory = (
 };
 
 const calculateOffset = (props: Props) => (
-  storyRef: React.RefObject<HTMLElement>
+  storyRef: RefObject<HTMLElement>
 ) => {
   const offsetTop = storyRef.current?.offsetTop || 0;
   const scrollTop = props.parentRef.current.scrollTop || 0;

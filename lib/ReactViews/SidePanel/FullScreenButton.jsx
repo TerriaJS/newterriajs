@@ -1,14 +1,13 @@
 "use strict";
-const React = require("react");
 const createReactClass = require("create-react-class");
 const PropTypes = require("prop-types");
-import Styles from "./full_screen_button.scss";
 import classNames from "classnames";
-import Icon from "../../Styled/Icon";
-import { withTranslation } from "react-i18next";
 import { observer } from "mobx-react";
-import withControlledVisibility from "../HOCs/withControlledVisibility";
+import { withTranslation } from "react-i18next";
 import { Category, ViewAction } from "../../Core/AnalyticEvents/analyticEvents";
+import Icon from "../../Styled/Icon";
+import withControlledVisibility from "../HOCs/withControlledVisibility";
+import Styles from "./full_screen_button.scss";
 
 // The button to make the map full screen and hide the workbench.
 const FullScreenButton = observer(

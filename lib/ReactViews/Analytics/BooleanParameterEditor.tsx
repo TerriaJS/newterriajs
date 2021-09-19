@@ -1,13 +1,13 @@
 import { action } from "mobx";
 import { observer } from "mobx-react";
-import React from "react";
+import { Component } from "react";
 import CommonStrata from "../../Models/Definition/CommonStrata";
 import BooleanParameter from "../../Models/FunctionParameters/BooleanParameter";
 import Icon from "../../Styled/Icon";
 import Styles from "./parameter-editors.scss";
 
 @observer
-export default class BooleanParameterEditor extends React.Component<{
+export default class BooleanParameterEditor extends Component<{
   parameter: BooleanParameter;
 }> {
   @action

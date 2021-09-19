@@ -1,4 +1,3 @@
-import React from "react";
 import { findAllWithType } from "react-shallow-testutils";
 import { USER_ADDED_CATEGORY_ID } from "../../../lib/Core/addedByUser";
 import CatalogGroup from "../../../lib/Models/CatalogGroup";

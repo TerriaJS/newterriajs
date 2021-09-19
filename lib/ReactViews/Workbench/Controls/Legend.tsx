@@ -1,7 +1,7 @@
 "use strict";
 
 import { observer } from "mobx-react";
-import React, { SyntheticEvent } from "react";
+import { Component, Fragment, SyntheticEvent } from "react";
 import defined from "terriajs-cesium/Source/Core/defined";
 import Resource from "terriajs-cesium/Source/Core/Resource";
 import URI from "urijs";
@@ -37,7 +37,7 @@ function checkMimeType(legend: Model<LegendTraits>) {
 }
 
 @observer
-export default class Legend extends React.Component<{
+export default class Legend extends Component<{
   item: CatalogMemberMixin.Instance;
   forPrint?: boolean;
 }> {
@@ -207,7 +207,7 @@ export default class Legend extends React.Component<{
       height: `${legendItem.imageHeight + 2}px`
     };
     return (
-      <React.Fragment key={i}>
+      <Fragment key={i}>
         {legendItem.addSpacingAbove && (
           <tr className={Styles.legendSpacer}>
             <td />
@@ -246,7 +246,7 @@ export default class Legend extends React.Component<{
             )}
           </td>
         </tr>
-      </React.Fragment>
+      </Fragment>
     );
   }
 
@@ -266,13 +266,13 @@ export default class Legend extends React.Component<{
         <ul className={Styles.legend}>
           <div className={Styles.legendInner}>
             {this.props.item.legends.map((legend, i) => (
-              <React.Fragment key={i}>
+              <Fragment key={i}>
                 {isDefined(legend.title) ? (
                   <h3 className={Styles.legendTitle}>{legend.title}</h3>
                 ) : null}
 
                 {this.renderLegend.bind(this)(legend, i)}
-              </React.Fragment>
+              </Fragment>
             ))}
           </div>
         </ul>

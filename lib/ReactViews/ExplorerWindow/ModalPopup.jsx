@@ -1,7 +1,6 @@
 import classNames from "classnames";
 import createReactClass from "create-react-class";
 import PropTypes from "prop-types";
-import React from "react";
 import { withTranslation } from "react-i18next";
 
 import Styles from "./explorer-window.scss";

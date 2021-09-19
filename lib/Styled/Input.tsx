@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import styled, { DefaultTheme, useTheme } from "styled-components";
 const Box: any = require("./Box").default;
 
@@ -78,7 +78,7 @@ interface InputProps {
   [spread: string]: any;
 }
 
-const Input: React.FC<InputProps> = (props: InputProps) => {
+const Input: FC<InputProps> = (props: InputProps) => {
   const { boxProps, ...rest }: InputProps = props;
   const theme: DefaultTheme = useTheme();
   return (

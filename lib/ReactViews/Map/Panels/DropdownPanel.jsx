@@ -1,18 +1,14 @@
 "use strict";
-
 // proptypes are in mixin
 /* eslint react/prop-types:0*/
 
-import React from "react";
-import createReactClass from "create-react-class";
 import classNames from "classnames";
-import Icon from "../../../Styled/Icon";
-import InnerPanel from "./InnerPanel";
-import BaseOuterPanel from "./BaseOuterPanel";
-
-import Styles from "./panel.scss";
-
+import createReactClass from "create-react-class";
 import defined from "terriajs-cesium/Source/Core/defined";
+import Icon from "../../../Styled/Icon";
+import BaseOuterPanel from "./BaseOuterPanel";
+import InnerPanel from "./InnerPanel";
+import Styles from "./panel.scss";
 
 const DropdownPanel = createReactClass({
   displayName: "DropdownPanel",

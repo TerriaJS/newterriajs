@@ -5,7 +5,7 @@ import { scaleLinear, scaleTime } from "@visx/scale";
 import { computed } from "mobx";
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
-import React from "react";
+import { Component } from "react";
 import ChartableMixin from "../../../ModelMixins/ChartableMixin";
 import Styles from "./chart-preview.scss";
 import LineChart from "./LineChart";
@@ -14,7 +14,7 @@ import i18next from "i18next";
 
 @withParentSize
 @observer
-class FeatureInfoPanelChart extends React.Component {
+class FeatureInfoPanelChart extends Component {
   static propTypes = {
     parentWidth: PropTypes.number,
     parentHeight: PropTypes.number,
@@ -95,7 +95,7 @@ class FeatureInfoPanelChart extends React.Component {
 }
 
 @observer
-class Chart extends React.Component {
+class Chart extends Component {
   static propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,

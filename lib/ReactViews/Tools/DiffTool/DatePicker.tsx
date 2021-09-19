@@ -1,29 +1,29 @@
 import { action, computed, observable } from "mobx";
 import { observer } from "mobx-react";
-import React from "react";
+import { Component, MouseEvent as ReactMouseEvent, RefObject } from "react";
 import { WithTranslation, withTranslation } from "react-i18next";
 import styled from "styled-components";
 import JulianDate from "terriajs-cesium/Source/Core/JulianDate";
 import DiffableMixin from "../../../ModelMixins/DiffableMixin";
 import CommonStrata from "../../../Models/Definition/CommonStrata";
-import { formatDateTime } from "../../BottomDock/Timeline/DateFormats";
-import Icon, { StyledIcon } from "../../../Styled/Icon";
-import DateTimePicker from "../../BottomDock/Timeline/DateTimePicker";
-import Text, { TextSpan } from "../../../Styled/Text";
 import Box from "../../../Styled/Box";
 import Button from "../../../Styled/Button";
+import Icon, { StyledIcon } from "../../../Styled/Icon";
 import Spacing from "../../../Styled/Spacing";
+import Text, { TextSpan } from "../../../Styled/Text";
+import { formatDateTime } from "../../BottomDock/Timeline/DateFormats";
+import DateTimePicker from "../../BottomDock/Timeline/DateTimePicker";
 const dateFormat = require("dateformat");
 
 interface PropsType extends WithTranslation {
   heading: string;
   item: DiffableMixin.Instance;
-  externalOpenButton: React.RefObject<HTMLButtonElement>;
+  externalOpenButton: RefObject<HTMLButtonElement>;
   onDateSet: () => void;
 }
 
 @observer
-class DatePicker extends React.Component<PropsType> {
+class DatePicker extends Component<PropsType> {
   @observable private isOpen = false;
 
   @computed
@@ -46,7 +46,7 @@ class DatePicker extends React.Component<PropsType> {
   }
 
   @action.bound
-  toggleOpen(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+  toggleOpen(e: ReactMouseEvent<HTMLButtonElement, MouseEvent>) {
     this.isOpen = !this.isOpen;
     // stopPropagation is required to prevent the datetime picker popup from closing when
     // the date button is clicked
@@ -96,7 +96,7 @@ class DatePicker extends React.Component<PropsType> {
   }
 
   unregisterExternalButtonClick(
-    externalOpenButton: React.RefObject<HTMLButtonElement>
+    externalOpenButton: RefObject<HTMLButtonElement>
   ) {
     externalOpenButton.current?.removeEventListener(
       "click",

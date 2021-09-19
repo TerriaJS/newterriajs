@@ -1,28 +1,26 @@
 "use strict";
-
-import React from "react";
+import createReactClass from "create-react-class";
+import { runInAction } from "mobx";
+import { observer } from "mobx-react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import defined from "terriajs-cesium/Source/Core/defined";
+import CommonStrata from "../../Models/Definition/CommonStrata";
+import GeoJsonParameter from "../../Models/FunctionParameters/GeoJsonParameter";
 import Styles from "./parameter-editors.scss";
 import {
-  selectOnMap as selectPointOnMap,
-  getDisplayValue as getPointParameterDisplayValue
+  getDisplayValue as getPointParameterDisplayValue,
+  selectOnMap as selectPointOnMap
 } from "./PointParameterEditor";
 import {
-  selectOnMap as selectPolygonOnMap,
-  getDisplayValue as getPolygonParameterDisplayValue
+  getDisplayValue as getPolygonParameterDisplayValue,
+  selectOnMap as selectPolygonOnMap
 } from "./PolygonParameterEditor";
-import {
-  selectOnMap as selectExistingPolygonOnMap,
-  getDisplayValue as getExistingPolygonParameterDisplayValue
-} from "./SelectAPolygonParameterEditor";
 import { getDisplayValue as getRegionPickerDisplayValue } from "./RegionPicker";
-import createReactClass from "create-react-class";
-import GeoJsonParameter from "../../Models/FunctionParameters/GeoJsonParameter";
-import { withTranslation } from "react-i18next";
-import { observer } from "mobx-react";
-import { runInAction } from "mobx";
-import CommonStrata from "../../Models/Definition/CommonStrata";
+import {
+  getDisplayValue as getExistingPolygonParameterDisplayValue,
+  selectOnMap as selectExistingPolygonOnMap
+} from "./SelectAPolygonParameterEditor";
 
 const GeoJsonParameterEditor = observer(
   createReactClass({

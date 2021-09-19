@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import React from "react";
+import { FC } from "react";
 import styled, { CSSObject } from "styled-components";
 import ViewState from "../../ReactViewModels/ViewState";
 
@@ -21,7 +21,7 @@ type PositionRightOfWorkbenchProps = {
  *    `;
  *
  */
-const PositionRightOfWorkbench: React.FC<PositionRightOfWorkbenchProps> = observer(
+const PositionRightOfWorkbench: FC<PositionRightOfWorkbenchProps> = observer(
   props => {
     return (
       <Container

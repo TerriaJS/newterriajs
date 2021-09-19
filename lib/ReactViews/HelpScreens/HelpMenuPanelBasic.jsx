@@ -1,6 +1,6 @@
 "use strict";
 
-import React from "react";
+import { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import MenuPanel from "../StandardUserInterface/customizable/MenuPanel.jsx";
@@ -14,7 +14,7 @@ import { action } from "mobx";
 import { observer } from "mobx-react";
 
 @observer
-class HelpMenuPanelBasic extends React.Component {
+class HelpMenuPanelBasic extends Component {
   static propTypes = {
     viewState: PropTypes.object.isRequired,
     t: PropTypes.func.isRequired

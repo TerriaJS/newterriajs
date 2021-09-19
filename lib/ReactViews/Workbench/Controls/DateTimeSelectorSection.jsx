@@ -1,24 +1,19 @@
 "use strict";
-
-import dateFormat from "dateformat";
-
-import React from "react";
-import createReactClass from "create-react-class";
 import classNames from "classnames";
-import PropTypes from "prop-types";
-import styled from "styled-components";
+import createReactClass from "create-react-class";
+import dateFormat from "dateformat";
+import { runInAction } from "mobx";
 import { observer } from "mobx-react";
-
+import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
+import styled from "styled-components";
 import defined from "terriajs-cesium/Source/Core/defined";
 import JulianDate from "terriajs-cesium/Source/Core/JulianDate";
-
-import DateTimePicker from "../../BottomDock/Timeline/DateTimePicker";
-import { formatDateTime } from "../../BottomDock/Timeline/DateFormats";
-import Styles from "./datetime-selector-section.scss";
-import Icon from "../../../Styled/Icon";
 import CommonStrata from "../../../Models/Definition/CommonStrata";
-import { runInAction } from "mobx";
-import { withTranslation } from "react-i18next";
+import Icon from "../../../Styled/Icon";
+import { formatDateTime } from "../../BottomDock/Timeline/DateFormats";
+import DateTimePicker from "../../BottomDock/Timeline/DateTimePicker";
+import Styles from "./datetime-selector-section.scss";
 
 const DateTimeSelectorSection = observer(
   createReactClass({

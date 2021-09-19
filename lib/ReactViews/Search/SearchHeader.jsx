@@ -1,6 +1,5 @@
 import Loader from "../Loader";
 import { observer } from "mobx-react";
-import React from "react";
 import createReactClass from "create-react-class";
 import PropTypes from "prop-types";
 import Styles from "./search-header.scss";

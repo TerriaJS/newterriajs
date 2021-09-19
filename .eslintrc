@@ -1,5 +1,10 @@
 {
-    "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:jsx-control-statements/recommended"],
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:jsx-control-statements/recommended",
+        "plugin:react/jsx-runtime"
+    ],
     "parser": "@babel/eslint-parser",
     "parserOptions": {
       "requireConfigFile": false,

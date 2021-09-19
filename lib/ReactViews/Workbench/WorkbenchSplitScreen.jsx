@@ -1,5 +1,5 @@
 // import React, { useState } from "react";
-import React from "react";
+import { Component } from "react";
 import PropTypes from "prop-types";
 import { runInAction } from "mobx";
 import { observer } from "mobx-react";
@@ -21,7 +21,7 @@ import Styles from "../Map/Panels/setting-panel.scss";
 
 // mangled from SettingPanel.jsx
 @observer
-class WorkbenchSplitScreen extends React.Component {
+class WorkbenchSplitScreen extends Component {
   render() {
     const props = this.props;
     const terria = props.terria;

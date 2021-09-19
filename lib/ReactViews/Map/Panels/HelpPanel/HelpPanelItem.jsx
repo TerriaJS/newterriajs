@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
-import React from "react";
+import { Component } from "react";
 import { withTranslation } from "react-i18next";
 import styled, { withTheme } from "styled-components";
 import {
@@ -16,7 +16,7 @@ import Styles from "./help-panel.scss";
 import HelpVideoPanel from "./HelpVideoPanel";
 
 @observer
-class HelpPanelItem extends React.Component {
+class HelpPanelItem extends Component {
   static displayName = "HelpPanelItem";
 
   static propTypes = {

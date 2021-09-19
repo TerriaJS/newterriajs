@@ -2,7 +2,6 @@
 import createReactClass from "create-react-class";
 import FileSaver from "file-saver";
 import PropTypes from "prop-types";
-import React from "react";
 import FeatureDetection from "terriajs-cesium/Source/Core/FeatureDetection";
 import Result from "../../../Core/Result";
 import VarType from "../../../Map/VarType";

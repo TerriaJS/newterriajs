@@ -7,7 +7,7 @@ import FeatureInfoCatalogItem from "./FeatureInfoCatalogItem";
 import { featureBelongsToCatalogItem } from "../../Map/PickedFeatures.ts";
 import DragWrapper from "../DragWrapper";
 import Loader from "../Loader";
-import React from "react";
+import { Component } from "react";
 import PropTypes from "prop-types";
 import Entity from "terriajs-cesium/Source/DataSources/Entity";
 import { withTranslation } from "react-i18next";
@@ -26,7 +26,7 @@ import { observer, disposeOnUnmount } from "mobx-react";
 import { action, reaction, runInAction } from "mobx";
 
 @observer
-class FeatureInfoPanel extends React.Component {
+class FeatureInfoPanel extends Component {
   static propTypes = {
     terria: PropTypes.object.isRequired,
     viewState: PropTypes.object.isRequired,

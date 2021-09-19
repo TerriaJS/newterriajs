@@ -1,6 +1,6 @@
 import i18next from "i18next";
 import { runInAction } from "mobx";
-import React from "react";
+import { Fragment } from "react";
 import isDefined from "../../Core/isDefined";
 import ViewState from "../../ReactViewModels/ViewState";
 import Collapsible from "../Custom/Collapsible/Collapsible";
@@ -39,7 +39,7 @@ export const shareConvertNotification = (
   };
 
   return (
-    <React.Fragment>
+    <Fragment>
       <Text>
         {parseCustomMarkdownToReact(
           i18next.t("share.convertNotificationMessage")
@@ -83,18 +83,18 @@ export const shareConvertNotification = (
         bodyBoxProps={{ padded: true }}
       >
         {rootMessages && (
-          <React.Fragment>
+          <Fragment>
             <ul>
               {rootMessages.map(message => (
                 <li>{message}</li>
               ))}
             </ul>
             <Spacing bottom={1} />
-          </React.Fragment>
+          </Fragment>
         )}
 
         {Object.entries(messagesForPath).map(([path, messages]) => (
-          <React.Fragment>
+          <Fragment>
             <Spacing bottom={1} />
             <Collapsible
               btnRight={true}
@@ -110,9 +110,9 @@ export const shareConvertNotification = (
                 ))}
               </ul>
             </Collapsible>
-          </React.Fragment>
+          </Fragment>
         ))}
       </Collapsible>
-    </React.Fragment>
+    </Fragment>
   );
 };

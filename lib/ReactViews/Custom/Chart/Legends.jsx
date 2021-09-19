@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React from "react";
+import { PureComponent } from "react";
 import { scaleOrdinal } from "@visx/scale";
 import { LegendOrdinal } from "@visx/legend";
 import Glyphs from "./Glyphs";
@@ -7,7 +7,7 @@ import { GlyphCircle } from "@visx/glyph";
 import { TextSpan } from "../../../Styled/Text";
 import styled from "styled-components";
 
-export default class Legends extends React.PureComponent {
+export default class Legends extends PureComponent {
   static propTypes = {
     chartItems: PropTypes.array.isRequired,
     width: PropTypes.number.isRequired
@@ -40,7 +40,7 @@ export default class Legends extends React.PureComponent {
   }
 }
 
-class Legend extends React.PureComponent {
+class Legend extends PureComponent {
   static propTypes = {
     label: PropTypes.object.isRequired,
     glyph: PropTypes.string

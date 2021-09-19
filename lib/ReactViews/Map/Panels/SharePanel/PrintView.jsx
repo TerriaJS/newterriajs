@@ -1,14 +1,12 @@
 "use strict";
-
-import { formatDateTime } from "../../../BottomDock/Timeline/DateFormats";
 import createReactClass from "create-react-class";
-import Description from "../../../Preview/Description";
 import DOMPurify from "dompurify/dist/purify";
-import FeatureInfoPanel from "../../../FeatureInfo/FeatureInfoPanel";
-import Legend from "../../../Workbench/Controls/Legend";
 import PropTypes from "prop-types";
-import React from "react";
 import ReactDOM from "react-dom";
+import { formatDateTime } from "../../../BottomDock/Timeline/DateFormats";
+import FeatureInfoPanel from "../../../FeatureInfo/FeatureInfoPanel";
+import Description from "../../../Preview/Description";
+import Legend from "../../../Workbench/Controls/Legend";
 
 const PrintView = createReactClass({
   displayName: "PrintView",

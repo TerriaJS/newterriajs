@@ -1,7 +1,6 @@
 const findAllWithType = require("react-shallow-testutils").findAllWithType;
 const findAllWithClass = require("react-shallow-testutils").findAllWithClass;
 import { getShallowRenderedOutput } from "../../MoreShallowTools";
-import React from "react";
 
 import Terria from "../../../../lib/Models/Terria";
 import WebMapServiceCatalogItem from "../../../../lib/Models/Catalog/Ows/WebMapServiceCatalogItem";

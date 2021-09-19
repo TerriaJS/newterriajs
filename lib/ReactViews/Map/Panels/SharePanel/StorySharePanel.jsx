@@ -1,15 +1,12 @@
 "use strict";
-
 // proptypes are in mixin
 /* eslint react/prop-types:0*/
 
 import createReactClass from "create-react-class";
-import React from "react";
 import Button from "../../../../Styled/Button";
-import Icon from "../../../../Styled/Icon";
+import Icon, { StyledIcon } from "../../../../Styled/Icon";
 import BaseOuterPanel from "../BaseOuterPanel";
 import InnerPanel from "../InnerPanel";
-import { StyledIcon } from "../../../../Styled/Icon";
 
 const StorySharePanel = createReactClass({
   displayName: "StorySharePanel",

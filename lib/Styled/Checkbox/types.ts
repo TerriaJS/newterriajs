@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactChild, ChangeEvent } from "react";
 
 export interface ICheckboxProps {
   /** Sets whether the checkbox begins checked. */
@@ -22,14 +22,14 @@ export interface ICheckboxProps {
    * The label to be displayed to the right of the checkbox. The label is part
    * of the clickable element to select the checkbox.
    */
-  label?: React.ReactChild;
+  label?: ReactChild;
   /** The name of the submitted field in a checkbox. */
   name?: string;
   /**
    * Function that is called whenever the state of the checkbox changes. It will
    * be called with an object containing the react synthetic event. Use currentTarget to get value, name and checked
    */
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => any;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => any;
   /** The value to be used in the checkbox input. This is the value that will be returned on form submission. */
   value?: number | string;
 }

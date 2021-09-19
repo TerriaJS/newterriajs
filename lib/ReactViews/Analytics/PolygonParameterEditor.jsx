@@ -1,22 +1,15 @@
 "use strict";
-
-import React from "react";
-
 import createReactClass from "create-react-class";
-
-import PropTypes from "prop-types";
-
-import defined from "terriajs-cesium/Source/Core/defined";
-
-import Styles from "./parameter-editors.scss";
-
-import CesiumMath from "terriajs-cesium/Source/Core/Math";
-import Ellipsoid from "terriajs-cesium/Source/Core/Ellipsoid";
-import UserDrawing from "../../Models/UserDrawing";
-import { withTranslation } from "react-i18next";
-import { observer } from "mobx-react";
 import { runInAction } from "mobx";
+import { observer } from "mobx-react";
+import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
+import defined from "terriajs-cesium/Source/Core/defined";
+import Ellipsoid from "terriajs-cesium/Source/Core/Ellipsoid";
+import CesiumMath from "terriajs-cesium/Source/Core/Math";
 import CommonStrata from "../../Models/Definition/CommonStrata";
+import UserDrawing from "../../Models/UserDrawing";
+import Styles from "./parameter-editors.scss";
 
 const PolygonParameterEditor = observer(
   createReactClass({

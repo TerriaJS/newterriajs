@@ -1,14 +1,12 @@
 "use strict";
-
-import flattenNested from "../../../../Core/flattenNested";
-import ActiveConcept from "./ActiveConcept";
-import OpenInactiveConcept from "./OpenInactiveConcept";
-import Icon from "../../../../Styled/Icon";
-import React from "react";
 import createReactClass from "create-react-class";
 import PropTypes from "prop-types";
-import Styles from "./summary-concept.scss";
 import { withTranslation } from "react-i18next";
+import flattenNested from "../../../../Core/flattenNested";
+import Icon from "../../../../Styled/Icon";
+import ActiveConcept from "./ActiveConcept";
+import OpenInactiveConcept from "./OpenInactiveConcept";
+import Styles from "./summary-concept.scss";
 
 /*
  * SummaryConcept displays all the active and open nodes under a given

@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import { createElement, ReactElement } from "react";
 import { TooltipWithButtonLauncher } from "../Generic/TooltipWrapper";
 import CustomComponent, {
   DomElement,
@@ -25,7 +25,7 @@ export default class TerriaTooltipCustomComponent extends CustomComponent {
     node: DomElement,
     children: ReactElement[]
   ): ReactElement {
-    return React.createElement(TooltipWithButtonLauncher, {
+    return createElement(TooltipWithButtonLauncher, {
       dismissOnLeave: true,
       launcherComponent: () => node.attribs?.title,
       children: () => children

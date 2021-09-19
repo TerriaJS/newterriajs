@@ -1,6 +1,6 @@
 import { observer } from "mobx-react";
 import Mustache from "mustache";
-import React, { useState } from "react";
+import { FC, MouseEventHandler, useCallback, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useVirtual } from "react-virtual";
 import styled from "styled-components";
@@ -19,7 +19,7 @@ export interface SearchResultsProps {
 
 type ResultClickHandler = (result: ItemSearchResult) => void;
 
-const SearchResults: React.FC<SearchResultsProps> = props => {
+const SearchResults: FC<SearchResultsProps> = props => {
   const { item, results } = props;
   const [currentMapEffect, setCurrentMapEffect] = useState<MapEffect>({
     is: "highlightAll"
@@ -28,11 +28,11 @@ const SearchResults: React.FC<SearchResultsProps> = props => {
     currentMapEffect.is === "highlightSingleResult"
       ? currentMapEffect.result
       : undefined;
-  const parentRef = React.createRef<HTMLDivElement>();
+  const parentRef = useRef<HTMLDivElement>(null);
   const list = useVirtual({
     size: results.length,
     parentRef,
-    estimateSize: React.useCallback(() => 50, [])
+    estimateSize: useCallback(() => 50, [])
   });
   const [t] = useTranslation();
 
@@ -101,12 +101,12 @@ type ResultProps = {
   style: any;
 };
 
-export const Result: React.FC<ResultProps> = observer(props => {
+export const Result: FC<ResultProps> = observer(props => {
   const { result, template, isEven, isSelected, style } = props;
   const content = template
     ? parseCustomMarkdownToReact(Mustache.render(template, result.properties))
     : result.id;
-  const onClick: React.MouseEventHandler<HTMLAnchorElement> = e => {
+  const onClick: MouseEventHandler<HTMLAnchorElement> = e => {
     try {
       props.onClick(result);
     } finally {
@@ -161,7 +161,7 @@ const Wrapper = styled(Box).attrs({ column: true, flex: 1 })`
   }
 `;
 
-export const ResultsCount: React.FC<{ count: number }> = ({ count }) => {
+export const ResultsCount: FC<{ count: number }> = ({ count }) => {
   const [t] = useTranslation();
   return (
     <Box

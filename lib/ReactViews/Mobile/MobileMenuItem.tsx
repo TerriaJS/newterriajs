@@ -1,11 +1,11 @@
-import React from "react";
+import { MouseEventHandler } from "react";
 import Icon, { GLYPHS } from "../../Styled/Icon";
 
 import Styles from "./mobile-menu-item.scss";
 
 type Props = {
   href?: string;
-  onClick: React.MouseEventHandler<HTMLElement>;
+  onClick: MouseEventHandler<HTMLElement>;
   caption: string;
   icon: { id: keyof typeof GLYPHS };
 };

@@ -1,6 +1,6 @@
 import { action, observable, reaction } from "mobx";
 import { observer } from "mobx-react";
-import React from "react";
+import { Component } from "react";
 import Cartesian3 from "terriajs-cesium/Source/Core/Cartesian3";
 import Ellipsoid from "terriajs-cesium/Source/Core/Ellipsoid";
 import CesiumMath from "terriajs-cesium/Source/Core/Math";
@@ -22,7 +22,7 @@ interface PropsType {
 }
 
 @observer
-export default class LocationPicker extends React.Component<PropsType> {
+export default class LocationPicker extends Component<PropsType> {
   @observable private pickMode?: MapInteractionMode;
   @observable private currentPick?: PickedFeatures;
   @observable private pickDisposer?: () => void;

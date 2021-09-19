@@ -1,8 +1,8 @@
-import joinUrl from "./joinUrl";
-import loadCsv from "../../Core/loadCsv";
-import { IndexBase, IndexType } from "./Types";
 import sortedIndexBy from "lodash-es/sortedIndexBy";
 import sortedLastIndexBy from "lodash-es/sortedLastIndexBy";
+import loadCsv from "../../Core/loadCsv";
+import joinUrl from "./joinUrl";
+import { IndexBase, IndexType } from "./Types";
 
 // Minimum and maxiumum values in a numeric range
 export type NumericRange = { min: number; max: number };

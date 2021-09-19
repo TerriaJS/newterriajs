@@ -1,31 +1,24 @@
 "use strict";
-
-import Mustache from "mustache";
-import React from "react";
-
-import createReactClass from "create-react-class";
-
-import PropTypes from "prop-types";
-
-import CesiumMath from "terriajs-cesium/Source/Core/Math";
 import classNames from "classnames";
+import createReactClass from "create-react-class";
 import dateFormat from "dateformat";
+import { runInAction } from "mobx";
+import { observer } from "mobx-react";
+import Mustache from "mustache";
+import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import defined from "terriajs-cesium/Source/Core/defined";
 import Ellipsoid from "terriajs-cesium/Source/Core/Ellipsoid";
 import JulianDate from "terriajs-cesium/Source/Core/JulianDate";
-import { observer } from "mobx-react";
-
-import CustomComponent from "../Custom/CustomComponent";
-import FeatureInfoDownload from "./FeatureInfoDownload";
+import CesiumMath from "terriajs-cesium/Source/Core/Math";
 import formatNumberForLocale from "../../Core/formatNumberForLocale";
-import Icon from "../../Styled/Icon";
 import propertyGetTimeValues from "../../Core/propertyGetTimeValues";
-import parseCustomMarkdownToReact from "../Custom/parseCustomMarkdownToReact";
-import { withTranslation } from "react-i18next";
-
-import Styles from "./feature-info-section.scss";
-import { runInAction } from "mobx";
 import TableMixin from "../../ModelMixins/TableMixin";
+import Icon from "../../Styled/Icon";
+import CustomComponent from "../Custom/CustomComponent";
+import parseCustomMarkdownToReact from "../Custom/parseCustomMarkdownToReact";
+import Styles from "./feature-info-section.scss";
+import FeatureInfoDownload from "./FeatureInfoDownload";
 
 // We use Mustache templates inside React views, where React does the escaping; don't escape twice, or eg. " => &quot;
 Mustache.escape = function(string) {

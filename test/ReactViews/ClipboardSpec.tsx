@@ -1,5 +1,4 @@
 const create: any = require("react-test-renderer").create;
-import React from "react";
 import { act } from "react-dom/test-utils";
 import { ThemeProvider } from "styled-components";
 import { terriaTheme } from "../../lib/ReactViews/StandardUserInterface/StandardTheme";

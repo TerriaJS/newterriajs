@@ -1,4 +1,4 @@
-import React from "react";
+import { Component } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import Guide from "./Guide.jsx";
@@ -9,7 +9,7 @@ import { observer } from "mobx-react";
 export const SATELLITE_GUIDE_KEY = "satelliteGuidance";
 
 @observer
-class SatelliteGuide extends React.Component {
+class SatelliteGuide extends Component {
   static propTypes = {
     terria: PropTypes.object.isRequired,
     viewState: PropTypes.object.isRequired,

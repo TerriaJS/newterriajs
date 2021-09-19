@@ -1,6 +1,6 @@
 "use strict";
 
-import React from "react";
+import { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 const parseCustomHtmlToReact = require("../Custom/parseCustomHtmlToReact")
@@ -32,7 +32,7 @@ const MapInteractionWindowWrapper = styled.div<{ isDiffTool: boolean }>`
 `;
 
 @observer
-export default class MapInteractionWindow extends React.Component<{
+export default class MapInteractionWindow extends Component<{
   terria: Terria;
   viewState: ViewState;
 }> {

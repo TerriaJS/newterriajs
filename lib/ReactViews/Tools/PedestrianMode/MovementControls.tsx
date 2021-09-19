@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import Cesium from "../../../Models/Cesium";
@@ -20,7 +20,7 @@ type MovementControlsProps = {
   maxVerticalLookAngle: number;
 };
 
-const MovementControls: React.FC<MovementControlsProps> = props => {
+const MovementControls: FC<MovementControlsProps> = props => {
   const [isMaximized, setIsMaximized] = useState(true);
   const [t] = useTranslation();
 

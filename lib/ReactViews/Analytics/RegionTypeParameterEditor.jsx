@@ -1,12 +1,10 @@
 "use strict";
-
-import React from "react";
 import createReactClass from "create-react-class";
 import PropTypes from "prop-types";
 import defined from "terriajs-cesium/Source/Core/defined";
+import CommonStrata from "../../Models/Definition/CommonStrata";
 import Loader from "../Loader";
 import Styles from "./parameter-editors.scss";
-import CommonStrata from "../../Models/Definition/CommonStrata";
 
 const RegionTypeParameterEditor = createReactClass({
   displayName: "RegionTypeParameterEditor",

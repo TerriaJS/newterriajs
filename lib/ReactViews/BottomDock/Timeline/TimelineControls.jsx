@@ -1,19 +1,14 @@
 "use strict";
-
-import React from "react";
-
-import PropTypes from "prop-types";
 import createReactClass from "create-react-class";
-
-import ClockRange from "terriajs-cesium/Source/Core/ClockRange";
+import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
-
-import Styles from "./timeline-controls.scss";
-import Icon from "../../../Styled/Icon";
+import ClockRange from "terriajs-cesium/Source/Core/ClockRange";
 import {
   Category,
   TimeLineAction
 } from "../../../Core/AnalyticEvents/analyticEvents";
+import Icon from "../../../Styled/Icon";
+import Styles from "./timeline-controls.scss";
 
 const TimelineControls = createReactClass({
   propTypes: {

@@ -1,13 +1,10 @@
 "use strict";
-
-import SummaryConcept from "./SummaryConcept/SummaryConcept";
-import Concept from "./Concept";
-import SummaryConceptModel from "../../../Map/SummaryConcept";
-
-import React from "react";
 import createReactClass from "create-react-class";
 import PropTypes from "prop-types";
+import SummaryConceptModel from "../../../Map/SummaryConcept";
+import Concept from "./Concept";
 import Styles from "./concept-viewer.scss";
+import SummaryConcept from "./SummaryConcept/SummaryConcept";
 
 const ConceptViewer = createReactClass({
   displayName: "ConceptViewer",

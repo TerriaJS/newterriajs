@@ -1,43 +1,40 @@
 "use strict";
-
 // import knockout from 'terriajs-cesium/Source/ThirdParty/knockout';
-import React from "react";
+import i18next from "i18next";
+import { observable } from "mobx";
 import {
   findAll,
-  findAllWithType,
   findAllWithClass,
+  findAllWithType,
   findWithRef
 } from "react-shallow-testutils";
-import {
-  getShallowRenderedOutput,
-  findAllEqualTo,
-  findAllWithPropsChildEqualTo
-} from "./MoreShallowTools";
-
 import Cartographic from "terriajs-cesium/Source/Core/Cartographic";
 import Ellipsoid from "terriajs-cesium/Source/Core/Ellipsoid";
-import Entity from "terriajs-cesium/Source/DataSources/Entity";
 import JulianDate from "terriajs-cesium/Source/Core/JulianDate";
-import loadJson from "../../lib/Core/loadJson";
 import TimeInterval from "terriajs-cesium/Source/Core/TimeInterval";
+import Entity from "terriajs-cesium/Source/DataSources/Entity";
 import TimeIntervalCollectionProperty from "terriajs-cesium/Source/DataSources/TimeIntervalCollectionProperty";
-import CreateModel from "../../lib/Models/Definition/CreateModel";
-import CzmlCatalogItem from "../../lib/Models/Catalog/CatalogItems/CzmlCatalogItem";
-import { FeatureInfoSection } from "../../lib/ReactViews/FeatureInfo/FeatureInfoSection";
-import Terria from "../../lib/Models/Terria";
-import Styles from "../../lib/ReactViews/FeatureInfo/feature-info-section.scss";
-import upsertModelFromJson from "../../lib/Models/Definition/upsertModelFromJson";
-import CommonStrata from "../../lib/Models/Definition/CommonStrata";
-import MappableTraits from "../../lib/Traits/TraitsClasses/MappableTraits";
-import mixTraits from "../../lib/Traits/mixTraits";
-import FeatureInfoTraits from "../../lib/Traits/TraitsClasses/FeatureInfoTraits";
-import DiscretelyTimeVaryingTraits from "../../lib/Traits/TraitsClasses/DiscretelyTimeVaryingTraits";
+import loadJson from "../../lib/Core/loadJson";
+import CatalogMemberMixin from "../../lib/ModelMixins/CatalogMemberMixin";
 import DiscretelyTimeVaryingMixin from "../../lib/ModelMixins/DiscretelyTimeVaryingMixin";
 import MappableMixin, { MapItem } from "../../lib/ModelMixins/MappableMixin";
-import CatalogMemberMixin from "../../lib/ModelMixins/CatalogMemberMixin";
-import { observable } from "mobx";
-import i18next from "i18next";
+import CzmlCatalogItem from "../../lib/Models/Catalog/CatalogItems/CzmlCatalogItem";
 import CatalogMemberFactory from "../../lib/Models/Catalog/CatalogMemberFactory";
+import CommonStrata from "../../lib/Models/Definition/CommonStrata";
+import CreateModel from "../../lib/Models/Definition/CreateModel";
+import upsertModelFromJson from "../../lib/Models/Definition/upsertModelFromJson";
+import Terria from "../../lib/Models/Terria";
+import Styles from "../../lib/ReactViews/FeatureInfo/feature-info-section.scss";
+import { FeatureInfoSection } from "../../lib/ReactViews/FeatureInfo/FeatureInfoSection";
+import mixTraits from "../../lib/Traits/mixTraits";
+import DiscretelyTimeVaryingTraits from "../../lib/Traits/TraitsClasses/DiscretelyTimeVaryingTraits";
+import FeatureInfoTraits from "../../lib/Traits/TraitsClasses/FeatureInfoTraits";
+import MappableTraits from "../../lib/Traits/TraitsClasses/MappableTraits";
+import {
+  findAllEqualTo,
+  findAllWithPropsChildEqualTo,
+  getShallowRenderedOutput
+} from "./MoreShallowTools";
 
 let separator = ",";
 if (typeof Intl === "object" && typeof Intl.NumberFormat === "function") {

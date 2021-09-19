@@ -1,11 +1,9 @@
 "use strict";
-
-import React from "react";
-import { getMountedInstance } from "./MoreShallowTools";
-
+import ChartData from "../../lib/Charts/ChartData";
 import Scales from "../../lib/Charts/Scales";
 import Chart from "../../lib/ReactViews/Custom/Chart/Chart";
-import ChartData from "../../lib/Charts/ChartData";
+import { getMountedInstance } from "./MoreShallowTools";
+
 // import TableStructure  from '../../lib/Map/TableStructure';
 
 describe("Scales", function() {

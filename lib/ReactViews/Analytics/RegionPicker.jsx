@@ -1,23 +1,16 @@
 "use strict";
-
 import classNames from "classnames";
-import React from "react";
-
 import createReactClass from "create-react-class";
-
 import PropTypes from "prop-types";
-
+import { withTranslation } from "react-i18next";
 import defined from "terriajs-cesium/Source/Core/defined";
 import knockout from "terriajs-cesium/Source/ThirdParty/knockout";
 import when from "terriajs-cesium/Source/ThirdParty/when";
-
 import GeoJsonCatalogItem from "../../Models/Catalog/CatalogItems/GeoJsonCatalogItem";
 import WebMapServiceCatalogItem from "../../Models/Catalog/Ows/WebMapServiceCatalogItem";
-import { withTranslation } from "react-i18next";
-
-import RegionTypeParameterEditor from "./RegionTypeParameterEditor";
-import Styles from "./parameter-editors.scss";
 import CommonStrata from "../../Models/Definition/CommonStrata";
+import Styles from "./parameter-editors.scss";
+import RegionTypeParameterEditor from "./RegionTypeParameterEditor";
 
 const RegionPicker = createReactClass({
   displayName: "RegionPicker",

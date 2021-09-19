@@ -1,12 +1,10 @@
 "use strict";
-
-import ObserverModelMixin from "../ObserveModelMixin";
-import React from "react";
+import classNames from "classnames";
 import createReactClass from "create-react-class";
 import PropTypes from "prop-types";
-import Styles from "./obscure-overlay.scss";
-import classNames from "classnames";
 import defined from "terriajs-cesium/Source/Core/defined";
+import ObserverModelMixin from "../ObserveModelMixin";
+import Styles from "./obscure-overlay.scss";
 
 /**
  * This provides five panels. Four are rectangle elements that go above, left, right, and below the highlighted element

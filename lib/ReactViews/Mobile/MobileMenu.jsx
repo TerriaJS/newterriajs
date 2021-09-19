@@ -1,4 +1,3 @@
-import React from "react";
 import defined from "terriajs-cesium/Source/Core/defined";
 import createReactClass from "create-react-class";
 import { observer } from "mobx-react";

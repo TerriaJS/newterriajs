@@ -1,5 +1,5 @@
 "use strict";
-import React from "react";
+import { Fragment } from "react";
 import Terria from "../../Models/Terria";
 import ViewState from "../../ReactViewModels/ViewState";
 import parseCustomHtmlToReact from "../Custom/parseCustomHtmlToReact";
@@ -83,11 +83,11 @@ export default (props: {
       `}
     >
       {brandingHtmlElements.map((element, idx) => (
-        <React.Fragment key={idx}>
+        <Fragment key={idx}>
           {parseCustomHtmlToReact(
             element.replace(/\{\{\s*version\s*\}\}/g, version)
           )}
-        </React.Fragment>
+        </Fragment>
       ))}
     </div>
   );

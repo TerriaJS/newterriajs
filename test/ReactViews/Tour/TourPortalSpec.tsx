@@ -1,5 +1,5 @@
 const create: any = require("react-test-renderer").create;
-import React from "react";
+import { createRef } from "react";
 import { act } from "react-dom/test-utils";
 import { runInAction } from "mobx";
 import { withThemeContext } from "../withThemeContext";
@@ -60,9 +60,9 @@ describe("TourPortal", function() {
         expect(() => testRenderer.root.findByType(TourExplanation)).toThrow();
       });
       it("renders something using the TourGrouping path under showPortal conditions", function() {
-        const testRef: any = React.createRef();
-        const testRef2: any = React.createRef();
-        const testRef3: any = React.createRef();
+        const testRef: any = createRef();
+        const testRef2: any = createRef();
+        const testRef3: any = createRef();
         act(() => {
           testRenderer = create(
             <div>

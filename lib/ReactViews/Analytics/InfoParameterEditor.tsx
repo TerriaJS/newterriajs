@@ -1,11 +1,11 @@
-import React from "react";
+import { Component } from "react";
 
 import { observer } from "mobx-react";
 import InfoParameter from "../../Models/FunctionParameters/InfoParameter";
 import parseCustomMarkdownToReact from "../Custom/parseCustomMarkdownToReact";
 
 @observer
-export default class InfoParameterEditor extends React.Component<{
+export default class InfoParameterEditor extends Component<{
   parameter: InfoParameter;
 }> {
   render() {

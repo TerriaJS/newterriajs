@@ -1,5 +1,5 @@
-import joinUrl from "./joinUrl";
 import loadCsv from "../../Core/loadCsv";
+import joinUrl from "./joinUrl";
 import { IndexBase, IndexType } from "./Types";
 
 // IDs of enum to search

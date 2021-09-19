@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import React from "react";
+import { Component } from "react";
 import styled from "styled-components";
 import { useTranslationIfExists } from "../../../../Language/languageHelpers";
 import Terria from "../../../../Models/Terria";
@@ -15,7 +15,7 @@ interface PropTypes {
 }
 
 @observer
-export class MapNavigationItem extends React.Component<PropTypes> {
+export class MapNavigationItem extends Component<PropTypes> {
   constructor(props: PropTypes) {
     super(props);
   }

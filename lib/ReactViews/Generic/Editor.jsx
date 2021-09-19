@@ -1,8 +1,8 @@
-import React from "react";
+import { PureComponent } from "react";
 import { init, exec } from "pell";
 import PropTypes from "prop-types";
 
-export default class Editor extends React.PureComponent {
+export default class Editor extends PureComponent {
   constructor(props) {
     super(props);
   }

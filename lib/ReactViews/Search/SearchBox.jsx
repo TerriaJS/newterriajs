@@ -1,4 +1,4 @@
-import React from "react";
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import createReactClass from "create-react-class";
 import debounce from "lodash-es/debounce";
@@ -196,4 +196,4 @@ const SearchBoxWithRef = (props, ref) => (
   <SearchBox {...props} inputBoxRef={ref} />
 );
 
-export default withTheme(React.forwardRef(SearchBoxWithRef));
+export default withTheme(forwardRef(SearchBoxWithRef));

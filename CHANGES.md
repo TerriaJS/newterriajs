@@ -190,6 +190,10 @@ Change Log
 
 * Added analytic events related to story, share and help menu items, Also refactored events to use category and action enums.
 * Remove table style `SelectableDimension` from SDMX
+* Upgrade to react v17. (#5549)
+* Upgrade to documentationjs 13, and fix configuration issue. (#5549)
+* Remove unused dependencies `class-list`, `d3-axis`, `d3-dispatch`, `simple-statistics` and `ts-loader`. (#5549)
+* [The next improvement]
 * `GyroscopeGuidance` can now be translated.
 * Wraps tool title bar text using `...`.
 

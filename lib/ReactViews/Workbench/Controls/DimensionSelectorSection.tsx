@@ -3,7 +3,7 @@
 import i18next from "i18next";
 import { action } from "mobx";
 import { observer } from "mobx-react";
-import React from "react";
+import { ChangeEvent, Component, Fragment } from "react";
 import { WithTranslation, withTranslation } from "react-i18next";
 import isDefined from "../../../Core/isDefined";
 import CommonStrata from "../../../Models/Definition/CommonStrata";
@@ -22,11 +22,11 @@ interface PropsType extends WithTranslation {
 }
 
 @observer
-class DimensionSelectorSection extends React.Component<PropsType> {
+class DimensionSelectorSection extends Component<PropsType> {
   @action
   setDimensionValue(
     dimension: SelectableDimension,
-    event: React.ChangeEvent<HTMLSelectElement>
+    event: ChangeEvent<HTMLSelectElement>
   ) {
     dimension.setDimensionValue(CommonStrata.user, event.target.value);
   }
@@ -55,7 +55,7 @@ class DimensionSelectorSection extends React.Component<PropsType> {
       <Box displayInlineBlock fullWidth>
         <Spacing bottom={2} />
         {selectableDimensions.map((dim, i) => (
-          <React.Fragment key={dim.id}>
+          <Fragment key={dim.id}>
             <label htmlFor={`${this.props.item.uniqueId}-${dim.id}`}>
               <Text textLight medium as="span">
                 {dim.name || dim.id}:
@@ -88,7 +88,7 @@ class DimensionSelectorSection extends React.Component<PropsType> {
               ))}
             </Select>
             {i < selectableDimensions.length - 1 && <Spacing bottom={2} />}
-          </React.Fragment>
+          </Fragment>
         ))}
       </Box>
     );

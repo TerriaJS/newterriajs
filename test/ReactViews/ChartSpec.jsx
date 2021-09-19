@@ -1,11 +1,8 @@
 "use strict";
-
-import React from "react";
-import { getMountedInstance } from "./MoreShallowTools";
-
-import Chart from "../../lib/ReactViews/Custom/Chart/Chart";
 import ChartData from "../../lib/Charts/ChartData";
 import TableStructure from "../../lib/Map/TableStructure";
+import Chart from "../../lib/ReactViews/Custom/Chart/Chart";
+import { getMountedInstance } from "./MoreShallowTools";
 
 describe("Chart", function() {
   it("loads data from a url", function(done) {

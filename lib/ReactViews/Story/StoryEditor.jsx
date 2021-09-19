@@ -1,11 +1,11 @@
-import React from "react";
+import { Component } from "react";
 import PropTypes from "prop-types";
 import Editor from "../Generic/Editor.jsx";
 import classNames from "classnames";
 import Styles from "./story-editor.scss";
 import { withTranslation } from "react-i18next";
 
-class StoryEditor extends React.Component {
+class StoryEditor extends Component {
   constructor(props) {
     super(props);
     this.state = {

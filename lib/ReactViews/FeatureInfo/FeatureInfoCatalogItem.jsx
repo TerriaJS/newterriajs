@@ -1,6 +1,5 @@
 import defined from "terriajs-cesium/Source/Core/defined";
 import FeatureInfoSection from "./FeatureInfoSection";
-import React from "react";
 
 import createReactClass from "create-react-class";
 

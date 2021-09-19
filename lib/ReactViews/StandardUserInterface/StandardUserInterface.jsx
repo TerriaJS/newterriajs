@@ -1,4 +1,3 @@
-import React from "react";
 import createReactClass from "create-react-class";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import PropTypes from "prop-types";

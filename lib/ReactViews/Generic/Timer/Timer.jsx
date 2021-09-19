@@ -1,6 +1,6 @@
 "use strict";
 
-import React from "react";
+import { PureComponent } from "react";
 import PropTypes from "prop-types";
 
 import createGuid from "terriajs-cesium/Source/Core/createGuid";
@@ -24,7 +24,7 @@ if (typeof document.hidden !== "undefined") {
   visibilityChange = "webkitvisibilitychange";
 }
 
-class Timer extends React.PureComponent {
+class Timer extends PureComponent {
   constructor(props) {
     super();
 

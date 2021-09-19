@@ -5,7 +5,7 @@ import { action, runInAction, observable, computed } from "mobx";
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
 import Slider from "rc-slider";
-import React from "react";
+import { Component } from "react";
 import { withTranslation } from "react-i18next";
 import ImagerySplitDirection from "terriajs-cesium/Source/Scene/ImagerySplitDirection";
 import DefaultTimelineModel from "../../../Models/DefaultTimelineModel";
@@ -36,7 +36,7 @@ const sides = {
 };
 
 @observer
-class SettingPanel extends React.Component {
+class SettingPanel extends Component {
   static propTypes = {
     terria: PropTypes.object.isRequired,
     refFromHOC: PropTypes.object,

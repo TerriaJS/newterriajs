@@ -1,6 +1,5 @@
 import createReactClass from "create-react-class";
 import PropTypes from "prop-types";
-import React from "react";
 import { Trans, withTranslation } from "react-i18next";
 import {
   Category,

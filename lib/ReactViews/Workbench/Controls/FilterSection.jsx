@@ -1,11 +1,9 @@
 "use strict";
-
 import createReactClass from "create-react-class";
 import { runInAction } from "mobx";
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
 import { Range } from "rc-slider";
-import React from "react";
 import CommonStrata from "../../../Models/Definition/CommonStrata";
 import Styles from "./filter-section.scss";
 

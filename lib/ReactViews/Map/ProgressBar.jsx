@@ -1,11 +1,8 @@
 "use strict";
-
-import React from "react";
-import PropTypes from "prop-types";
-import createReactClass from "create-react-class";
-import EventHelper from "terriajs-cesium/Source/Core/EventHelper";
 import classNames from "classnames";
-
+import createReactClass from "create-react-class";
+import PropTypes from "prop-types";
+import EventHelper from "terriajs-cesium/Source/Core/EventHelper";
 import Styles from "./progress-bar.scss";
 
 // The map navigation region

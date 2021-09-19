@@ -1,22 +1,15 @@
 "use strict";
-
-import React from "react";
-
 import createReactClass from "create-react-class";
-
+import { autorun, runInAction } from "mobx";
 import PropTypes from "prop-types";
-
+import { withTranslation } from "react-i18next";
 import Cartographic from "terriajs-cesium/Source/Core/Cartographic";
-import CesiumMath from "terriajs-cesium/Source/Core/Math";
 import defined from "terriajs-cesium/Source/Core/defined";
 import Ellipsoid from "terriajs-cesium/Source/Core/Ellipsoid";
-
-import MapInteractionMode from "../../Models/MapInteractionMode";
-
-import Styles from "./parameter-editors.scss";
-import { runInAction, autorun } from "mobx";
-import { withTranslation } from "react-i18next";
+import CesiumMath from "terriajs-cesium/Source/Core/Math";
 import CommonStrata from "../../Models/Definition/CommonStrata";
+import MapInteractionMode from "../../Models/MapInteractionMode";
+import Styles from "./parameter-editors.scss";
 
 const PointParameterEditor = createReactClass({
   displayName: "PointParameterEditor",

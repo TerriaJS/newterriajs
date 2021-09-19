@@ -1,4 +1,4 @@
-import React, { createRef, useEffect } from "react";
+import { FC, createRef, useEffect } from "react";
 import styled from "styled-components";
 import Cartesian2 from "terriajs-cesium/Source/Core/Cartesian2";
 import Scene from "terriajs-cesium/Source/Scene/Scene";
@@ -9,7 +9,7 @@ type MouseTooltipProps = {
   text: string;
 };
 
-const MouseTooltip: React.FC<MouseTooltipProps> = props => {
+const MouseTooltip: FC<MouseTooltipProps> = props => {
   const { scene, text } = props;
   const tooltipText = createRef<typeof TooltipText>();
 

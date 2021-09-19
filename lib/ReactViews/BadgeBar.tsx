@@ -1,13 +1,13 @@
-import React from "react";
+import { ReactNode, FC } from "react";
 import { TextSpan } from "../Styled/Text";
 const Box = require("../Styled/Box").default;
 
 interface IProps {
   label: string;
   badge?: number;
-  children: React.ReactNode;
+  children: ReactNode;
 }
-const BadgeBar: React.FC<IProps> = (props: IProps) => {
+const BadgeBar: FC<IProps> = (props: IProps) => {
   return (
     <Box paddedHorizontally={3} justifySpaceBetween whiteSpace="nowrap">
       <Box verticalCenter styledMaxWidth="40%">

@@ -1,25 +1,21 @@
 "use strict";
-
 // import knockout from 'terriajs-cesium/Source/ThirdParty/knockout';
-import React from "react";
-import { findWithType } from "react-shallow-testutils";
-import { getShallowRenderedOutput } from "./MoreShallowTools";
 import { runInAction } from "mobx";
-
-// import Entity from 'terriajs-cesium/Source/DataSources/Entity';
-
-import {
-  FeatureInfoPanel,
-  determineCatalogItem
-} from "../../lib/ReactViews/FeatureInfo/FeatureInfoPanel";
-import Loader from "../../lib/ReactViews/Loader";
+import { findWithType } from "react-shallow-testutils";
 import PickedFeatures from "../../lib/Map/PickedFeatures";
-import Terria from "../../lib/Models/Terria";
-import ViewState from "../../lib/ReactViewModels/ViewState";
-import Feature from "../../lib/Models/Feature";
-import SimpleCatalogItem from "../Helpers/SimpleCatalogItem";
 import CompositeCatalogItem from "../../lib/Models/Catalog/CatalogItems/CompositeCatalogItem";
 import CommonStrata from "../../lib/Models/Definition/CommonStrata";
+import Feature from "../../lib/Models/Feature";
+import Terria from "../../lib/Models/Terria";
+import ViewState from "../../lib/ReactViewModels/ViewState";
+// import Entity from 'terriajs-cesium/Source/DataSources/Entity';
+import {
+  determineCatalogItem,
+  FeatureInfoPanel
+} from "../../lib/ReactViews/FeatureInfo/FeatureInfoPanel";
+import Loader from "../../lib/ReactViews/Loader";
+import SimpleCatalogItem from "../Helpers/SimpleCatalogItem";
+import { getShallowRenderedOutput } from "./MoreShallowTools";
 
 // var separator = ',';
 // if (typeof Intl === 'object' && typeof Intl.NumberFormat === 'function') {

@@ -1,4 +1,4 @@
-import React from "react";
+import { PureComponent } from "react";
 import PropTypes from "prop-types";
 import FadeIn from "../Transitions/FadeIn/FadeIn";
 import Box from "../../Styled/Box";
@@ -8,7 +8,7 @@ import { RawButton } from "../../Styled/Button";
 import { withTheme } from "styled-components";
 import Caret from "../Generic/Caret";
 
-class Prompt extends React.PureComponent {
+class Prompt extends PureComponent {
   // Tried to keep/make use of the original story prompt css properties
   render() {
     return (

@@ -1,10 +1,8 @@
 "use strict";
-
-import React from "react";
-import PropTypes from "prop-types";
-import Styles from "../HelpScreens/obscure-overlay.scss";
 import classNames from "classnames";
+import PropTypes from "prop-types";
 import defined from "terriajs-cesium/Source/Core/defined";
+import Styles from "../HelpScreens/obscure-overlay.scss";
 
 /**
  * Re-adapted from ObscureOverlay.jsx to be more general and not tied to viewState
