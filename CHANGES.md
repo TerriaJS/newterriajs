@@ -27,6 +27,8 @@
 - Fix app crash when rendering feature info with a custom title.
 - Added new `CkanCatalogGroup` traits `resourceIdTemplate` and `restrictResourceIdTemplateToOrgsWithNames` to generate custom resource IDs for CKAN resources with unstable IDs.
 - Fix `acessType` resolution for `MagdaReference` so that it uses the default terria resolution strategy when `magdaRecord` is not defined.
+- Implement basic Cloud Optimised Geotiff support
+- [The next improvement]
 
 #### 8.2.28 - 2023-04-28
 

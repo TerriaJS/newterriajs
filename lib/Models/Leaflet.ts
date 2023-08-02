@@ -1,5 +1,4 @@
 import i18next from "i18next";
-import { GridLayer } from "leaflet";
 import {
   action,
   autorun,
@@ -63,6 +62,8 @@ import GlobeOrMap from "./GlobeOrMap";
 import { LeafletAttribution } from "./LeafletAttribution";
 import MapInteractionMode from "./MapInteractionMode";
 import Terria from "./Terria";
+import { isUndefined } from "lodash-es";
+import GeorasterTerriaLayer from "../Map/Leaflet/GeorasterTerriaLayer";
 
 // We want TS to look at the type declared in lib/ThirdParty/terriajs-cesium-extra/index.d.ts
 // and import doesn't allows us to do that, so instead we use require + type casting to ensure
@@ -70,8 +71,12 @@ import Terria from "./Terria";
 const FeatureDetection: FeatureDetection =
   require("terriajs-cesium/Source/Core/FeatureDetection").default;
 
-// This class is an observer. It probably won't contain any observables itself
+export type TerriaLeafletLayer =
+  | GeorasterTerriaLayer
+  | ImageryProviderLeafletGridLayer
+  | ImageryProviderLeafletTileLayer;
 
+// This class is an observer. It probably won't contain any observables itself
 export default class Leaflet extends GlobeOrMap {
   readonly type = "Leaflet";
   readonly terria: Terria;
@@ -110,21 +115,29 @@ export default class Leaflet extends GlobeOrMap {
 
   private _createImageryLayer: (
     ip: ImageryProvider,
-    clippingRectangle: Rectangle | undefined
-  ) => GridLayer = computedFn((ip, clippingRectangle) => {
-    const layerOptions = {
-      bounds: clippingRectangle && rectangleToLatLngBounds(clippingRectangle)
-    };
-    // We have two different kinds of ImageryProviderLeaflet layers
-    // - Grid layer will use the ImageryProvider in the more traditional way - calling `requestImage` to draw the image on to a canvas
-    // - Tile layer will pass tile URLs to leaflet objects - which is a bit more "Leaflety" than Grid layer
-    // Tile layer is preferred. Grid layer mainly exists for custom Imagery Providers which aren't just a tile of image URLs
-    if (supportsImageryProviderGridLayer(ip)) {
-      return new ImageryProviderLeafletGridLayer(this, ip, layerOptions);
-    } else {
-      return new ImageryProviderLeafletTileLayer(this, ip, layerOptions);
+    clippingRectangle: Rectangle | undefined,
+    overrideCreateLeafletLayerFn: ImageryParts["overrideCreateLeafletLayer"]
+  ) => TerriaLeafletLayer | undefined = computedFn(
+    (ip, clippingRectangle, overrideCreateLeafletLayerFn) => {
+      const layerOptions = {
+        bounds: clippingRectangle && rectangleToLatLngBounds(clippingRectangle)
+      };
+      // We have two different kinds of ImageryProviderLeaflet layers
+      // - Grid layer will use the ImageryProvider in the more traditional way - calling `requestImage` to draw the image on to a canvas
+      // - Tile layer will pass tile URLs to leaflet objects - which is a bit more "Leaflety" than Grid layer
+      // Tile layer is preferred. Grid layer mainly exists for custom Imagery Providers which aren't just a tile of image URLs
+      // Also, some kinds of Imagery Providers cannot create Leaflet layers appropriately, e.g. the COG Imagery Provider.
+      // In this case, the Catalog Item should specify an `overrideCreateLeafletLayer` property.
+      // If the Catalog Item defines `overrideCreateLeafletLayer` then use that, otherwise follow the logic below.
+      if (overrideCreateLeafletLayerFn) {
+        return overrideCreateLeafletLayerFn(ip, layerOptions.bounds);
+      } else if (supportsImageryProviderGridLayer(ip)) {
+        return new ImageryProviderLeafletGridLayer(this, ip, layerOptions);
+      } else {
+        return new ImageryProviderLeafletTileLayer(this, ip, layerOptions);
+      }
     }
-  });
+  );
 
   private _makeImageryLayerFromParts(
     parts: ImageryParts,
@@ -144,7 +157,8 @@ export default class Leaflet extends GlobeOrMap {
     }
     return this._createImageryLayer(
       parts.imageryProvider,
-      parts.clippingRectangle
+      parts.clippingRectangle,
+      parts.overrideCreateLeafletLayer
     );
   }
 
@@ -413,16 +427,24 @@ export default class Leaflet extends GlobeOrMap {
           )
       );
 
-      const allImagery = allImageryMapItems.map(({ item, parts }) => {
-        if (hasTraits(item, ImageryProviderTraits, "leafletUpdateInterval")) {
-          (parts.imageryProvider as any)._leafletUpdateInterval =
-            item.leafletUpdateInterval;
-        }
-        return {
-          parts: parts,
-          layer: this._makeImageryLayerFromParts(parts, item)
-        };
-      });
+      const allImagery = filterOutUndefined(
+        allImageryMapItems.map(({ item, parts }) => {
+          if (hasTraits(item, ImageryProviderTraits, "leafletUpdateInterval")) {
+            (parts.imageryProvider as any)._leafletUpdateInterval =
+              item.leafletUpdateInterval;
+          }
+
+          const layer = this._makeImageryLayerFromParts(parts, item);
+          if (isDefined(layer)) {
+            return {
+              parts: parts,
+              layer: layer
+            };
+          } else {
+            return undefined;
+          }
+        })
+      );
 
       // Delete imagery layers no longer in the model
       this.map.eachLayer((mapLayer) => {
@@ -440,15 +462,27 @@ export default class Leaflet extends GlobeOrMap {
       // Add layer and update its zIndex
       let zIndex = 100; // Start at an arbitrary value
       allImagery.reverse().forEach(({ parts, layer }) => {
+        if (!isDefined(layer)) {
+          // TODO: Should we filter out undefined layers before this point in the code?
+          console.log(
+            `Layer is undefined, and will fail when trying to set Opacity. Skipping layer ${parts}`
+          );
+          debugger;
+          return;
+        }
+
         if (parts.show) {
           layer.setOpacity(parts.alpha);
           layer.setZIndex(zIndex);
           zIndex++;
-
+          // NB: these ts-ignores are because the type of GeoRaster is not well defined. It does implement the requires methods.
+          // @ts-ignore
           if (!this.map.hasLayer(layer)) {
+            // @ts-ignore
             this.map.addLayer(layer);
           }
         } else {
+          // @ts-ignore
           this.map.removeLayer(layer);
         }
       });
@@ -530,7 +564,15 @@ export default class Leaflet extends GlobeOrMap {
           return this.doZoomTo(target.mapItems[0], flightDurationSeconds);
         }
       } else {
-        extent = target.rectangle;
+        /** TODO: THIS PATH IS FOLLOWED FOR COGS. Need to define target.rectangle...
+         * Needed to get the layer extent. Now storing this in clippingRectangle property of target, for COGs.
+         * TODO: Is that appropriate? **/
+
+        // Changed from:
+        // extent = target.rectangle;
+        extent = isDefined(target.rectangle)
+          ? target.rectangle
+          : target.clippingRectangle;
       }
 
       // Account for a bounding box crossing the date line.
@@ -768,7 +810,7 @@ export default class Leaflet extends GlobeOrMap {
       Ellipsoid.WGS84.cartographicToCartesian(pickedLocation);
 
     const imageryFeaturePromises = imageryLayers.map(async (imageryLayer) => {
-      const imageryLayerUrl = (<any>imageryLayer.imageryProvider).url;
+      const imageryLayerUrl = (<any>imageryLayer.imageryProvider)?.url;
       const longRadians = CesiumMath.toRadians(latlng.lng);
       const latRadians = CesiumMath.toRadians(latlng.lat);
 
@@ -923,15 +965,16 @@ export default class Leaflet extends GlobeOrMap {
 
   getImageryLayersForItem(
     item: MappableMixin.Instance
-  ): (ImageryProviderLeafletTileLayer | ImageryProviderLeafletGridLayer)[] {
+  ): (
+    | ImageryProviderLeafletTileLayer
+    | ImageryProviderLeafletGridLayer
+    | GeorasterTerriaLayer
+  )[] {
     return filterOutUndefined(
       item.mapItems.map((m) => {
         if (ImageryParts.is(m)) {
           const layer = this._makeImageryLayerFromParts(m, item);
-          return layer instanceof ImageryProviderLeafletTileLayer ||
-            layer instanceof ImageryProviderLeafletGridLayer
-            ? layer
-            : undefined;
+          return layer ?? undefined;
         }
       })
     );
@@ -1135,7 +1178,7 @@ export default class Leaflet extends GlobeOrMap {
 function isImageryLayer(
   someLayer: L.Layer
 ): someLayer is ImageryProviderLeafletTileLayer {
-  return "imageryProvider" in someLayer;
+  return "pickFeatures" in someLayer;
 }
 
 function isDataSource(object: MapItem): object is DataSource {

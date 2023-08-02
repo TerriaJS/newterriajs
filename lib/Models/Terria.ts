@@ -154,7 +154,7 @@ export interface ConfigParameters {
   /**
    * URL of Proj4 projection lookup service (part of TerriaJS-Server).
    */
-  proj4ServiceBaseUrl?: string;
+  proj4ServiceBaseUrl: string;
   /**
    * URL of CORS proxy service (part of TerriaJS-Server)
    */
