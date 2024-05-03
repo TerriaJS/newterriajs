@@ -3,6 +3,7 @@
 #### next release (8.7.2)
 
 - Add NumberParameterEditor to enable WPS AllowedValues Ranges to be set and use DefaultValue
+- Show Cesium's original credit message instead of a custom Terria one when using the default Ion access token.
 
 #### 8.7.1 - 2024-04-16
 
