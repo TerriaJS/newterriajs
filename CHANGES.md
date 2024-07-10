@@ -3,6 +3,7 @@
 #### next release (8.7.6)
 
 - Set default value for date and datetime WPS fields only when the field is marked as required.
+- TSify MenuBar
 - [The next improvement]
 
 #### 8.7.5 - 2024-06-26
@@ -12,7 +13,6 @@
 - Show rectangle selector for WPS bounding box parameter
 - Fix `store` and `status` values send in WPS Execute request.
 - Add docs for `modelDimensions`
-- [The next improvement]
 
 #### 8.7.4 - 2024-06-07
 

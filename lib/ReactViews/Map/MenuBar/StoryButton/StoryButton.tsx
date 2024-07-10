@@ -16,7 +16,7 @@ interface Props {
   terria: Terria;
   theme: DefaultTheme;
   viewState: ViewState;
-  animationDuration: number;
+  animationDuration?: number;
 }
 
 interface ButtonProps extends Props {

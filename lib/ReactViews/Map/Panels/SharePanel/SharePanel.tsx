@@ -19,13 +19,13 @@ const StorySharePanel = require("./StorySharePanel").default;
 
 interface PropTypes extends WithTranslation {
   terria: Terria;
-  storyShare: boolean;
+  storyShare?: boolean;
   catalogShare?: boolean;
   catalogShareWithoutText?: boolean;
-  modalWidth: number;
+  modalWidth?: number;
   viewState: ViewState;
-  onUserClick: () => void;
-  btnDisabled: boolean;
+  onUserClick?: () => void;
+  btnDisabled?: boolean;
   t: TFunction;
 }
 

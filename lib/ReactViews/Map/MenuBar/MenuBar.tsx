@@ -1,21 +1,21 @@
 import classNames from "classnames";
 import { runInAction } from "mobx";
 import { observer } from "mobx-react";
-import PropTypes from "prop-types";
 import React from "react";
-import styled from "styled-components";
-import withControlledVisibility from "../../HOCs/withControlledVisibility";
+import styled, { useTheme } from "styled-components";
 import { useViewState } from "../../Context";
+import withControlledVisibility from "../../HOCs/withControlledVisibility";
 import LangPanel from "../Panels/LangPanel/LangPanel";
 import SettingPanel from "../Panels/SettingPanel";
 import SharePanel from "../Panels/SharePanel/SharePanel";
 import ToolsPanel from "../Panels/ToolsPanel/ToolsPanel";
-import StoryButton from "./StoryButton/StoryButton";
 import HelpButton from "./HelpButton/HelpButton";
+import StoryButton from "./StoryButton/StoryButton";
 
+import IElementConfig from "../../../Models/IElementConfig";
 import Styles from "./menu-bar.scss";
 
-const StyledMenuBar = styled.div`
+const StyledMenuBar = styled.div<{ trainerBarVisible: boolean }>`
   pointer-events: none;
   ${(p) =>
     p.trainerBarVisible &&
@@ -23,8 +23,17 @@ const StyledMenuBar = styled.div`
     top: ${Number(p.theme.trainerHeight) + Number(p.theme.mapButtonTop)}px;
   `}
 `;
+
+interface PropsType {
+  animationDuration?: number;
+  menuItems: React.ReactElement[];
+  menuLeftItems: React.ReactElement[];
+  elementConfig?: IElementConfig;
+}
+
 // The map navigation region
-const MenuBar = observer((props) => {
+const MenuBar = observer((props: PropsType) => {
+  const theme = useTheme();
   const viewState = useViewState();
   const terria = viewState.terria;
   const menuItems = props.menuItems || [];
@@ -70,7 +79,7 @@ const MenuBar = observer((props) => {
             <SettingPanel terria={terria} viewState={viewState} />
           </li>
           <li className={Styles.menuItem}>
-            <HelpButton viewState={viewState} />
+            <HelpButton />
           </li>
 
           {terria.configParameters?.languageConfiguration?.enabled ? (
@@ -88,18 +97,14 @@ const MenuBar = observer((props) => {
               <StoryButton
                 terria={terria}
                 viewState={viewState}
-                theme={props.theme}
+                theme={theme}
               />
             </li>
           </ul>
         )}
         <ul className={classNames(Styles.menu)}>
           <li className={Styles.menuItem}>
-            <SharePanel
-              terria={terria}
-              viewState={viewState}
-              animationDuration={props.animationDuration}
-            />
+            <SharePanel terria={terria} viewState={viewState} />
           </li>
         </ul>
         {!viewState.useSmallScreenInterface &&
@@ -112,11 +117,5 @@ const MenuBar = observer((props) => {
     </StyledMenuBar>
   );
 });
-MenuBar.displayName = "MenuBar";
-MenuBar.propTypes = {
-  animationDuration: PropTypes.number,
-  menuItems: PropTypes.arrayOf(PropTypes.element),
-  menuLeftItems: PropTypes.arrayOf(PropTypes.element)
-};
 
 export default withControlledVisibility(MenuBar);
