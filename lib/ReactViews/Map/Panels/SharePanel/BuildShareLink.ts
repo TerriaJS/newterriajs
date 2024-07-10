@@ -38,7 +38,13 @@ function buildBaseShareUrl(
   terria: Terria,
   hashParams: { [key: string]: string }
 ) {
-  const uri = new URI(document.baseURI).fragment("").search("");
+  let baseUrl = document.baseURI
+
+  if (terria.configParameters.shareClientBaseUrl) {
+    baseUrl = terria.configParameters.shareClientBaseUrl;
+  }
+
+  const uri = new URI(baseUrl).fragment("").search("");
 
   if (terria.developmentEnv) {
     uri.addSearch(toJS(terria.userProperties));

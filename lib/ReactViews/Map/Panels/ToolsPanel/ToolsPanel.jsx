@@ -8,6 +8,7 @@ import { useViewState } from "../../../Context";
 import DropdownStyles from "../panel.scss";
 import CountDatasets from "./CountDatasets";
 import Styles from "./tools-panel.scss";
+import withControlledVisibility from "../../../HOCs/withControlledVisibility";
 
 const ToolsPanel = observer(() => {
   const [isOpen, setIsOpen] = useState(false);
@@ -45,4 +46,4 @@ const ToolsPanel = observer(() => {
   );
 });
 
-export default ToolsPanel;
+export default withControlledVisibility(ToolsPanel);

@@ -56,6 +56,28 @@ function findKeyForGroupElement(groupElement) {
   )[0];
 }
 
+function processChildren(child, isSmallScreen) {
+  if (typeof child === "string") {
+    return <span>{child}</span>;
+  } else if (
+    child &&
+    child.type.propTypes &&
+    child.type.propTypes.smallScreen
+  ) {
+    return React.cloneElement(child, {
+      smallScreen: isSmallScreen
+    });
+  }
+  // IF child is react fragment, then unpack
+  else if (child && child.type === React.Fragment) {
+    return React.Children.map(child.props.children, (child) => processChildren(child, isSmallScreen));
+  }
+
+  else {
+    return child;
+  }
+}
+
 /**
  * Gets the children out of a grouping element and sanitises them - e.g. plain strings are converted to <span>s and
  * elements that need to know about whether we're in small screen configuration are provided with that prop.
@@ -65,19 +87,5 @@ function findKeyForGroupElement(groupElement) {
  * @returns {Array<Element>} a collection of processed children.
  */
 function getGroupChildren(isSmallScreen, groupElement) {
-  return React.Children.map(groupElement.props.children, (child) => {
-    if (typeof child === "string") {
-      return <span>{child}</span>;
-    } else if (
-      child &&
-      child.type.propTypes &&
-      child.type.propTypes.smallScreen
-    ) {
-      return React.cloneElement(child, {
-        smallScreen: isSmallScreen
-      });
-    } else {
-      return child;
-    }
-  });
+  return React.Children.map(groupElement.props.children, (child) => processChildren(child, isSmallScreen));
 }

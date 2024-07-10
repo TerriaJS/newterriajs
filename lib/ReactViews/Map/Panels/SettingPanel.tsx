@@ -30,6 +30,7 @@ import Text, { TextSpan } from "../../../Styled/Text";
 import withTerriaRef from "../../HOCs/withTerriaRef";
 import MenuPanel from "../../StandardUserInterface/customizable/MenuPanel";
 import Styles from "./setting-panel.scss";
+import withControlledVisibility from "../../HOCs/withControlledVisibility";
 
 const sides = {
   left: "settingPanel.terrain.left",
@@ -413,7 +414,7 @@ class SettingPanel extends React.Component<PropTypes> {
 
 export const SETTING_PANEL_NAME = "MenuBarMapSettingsButton";
 export default withTranslation()(
-  withTheme(withTerriaRef(SettingPanel, SETTING_PANEL_NAME))
+  withTheme(withTerriaRef(withControlledVisibility(SettingPanel), SETTING_PANEL_NAME))
 );
 
 type IFlexGrid = {

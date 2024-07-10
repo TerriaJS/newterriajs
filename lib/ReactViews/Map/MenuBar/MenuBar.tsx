@@ -62,7 +62,7 @@ const MenuBar = observer((props: PropsType) => {
         <ul className={classNames(Styles.menu)}>
           {enableTools && (
             <li className={Styles.menuItem}>
-              <ToolsPanel />
+              <ToolsPanel elementConfig={terria.elements.get("menu-bar-tools")}/>
             </li>
           )}
           {!viewState.useSmallScreenInterface &&
@@ -76,10 +76,14 @@ const MenuBar = observer((props: PropsType) => {
       <section className={classNames(Styles.flex)}>
         <ul className={classNames(Styles.menu)}>
           <li className={Styles.menuItem}>
-            <SettingPanel terria={terria} viewState={viewState} />
+            <SettingPanel
+              terria={terria}
+              viewState={viewState}
+              elementConfig={terria.elements.get("menu-bar-settings")}
+            />
           </li>
           <li className={Styles.menuItem}>
-            <HelpButton />
+            <HelpButton elementConfig={terria.elements.get("menu-bar-help")}/>
           </li>
 
           {terria.configParameters?.languageConfiguration?.enabled ? (
@@ -87,6 +91,7 @@ const MenuBar = observer((props: PropsType) => {
               <LangPanel
                 terria={terria}
                 smallScreen={viewState.useSmallScreenInterface}
+                elementConfig={terria.elements.get("menu-bar-lang")}
               />
             </li>
           ) : null}
@@ -98,13 +103,14 @@ const MenuBar = observer((props: PropsType) => {
                 terria={terria}
                 viewState={viewState}
                 theme={theme}
+                elementConfig={terria.elements.get("menu-bar-story")}
               />
             </li>
           </ul>
         )}
         <ul className={classNames(Styles.menu)}>
           <li className={Styles.menuItem}>
-            <SharePanel terria={terria} viewState={viewState} />
+            <SharePanel terria={terria} viewState={viewState} elementConfig={terria.elements.get("menu-bar-share")} />
           </li>
         </ul>
         {!viewState.useSmallScreenInterface &&

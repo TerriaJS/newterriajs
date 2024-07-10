@@ -12,6 +12,7 @@ import { canShorten } from "./BuildShareLink";
 import Styles from "./share-panel.scss";
 import { SharePanelContent } from "./SharePanelContent";
 import { ShareUrl } from "./ShareUrl";
+import withControlledVisibility from "../../../HOCs/withControlledVisibility";
 
 const MenuPanel =
   require("../../../StandardUserInterface/customizable/MenuPanel").default;
@@ -184,7 +185,7 @@ class SharePanel extends React.Component<PropTypes, SharePanelState> {
   }
 }
 
-export default withTranslation()(SharePanel);
+export default withControlledVisibility(withTranslation()(SharePanel))
 
 export function shouldShorten(terria: Terria) {
   return (

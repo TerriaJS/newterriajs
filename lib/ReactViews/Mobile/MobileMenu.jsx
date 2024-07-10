@@ -128,12 +128,14 @@ class MobileMenu extends React.Component {
             <SettingPanel
               terria={this.props.terria}
               viewState={this.props.viewState}
+              elementConfig={this.props.terria.elements.get("menu-bar-settings")}
             />
           </div>
           <div onClick={() => this.hideMenu()}>
             <SharePanel
               terria={this.props.terria}
               viewState={this.props.viewState}
+              elementConfig={this.props.terria.elements.get("menu-bar-share")}
             />
           </div>
           {this.props.menuItems.map((menuItem) => (
@@ -165,6 +167,7 @@ class MobileMenu extends React.Component {
               <LangPanel
                 terria={this.props.terria}
                 smallScreen={this.props.viewState.useSmallScreenInterface}
+                elementConfig={this.props.terria.elements.get("menu-bar-lang")}
               />
             </div>
           )}

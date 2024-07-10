@@ -5,13 +5,25 @@
  * and puts them in the correct place.
  */
 
+import { ReactElement } from "react";
+
 /** No-op grouping element for elements that should be added to the menu */
-export function Menu() {}
+export function Menu({ children }: { children: ReactElement | null }) {
+  return children;
+}
 /** No-op grouping element for elements that should be added to the left menu */
-export function MenuLeft() {}
+export function MenuLeft({ children }: { children: ReactElement | null }) {
+  return children;
+}
 /** No-op grouping element for elements that should be added to the nav*/
-export function Nav() {}
+export function Nav({ children }: { children: ReactElement | null }) {
+  return children;
+}
 /** No-op grouping element for elements that should be added to the experimental features*/
-export function ExperimentalMenu() {}
+export function ExperimentalMenu({ children }: { children: ReactElement | null }) {
+  return children;
+}
 /** No-op grouping element for elements that should be added to the Feedback*/
-export function Feedback() {}
+export function Feedback({ children }: { children: ReactElement | null }) {
+  return children;
+}
