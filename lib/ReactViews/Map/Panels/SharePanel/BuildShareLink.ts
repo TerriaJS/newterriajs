@@ -17,7 +17,7 @@ import HasLocalData from "../../../../Models/HasLocalData";
 import {
   InitSourceData,
   InitSourcePickedFeatures,
-  ShareInitSourceData,
+  StartData,
   ViewModeJson
 } from "../../../../Models/InitSource";
 import Terria from "../../../../Models/Terria";
@@ -38,7 +38,7 @@ function buildBaseShareUrl(
   terria: Terria,
   hashParams: { [key: string]: string }
 ) {
-  let baseUrl = document.baseURI
+  let baseUrl = document.baseURI;
 
   if (terria.configParameters.shareClientBaseUrl) {
     baseUrl = terria.configParameters.shareClientBaseUrl;
@@ -115,7 +115,7 @@ export function getShareData(
   terria: Terria,
   viewState?: ViewState,
   options = { includeStories: true }
-): ShareInitSourceData {
+): StartData {
   return runInAction(() => {
     const { includeStories } = options;
     const initSource: InitSourceData = {};

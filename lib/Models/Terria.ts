@@ -106,7 +106,7 @@ import IElementConfig from "./IElementConfig";
 import InitSource, {
   InitSourceData,
   InitSourceFromData,
-  ShareInitSourceData,
+  StartData,
   StoryData,
   isInitFromData,
   isInitFromDataPromise,
@@ -2269,7 +2269,7 @@ async function interpretStartData(
 ) {
   if (isJsonObject(startData, false)) {
     // Convert startData to v8 if necessary
-    let startDataV8: ShareInitSourceData | null;
+    let startDataV8: StartData | null;
     try {
       if (
         // If startData.version has version 0.x.x - user catalog-converter to convert startData
