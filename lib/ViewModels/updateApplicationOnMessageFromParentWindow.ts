@@ -1,6 +1,6 @@
 import { TerriaErrorSeverity } from "terriajs/lib/Core/TerriaError";
 import isDefined from "../Core/isDefined";
-import { isJsonObject, isJsonString } from "../Core/Json";
+import { isJsonBoolean, isJsonObject, isJsonString } from "../Core/Json";
 import Terria from "../Models/Terria";
 import { BaseModel } from "../Models/Definition/Model";
 
@@ -13,6 +13,7 @@ interface StartDataMessage {
 
 interface applyInitSource {
   type: "applyInitSource";
+  replaceStratum?: boolean;
   data: unknown;
 }
 
@@ -121,7 +122,12 @@ function updateApplicationOnMessageFromParentWindow(
           event.data.type === "applyInitSource" &&
           isJsonObject(event.data.data)
         ) {
-          await terria.applyInitData({ initData: event.data.data });
+          await terria.applyInitData({
+            initData: event.data.data,
+            replaceStratum: isJsonBoolean(event.data.replaceStratum)
+              ? event.data.replaceStratum
+              : undefined
+          });
           postMessage({ type: "applyInitSource", ready: true }, "*");
           return;
         }
