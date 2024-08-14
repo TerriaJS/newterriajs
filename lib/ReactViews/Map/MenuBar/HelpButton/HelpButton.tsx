@@ -7,6 +7,7 @@ import Prompt from "../../../Generic/Prompt";
 import { useViewState } from "../../../Context";
 
 import Styles from "./help-button.scss";
+import withControlledVisibility from "../../../HOCs/withControlledVisibility";
 
 const HelpButton = observer(() => {
   const { t } = useTranslation();
@@ -48,4 +49,4 @@ const HelpButton = observer(() => {
   );
 });
 
-export default HelpButton;
+export default withControlledVisibility(HelpButton);

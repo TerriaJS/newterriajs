@@ -106,7 +106,7 @@ import IElementConfig from "./IElementConfig";
 import InitSource, {
   InitSourceData,
   InitSourceFromData,
-  ShareInitSourceData,
+  StartData,
   StoryData,
   isInitFromData,
   isInitFromDataPromise,
@@ -168,8 +168,17 @@ export interface ConfigParameters {
    * @deprecated
    */
   proxyableDomainsUrl?: string;
+  /** URL to TerriaJS-server config. Defaults to `serverconfig/`. */
   serverConfigUrl?: string;
+  /**
+   * URL of the service used to generate share links. This defaults to `share` if not specified, which maps to TerriaJS Server `share` endpoint.
+   */
   shareUrl?: string;
+  /**
+   * Base URL of the client application used to generate share links. If not specified, the current page base URI will be used.
+   * For example, if `shareClientBaseUrl` is `http://example.com/`, then a share link will be generated as `http://example.com/#share=...`.
+   */
+  shareClientBaseUrl?: string;
   /**
    * URL of the service used to send feedback.  If not specified, the "Give Feedback" button will not appear.
    */
@@ -506,6 +515,7 @@ export default class Terria {
     proxyableDomainsUrl: "proxyabledomains/", // deprecated, will be determined from serverconfig
     serverConfigUrl: "serverconfig/",
     shareUrl: "share",
+    shareClientBaseUrl: undefined,
     feedbackUrl: undefined,
     initFragmentPaths: ["init/"],
     storyEnabled: true,
@@ -2259,7 +2269,7 @@ async function interpretStartData(
 ) {
   if (isJsonObject(startData, false)) {
     // Convert startData to v8 if necessary
-    let startDataV8: ShareInitSourceData | null;
+    let startDataV8: StartData | null;
     try {
       if (
         // If startData.version has version 0.x.x - user catalog-converter to convert startData

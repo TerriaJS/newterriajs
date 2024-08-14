@@ -11,12 +11,13 @@ import Prompt from "../../../Generic/Prompt";
 import { useRefForTerria } from "../../../Hooks/useRefForTerria";
 
 import Styles from "./story-button.scss";
+import withControlledVisibility from "../../../HOCs/withControlledVisibility";
 
-interface Props {
+interface Props  {
   terria: Terria;
   theme: DefaultTheme;
   viewState: ViewState;
-  animationDuration: number;
+  animationDuration?: number;
 }
 
 interface ButtonProps extends Props {
@@ -110,4 +111,4 @@ const StoryButton = (props: Props) => {
     </div>
   );
 };
-export default StoryButton;
+export default withControlledVisibility(StoryButton);
