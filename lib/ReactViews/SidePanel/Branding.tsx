@@ -1,4 +1,3 @@
-"use strict";
 import { observer } from "mobx-react";
 import React from "react";
 import isDefined from "../../Core/isDefined";

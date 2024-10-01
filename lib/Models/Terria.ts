@@ -377,7 +377,7 @@ export interface ConfigParameters {
   /**
    * Keep catalog open when adding / removing items
    */
-  keepCatalogOpen: false;
+  keepCatalogOpen: boolean;
 }
 
 interface StartOptions {

@@ -49,11 +49,13 @@ export const SelectableDimensionGroup: React.FC<{
         onToggle={
           dim.type === "group"
             ? dim.onToggle
-            : (isOpen) =>
+            : (isOpen) => {
                 dim.setDimensionValue(
                   CommonStrata.user,
                   isOpen ? "true" : "false"
-                )
+                );
+                return true;
+              }
         }
         btnStyle={dim.type === "checkbox-group" ? "checkbox" : undefined}
         btnRight={dim.type === "group"}

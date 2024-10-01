@@ -39,7 +39,7 @@ class MappablePreview extends React.Component {
     t: PropTypes.func.isRequired
   };
 
-  async toggleOnMap(_event) {
+  async toggleOnMap(event) {
     if (defined(this.props.viewState.storyShown)) {
       runInAction(() => (this.props.viewState.storyShown = false));
     }
@@ -48,7 +48,6 @@ class MappablePreview extends React.Component {
       this.props.viewState.terria.configParameters.keepCatalogOpen ||
       event.shiftKey ||
       event.ctrlKey;
-    event.shiftKey || event.ctrlKey;
 
     await toggleItemOnMapFromCatalog(
       this.props.viewState,

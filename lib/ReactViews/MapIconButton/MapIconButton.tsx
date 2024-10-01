@@ -1,4 +1,3 @@
-"use strict";
 import React, { useRef, useState } from "react";
 import styled, { useTheme } from "styled-components";
 import Box from "../../Styled/Box";
