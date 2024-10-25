@@ -38,6 +38,7 @@ export interface LanguageConfiguration {
   languages: object;
   fallbackLanguage: string;
   changeLanguageOnStartWhen: string[];
+  lookupCookie?: string;
 
   /** Base URL for override namespace translation files. If set, this makes up the base URL for translation override files. Should end in /
    *
@@ -60,7 +61,8 @@ const defaultLanguageConfiguration = {
     "localStorage",
     "navigator",
     "htmlTag"
-  ]
+  ],
+  lookupCookie: "i18next"
 };
 
 class Internationalization {
@@ -86,6 +88,7 @@ class Internationalization {
      * @param {Object} languageConfiguration.languages the languages to be used, example `{en: "english"}
      * @param {String} languageConfiguration.fallbackLanguage the language to be used on startup
      * @param {Array} languageConfiguration.changeLanguageOnStartWhen
+     * @param {String} languageConfiguration.lookupCookie name of the cookie that handles i18n
      */
 
     return i18next
@@ -161,11 +164,11 @@ class Internationalization {
 
         detection: {
           // order and from where user language should be detected
-          order: languageConfig.changeLanguageOnStartWhen,
+          order: languageConfig.changeLanguageOnStartWhen, 
 
           // keys or params to lookup language from
           lookupQuerystring: "lng",
-          lookupCookie: "i18next",
+          lookupCookie: languageConfig.lookupCookie,
           lookupLocalStorage: "i18nextLng",
 
           // cache user language on

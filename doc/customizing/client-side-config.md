@@ -174,6 +174,7 @@ Configuration of items to appear in the search bar
 | languages                 | yes      | **Object**       | `{en: "english"}`                                         | Language abbreviations. Please mind that matching locale files must exist.                                                                                                                                                                                                       |
 | fallbackLanguage          | yes      | **string**       | `"en"`                                                    | Fallback language used if contents are not available in the currently selected language.                                                                                                                                                                                         |
 | changeLanguageOnStartWhen | yes      | **string[]**     | `["querystring", "localStorage", "navigator", "htmlTag"]` | Order of user language detection. See [i18next browser language detection documentation](https://github.com/i18next/i18next-browser-languageDetector) for details.                                                                                                               |
+| lookupCookie              | no       | **string**       | `"i18next"`                                               | Name of the cookie that handles i18n. See [i18next browser language detection documentation](https://github.com/i18next/i18next-browser-languageDetector) for details.                                                                                                           |
 | overridesBaseUrl          | yes      | **string**       |                                                           | Base URL for override namespace translation files. If set, this makes up the base URL for translation override files. Should end in "/". For example, if `overridesBaseUrl = "test/path/"`, then the full path for translation override files will be `"test/path/{{lng}}.json"` |
 
 ---
@@ -204,7 +205,8 @@ Configuration of items to appear in the search bar
         "localStorage",
         "navigator",
         "htmlTag"
-    ]
+    ],
+    "lookupCookie": "i18next"
 }
 ```
 
