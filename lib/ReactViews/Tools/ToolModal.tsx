@@ -51,6 +51,9 @@ export const Frame: React.FC<FrameProps> = observer((props) => {
   );
 });
 
+const TOP_MARGIN = 70;
+const BOTTOM_MARGIN = 100;
+
 export const Main = styled(Text)`
   display: flex;
   flex-direction: column;
@@ -67,9 +70,10 @@ const Wrapper = styled(Box).attrs({
   styledWidth: "340px"
   // charcoalGreyBg: true
 })<{ isMapFullScreen: boolean }>`
-  top: 70px;
+  top: ${TOP_MARGIN}px;
   left: 0px;
   min-height: 220px;
+  max-height: calc(100vh - ${TOP_MARGIN + BOTTOM_MARGIN}px);
   // background: ${(p) => p.theme.dark};
   margin-left: ${(props) =>
     props.isMapFullScreen

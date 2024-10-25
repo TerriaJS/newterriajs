@@ -50,23 +50,6 @@
   }
 }
 
-.editor {
-  background: variables.$dark-with-overlay;
-  color: variables.$text-light;
-  font-family: variables.$font-pop;
-  margin: variables.$padding-small;
-  border-radius: 6px;
-
-  .editorHeader {
-    padding: variables.$padding;
-    border-bottom: 1px solid variables.$overlay;
-  }
-
-  form {
-    padding: variables.$padding;
-  }
-}
-
 .field {
   composes: field from "../../Sass/common/_form.scss";
   border: 0;
@@ -79,26 +62,10 @@
   color: white;
 }
 
-.fieldBtn {
-  composes: btn from "../../Sass/common/_buttons.scss";
-  composes: btn--map from "../../Sass/common/_buttons.scss";
-  background: #9ca1aa;
-  border-radius: 4px;
-  padding: variables.$padding;
-  margin-bottom: variables.$padding + 3px;
-  box-shadow: none;
-  width: 100%;
-}
-
-.doneBtn,
 .saveBtn {
   composes: btn from "../../Sass/common/_buttons.scss";
   composes: btn-primary from "../../Sass/common/_buttons.scss";
-}
-
-.saveBtn {
-  composes: btn from "../../Sass/common/_buttons.scss";
-  composes: btn--primary from "../../Sass/common/_buttons.scss";
+  width: auto;
   padding: 15px 15px;
 }
 

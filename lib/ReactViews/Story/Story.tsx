@@ -1,6 +1,10 @@
 import classNames from "classnames";
-import { TFunction } from "i18next";
-import React, { MouseEventHandler, useEffect, useRef } from "react";
+import React, {
+  MouseEventHandler,
+  useEffect,
+  useLayoutEffect,
+  useRef
+} from "react";
 import { sortable } from "react-anything-sortable";
 import { useTranslation } from "react-i18next";
 import styled, { useTheme } from "styled-components";
@@ -39,7 +43,7 @@ interface Props {
 }
 
 interface MenuProps extends Props {
-  t: TFunction;
+  storyRef: React.RefObject<HTMLElement>;
 }
 
 const findTextContent = (content: any): string => {
@@ -144,70 +148,87 @@ const recaptureStory =
     hideList(props);
   };
 
-const calculateOffset =
-  (props: Props) => (storyRef: React.RefObject<HTMLElement>) => {
-    const offsetTop = storyRef.current?.offsetTop || 0;
-    const scrollTop = props.parentRef.current.scrollTop || 0;
-    const heightParent =
-      (storyRef.current?.offsetParent as HTMLElement)?.offsetHeight || 0;
+const StoryMenu = (props: MenuProps) => {
+  const { t } = useTranslation();
+  const menuRef = useRef<HTMLDivElement | null>(null);
+  useLayoutEffect(() => {
+    // Adjust the position of the menu so it stays inside the scroll container.
 
-    const offsetTopScroll = offsetTop - scrollTop + 25;
-    if (offsetTopScroll + 125 > heightParent) {
-      return `bottom ${offsetTopScroll + 125 - heightParent + 45}px;`;
+    if (!menuRef.current) return;
+    if (!props.parentRef.current) return;
+
+    // Grow downwards, by default:
+    Object.assign(menuRef.current.style, { top: "0px", bottom: "unset" });
+
+    const selfRect = menuRef.current.getBoundingClientRect();
+    const parentRect = props.parentRef.current.getBoundingClientRect();
+    if (selfRect.bottom > parentRect.bottom) {
+      // Looks like there's no room to the bottom; grow upwards.
+      Object.assign(menuRef.current.style, { top: "unset", bottom: "0px" });
     }
-    return `top: ${offsetTopScroll}px;`;
-  };
-
-const renderMenu = (props: MenuProps) => {
-  const { t } = props;
-
+  }, [props.parentRef]);
   return (
-    <Ul column>
-      <li>
-        <StoryMenuButton
-          onClick={viewStory(props)}
-          title={t("story.viewStory")}
-        >
-          <StoryControl>
-            <StyledIcon glyph={Icon.GLYPHS.viewStory} />
-            <span>{t("story.view")}</span>
-          </StoryControl>
-        </StoryMenuButton>
-      </li>
-      <li>
-        <StoryMenuButton
-          onClick={editStory(props)}
-          title={t("story.editStory")}
-        >
-          <StoryControl>
-            <StyledIcon glyph={Icon.GLYPHS.editStory} />
-            <span>{t("story.edit")}</span>
-          </StoryControl>
-        </StoryMenuButton>
-      </li>
-      <li>
-        <StoryMenuButton
-          onClick={recaptureStory(props)}
-          title={t("story.recaptureStory")}
-        >
-          <StoryControl>
-            <StyledIcon glyph={Icon.GLYPHS.story} />
-            <span>{t("story.recapture")}</span>
-          </StoryControl>
-        </StoryMenuButton>
-      </li>
-      <li>
-        <StoryMenuButton
-          onClick={deleteStory(props)}
-          title={t("story.deleteStory")}
-        >
-          <StoryControl>
-            <StyledIcon glyph={Icon.GLYPHS.cancel} />
-            <span>{t("story.delete")}</span>
-          </StoryControl>
-        </StoryMenuButton>
-      </li>
-    </Ul>
+    <Box
+      ref={menuRef}
+      css={`
+        position: absolute;
+        z-index: 100;
+        right: 0px;
+        padding: 0;
+        margin: 0;
+
+        ul {
+          list-style: none;
+        }
+      `}
+    >
+      <Ul column>
+        <li>
+          <StoryMenuButton
+            onClick={viewStory(props)}
+            title={t("story.viewStory")}
+          >
+            <StoryControl>
+              <StyledIcon glyph={Icon.GLYPHS.viewStory} />
+              <span>{t("story.view")}</span>
+            </StoryControl>
+          </StoryMenuButton>
+        </li>
+        <li>
+          <StoryMenuButton
+            onClick={editStory(props)}
+            title={t("story.editStory")}
+          >
+            <StoryControl>
+              <StyledIcon glyph={Icon.GLYPHS.editStory} />
+              <span>{t("story.edit")}</span>
+            </StoryControl>
+          </StoryMenuButton>
+        </li>
+        <li>
+          <StoryMenuButton
+            onClick={recaptureStory(props)}
+            title={t("story.recaptureStory")}
+          >
+            <StoryControl>
+              <StyledIcon glyph={Icon.GLYPHS.story} />
+              <span>{t("story.recapture")}</span>
+            </StoryControl>
+          </StoryMenuButton>
+        </li>
+        <li>
+          <StoryMenuButton
+            onClick={deleteStory(props)}
+            title={t("story.deleteStory")}
+          >
+            <StoryControl>
+              <StyledIcon glyph={Icon.GLYPHS.cancel} />
+              <span>{t("story.delete")}</span>
+            </StoryControl>
+          </StoryMenuButton>
+        </li>
+      </Ul>
+    </Box>
   );
 };
 
@@ -238,7 +259,6 @@ const Story = (props: Props) => {
           float: none !important;
           border: 1px solid #baebf8;
         `}
-        position="static"
         style={props.style}
         className={classNames(props.className)}
         onMouseDown={props.onMouseDown}
@@ -246,7 +266,6 @@ const Story = (props: Props) => {
       >
         <Box
           fullWidth
-          position="static"
           justifySpaceBetween
           padded
           verticalCenter
@@ -297,25 +316,7 @@ const Story = (props: Props) => {
               />
             </MenuButton>
           </Box>
-          {props.menuOpen && (
-            <Box
-              css={`
-                position: absolute;
-                z-index: 100;
-                right: 20px;
-
-                ${calculateOffset(props)(storyRef)}
-                padding: 0;
-                margin: 0;
-
-                ul {
-                  list-style: none;
-                }
-              `}
-            >
-              {renderMenu({ ...props, t })}
-            </Box>
-          )}
+          {props.menuOpen && <StoryMenu {...props} storyRef={storyRef} />}
         </Box>
         {bodyText.length > 0 && (
           <Box paddedRatio={2} paddedHorizontally={3}>
