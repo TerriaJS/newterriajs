@@ -52,20 +52,17 @@ export class BaseMapsModel extends CreateModel(BaseMapsTraits) {
   get baseMapItems(): BaseMapItem[] {
     const enabledBaseMaps: BaseMapItem[] = [];
 
-    this.items.forEach((baseMapItem) => {
-      if (
-        baseMapItem.item &&
-        !ModelReference.isRemoved(baseMapItem.item) &&
-        (!this.enabledBaseMaps ||
-          this.enabledBaseMaps.includes(baseMapItem.item))
-      ) {
-        const itemModel = this.terria.getModelById(BaseModel, baseMapItem.item);
-        if (MappableMixin.isMixedInto(itemModel))
+    this.enabledBaseMaps.forEach((baseMapItem) => {
+      const item = this.items.find((item) => item.item === baseMapItem);
+      if (item && !ModelReference.isRemoved(baseMapItem)) {
+        const itemModel = this.terria.getModelById(BaseModel, baseMapItem);
+        if (MappableMixin.isMixedInto(itemModel)) {
           enabledBaseMaps.push({
-            image: baseMapItem.image,
-            contrastColor: baseMapItem.contrastColor,
+            image: item.image,
+            contrastColor: item.contrastColor,
             item: itemModel
           });
+        }
       }
     });
 
