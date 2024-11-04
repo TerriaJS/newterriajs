@@ -2,6 +2,8 @@
 
 #### next release (8.7.9)
 
+- Allow to use Cesium in `SCENE2D` mode (and WebMercator projection) as map viewer.
+- Add a new configuration parameter `mapViewers` to specify which map viewers to show in `SettingPanel`.
 - [The next improvement]
 
 #### 8.7.8 - 2024-11-01
