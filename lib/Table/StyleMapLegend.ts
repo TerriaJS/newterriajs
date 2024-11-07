@@ -53,7 +53,7 @@ export class StyleMapLegend<
 
   @computed
   get items(): StratumFromTraits<LegendItemTraits>[] {
-    let items: StratumFromTraits<LegendItemTraits>[] = [];
+    let items: StratumFromTraits<LegendItemTraits>[];
 
     if (this.styleMap.styleMap.type === "bin") {
       items = this._createLegendItemsFromBinStyleMap();

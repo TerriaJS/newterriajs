@@ -178,7 +178,7 @@ class GetCapabilitiesStratum extends LoadableStratum(
     // If has nested layers -> create model for CatalogGroup
     if (layer.Layer) {
       // Create nested layers
-      let members: CapabilitiesLayer[] = [];
+      let members: CapabilitiesLayer[];
       if (Array.isArray(layer.Layer)) {
         members = layer.Layer;
       } else {

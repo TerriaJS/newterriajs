@@ -172,8 +172,8 @@ export class GeojsonSource implements TileSource {
 
         // We have to transform feature objects from GeojsonVtTile to ProtomapsFeature
         tile.features.map((f) => {
-          let transformedGeom: Point[][] = [];
-          let numVertices = 0;
+          let transformedGeom: Point[][];
+          let numVertices;
 
           // Calculate bbox
           const bbox: Bbox = {

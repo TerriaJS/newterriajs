@@ -47,7 +47,7 @@ class FunctionJobStratum extends LoadableStratum(CatalogFunctionJobTraits) {
 
   @computed
   get shortReport() {
-    let content = "";
+    let content;
     if (this.catalogFunctionJob.jobStatus === "inactive") {
       content = "Job is inactive";
     } else if (this.catalogFunctionJob.jobStatus === "running") {

@@ -358,7 +358,7 @@ export function getDisplayValue(region, parameter) {
     return "";
   }
   const regionProvider = parameter.regionProvider;
-  let val = "";
+  let val;
   const index = regionProvider.regions.indexOf(region);
   if (index >= 0 && regionProvider.regionNames[index]) {
     val = regionProvider.regionNames[index];

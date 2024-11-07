@@ -20,7 +20,7 @@ import Trait from "../lib/Traits/Trait";
 
 /** Get type name for a given Trait */
 function markdownFromTraitType(trait: Trait) {
-  let base = "";
+  let base;
   if (trait instanceof PrimitiveTrait || trait instanceof PrimitiveArrayTrait) {
     base = trait.type;
   } else if (

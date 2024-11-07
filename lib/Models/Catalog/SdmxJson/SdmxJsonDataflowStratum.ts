@@ -289,8 +289,6 @@ export class SdmxJsonDataflowStratum extends LoadableStratum(
               }, new Set())
             : new Set();
 
-          let options: StratumFromTraits<DimensionOptionTraits>[] = [];
-
           // Get codes by merging allowedOptionIds with codelist
           const filteredCodesList =
             (allowedOptionIds.size > 0
@@ -304,7 +302,7 @@ export class SdmxJsonDataflowStratum extends LoadableStratum(
           // If modelOverride `options` has been defined -> use it
           // Other wise use filteredCodesList
           const overrideOptions = modelOverride?.options;
-          options =
+          const options: StratumFromTraits<DimensionOptionTraits>[] =
             isDefined(overrideOptions) && overrideOptions.length > 0
               ? overrideOptions.map((option) => {
                   return {
