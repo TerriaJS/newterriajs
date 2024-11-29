@@ -242,6 +242,9 @@ export const Button: FC<ButtonProps> = (props) => {
   );
 };
 
-export default forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => (
-  <Button {...props} buttonRef={ref} />
-));
+const ButtonWithRef = forwardRef<HTMLButtonElement, ButtonProps>(
+  (props, ref) => <Button {...props} buttonRef={ref} />
+);
+ButtonWithRef.displayName = "Button";
+
+export default ButtonWithRef;

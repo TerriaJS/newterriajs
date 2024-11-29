@@ -1,4 +1,9 @@
 "use strict";
+// Ref now needs to be passed in via refForCaret as there is no longer a button
+// in CleanDropdownPanel
+
+// proptypes are in mixin
+/* eslint react/prop-types:0*/
 
 import createReactClass from "create-react-class";
 // import Icon from "../../Icon";
