@@ -1,5 +1,6 @@
 "use strict";
 
+/* eslint react/prop-types:0*/
 import createReactClass from "create-react-class";
 import classNames from "classnames";
 import Icon from "../../../Styled/Icon";
