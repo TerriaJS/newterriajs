@@ -21,7 +21,7 @@ export default function createLongitudeLatitudeFeaturePerRow(
 
   const tableColumns = style.tableModel.tableColumns;
   const intervals = style.moreThanOneTimeInterval
-    ? style.timeIntervals ?? []
+    ? (style.timeIntervals ?? [])
     : [];
   const rowIds = style.tableModel.rowIds;
 

@@ -275,11 +275,15 @@
   .react-datepicker__day--keyboard-selected:hover {
     background-color: #1d5d90;
   }
-  .react-datepicker__day--in-selecting-range:not(.react-datepicker__day--in-range) {
+  .react-datepicker__day--in-selecting-range:not(
+      .react-datepicker__day--in-range
+    ) {
     background-color: rgba(33, 107, 165, 0.5);
   }
   .react-datepicker__month--selecting-range
-    .react-datepicker__day--in-range:not(.react-datepicker__day--in-selecting-range) {
+    .react-datepicker__day--in-range:not(
+      .react-datepicker__day--in-selecting-range
+    ) {
     background-color: #f0f0f0;
     color: #000;
   }

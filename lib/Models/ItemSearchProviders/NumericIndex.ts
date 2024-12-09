@@ -30,7 +30,10 @@ export default class NumericIndex implements IndexBase<NumericSearchQuery> {
    * @param url    Url of the NumericIndex CSV file. This could be a relative URL.
    * @param range  The maximum and minimum value in the index.
    */
-  constructor(readonly url: string, readonly range: NumericRange) {}
+  constructor(
+    readonly url: string,
+    readonly range: NumericRange
+  ) {}
 
   /**
    * Load a numeric index.

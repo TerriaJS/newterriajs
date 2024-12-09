@@ -179,20 +179,22 @@ describe("ImageryLayerCatalogItem", function () {
     });
 
     function failLoad(statusCode, times) {
-      return spyOn(Resource.prototype, "fetchImage").and.callFake(function (
-        options
-      ) {
-        if (times > 0) {
-          --times;
-          if (options.preferBlob) {
-            return Promise.reject(new RequestErrorEvent(statusCode, "bad", []));
+      return spyOn(Resource.prototype, "fetchImage").and.callFake(
+        function (options) {
+          if (times > 0) {
+            --times;
+            if (options.preferBlob) {
+              return Promise.reject(
+                new RequestErrorEvent(statusCode, "bad", [])
+              );
+            } else {
+              return Promise.reject(image);
+            }
           } else {
-            return Promise.reject(image);
+            return Promise.resolve(image);
           }
-        } else {
-          return Promise.resolve(image);
         }
-      });
+      );
     }
 
     it("ignores errors in disabled layers", function (done) {

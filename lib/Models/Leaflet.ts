@@ -781,8 +781,7 @@ export default class Leaflet extends GlobeOrMap {
             if (imageryProvider)
               coordsSoFar[(imageryProvider as any).url] = result.coords;
             return coordsSoFar;
-          },
-          {});
+          }, {});
 
           const features = filteredResults.reduce((allFeatures, result) => {
             if (

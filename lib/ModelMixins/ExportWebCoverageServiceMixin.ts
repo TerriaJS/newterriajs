@@ -223,9 +223,8 @@ function ExportWebCoverageServiceMixin<
     }
 
     private async loadWcsCapabilities() {
-      const capabilities = await WebCoverageServiceCapabilitiesStratum.load(
-        this
-      );
+      const capabilities =
+        await WebCoverageServiceCapabilitiesStratum.load(this);
 
       runInAction(() =>
         this.strata.set(

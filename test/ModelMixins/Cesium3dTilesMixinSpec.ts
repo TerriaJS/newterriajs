@@ -147,8 +147,8 @@ describe("Cesium3dTilesMixin", function () {
         property === "locality"
           ? "foo"
           : property === "building-no"
-          ? 4242
-          : undefined
+            ? 4242
+            : undefined
       );
       const selector = item.getSelectorForFeature(fakeTileFeature);
       expect(selector).toBe('${building-no} === 4242 && ${locality} === "foo"');

@@ -111,10 +111,10 @@ export default class TableColorMap {
     return this.colorMap instanceof DiscreteColorMap
       ? "bin"
       : this.colorMap instanceof ContinuousColorMap
-      ? "continuous"
-      : this.colorMap instanceof EnumColorMap
-      ? "enum"
-      : "constant";
+        ? "continuous"
+        : this.colorMap instanceof EnumColorMap
+          ? "enum"
+          : "constant";
   }
 
   /**
@@ -216,7 +216,7 @@ export default class TableColorMap {
               value: e.value,
               color:
                 colorColumn.type !== TableColumnType.region
-                  ? Color.fromCssColorString(e.color) ?? Color.TRANSPARENT
+                  ? (Color.fromCssColorString(e.color) ?? Color.TRANSPARENT)
                   : this.regionColor
             };
           })
@@ -390,8 +390,8 @@ export default class TableColorMap {
 
   @computed get nullColor() {
     return this.colorTraits.nullColor
-      ? Color.fromCssColorString(this.colorTraits.nullColor) ??
-          Color.TRANSPARENT
+      ? (Color.fromCssColorString(this.colorTraits.nullColor) ??
+          Color.TRANSPARENT)
       : Color.TRANSPARENT;
   }
 

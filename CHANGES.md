@@ -4,6 +4,7 @@
 
 - Explicitly set prettier tab-width
 - Move release guide from README.md to RELEASE_GUIDE.md
+- Upgrade prettier to version 3.4.1
 - [The next improvement]
 
 #### 8.7.10 - 2024-11-29

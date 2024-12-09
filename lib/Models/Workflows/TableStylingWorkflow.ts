@@ -855,10 +855,10 @@ export default class TableStylingWorkflow
                 this.colorSchemeType === "sequential-discrete"
                   ? 9
                   : // Diverging discrete color scales support up to 11 bins
-                  this.colorSchemeType === "diverging-discrete"
-                  ? 11
-                  : // Custom discrete color scales can be any number of bins
-                    undefined,
+                    this.colorSchemeType === "diverging-discrete"
+                    ? 11
+                    : // Custom discrete color scales can be any number of bins
+                      undefined,
               value: this.tableStyle.colorTraits.numberOfBins,
               setDimensionValue: (stratumId, value) => {
                 if (!isDefined(value)) return;
@@ -1030,7 +1030,7 @@ export default class TableStylingWorkflow
                     }
                   }
                 ]
-              } as SelectableDimensionGroup)
+              }) as SelectableDimensionGroup
           )
           .reverse() // Reverse array of bins to match Legend (descending order)
       ]
@@ -1456,7 +1456,7 @@ export default class TableStylingWorkflow
                 setDimensionValue: (stratumId, value) => {
                   legendItem.setTrait(stratumId, "title", value);
                 }
-              } as SelectableDimensionText)
+              }) as SelectableDimensionText
           )
         ])
       },
@@ -2099,15 +2099,15 @@ export default class TableStylingWorkflow
                             "models.tableStyling.style.selectableDimensions.bin.selectableDimensions.bin.noValue"
                           )
                         : idx > 0 &&
-                          isDefined(traits.bin[idx - 1].maxValue ?? undefined)
-                        ? i18next.t(
-                            "models.tableStyling.style.selectableDimensions.bin.selectableDimensions.bin.range",
-                            {
-                              value1: traits.bin[idx - 1].maxValue,
-                              value2: bin.maxValue
-                            }
-                          )
-                        : `${bin.maxValue}`
+                            isDefined(traits.bin[idx - 1].maxValue ?? undefined)
+                          ? i18next.t(
+                              "models.tableStyling.style.selectableDimensions.bin.selectableDimensions.bin.range",
+                              {
+                                value1: traits.bin[idx - 1].maxValue,
+                                value2: bin.maxValue
+                              }
+                            )
+                          : `${bin.maxValue}`
                     ),
 
                     isOpen: this.openBinIndex.get(key) === idx,

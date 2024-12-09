@@ -264,9 +264,9 @@ export class GetCapabilitiesStratum extends LoadableStratum(
 
     return supportsGeojson
       ? "JSON"
-      : this.capabilities.outputTypes?.find((outputFormat) =>
+      : (this.capabilities.outputTypes?.find((outputFormat) =>
           searchValue.test(outputFormat)
-        ) ?? "gml3";
+        ) ?? "gml3");
   }
 
   /** Finds the best srsName to use.

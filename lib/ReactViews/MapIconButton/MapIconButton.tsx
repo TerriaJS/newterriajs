@@ -168,8 +168,11 @@ function MapIconButton(props: IMapIconButtonProps) {
             medium
             css={`
               display: block;
-              transition: visibility 0.3s ease, max-width 0.3s ease,
-                margin-right 0.3s ease, opacity 0.3s ease;
+              transition:
+                visibility 0.3s ease,
+                max-width 0.3s ease,
+                margin-right 0.3s ease,
+                opacity 0.3s ease;
               visibility: ${expanded ? `visible` : `hidden`};
               max-width: ${expanded ? `150px` : `0px`};
               margin-right: ${expanded ? `10px` : `0px`};

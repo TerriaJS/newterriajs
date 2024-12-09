@@ -67,9 +67,8 @@ export class CkanDatasetStratum extends LoadableStratum(
         ckanItemReference.datasetId !== undefined &&
         ckanItemReference.resourceId !== undefined
       ) {
-        ckanItemReference._ckanDataset = await loadCkanDataset(
-          ckanItemReference
-        );
+        ckanItemReference._ckanDataset =
+          await loadCkanDataset(ckanItemReference);
         ckanItemReference._ckanResource = findResourceInDataset(
           ckanItemReference._ckanDataset,
           ckanItemReference.resourceId
@@ -81,9 +80,8 @@ export class CkanDatasetStratum extends LoadableStratum(
         ckanItemReference.datasetId !== undefined &&
         ckanItemReference.resourceId === undefined
       ) {
-        ckanItemReference._ckanDataset = await loadCkanDataset(
-          ckanItemReference
-        );
+        ckanItemReference._ckanDataset =
+          await loadCkanDataset(ckanItemReference);
         const matched = getSupportedFormats(
           ckanItemReference._ckanDataset,
           ckanItemReference.preparedSupportedFormats
@@ -95,9 +93,8 @@ export class CkanDatasetStratum extends LoadableStratum(
         ckanItemReference.datasetId === undefined &&
         ckanItemReference.resourceId !== undefined
       ) {
-        ckanItemReference._ckanResource = await loadCkanResource(
-          ckanItemReference
-        );
+        ckanItemReference._ckanResource =
+          await loadCkanResource(ckanItemReference);
         ckanItemReference._supportedFormat = isResourceInSupportedFormats(
           ckanItemReference._ckanResource,
           ckanItemReference.preparedSupportedFormats

@@ -224,8 +224,8 @@ export function getFeatureStyle(style: TableStyle, rowId: number) {
           labelStyle.style === "OUTLINE"
             ? LabelStyle.OUTLINE
             : labelStyle.style === "FILL_AND_OUTLINE"
-            ? LabelStyle.FILL_AND_OUTLINE
-            : LabelStyle.FILL,
+              ? LabelStyle.FILL_AND_OUTLINE
+              : LabelStyle.FILL,
         fillColor: Color.fromCssColorString(labelStyle.fillColor),
         outlineColor: Color.fromCssColorString(labelStyle.outlineColor),
         pixelOffset: new Cartesian2(
@@ -236,16 +236,16 @@ export function getFeatureStyle(style: TableStyle, rowId: number) {
           labelStyle.verticalOrigin === "TOP"
             ? VerticalOrigin.TOP
             : labelStyle.verticalOrigin === "BOTTOM"
-            ? VerticalOrigin.BOTTOM
-            : labelStyle.verticalOrigin === "BASELINE"
-            ? VerticalOrigin.BASELINE
-            : VerticalOrigin.CENTER,
+              ? VerticalOrigin.BOTTOM
+              : labelStyle.verticalOrigin === "BASELINE"
+                ? VerticalOrigin.BASELINE
+                : VerticalOrigin.CENTER,
         horizontalOrigin:
           labelStyle.horizontalOrigin === "CENTER"
             ? HorizontalOrigin.CENTER
             : labelStyle.horizontalOrigin === "RIGHT"
-            ? HorizontalOrigin.RIGHT
-            : HorizontalOrigin.LEFT,
+              ? HorizontalOrigin.RIGHT
+              : HorizontalOrigin.LEFT,
         scaleByDistance: scaleByDistanceFromTraits(labelStyle?.scaleByDistance),
         disableDepthTestDistance: labelStyle?.disableDepthTestDistance
       }

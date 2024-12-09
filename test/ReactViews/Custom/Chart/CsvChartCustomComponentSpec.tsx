@@ -45,8 +45,8 @@ describe("CsvChartCustomComponent", function () {
       const chart = component.processNode(context, node, [], 0);
       expect(chart).toBeDefined();
       if (chart) {
-        const csvCatalogItem = await chart.props.children[0].props
-          .sourceItems[0];
+        const csvCatalogItem =
+          await chart.props.children[0].props.sourceItems[0];
         expect(csvCatalogItem instanceof CsvCatalogItem).toBeTruthy();
         expect(csvCatalogItem.columnTitles).toEqual([
           "Meteor",
@@ -64,8 +64,8 @@ describe("CsvChartCustomComponent", function () {
       const chart = component.processNode(context, node, [], 0);
       expect(chart).toBeDefined();
       if (chart) {
-        const csvCatalogItem = await chart.props.children[0].props
-          .sourceItems[0];
+        const csvCatalogItem =
+          await chart.props.children[0].props.sourceItems[0];
         expect(csvCatalogItem instanceof CsvCatalogItem).toBeTruthy();
         expect(csvCatalogItem.columns[0].title).toBe("Meteor");
         expect(csvCatalogItem.columns[1].title).toBe("Speed");

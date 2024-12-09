@@ -1011,7 +1011,9 @@ button::-moz-focus-inner {
 }
 .tox .tox-swatch {
   height: 30px;
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
   width: 30px;
 }
 .tox .tox-swatch:focus,
@@ -1282,7 +1284,8 @@ button::-moz-focus-inner {
   border-radius: 3px;
   border-style: solid;
   border-width: 1px;
-  box-shadow: 0 16px 16px -10px rgba(34, 47, 62, 0.15),
+  box-shadow:
+    0 16px 16px -10px rgba(34, 47, 62, 0.15),
     0 0 40px 1px rgba(34, 47, 62, 0.15);
   display: flex;
   flex-direction: column;
@@ -1567,7 +1570,9 @@ button::-moz-focus-inner {
   visibility: visible;
 }
 .tox .tox-dialog-dock-transition {
-  transition: visibility 0s linear 0.3s, opacity 0.3s ease;
+  transition:
+    visibility 0s linear 0.3s,
+    opacity 0.3s ease;
 }
 .tox .tox-dialog-dock-transition.tox-dialog-dock-fadein {
   transition-delay: 0s;
@@ -1684,7 +1689,9 @@ body.tox-dialog__disable-scroll {
   visibility: visible;
 }
 .tox-editor-dock-transition {
-  transition: visibility 0s linear 0.25s, opacity 0.25s ease;
+  transition:
+    visibility 0s linear 0.25s,
+    opacity 0.25s ease;
 }
 .tox-editor-dock-transition.tox-editor-dock-fadein {
   transition-delay: 0s;
@@ -1780,7 +1787,11 @@ body.tox-dialog__disable-scroll {
     linear-gradient(-45deg, rgba(0, 0, 0, 0.25) 25%, transparent 25%),
     linear-gradient(45deg, transparent 75%, rgba(0, 0, 0, 0.25) 75%),
     linear-gradient(-45deg, transparent 75%, rgba(0, 0, 0, 0.25) 75%);
-  background-position: 0 0, 0 6px, 6px -6px, -6px 0;
+  background-position:
+    0 0,
+    0 6px,
+    6px -6px,
+    -6px 0;
   background-size: 12px 12px;
   border: 1px solid #fff;
   border-radius: 3px;
@@ -2345,7 +2356,9 @@ body.tox-dialog__disable-scroll {
   margin-top: 4px;
   opacity: 0;
   padding: 4px;
-  transition: transform 0.1s ease-in, opacity 150ms ease-in;
+  transition:
+    transform 0.1s ease-in,
+    opacity 150ms ease-in;
 }
 .tox .tox-notification p {
   font-size: 14px;
@@ -2502,7 +2515,10 @@ body.tox-dialog__disable-scroll {
 }
 .tox .tox-pop--transition::after,
 .tox .tox-pop--transition::before {
-  transition: all 0.15s, visibility 0s, opacity 75ms ease 75ms;
+  transition:
+    all 0.15s,
+    visibility 0s,
+    opacity 75ms ease 75ms;
 }
 .tox .tox-pop__dialog {
   background-color: #fff;
@@ -2532,7 +2548,10 @@ body.tox-dialog__disable-scroll {
 .tox .tox-pop.tox-pop--inset::after,
 .tox .tox-pop.tox-pop--inset::before {
   opacity: 0;
-  transition: all 0s 0.15s, visibility 0s, opacity 75ms ease;
+  transition:
+    all 0s 0.15s,
+    visibility 0s,
+    opacity 75ms ease;
 }
 .tox .tox-pop.tox-pop--bottom::after,
 .tox .tox-pop.tox-pop--bottom::before {
@@ -2638,7 +2657,9 @@ body.tox-dialog__disable-scroll {
 }
 .tox .tox-sidebar--sliding-growing,
 .tox .tox-sidebar--sliding-shrinking {
-  transition: width 0.5s ease, opacity 0.5s ease;
+  transition:
+    width 0.5s ease,
+    opacity 0.5s ease;
 }
 .tox .tox-selector {
   background-color: #4099ff;
@@ -3028,10 +3049,14 @@ body.tox-dialog__disable-scroll {
   visibility: hidden;
 }
 .tox .tox-toolbar__overflow--growing {
-  transition: height 0.3s ease, opacity 0.2s linear 0.1s;
+  transition:
+    height 0.3s ease,
+    opacity 0.2s linear 0.1s;
 }
 .tox .tox-toolbar__overflow--shrinking {
-  transition: opacity 0.3s ease, height 0.2s linear 0.1s,
+  transition:
+    opacity 0.3s ease,
+    height 0.2s linear 0.1s,
     visibility 0s linear 0.3s;
 }
 .tox .tox-menubar + .tox-toolbar,

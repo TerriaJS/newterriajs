@@ -31,20 +31,20 @@ export type Or<
 > = [A] extends [true]
   ? true
   : [B] extends [true]
-  ? true
-  : [C] extends [true]
-  ? true
-  : [D] extends [true]
-  ? true
-  : [E] extends [true]
-  ? true
-  : [F] extends [true]
-  ? true
-  : [G] extends [true]
-  ? true
-  : [H] extends [true]
-  ? true
-  : false;
+    ? true
+    : [C] extends [true]
+      ? true
+      : [D] extends [true]
+        ? true
+        : [E] extends [true]
+          ? true
+          : [F] extends [true]
+            ? true
+            : [G] extends [true]
+              ? true
+              : [H] extends [true]
+                ? true
+                : false;
 
 /**
  * Inverts a conditional, changing `true` to `false` and `false` to `true`.
@@ -54,11 +54,10 @@ export type Not<C extends boolean> = [C] extends [true] ? false : true;
 /**
  * Resolves to `true` if the two types are identical; otherwise, `false`.
  */
-export type Equals<A, B> = (<T>() => T extends A ? 1 : 2) extends <
-  T
->() => T extends B ? 1 : 2
-  ? true
-  : false;
+export type Equals<A, B> =
+  (<T>() => T extends A ? 1 : 2) extends <T>() => T extends B ? 1 : 2
+    ? true
+    : false;
 
 /**
  * Resolves to `true` if `A` extends `B`; otherwise, `false`.

@@ -441,7 +441,11 @@ describeIfSupported("Cesium Model", function () {
  * items.
  */
 class MappablePrimitiveItem extends MappableMixin(CreateModel(MappableTraits)) {
-  constructor(id: string, terria: Terria, readonly tileset: Cesium3DTileset) {
+  constructor(
+    id: string,
+    terria: Terria,
+    readonly tileset: Cesium3DTileset
+  ) {
     super(id, terria);
   }
 

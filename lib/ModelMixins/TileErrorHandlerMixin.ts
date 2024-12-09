@@ -195,8 +195,8 @@ function TileErrorHandlerMixin<T extends AbstractConstructor<ModelType>>(
         return this === (baseMap as any)
           ? true
           : baseMap instanceof CompositeCatalogItem
-          ? baseMap.memberModels.includes(this)
-          : false;
+            ? baseMap.memberModels.includes(this)
+            : false;
       };
       /** End helper methods **/
 

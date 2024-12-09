@@ -85,8 +85,8 @@ export const analyticsSetShowGuide = (
       ? GuideAction.openInModal
       : GuideAction.closeInModal
     : isOpen
-    ? GuideAction.open
-    : GuideAction.close;
+      ? GuideAction.open
+      : GuideAction.close;
 
   terria.analytics?.logEvent(
     Category.guide,

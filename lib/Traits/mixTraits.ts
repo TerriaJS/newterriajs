@@ -69,14 +69,17 @@ export default function mixTraits<
     Traits14
   ]);
   const traitsInstances = traitsClasses.map((TraitsClass) => new TraitsClass());
-  const keysValues = traitsInstances.reduce((result, traitsInstance) => {
-    return result.concat(
-      Object.keys(traitsInstance).map((property) => ({
-        key: property,
-        value: (traitsInstance as any)[property]
-      }))
-    );
-  }, [] as Array<{ key: string; value: any }>);
+  const keysValues = traitsInstances.reduce(
+    (result, traitsInstance) => {
+      return result.concat(
+        Object.keys(traitsInstance).map((property) => ({
+          key: property,
+          value: (traitsInstance as any)[property]
+        }))
+      );
+    },
+    [] as Array<{ key: string; value: any }>
+  );
 
   class Mixed extends ModelTraits {
     static readonly traits: any = {};

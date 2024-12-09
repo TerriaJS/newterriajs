@@ -36,15 +36,15 @@ export const ActionButton: React.FC<ActionButtonProps> = ({
         showProcessingIcon
           ? () => <AnimatedSpinnerIcon styledWidth="20px" styledHeight="20px" />
           : icon
-          ? () => (
-              <StyledIcon
-                light
-                styledWidth="20px"
-                styledHeight="20px"
-                glyph={icon}
-              />
-            )
-          : undefined
+            ? () => (
+                <StyledIcon
+                  light
+                  styledWidth="20px"
+                  styledHeight="20px"
+                  glyph={icon}
+                />
+              )
+            : undefined
       }
       {...(props as any)}
     />

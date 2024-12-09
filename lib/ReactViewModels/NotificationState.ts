@@ -49,7 +49,7 @@ export default class NotificationState {
       const ignore =
         typeof notification.ignore === "function"
           ? notification.ignore()
-          : notification.ignore ?? false;
+          : (notification.ignore ?? false);
       if (!ignore) this.notifications.push(notification);
     }
 
@@ -65,7 +65,8 @@ export default class NotificationState {
     // Remove all ignored notifications
     // This is needed here as the action of dismissing the current notification may change "ignore" status of notifications in stack
     this.notifications = this.notifications.filter(
-      (n) => !(typeof n.ignore === "function" ? n.ignore() : n.ignore ?? false)
+      (n) =>
+        !(typeof n.ignore === "function" ? n.ignore() : (n.ignore ?? false))
     );
     return removed;
   }

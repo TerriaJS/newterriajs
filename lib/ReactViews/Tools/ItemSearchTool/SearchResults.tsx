@@ -136,8 +136,8 @@ const ClickableItem = styled.a<{ isEven: boolean; isSelected: boolean }>`
       p.isSelected
         ? p.theme.toolPrimaryColor
         : p.isEven
-        ? p.theme.dark
-        : p.theme.darkLighter
+          ? p.theme.dark
+          : p.theme.darkLighter
     };`}
 `;
 

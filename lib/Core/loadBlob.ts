@@ -75,11 +75,11 @@ export function parseZipJsonBlob(blob: Blob): Promise<JsonValue> {
     for (let i = 0; i < entries.length; i++) {
       const entry = entries[i];
       if (isJson(entry.filename)) {
-        return entry
-          .getData(new ZipData64URIWriter())
-          .then(function (uri: string) {
-            return loadJson(uri);
-          });
+        return entry.getData(new ZipData64URIWriter()).then(function (
+          uri: string
+        ) {
+          return loadJson(uri);
+        });
       }
     }
     return undefined;

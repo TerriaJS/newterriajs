@@ -33,11 +33,11 @@ export const SelectableDimensionGroup: React.FC<{
       <Collapsible
         title={
           dim.type === "group"
-            ? dim.name ?? dim.id ?? ""
-            : dim.options?.find((opt) => opt.id === dim.selectedId)?.name ??
+            ? (dim.name ?? dim.id ?? "")
+            : (dim.options?.find((opt) => opt.id === dim.selectedId)?.name ??
               (dim.selectedId === "true"
                 ? t("selectableDimensions.enabled")
-                : t("selectableDimensions.disabled"))
+                : t("selectableDimensions.disabled")))
         }
         bodyBoxProps={{
           displayInlineBlock: true,

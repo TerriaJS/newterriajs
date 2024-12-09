@@ -9,7 +9,7 @@ updateApplicationOnMessageFromParentWindow(terria, window);
 Then, the parent window can send messages like this:
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />

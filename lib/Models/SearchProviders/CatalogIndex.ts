@@ -31,7 +31,10 @@ export default class CatalogIndex {
   @observable
   private _loadPromise: Promise<void> | undefined;
 
-  constructor(private readonly terria: Terria, private readonly url: string) {
+  constructor(
+    private readonly terria: Terria,
+    private readonly url: string
+  ) {
     makeObservable(this);
   }
 

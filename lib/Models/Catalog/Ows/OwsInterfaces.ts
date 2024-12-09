@@ -42,10 +42,10 @@ export function parseOwsKeywordList(json: any): OwsKeywordList | undefined {
   const Keyword = isJsonString(json.Keyword)
     ? json.Keyword
     : Array.isArray(json.Keyword)
-    ? filterOutUndefined(
-        json.Keyword.map((s) => (isJsonString(s) ? s : undefined))
-      )
-    : [];
+      ? filterOutUndefined(
+          json.Keyword.map((s) => (isJsonString(s) ? s : undefined))
+        )
+      : [];
   return {
     type,
     Keyword

@@ -190,7 +190,10 @@ export default class WebMapServiceCapabilities {
     readonly [name: string]: CapabilitiesLayer;
   };
 
-  private constructor(readonly xml: XMLDocument, readonly json: any) {
+  private constructor(
+    readonly xml: XMLDocument,
+    readonly json: any
+  ) {
     this.allLayers = [];
     this.rootLayers = [];
     this.topLevelNamedLayers = [];

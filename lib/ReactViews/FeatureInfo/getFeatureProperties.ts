@@ -119,8 +119,8 @@ function applyFormatsInPlace(
           const number = isJsonNumber(value)
             ? value
             : isJsonString(value)
-            ? parseFloat(value)
-            : undefined;
+              ? parseFloat(value)
+              : undefined;
           // Note we default maximumFractionDigits to 20 (not 3).
           properties[key] = number?.toLocaleString(undefined, {
             maximumFractionDigits: 20,

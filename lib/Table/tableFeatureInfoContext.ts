@@ -50,7 +50,7 @@ export const tableFeatureInfoContext: (
     // Corresponding row IDs for the selected feature are stored in TerriaFeatureData
     // See createLongitudeLatitudeFeaturePerId, createLongitudeLatitudeFeaturePerRow and createRegionMappedImageryProvider
     const rowIds = isTerriaFeatureData(feature.data)
-      ? feature.data.rowIds ?? []
+      ? (feature.data.rowIds ?? [])
       : [];
 
     if (!style.timeColumn || !style.colorColumn || rowIds.length < 2) return {};

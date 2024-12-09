@@ -77,7 +77,9 @@ const DataPreviewUrl = createReactClass({
         {this.props.metadataItem.type === "wfs" && (
           <p>
             Type name
-            {this.props.metadataItem.typeNames.split(",").length > 1 ? "s" : ""}
+            {this.props.metadataItem.typeNames.split(",").length > 1
+              ? "s" // Prettier 3.4.1 padding: make --check and --write agree.
+              : ""}
             : {this.props.metadataItem.typeNames}
           </p>
         )}

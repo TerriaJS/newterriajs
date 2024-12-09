@@ -257,7 +257,7 @@ describe("TileErrorHandlerMixin", function () {
       }
       expect(Resource.fetchImage).toHaveBeenCalledTimes(
         !Array.isArray(item.tileRetryOptions)
-          ? item.tileRetryOptions.retries ?? 0
+          ? (item.tileRetryOptions.retries ?? 0)
           : 0
       );
       expect(item.tileFailures).toBe(1);

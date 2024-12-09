@@ -40,7 +40,10 @@ export default class TimelineStack {
   private _disposeClockAutorun: IReactionDisposer | undefined;
   private _disposeTickSubscription: CesiumEvent.RemoveCallback | undefined;
 
-  constructor(readonly terria: Terria, readonly clock: Clock) {
+  constructor(
+    readonly terria: Terria,
+    readonly clock: Clock
+  ) {
     makeObservable(this);
   }
 

@@ -873,8 +873,8 @@ export default class WebMapServiceCapabilitiesStratum extends LoadableStratum(
     const formatsArray = isJsonArray(formats)
       ? formats
       : isJsonString(formats)
-      ? [formats]
-      : [];
+        ? [formats]
+        : [];
 
     if (this.catalogItem.supportsGetTimeseries) {
       return { format: "text/csv", type: "text" };

@@ -20,7 +20,9 @@ const StoryContainer = styled(Box).attrs((props: { isCollapsed: boolean }) => ({
 
   overflow-y: auto;
 
-  transition: max-height 0.2s, padding 0.2s;
+  transition:
+    max-height 0.2s,
+    padding 0.2s;
 
   img {
     max-width: 100%;

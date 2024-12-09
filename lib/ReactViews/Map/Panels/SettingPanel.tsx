@@ -62,8 +62,8 @@ class SettingPanel extends React.Component<PropTypes> {
     return this._hoverBaseMap
       ? this._hoverBaseMap
       : this.props.terria.mainViewer.baseMap
-      ? (this.props.terria.mainViewer.baseMap as any).name
-      : "(None)";
+        ? (this.props.terria.mainViewer.baseMap as any).name
+        : "(None)";
   }
 
   selectBaseMap(baseMap: BaseModel, event: MouseEvent<HTMLButtonElement>) {

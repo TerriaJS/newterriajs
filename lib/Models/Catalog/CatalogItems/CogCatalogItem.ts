@@ -44,10 +44,13 @@ class CogLoadableStratum extends LoadableStratum(CogCatalogItemTraits) {
       ? // Warn for 2D mode
         i18next.t("models.commonModelErrors.3dTypeIn2dMode", this)
       : this.model._imageryProvider?.tilingScheme &&
-        // Show warning for experimental reprojection freature if not using EPSG 3857 or 4326
-        isCustomTilingScheme(this.model._imageryProvider?.tilingScheme)
-      ? i18next.t("models.cogCatalogItem.experimentalReprojectionWarning", this)
-      : undefined;
+          // Show warning for experimental reprojection freature if not using EPSG 3857 or 4326
+          isCustomTilingScheme(this.model._imageryProvider?.tilingScheme)
+        ? i18next.t(
+            "models.cogCatalogItem.experimentalReprojectionWarning",
+            this
+          )
+        : undefined;
   }
 
   @computed
