@@ -56,6 +56,8 @@ class TestCatalogItem extends TileErrorHandlerMixin(
       }
     ];
   }
+
+  handleTileError = (promise: Promise<void>, _tile: any) => promise;
 }
 
 describe("TileErrorHandlerMixin", function () {
@@ -370,7 +372,6 @@ describe("TileErrorHandlerMixin", function () {
   });
 
   it("calls `handleTileError` if the item defines it", async function () {
-    item.handleTileError = (promise) => promise;
     spyOn(item, "handleTileError");
     try {
       await onTileLoadError(item, newError(400));
