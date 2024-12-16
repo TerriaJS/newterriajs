@@ -16,8 +16,8 @@ export default class LineAndPointChart extends React.PureComponent {
     glyph: PropTypes.string
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.lineRef = React.createRef();
     this.pointRef = React.createRef();
   }

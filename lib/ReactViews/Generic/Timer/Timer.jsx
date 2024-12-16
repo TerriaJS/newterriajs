@@ -20,8 +20,8 @@ if (typeof document.hidden !== "undefined") {
 }
 
 class Timer extends React.PureComponent {
-  constructor(_props) {
-    super();
+  constructor(props) {
+    super(props);
 
     // We need a unique selector for the timer container. If there are multiple timers, we need to know which one to
     // draw to.
