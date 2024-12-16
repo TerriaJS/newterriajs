@@ -121,6 +121,27 @@ describe("WebMapTileServiceCatalogItem", function () {
   //   }
   // });
 
+  it("should properly generate tile url request", async function () {
+    runInAction(() => {
+      wmts.setTrait(
+        "definition",
+        "url",
+        "test/WMTS/with_operation_metadata.xml"
+      );
+      wmts.setTrait(
+        "definition",
+        "layer",
+        "NWSHELF_ANALYSISFORECAST_PHY_004_013/cmems_mod_nws_phy_anfc_0.027deg-3D_PT1H-m_202309/vo"
+      );
+    });
+
+    await wmts.loadMapItems();
+
+    expect(wmts.imageryProvider?.url).toBe(
+      "http://wmts.marine.copernicus.eu/teroWmts?service=WMTS&version=1.0.0&request=GetTile"
+    );
+  });
+
   it("calculates correct tileMatrixSet", async function () {
     runInAction(() => {
       wmts.setTrait("definition", "url", "test/WMTS/with_tilematrix.xml");

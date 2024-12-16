@@ -1,0 +1,1312 @@
+<Capabilities xmlns="http://www.opengis.net/wmts/1.0" xmlns:ows="http://www.opengis.net/ows/1.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gml="http://www.opengis.net/gml"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xsi:schemaLocation="http://www.opengis.net/wmts/1.0 http://schemas.opengis.net/wmts/1.0/wmtsGetCapabilities_response.xsd">
+  <script id="eppiocemhmnlbhjplcgkofciiegomcon" />
+  <script />
+  <script />
+  <ows:ServiceIdentification>
+    <ows:Title>Copernicus Marine Data Store -
+      NWSHELF_ANALYSISFORECAST_PHY_004_013/cmems_mod_nws_phy_anfc_0.027deg-3D_PT1H-m_202309</ows:Title>
+    <ows:ServiceType>OGC WMTS</ows:ServiceType>
+    <ows:ServiceTypeVersion>1.0.0</ows:ServiceTypeVersion>
+  </ows:ServiceIdentification>
+  <ows:ServiceProvider>
+    <ows:ProviderName>Copernicus Marine Service</ows:ProviderName>
+    <ows:ProviderSite xlink:href="https://marine.copernicus.eu/" />
+  </ows:ServiceProvider>
+  <ows:OperationsMetadata>
+    <ows:Operation name="GetCapabilities">
+      <ows:DCP>
+        <ows:HTTP>
+          <ows:Get
+            xlink:href="http://wmts.marine.copernicus.eu/teroWmts/NWSHELF_ANALYSISFORECAST_PHY_004_013/cmems_mod_nws_phy_anfc_0.027deg-3D_PT1H-m_202309">
+            <ows:Constraint name="GetEncoding">
+              <ows:AllowedValues>
+                <ows:Value>KVP</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Get>
+          <ows:Get
+            xlink:href="http://wmts.marine.copernicus.eu/teroWmts/NWSHELF_ANALYSISFORECAST_PHY_004_013/cmems_mod_nws_phy_anfc_0.027deg-3D_PT1H-m_202309111">
+            <ows:Constraint name="GetEncoding">
+              <ows:AllowedValues>
+                <ows:Value>KVP</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Get>
+        </ows:HTTP>
+      </ows:DCP>
+    </ows:Operation>
+    <ows:Operation name="GetTile">
+      <ows:DCP>
+        <ows:HTTP>
+          <ows:Get xlink:href="http://wmts.marine.copernicus.eu/teroWmts">
+            <ows:Constraint name="GetEncoding">
+              <ows:AllowedValues>
+                <ows:Value>KVP</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Get>
+        </ows:HTTP>
+      </ows:DCP>
+    </ows:Operation>
+    <ows:Operation name="GetFeatureInfo">
+      <ows:DCP>
+        <ows:HTTP>
+          <ows:Get xlink:href="http://wmts.marine.copernicus.eu/teroWmts">
+            <ows:Constraint name="GetEncoding">
+              <ows:AllowedValues>
+                <ows:Value>KVP</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Get>
+        </ows:HTTP>
+      </ows:DCP>
+    </ows:Operation>
+  </ows:OperationsMetadata>
+  <Contents>
+    <Layer queryable="1">
+      <ows:Identifier>
+        NWSHELF_ANALYSISFORECAST_PHY_004_013/cmems_mod_nws_phy_anfc_0.027deg-3D_PT1H-m_202309/so</ows:Identifier>
+      <ows:Title>Salinity (so)</ows:Title>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-15.996014595031738 46.00364303588867</ows:LowerCorner>
+        <ows:UpperCorner>9.977004051208496 61.28188705444336</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+      <Style isDefault="true">
+        <ows:Identifier>cmap:haline</ows:Identifier>
+        <ows:Title>Linear scale</ows:Title>
+      </Style>
+      <Style isDefault="false">
+        <ows:Identifier>cmap:haline,logScale</ows:Identifier>
+        <ows:Title>Log scale</ows:Title>
+      </Style>
+      <Format>image/png</Format>
+      <InfoFormat>application/json</InfoFormat>
+      <InfoFormat>text/html</InfoFormat>
+      <InfoFormat>text/xml</InfoFormat>
+      <InfoFormat>application/vnd.ogc.gml/3.1.1</InfoFormat>
+      <Dimension>
+        <ows:Identifier>elevation</ows:Identifier>
+        <UnitSymbol>m</UnitSymbol>
+        <Default>-0.4940253794193268</Default>
+        <Value>-5727.91650390625</Value>
+        <Value>-5274.7841796875</Value>
+        <Value>-4833.29052734375</Value>
+        <Value>-4405.22412109375</Value>
+        <Value>-3992.48388671875</Value>
+        <Value>-3597.031982421875</Value>
+        <Value>-3220.8203125</Value>
+        <Value>-2865.70263671875</Value>
+        <Value>-2533.336181640625</Value>
+        <Value>-2225.077880859375</Value>
+        <Value>-1941.8934326171875</Value>
+        <Value>-1684.284423828125</Value>
+        <Value>-1452.2509765625</Value>
+        <Value>-1245.2911376953125</Value>
+        <Value>-1062.439697265625</Value>
+        <Value>-902.3392944335938</Value>
+        <Value>-763.3330688476562</Value>
+        <Value>-643.5668334960938</Value>
+        <Value>-541.0889282226562</Value>
+        <Value>-453.937744140625</Value>
+        <Value>-380.2130126953125</Value>
+        <Value>-318.12744140625</Value>
+        <Value>-266.0402526855469</Value>
+        <Value>-222.4751739501953</Value>
+        <Value>-186.1255645751953</Value>
+        <Value>-155.85072326660156</Value>
+        <Value>-130.66598510742188</Value>
+        <Value>-109.72927856445312</Value>
+        <Value>-92.3260726928711</Value>
+        <Value>-77.85385131835938</Value>
+        <Value>-65.8072738647461</Value>
+        <Value>-55.76428985595703</Value>
+        <Value>-47.373687744140625</Value>
+        <Value>-40.344051361083984</Value>
+        <Value>-34.43415451049805</Value>
+        <Value>-29.44472885131836</Value>
+        <Value>-25.211408615112305</Value>
+        <Value>-21.59881591796875</Value>
+        <Value>-18.495559692382812</Value>
+        <Value>-15.810072898864746</Value>
+        <Value>-13.467138290405273</Value>
+        <Value>-11.40500259399414</Value>
+        <Value>-9.572997093200684</Value>
+        <Value>-7.92956018447876</Value>
+        <Value>-6.440614223480225</Value>
+        <Value>-5.078223705291748</Value>
+        <Value>-3.8194947242736816</Value>
+        <Value>-2.6456685066223145</Value>
+        <Value>-1.5413753986358643</Value>
+        <Value>-0.4940253794193268</Value>
+      </Dimension>
+      <Dimension>
+        <ows:Identifier>time</ows:Identifier>
+        <ows:UOM>ISO8601</ows:UOM>
+        <Default>2024-12-05T23:00:00Z</Default>
+        <Value>2023-07-02T00:00:00Z/2024-12-05T23:00:00Z/PT1H</Value>
+      </Dimension>
+      <ows:Metadata>
+        <ows:Title>WMTS Layer Metadata</ows:Title>
+        <VariableInformation>
+          <Id>so</Id>
+          <StandardName>sea_water_salinity</StandardName>
+          <Name>Salinity</Name>
+          <Unit>1e-3</Unit>
+          <MinimumValue>33.04500198364258</MinimumValue>
+          <MaximumValue>35.67100143432617</MaximumValue>
+          <Colormap>haline</Colormap>
+          <LogScale>false</LogScale>
+        </VariableInformation>
+        <DataCubeInformation>
+          <admp_in_preparation>false</admp_in_preparation>
+          <admp_updated>2024-12-01T15:42:25.667297Z</admp_updated>
+          <admp_released_date>2023-09-26T00:00:00.000Z</admp_released_date>
+          <admp_retired_date>2025-01-14T00:00:00.000Z</admp_retired_date>
+        </DataCubeInformation>
+      </ows:Metadata>
+      <TileMatrixSetLink>
+        <TileMatrixSet>EPSG:3857</TileMatrixSet>
+      </TileMatrixSetLink>
+      <TileMatrixSetLink>
+        <TileMatrixSet>EPSG:3857@2x</TileMatrixSet>
+      </TileMatrixSetLink>
+      <TileMatrixSetLink>
+        <TileMatrixSet>EPSG:3857@3x</TileMatrixSet>
+      </TileMatrixSetLink>
+      <TileMatrixSetLink>
+        <TileMatrixSet>EPSG:4326</TileMatrixSet>
+      </TileMatrixSetLink>
+      <TileMatrixSetLink>
+        <TileMatrixSet>EPSG:4326@2x</TileMatrixSet>
+      </TileMatrixSetLink>
+      <TileMatrixSetLink>
+        <TileMatrixSet>EPSG:4326@3x</TileMatrixSet>
+      </TileMatrixSetLink>
+    </Layer>
+    <Layer queryable="1">
+      <ows:Identifier>
+        NWSHELF_ANALYSISFORECAST_PHY_004_013/cmems_mod_nws_phy_anfc_0.027deg-3D_PT1H-m_202309/thetao</ows:Identifier>
+      <ows:Title>Temperature (thetao)</ows:Title>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-15.996014595031738 46.00364303588867</ows:LowerCorner>
+        <ows:UpperCorner>9.977004051208496 61.28188705444336</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+      <Style isDefault="true">
+        <ows:Identifier>cmap:thermal</ows:Identifier>
+        <ows:Title>Linear scale</ows:Title>
+      </Style>
+      <Style isDefault="false">
+        <ows:Identifier>cmap:thermal,logScale</ows:Identifier>
+        <ows:Title>Log scale</ows:Title>
+      </Style>
+      <Format>image/png</Format>
+      <InfoFormat>application/json</InfoFormat>
+      <InfoFormat>text/html</InfoFormat>
+      <InfoFormat>text/xml</InfoFormat>
+      <InfoFormat>application/vnd.ogc.gml/3.1.1</InfoFormat>
+      <Dimension>
+        <ows:Identifier>elevation</ows:Identifier>
+        <UnitSymbol>m</UnitSymbol>
+        <Default>-0.4940253794193268</Default>
+        <Value>-5727.91650390625</Value>
+        <Value>-5274.7841796875</Value>
+        <Value>-4833.29052734375</Value>
+        <Value>-4405.22412109375</Value>
+        <Value>-3992.48388671875</Value>
+        <Value>-3597.031982421875</Value>
+        <Value>-3220.8203125</Value>
+        <Value>-2865.70263671875</Value>
+        <Value>-2533.336181640625</Value>
+        <Value>-2225.077880859375</Value>
+        <Value>-1941.8934326171875</Value>
+        <Value>-1684.284423828125</Value>
+        <Value>-1452.2509765625</Value>
+        <Value>-1245.2911376953125</Value>
+        <Value>-1062.439697265625</Value>
+        <Value>-902.3392944335938</Value>
+        <Value>-763.3330688476562</Value>
+        <Value>-643.5668334960938</Value>
+        <Value>-541.0889282226562</Value>
+        <Value>-453.937744140625</Value>
+        <Value>-380.2130126953125</Value>
+        <Value>-318.12744140625</Value>
+        <Value>-266.0402526855469</Value>
+        <Value>-222.4751739501953</Value>
+        <Value>-186.1255645751953</Value>
+        <Value>-155.85072326660156</Value>
+        <Value>-130.66598510742188</Value>
+        <Value>-109.72927856445312</Value>
+        <Value>-92.3260726928711</Value>
+        <Value>-77.85385131835938</Value>
+        <Value>-65.8072738647461</Value>
+        <Value>-55.76428985595703</Value>
+        <Value>-47.373687744140625</Value>
+        <Value>-40.344051361083984</Value>
+        <Value>-34.43415451049805</Value>
+        <Value>-29.44472885131836</Value>
+        <Value>-25.211408615112305</Value>
+        <Value>-21.59881591796875</Value>
+        <Value>-18.495559692382812</Value>
+        <Value>-15.810072898864746</Value>
+        <Value>-13.467138290405273</Value>
+        <Value>-11.40500259399414</Value>
+        <Value>-9.572997093200684</Value>
+        <Value>-7.92956018447876</Value>
+        <Value>-6.440614223480225</Value>
+        <Value>-5.078223705291748</Value>
+        <Value>-3.8194947242736816</Value>
+        <Value>-2.6456685066223145</Value>
+        <Value>-1.5413753986358643</Value>
+        <Value>-0.4940253794193268</Value>
+      </Dimension>
+      <Dimension>
+        <ows:Identifier>time</ows:Identifier>
+        <ows:UOM>ISO8601</ows:UOM>
+        <Default>2024-12-05T23:00:00Z</Default>
+        <Value>2023-07-02T00:00:00Z/2024-12-05T23:00:00Z/PT1H</Value>
+      </Dimension>
+      <ows:Metadata>
+        <ows:Title>WMTS Layer Metadata</ows:Title>
+        <VariableInformation>
+          <Id>thetao</Id>
+          <StandardName>sea_water_potential_temperature</StandardName>
+          <Name>Temperature</Name>
+          <Unit>degrees_C</Unit>
+          <MinimumValue>2.8449997901916504</MinimumValue>
+          <MaximumValue>16.70199966430664</MaximumValue>
+          <Colormap>thermal</Colormap>
+          <LogScale>false</LogScale>
+        </VariableInformation>
+        <DataCubeInformation>
+          <admp_in_preparation>false</admp_in_preparation>
+          <admp_updated>2024-12-01T15:42:25.667297Z</admp_updated>
+          <admp_released_date>2023-09-26T00:00:00.000Z</admp_released_date>
+          <admp_retired_date>2025-01-14T00:00:00.000Z</admp_retired_date>
+        </DataCubeInformation>
+      </ows:Metadata>
+      <TileMatrixSetLink>
+        <TileMatrixSet>EPSG:3857</TileMatrixSet>
+      </TileMatrixSetLink>
+      <TileMatrixSetLink>
+        <TileMatrixSet>EPSG:3857@2x</TileMatrixSet>
+      </TileMatrixSetLink>
+      <TileMatrixSetLink>
+        <TileMatrixSet>EPSG:3857@3x</TileMatrixSet>
+      </TileMatrixSetLink>
+      <TileMatrixSetLink>
+        <TileMatrixSet>EPSG:4326</TileMatrixSet>
+      </TileMatrixSetLink>
+      <TileMatrixSetLink>
+        <TileMatrixSet>EPSG:4326@2x</TileMatrixSet>
+      </TileMatrixSetLink>
+      <TileMatrixSetLink>
+        <TileMatrixSet>EPSG:4326@3x</TileMatrixSet>
+      </TileMatrixSetLink>
+    </Layer>
+    <Layer queryable="1">
+      <ows:Identifier>
+        NWSHELF_ANALYSISFORECAST_PHY_004_013/cmems_mod_nws_phy_anfc_0.027deg-3D_PT1H-m_202309/uo</ows:Identifier>
+      <ows:Title>Eastward velocity (uo)</ows:Title>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-15.996014595031738 46.00364303588867</ows:LowerCorner>
+        <ows:UpperCorner>9.977004051208496 61.28188705444336</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+      <Style isDefault="true">
+        <ows:Identifier>cmap:balance</ows:Identifier>
+      </Style>
+      <Format>image/png</Format>
+      <InfoFormat>application/json</InfoFormat>
+      <InfoFormat>text/html</InfoFormat>
+      <InfoFormat>text/xml</InfoFormat>
+      <InfoFormat>application/vnd.ogc.gml/3.1.1</InfoFormat>
+      <Dimension>
+        <ows:Identifier>elevation</ows:Identifier>
+        <UnitSymbol>m</UnitSymbol>
+        <Default>-0.4940253794193268</Default>
+        <Value>-5727.91650390625</Value>
+        <Value>-5274.7841796875</Value>
+        <Value>-4833.29052734375</Value>
+        <Value>-4405.22412109375</Value>
+        <Value>-3992.48388671875</Value>
+        <Value>-3597.031982421875</Value>
+        <Value>-3220.8203125</Value>
+        <Value>-2865.70263671875</Value>
+        <Value>-2533.336181640625</Value>
+        <Value>-2225.077880859375</Value>
+        <Value>-1941.8934326171875</Value>
+        <Value>-1684.284423828125</Value>
+        <Value>-1452.2509765625</Value>
+        <Value>-1245.2911376953125</Value>
+        <Value>-1062.439697265625</Value>
+        <Value>-902.3392944335938</Value>
+        <Value>-763.3330688476562</Value>
+        <Value>-643.5668334960938</Value>
+        <Value>-541.0889282226562</Value>
+        <Value>-453.937744140625</Value>
+        <Value>-380.2130126953125</Value>
+        <Value>-318.12744140625</Value>
+        <Value>-266.0402526855469</Value>
+        <Value>-222.4751739501953</Value>
+        <Value>-186.1255645751953</Value>
+        <Value>-155.85072326660156</Value>
+        <Value>-130.66598510742188</Value>
+        <Value>-109.72927856445312</Value>
+        <Value>-92.3260726928711</Value>
+        <Value>-77.85385131835938</Value>
+        <Value>-65.8072738647461</Value>
+        <Value>-55.76428985595703</Value>
+        <Value>-47.373687744140625</Value>
+        <Value>-40.344051361083984</Value>
+        <Value>-34.43415451049805</Value>
+        <Value>-29.44472885131836</Value>
+        <Value>-25.211408615112305</Value>
+        <Value>-21.59881591796875</Value>
+        <Value>-18.495559692382812</Value>
+        <Value>-15.810072898864746</Value>
+        <Value>-13.467138290405273</Value>
+        <Value>-11.40500259399414</Value>
+        <Value>-9.572997093200684</Value>
+        <Value>-7.92956018447876</Value>
+        <Value>-6.440614223480225</Value>
+        <Value>-5.078223705291748</Value>
+        <Value>-3.8194947242736816</Value>
+        <Value>-2.6456685066223145</Value>
+        <Value>-1.5413753986358643</Value>
+        <Value>-0.4940253794193268</Value>
+      </Dimension>
+      <Dimension>
+        <ows:Identifier>time</ows:Identifier>
+        <ows:UOM>ISO8601</ows:UOM>
+        <Default>2024-12-05T23:00:00Z</Default>
+        <Value>2023-07-02T00:00:00Z/2024-12-05T23:00:00Z/PT1H</Value>
+      </Dimension>
+      <ows:Metadata>
+        <ows:Title>WMTS Layer Metadata</ows:Title>
+        <VariableInformation>
+          <Id>uo</Id>
+          <StandardName>eastward_sea_water_velocity</StandardName>
+          <Name>Eastward velocity</Name>
+          <Unit>m s-1</Unit>
+          <MinimumValue>-1.803000032901764</MinimumValue>
+          <MaximumValue>1.803000032901764</MaximumValue>
+          <Colormap>balance</Colormap>
+          <LogScale>false</LogScale>
+        </VariableInformation>
+        <DataCubeInformation>
+          <admp_in_preparation>false</admp_in_preparation>
+          <admp_updated>2024-12-01T15:42:25.667297Z</admp_updated>
+          <admp_released_date>2023-09-26T00:00:00.000Z</admp_released_date>
+          <admp_retired_date>2025-01-14T00:00:00.000Z</admp_retired_date>
+        </DataCubeInformation>
+      </ows:Metadata>
+      <TileMatrixSetLink>
+        <TileMatrixSet>EPSG:3857</TileMatrixSet>
+      </TileMatrixSetLink>
+      <TileMatrixSetLink>
+        <TileMatrixSet>EPSG:3857@2x</TileMatrixSet>
+      </TileMatrixSetLink>
+      <TileMatrixSetLink>
+        <TileMatrixSet>EPSG:3857@3x</TileMatrixSet>
+      </TileMatrixSetLink>
+      <TileMatrixSetLink>
+        <TileMatrixSet>EPSG:4326</TileMatrixSet>
+      </TileMatrixSetLink>
+      <TileMatrixSetLink>
+        <TileMatrixSet>EPSG:4326@2x</TileMatrixSet>
+      </TileMatrixSetLink>
+      <TileMatrixSetLink>
+        <TileMatrixSet>EPSG:4326@3x</TileMatrixSet>
+      </TileMatrixSetLink>
+    </Layer>
+    <Layer queryable="1">
+      <ows:Identifier>
+        NWSHELF_ANALYSISFORECAST_PHY_004_013/cmems_mod_nws_phy_anfc_0.027deg-3D_PT1H-m_202309/vo</ows:Identifier>
+      <ows:Title>Northward velocity (vo)</ows:Title>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-15.996014595031738 46.00364303588867</ows:LowerCorner>
+        <ows:UpperCorner>9.977004051208496 61.28188705444336</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+      <Style isDefault="true">
+        <ows:Identifier>cmap:balance</ows:Identifier>
+      </Style>
+      <Format>image/png</Format>
+      <InfoFormat>application/json</InfoFormat>
+      <InfoFormat>text/html</InfoFormat>
+      <InfoFormat>text/xml</InfoFormat>
+      <InfoFormat>application/vnd.ogc.gml/3.1.1</InfoFormat>
+      <Dimension>
+        <ows:Identifier>elevation</ows:Identifier>
+        <UnitSymbol>m</UnitSymbol>
+        <Default>-0.4940253794193268</Default>
+        <Value>-5727.91650390625</Value>
+        <Value>-5274.7841796875</Value>
+        <Value>-4833.29052734375</Value>
+        <Value>-4405.22412109375</Value>
+        <Value>-3992.48388671875</Value>
+        <Value>-3597.031982421875</Value>
+        <Value>-3220.8203125</Value>
+        <Value>-2865.70263671875</Value>
+        <Value>-2533.336181640625</Value>
+        <Value>-2225.077880859375</Value>
+        <Value>-1941.8934326171875</Value>
+        <Value>-1684.284423828125</Value>
+        <Value>-1452.2509765625</Value>
+        <Value>-1245.2911376953125</Value>
+        <Value>-1062.439697265625</Value>
+        <Value>-902.3392944335938</Value>
+        <Value>-763.3330688476562</Value>
+        <Value>-643.5668334960938</Value>
+        <Value>-541.0889282226562</Value>
+        <Value>-453.937744140625</Value>
+        <Value>-380.2130126953125</Value>
+        <Value>-318.12744140625</Value>
+        <Value>-266.0402526855469</Value>
+        <Value>-222.4751739501953</Value>
+        <Value>-186.1255645751953</Value>
+        <Value>-155.85072326660156</Value>
+        <Value>-130.66598510742188</Value>
+        <Value>-109.72927856445312</Value>
+        <Value>-92.3260726928711</Value>
+        <Value>-77.85385131835938</Value>
+        <Value>-65.8072738647461</Value>
+        <Value>-55.76428985595703</Value>
+        <Value>-47.373687744140625</Value>
+        <Value>-40.344051361083984</Value>
+        <Value>-34.43415451049805</Value>
+        <Value>-29.44472885131836</Value>
+        <Value>-25.211408615112305</Value>
+        <Value>-21.59881591796875</Value>
+        <Value>-18.495559692382812</Value>
+        <Value>-15.810072898864746</Value>
+        <Value>-13.467138290405273</Value>
+        <Value>-11.40500259399414</Value>
+        <Value>-9.572997093200684</Value>
+        <Value>-7.92956018447876</Value>
+        <Value>-6.440614223480225</Value>
+        <Value>-5.078223705291748</Value>
+        <Value>-3.8194947242736816</Value>
+        <Value>-2.6456685066223145</Value>
+        <Value>-1.5413753986358643</Value>
+        <Value>-0.4940253794193268</Value>
+      </Dimension>
+      <Dimension>
+        <ows:Identifier>time</ows:Identifier>
+        <ows:UOM>ISO8601</ows:UOM>
+        <Default>2024-12-05T23:00:00Z</Default>
+        <Value>2023-07-02T00:00:00Z/2024-12-05T23:00:00Z/PT1H</Value>
+      </Dimension>
+      <ows:Metadata>
+        <ows:Title>WMTS Layer Metadata</ows:Title>
+        <VariableInformation>
+          <Id>vo</Id>
+          <StandardName>northward_sea_water_velocity</StandardName>
+          <Name>Northward velocity</Name>
+          <Unit>m s-1</Unit>
+          <MinimumValue>-1.803000032901764</MinimumValue>
+          <MaximumValue>1.803000032901764</MaximumValue>
+          <Colormap>balance</Colormap>
+          <LogScale>false</LogScale>
+        </VariableInformation>
+        <DataCubeInformation>
+          <admp_in_preparation>false</admp_in_preparation>
+          <admp_updated>2024-12-01T15:42:25.667297Z</admp_updated>
+          <admp_released_date>2023-09-26T00:00:00.000Z</admp_released_date>
+          <admp_retired_date>2025-01-14T00:00:00.000Z</admp_retired_date>
+        </DataCubeInformation>
+      </ows:Metadata>
+      <TileMatrixSetLink>
+        <TileMatrixSet>EPSG:3857</TileMatrixSet>
+      </TileMatrixSetLink>
+      <TileMatrixSetLink>
+        <TileMatrixSet>EPSG:3857@2x</TileMatrixSet>
+      </TileMatrixSetLink>
+      <TileMatrixSetLink>
+        <TileMatrixSet>EPSG:3857@3x</TileMatrixSet>
+      </TileMatrixSetLink>
+      <TileMatrixSetLink>
+        <TileMatrixSet>EPSG:4326</TileMatrixSet>
+      </TileMatrixSetLink>
+      <TileMatrixSetLink>
+        <TileMatrixSet>EPSG:4326@2x</TileMatrixSet>
+      </TileMatrixSetLink>
+      <TileMatrixSetLink>
+        <TileMatrixSet>EPSG:4326@3x</TileMatrixSet>
+      </TileMatrixSetLink>
+    </Layer>
+    <Layer queryable="1">
+      <ows:Identifier>
+        NWSHELF_ANALYSISFORECAST_PHY_004_013/cmems_mod_nws_phy_anfc_0.027deg-3D_PT1H-m_202309/sea_water_velocity</ows:Identifier>
+      <ows:Title>Sea water velocity (sea_water_velocity)</ows:Title>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-15.996014595031738 46.00364303588867</ows:LowerCorner>
+        <ows:UpperCorner>9.977004051208496 61.28188705444336</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+      <Style isDefault="true">
+        <ows:Identifier>cmap:speed,vectorStyle:solid</ows:Identifier>
+        <ows:Title>Linear scale, solid</ows:Title>
+      </Style>
+      <Style isDefault="false">
+        <ows:Identifier>cmap:speed,vectorStyle:solidAndVector</ows:Identifier>
+        <ows:Title>Linear scale, solid + vectors</ows:Title>
+      </Style>
+      <Style isDefault="false">
+        <ows:Identifier>cmap:speed,vectorStyle:vector</ows:Identifier>
+        <ows:Title>Linear scale, vectors</ows:Title>
+      </Style>
+      <Style isDefault="false">
+        <ows:Identifier>cmap:speed,logScale,vectorStyle:solid</ows:Identifier>
+        <ows:Title>Log scale, solid</ows:Title>
+      </Style>
+      <Style isDefault="false">
+        <ows:Identifier>cmap:speed,logScale,vectorStyle:solidAndVector</ows:Identifier>
+        <ows:Title>Log scale, solid + vectors</ows:Title>
+      </Style>
+      <Style isDefault="false">
+        <ows:Identifier>cmap:speed,logScale,vectorStyle:vector</ows:Identifier>
+        <ows:Title>Log scale, vectors</ows:Title>
+      </Style>
+      <Format>image/png</Format>
+      <InfoFormat>application/json</InfoFormat>
+      <InfoFormat>text/html</InfoFormat>
+      <InfoFormat>text/xml</InfoFormat>
+      <InfoFormat>application/vnd.ogc.gml/3.1.1</InfoFormat>
+      <Dimension>
+        <ows:Identifier>elevation</ows:Identifier>
+        <UnitSymbol>m</UnitSymbol>
+        <Default>-0.4940253794193268</Default>
+        <Value>-5727.91650390625</Value>
+        <Value>-5274.7841796875</Value>
+        <Value>-4833.29052734375</Value>
+        <Value>-4405.22412109375</Value>
+        <Value>-3992.48388671875</Value>
+        <Value>-3597.031982421875</Value>
+        <Value>-3220.8203125</Value>
+        <Value>-2865.70263671875</Value>
+        <Value>-2533.336181640625</Value>
+        <Value>-2225.077880859375</Value>
+        <Value>-1941.8934326171875</Value>
+        <Value>-1684.284423828125</Value>
+        <Value>-1452.2509765625</Value>
+        <Value>-1245.2911376953125</Value>
+        <Value>-1062.439697265625</Value>
+        <Value>-902.3392944335938</Value>
+        <Value>-763.3330688476562</Value>
+        <Value>-643.5668334960938</Value>
+        <Value>-541.0889282226562</Value>
+        <Value>-453.937744140625</Value>
+        <Value>-380.2130126953125</Value>
+        <Value>-318.12744140625</Value>
+        <Value>-266.0402526855469</Value>
+        <Value>-222.4751739501953</Value>
+        <Value>-186.1255645751953</Value>
+        <Value>-155.85072326660156</Value>
+        <Value>-130.66598510742188</Value>
+        <Value>-109.72927856445312</Value>
+        <Value>-92.3260726928711</Value>
+        <Value>-77.85385131835938</Value>
+        <Value>-65.8072738647461</Value>
+        <Value>-55.76428985595703</Value>
+        <Value>-47.373687744140625</Value>
+        <Value>-40.344051361083984</Value>
+        <Value>-34.43415451049805</Value>
+        <Value>-29.44472885131836</Value>
+        <Value>-25.211408615112305</Value>
+        <Value>-21.59881591796875</Value>
+        <Value>-18.495559692382812</Value>
+        <Value>-15.810072898864746</Value>
+        <Value>-13.467138290405273</Value>
+        <Value>-11.40500259399414</Value>
+        <Value>-9.572997093200684</Value>
+        <Value>-7.92956018447876</Value>
+        <Value>-6.440614223480225</Value>
+        <Value>-5.078223705291748</Value>
+        <Value>-3.8194947242736816</Value>
+        <Value>-2.6456685066223145</Value>
+        <Value>-1.5413753986358643</Value>
+        <Value>-0.4940253794193268</Value>
+      </Dimension>
+      <Dimension>
+        <ows:Identifier>time</ows:Identifier>
+        <ows:UOM>ISO8601</ows:UOM>
+        <Default>2024-12-05T23:00:00Z</Default>
+        <Value>2023-07-02T00:00:00Z/2024-12-05T23:00:00Z/PT1H</Value>
+      </Dimension>
+      <ows:Metadata>
+        <ows:Title>WMTS Layer Metadata</ows:Title>
+        <VariableInformation>
+          <Id>sea_water_velocity</Id>
+          <Name>Sea water velocity</Name>
+          <Unit>m s-1</Unit>
+          <MinimumValue>0</MinimumValue>
+          <MaximumValue>1.803</MaximumValue>
+          <Colormap>speed</Colormap>
+          <LogScale>false</LogScale>
+        </VariableInformation>
+        <DataCubeInformation>
+          <admp_in_preparation>false</admp_in_preparation>
+          <admp_updated>2024-12-01T15:42:25.667297Z</admp_updated>
+          <admp_released_date>2023-09-26T00:00:00.000Z</admp_released_date>
+          <admp_retired_date>2025-01-14T00:00:00.000Z</admp_retired_date>
+        </DataCubeInformation>
+      </ows:Metadata>
+      <TileMatrixSetLink>
+        <TileMatrixSet>EPSG:3857</TileMatrixSet>
+      </TileMatrixSetLink>
+      <TileMatrixSetLink>
+        <TileMatrixSet>EPSG:3857@2x</TileMatrixSet>
+      </TileMatrixSetLink>
+      <TileMatrixSetLink>
+        <TileMatrixSet>EPSG:3857@3x</TileMatrixSet>
+      </TileMatrixSetLink>
+      <TileMatrixSetLink>
+        <TileMatrixSet>EPSG:4326</TileMatrixSet>
+      </TileMatrixSetLink>
+      <TileMatrixSetLink>
+        <TileMatrixSet>EPSG:4326@2x</TileMatrixSet>
+      </TileMatrixSetLink>
+      <TileMatrixSetLink>
+        <TileMatrixSet>EPSG:4326@3x</TileMatrixSet>
+      </TileMatrixSetLink>
+    </Layer>
+    <TileMatrixSet>
+      <ows:Identifier>EPSG:3857</ows:Identifier>
+      <ows:SupportedCRS>urn:ogc:def:crs:EPSG::3857</ows:SupportedCRS>
+      <TileMatrix>
+        <ows:Identifier>0</ows:Identifier>
+        <ScaleDenominator>559082264.0287178</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>256</TileWidth>
+        <TileHeight>256</TileHeight>
+        <MatrixWidth>1</MatrixWidth>
+        <MatrixHeight>1</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>1</ows:Identifier>
+        <ScaleDenominator>279541132.0143589</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>256</TileWidth>
+        <TileHeight>256</TileHeight>
+        <MatrixWidth>2</MatrixWidth>
+        <MatrixHeight>2</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>2</ows:Identifier>
+        <ScaleDenominator>139770566.0071794</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>256</TileWidth>
+        <TileHeight>256</TileHeight>
+        <MatrixWidth>4</MatrixWidth>
+        <MatrixHeight>4</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>3</ows:Identifier>
+        <ScaleDenominator>69885283.00358972</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>256</TileWidth>
+        <TileHeight>256</TileHeight>
+        <MatrixWidth>8</MatrixWidth>
+        <MatrixHeight>8</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>4</ows:Identifier>
+        <ScaleDenominator>34942641.50179486</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>256</TileWidth>
+        <TileHeight>256</TileHeight>
+        <MatrixWidth>16</MatrixWidth>
+        <MatrixHeight>16</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>5</ows:Identifier>
+        <ScaleDenominator>17471320.75089743</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>256</TileWidth>
+        <TileHeight>256</TileHeight>
+        <MatrixWidth>32</MatrixWidth>
+        <MatrixHeight>32</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>6</ows:Identifier>
+        <ScaleDenominator>8735660.375448715</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>256</TileWidth>
+        <TileHeight>256</TileHeight>
+        <MatrixWidth>64</MatrixWidth>
+        <MatrixHeight>64</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>7</ows:Identifier>
+        <ScaleDenominator>4367830.187724357</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>256</TileWidth>
+        <TileHeight>256</TileHeight>
+        <MatrixWidth>128</MatrixWidth>
+        <MatrixHeight>128</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>8</ows:Identifier>
+        <ScaleDenominator>2183915.093862179</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>256</TileWidth>
+        <TileHeight>256</TileHeight>
+        <MatrixWidth>256</MatrixWidth>
+        <MatrixHeight>256</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>9</ows:Identifier>
+        <ScaleDenominator>1091957.546931089</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>256</TileWidth>
+        <TileHeight>256</TileHeight>
+        <MatrixWidth>512</MatrixWidth>
+        <MatrixHeight>512</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>10</ows:Identifier>
+        <ScaleDenominator>545978.7734655447</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>256</TileWidth>
+        <TileHeight>256</TileHeight>
+        <MatrixWidth>1024</MatrixWidth>
+        <MatrixHeight>1024</MatrixHeight>
+      </TileMatrix>
+    </TileMatrixSet>
+    <TileMatrixSet>
+      <ows:Identifier>EPSG:3857@2x</ows:Identifier>
+      <ows:SupportedCRS>urn:ogc:def:crs:EPSG::3857</ows:SupportedCRS>
+      <TileMatrix>
+        <ows:Identifier>0</ows:Identifier>
+        <ScaleDenominator>279541132.0143589</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>512</TileWidth>
+        <TileHeight>512</TileHeight>
+        <MatrixWidth>1</MatrixWidth>
+        <MatrixHeight>1</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>1</ows:Identifier>
+        <ScaleDenominator>139770566.00717944</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>512</TileWidth>
+        <TileHeight>512</TileHeight>
+        <MatrixWidth>2</MatrixWidth>
+        <MatrixHeight>2</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>2</ows:Identifier>
+        <ScaleDenominator>69885283.0035897</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>512</TileWidth>
+        <TileHeight>512</TileHeight>
+        <MatrixWidth>4</MatrixWidth>
+        <MatrixHeight>4</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>3</ows:Identifier>
+        <ScaleDenominator>34942641.50179486</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>512</TileWidth>
+        <TileHeight>512</TileHeight>
+        <MatrixWidth>8</MatrixWidth>
+        <MatrixHeight>8</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>4</ows:Identifier>
+        <ScaleDenominator>17471320.75089743</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>512</TileWidth>
+        <TileHeight>512</TileHeight>
+        <MatrixWidth>16</MatrixWidth>
+        <MatrixHeight>16</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>5</ows:Identifier>
+        <ScaleDenominator>8735660.375448715</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>512</TileWidth>
+        <TileHeight>512</TileHeight>
+        <MatrixWidth>32</MatrixWidth>
+        <MatrixHeight>32</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>6</ows:Identifier>
+        <ScaleDenominator>4367830.1877243575</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>512</TileWidth>
+        <TileHeight>512</TileHeight>
+        <MatrixWidth>64</MatrixWidth>
+        <MatrixHeight>64</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>7</ows:Identifier>
+        <ScaleDenominator>2183915.0938621783</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>512</TileWidth>
+        <TileHeight>512</TileHeight>
+        <MatrixWidth>128</MatrixWidth>
+        <MatrixHeight>128</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>8</ows:Identifier>
+        <ScaleDenominator>1091957.5469310896</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>512</TileWidth>
+        <TileHeight>512</TileHeight>
+        <MatrixWidth>256</MatrixWidth>
+        <MatrixHeight>256</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>9</ows:Identifier>
+        <ScaleDenominator>545978.7734655445</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>512</TileWidth>
+        <TileHeight>512</TileHeight>
+        <MatrixWidth>512</MatrixWidth>
+        <MatrixHeight>512</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>10</ows:Identifier>
+        <ScaleDenominator>272989.38673277234</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>512</TileWidth>
+        <TileHeight>512</TileHeight>
+        <MatrixWidth>1024</MatrixWidth>
+        <MatrixHeight>1024</MatrixHeight>
+      </TileMatrix>
+    </TileMatrixSet>
+    <TileMatrixSet>
+      <ows:Identifier>EPSG:3857@3x</ows:Identifier>
+      <ows:SupportedCRS>urn:ogc:def:crs:EPSG::3857</ows:SupportedCRS>
+      <TileMatrix>
+        <ows:Identifier>0</ows:Identifier>
+        <ScaleDenominator>186360754.67623925</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>768</TileWidth>
+        <TileHeight>768</TileHeight>
+        <MatrixWidth>1</MatrixWidth>
+        <MatrixHeight>1</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>1</ows:Identifier>
+        <ScaleDenominator>93180377.33811963</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>768</TileWidth>
+        <TileHeight>768</TileHeight>
+        <MatrixWidth>2</MatrixWidth>
+        <MatrixHeight>2</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>2</ows:Identifier>
+        <ScaleDenominator>46590188.669059806</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>768</TileWidth>
+        <TileHeight>768</TileHeight>
+        <MatrixWidth>4</MatrixWidth>
+        <MatrixHeight>4</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>3</ows:Identifier>
+        <ScaleDenominator>23295094.334529907</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>768</TileWidth>
+        <TileHeight>768</TileHeight>
+        <MatrixWidth>8</MatrixWidth>
+        <MatrixHeight>8</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>4</ows:Identifier>
+        <ScaleDenominator>11647547.167264953</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>768</TileWidth>
+        <TileHeight>768</TileHeight>
+        <MatrixWidth>16</MatrixWidth>
+        <MatrixHeight>16</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>5</ows:Identifier>
+        <ScaleDenominator>5823773.583632477</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>768</TileWidth>
+        <TileHeight>768</TileHeight>
+        <MatrixWidth>32</MatrixWidth>
+        <MatrixHeight>32</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>6</ows:Identifier>
+        <ScaleDenominator>2911886.7918162383</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>768</TileWidth>
+        <TileHeight>768</TileHeight>
+        <MatrixWidth>64</MatrixWidth>
+        <MatrixHeight>64</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>7</ows:Identifier>
+        <ScaleDenominator>1455943.395908119</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>768</TileWidth>
+        <TileHeight>768</TileHeight>
+        <MatrixWidth>128</MatrixWidth>
+        <MatrixHeight>128</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>8</ows:Identifier>
+        <ScaleDenominator>727971.6979540597</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>768</TileWidth>
+        <TileHeight>768</TileHeight>
+        <MatrixWidth>256</MatrixWidth>
+        <MatrixHeight>256</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>9</ows:Identifier>
+        <ScaleDenominator>363985.8489770296</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>768</TileWidth>
+        <TileHeight>768</TileHeight>
+        <MatrixWidth>512</MatrixWidth>
+        <MatrixHeight>512</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>10</ows:Identifier>
+        <ScaleDenominator>181992.9244885149</ScaleDenominator>
+        <TopLeftCorner>-20037508.3428 20037508.3428</TopLeftCorner>
+        <TileWidth>768</TileWidth>
+        <TileHeight>768</TileHeight>
+        <MatrixWidth>1024</MatrixWidth>
+        <MatrixHeight>1024</MatrixHeight>
+      </TileMatrix>
+    </TileMatrixSet>
+    <TileMatrixSet>
+      <ows:Identifier>EPSG:4326</ows:Identifier>
+      <ows:SupportedCRS>urn:ogc:def:crs:EPSG::4326</ows:SupportedCRS>
+      <TileMatrix>
+        <ows:Identifier>0</ows:Identifier>
+        <ScaleDenominator>279541132.0143589</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>256</TileWidth>
+        <TileHeight>256</TileHeight>
+        <MatrixWidth>2</MatrixWidth>
+        <MatrixHeight>1</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>1</ows:Identifier>
+        <ScaleDenominator>139770566.00717944</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>256</TileWidth>
+        <TileHeight>256</TileHeight>
+        <MatrixWidth>4</MatrixWidth>
+        <MatrixHeight>2</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>2</ows:Identifier>
+        <ScaleDenominator>69885283.00358972</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>256</TileWidth>
+        <TileHeight>256</TileHeight>
+        <MatrixWidth>8</MatrixWidth>
+        <MatrixHeight>4</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>3</ows:Identifier>
+        <ScaleDenominator>34942641.50179486</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>256</TileWidth>
+        <TileHeight>256</TileHeight>
+        <MatrixWidth>16</MatrixWidth>
+        <MatrixHeight>8</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>4</ows:Identifier>
+        <ScaleDenominator>17471320.75089743</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>256</TileWidth>
+        <TileHeight>256</TileHeight>
+        <MatrixWidth>32</MatrixWidth>
+        <MatrixHeight>16</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>5</ows:Identifier>
+        <ScaleDenominator>8735660.375448715</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>256</TileWidth>
+        <TileHeight>256</TileHeight>
+        <MatrixWidth>64</MatrixWidth>
+        <MatrixHeight>32</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>6</ows:Identifier>
+        <ScaleDenominator>4367830.1877243575</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>256</TileWidth>
+        <TileHeight>256</TileHeight>
+        <MatrixWidth>128</MatrixWidth>
+        <MatrixHeight>64</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>7</ows:Identifier>
+        <ScaleDenominator>2183915.0938621787</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>256</TileWidth>
+        <TileHeight>256</TileHeight>
+        <MatrixWidth>256</MatrixWidth>
+        <MatrixHeight>128</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>8</ows:Identifier>
+        <ScaleDenominator>1091957.5469310894</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>256</TileWidth>
+        <TileHeight>256</TileHeight>
+        <MatrixWidth>512</MatrixWidth>
+        <MatrixHeight>256</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>9</ows:Identifier>
+        <ScaleDenominator>545978.7734655447</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>256</TileWidth>
+        <TileHeight>256</TileHeight>
+        <MatrixWidth>1024</MatrixWidth>
+        <MatrixHeight>512</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>10</ows:Identifier>
+        <ScaleDenominator>272989.38673277234</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>256</TileWidth>
+        <TileHeight>256</TileHeight>
+        <MatrixWidth>2048</MatrixWidth>
+        <MatrixHeight>1024</MatrixHeight>
+      </TileMatrix>
+    </TileMatrixSet>
+    <TileMatrixSet>
+      <ows:Identifier>EPSG:4326@2x</ows:Identifier>
+      <ows:SupportedCRS>urn:ogc:def:crs:EPSG::4326</ows:SupportedCRS>
+      <TileMatrix>
+        <ows:Identifier>0</ows:Identifier>
+        <ScaleDenominator>139770566.00717944</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>512</TileWidth>
+        <TileHeight>512</TileHeight>
+        <MatrixWidth>2</MatrixWidth>
+        <MatrixHeight>1</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>1</ows:Identifier>
+        <ScaleDenominator>69885283.00358972</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>512</TileWidth>
+        <TileHeight>512</TileHeight>
+        <MatrixWidth>4</MatrixWidth>
+        <MatrixHeight>2</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>2</ows:Identifier>
+        <ScaleDenominator>34942641.50179486</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>512</TileWidth>
+        <TileHeight>512</TileHeight>
+        <MatrixWidth>8</MatrixWidth>
+        <MatrixHeight>4</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>3</ows:Identifier>
+        <ScaleDenominator>17471320.75089743</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>512</TileWidth>
+        <TileHeight>512</TileHeight>
+        <MatrixWidth>16</MatrixWidth>
+        <MatrixHeight>8</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>4</ows:Identifier>
+        <ScaleDenominator>8735660.375448715</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>512</TileWidth>
+        <TileHeight>512</TileHeight>
+        <MatrixWidth>32</MatrixWidth>
+        <MatrixHeight>16</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>5</ows:Identifier>
+        <ScaleDenominator>4367830.1877243575</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>512</TileWidth>
+        <TileHeight>512</TileHeight>
+        <MatrixWidth>64</MatrixWidth>
+        <MatrixHeight>32</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>6</ows:Identifier>
+        <ScaleDenominator>2183915.0938621787</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>512</TileWidth>
+        <TileHeight>512</TileHeight>
+        <MatrixWidth>128</MatrixWidth>
+        <MatrixHeight>64</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>7</ows:Identifier>
+        <ScaleDenominator>1091957.5469310894</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>512</TileWidth>
+        <TileHeight>512</TileHeight>
+        <MatrixWidth>256</MatrixWidth>
+        <MatrixHeight>128</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>8</ows:Identifier>
+        <ScaleDenominator>545978.7734655447</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>512</TileWidth>
+        <TileHeight>512</TileHeight>
+        <MatrixWidth>512</MatrixWidth>
+        <MatrixHeight>256</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>9</ows:Identifier>
+        <ScaleDenominator>272989.38673277234</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>512</TileWidth>
+        <TileHeight>512</TileHeight>
+        <MatrixWidth>1024</MatrixWidth>
+        <MatrixHeight>512</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>10</ows:Identifier>
+        <ScaleDenominator>136494.69336638617</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>512</TileWidth>
+        <TileHeight>512</TileHeight>
+        <MatrixWidth>2048</MatrixWidth>
+        <MatrixHeight>1024</MatrixHeight>
+      </TileMatrix>
+    </TileMatrixSet>
+    <TileMatrixSet>
+      <ows:Identifier>EPSG:4326@3x</ows:Identifier>
+      <ows:SupportedCRS>urn:ogc:def:crs:EPSG::4326</ows:SupportedCRS>
+      <TileMatrix>
+        <ows:Identifier>0</ows:Identifier>
+        <ScaleDenominator>93180377.33811963</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>768</TileWidth>
+        <TileHeight>768</TileHeight>
+        <MatrixWidth>2</MatrixWidth>
+        <MatrixHeight>1</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>1</ows:Identifier>
+        <ScaleDenominator>46590188.66905981</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>768</TileWidth>
+        <TileHeight>768</TileHeight>
+        <MatrixWidth>4</MatrixWidth>
+        <MatrixHeight>2</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>2</ows:Identifier>
+        <ScaleDenominator>23295094.334529907</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>768</TileWidth>
+        <TileHeight>768</TileHeight>
+        <MatrixWidth>8</MatrixWidth>
+        <MatrixHeight>4</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>3</ows:Identifier>
+        <ScaleDenominator>11647547.167264953</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>768</TileWidth>
+        <TileHeight>768</TileHeight>
+        <MatrixWidth>16</MatrixWidth>
+        <MatrixHeight>8</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>4</ows:Identifier>
+        <ScaleDenominator>5823773.583632477</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>768</TileWidth>
+        <TileHeight>768</TileHeight>
+        <MatrixWidth>32</MatrixWidth>
+        <MatrixHeight>16</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>5</ows:Identifier>
+        <ScaleDenominator>2911886.7918162383</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>768</TileWidth>
+        <TileHeight>768</TileHeight>
+        <MatrixWidth>64</MatrixWidth>
+        <MatrixHeight>32</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>6</ows:Identifier>
+        <ScaleDenominator>1455943.3959081192</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>768</TileWidth>
+        <TileHeight>768</TileHeight>
+        <MatrixWidth>128</MatrixWidth>
+        <MatrixHeight>64</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>7</ows:Identifier>
+        <ScaleDenominator>727971.6979540596</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>768</TileWidth>
+        <TileHeight>768</TileHeight>
+        <MatrixWidth>256</MatrixWidth>
+        <MatrixHeight>128</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>8</ows:Identifier>
+        <ScaleDenominator>363985.8489770298</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>768</TileWidth>
+        <TileHeight>768</TileHeight>
+        <MatrixWidth>512</MatrixWidth>
+        <MatrixHeight>256</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>9</ows:Identifier>
+        <ScaleDenominator>181992.9244885149</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>768</TileWidth>
+        <TileHeight>768</TileHeight>
+        <MatrixWidth>1024</MatrixWidth>
+        <MatrixHeight>512</MatrixHeight>
+      </TileMatrix>
+      <TileMatrix>
+        <ows:Identifier>10</ows:Identifier>
+        <ScaleDenominator>90996.46224425745</ScaleDenominator>
+        <TopLeftCorner>90.0 -180.0</TopLeftCorner>
+        <TileWidth>768</TileWidth>
+        <TileHeight>768</TileHeight>
+        <MatrixWidth>2048</MatrixWidth>
+        <MatrixHeight>1024</MatrixHeight>
+      </TileMatrix>
+    </TileMatrixSet>
+  </Contents>
+  <Themes>
+    <Theme>
+      <ows:Title>MDS</ows:Title>
+      <ows:Abstract>Marine Data Store</ows:Abstract>
+      <ows:Identifier>MDS</ows:Identifier>
+      <Theme>
+        <ows:Title>Ocean 3D hourly mean fields for the North West Shelf (NWS) region</ows:Title>
+        <ows:Identifier>cmems_mod_nws_phy_anfc_0.027deg-3D_PT1H-m_202309</ows:Identifier>
+        <LayerRef>
+          NWSHELF_ANALYSISFORECAST_PHY_004_013/cmems_mod_nws_phy_anfc_0.027deg-3D_PT1H-m_202309/so</LayerRef>
+        <LayerRef>
+          NWSHELF_ANALYSISFORECAST_PHY_004_013/cmems_mod_nws_phy_anfc_0.027deg-3D_PT1H-m_202309/thetao</LayerRef>
+        <LayerRef>
+          NWSHELF_ANALYSISFORECAST_PHY_004_013/cmems_mod_nws_phy_anfc_0.027deg-3D_PT1H-m_202309/uo</LayerRef>
+        <LayerRef>
+          NWSHELF_ANALYSISFORECAST_PHY_004_013/cmems_mod_nws_phy_anfc_0.027deg-3D_PT1H-m_202309/vo</LayerRef>
+      </Theme>
+    </Theme>
+  </Themes>
+</Capabilities>

@@ -80,7 +80,7 @@ export class WebMapTileServiceAvailableLayerStylesTraits extends ModelTraits {
     opacity: 1
   }
 })
-export default class WebMapServiceCatalogItemTraits extends mixTraits(
+export default class WebMapTileServiceCatalogItemTraits extends mixTraits(
   LayerOrderingTraits,
   GetCapabilitiesTraits,
   ImageryProviderTraits,
@@ -124,4 +124,12 @@ export default class WebMapServiceCatalogItemTraits extends mixTraits(
       "Additional parameters to pass to the MapServer when requesting images."
   })
   parameters?: JsonObject;
+
+  @primitiveTrait({
+    type: "string",
+    name: "Encoding",
+    description:
+      "The encoding of the tile images. We will try to load the tile images with this encoding, if not available we will fallback to KVP. Supported values are KVP and Restful"
+  })
+  requestEncoding = "RESTful";
 }

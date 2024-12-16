@@ -4,6 +4,7 @@
 
 - Explicitly set prettier tab-width
 - Move release guide from README.md to RELEASE_GUIDE.md
+- WMTS read URL from operations metadata
 - [The next improvement]
 
 #### 8.7.10 - 2024-11-29
