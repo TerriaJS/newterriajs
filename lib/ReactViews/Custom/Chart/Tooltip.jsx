@@ -1,6 +1,7 @@
 import { observer } from "mobx-react";
 import { computed, makeObservable } from "mobx";
 import { Tooltip as VisxTooltip } from "@visx/tooltip";
+// eslint-disable-next-line no-redeclare
 import { CSSTransition } from "react-transition-group";
 import PropTypes from "prop-types";
 import React from "react";

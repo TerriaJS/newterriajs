@@ -10,6 +10,7 @@ import StyledHtml from "./StyledHtml";
 import Box, { BoxSpan } from "../../../../Styled/Box";
 import Button from "../../../../Styled/Button";
 import Spacing from "../../../../Styled/Spacing";
+// eslint-disable-next-line no-redeclare
 import Text from "../../../../Styled/Text";
 
 import { applyTranslationIfExists } from "../../../../Language/languageHelpers";

@@ -8,6 +8,7 @@ import Box from "../../Styled/Box";
 import Button, { RawButton } from "../../Styled/Button";
 import Icon, { StyledIcon } from "../../Styled/Icon";
 import Spacing from "../../Styled/Spacing";
+// eslint-disable-next-line no-redeclare
 import Text, { TextSpan } from "../../Styled/Text";
 import { ExplorerWindowElementName } from "../ExplorerWindow/ExplorerWindow";
 import { useKeyPress } from "../Hooks/useKeyPress.js";

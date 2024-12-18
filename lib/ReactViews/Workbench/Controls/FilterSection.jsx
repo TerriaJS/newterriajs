@@ -1,6 +1,7 @@
 import { runInAction } from "mobx";
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
+// eslint-disable-next-line no-redeclare
 import { Range } from "rc-slider";
 import React from "react";
 import CommonStrata from "../../../Models/Definition/CommonStrata";

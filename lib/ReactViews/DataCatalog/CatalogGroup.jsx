@@ -9,6 +9,7 @@ import Loader from "../Loader";
 import Icon from "../../Styled/Icon";
 import Styles from "./data-catalog-group.scss";
 import Box from "../../Styled/Box";
+// eslint-disable-next-line no-redeclare
 import Text from "../../Styled/Text";
 
 const CatalogGroupButton = styled.button`

@@ -40,15 +40,7 @@ gulp.task("lint", function (done) {
 
   const eslintDir = path.dirname(require.resolve("eslint/package.json"));
   const eslintExecutable = path.join(eslintDir, "bin", "eslint.js");
-  runExternalModule(eslintExecutable, [
-    "lib",
-    "test",
-    "--ext",
-    ".jsx,.js,.ts,.tsx",
-    "--max-warnings",
-    "0",
-    "--report-unused-disable-directives"
-  ]);
+  runExternalModule(eslintExecutable, ["lib", "test", "--max-warnings", "0"]);
 
   done();
 });

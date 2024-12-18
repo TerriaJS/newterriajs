@@ -8,6 +8,7 @@ import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
 import Styles from "./guidance.scss";
+// eslint-disable-next-line no-redeclare
 import Text from "../../Styled/Text";
 
 import GuidanceDot from "./GuidanceDot.jsx";

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-
+// eslint-disable-next-line no-redeclare
 import { CSSTransition } from "react-transition-group";
 
 import Styles from "./slide-up-fade-in.scss";
