@@ -1,6 +1,6 @@
-import defined from "terriajs-cesium/Source/Core/defined";
+import isDefined from "./isDefined";
 
-let result;
+let result: boolean | string;
 
 /**
  * Determines if the current browser supports WebGL.
@@ -8,8 +8,8 @@ let result;
  *                          but it has a major performance caveat (e.g. software rendering), and True
  *                          if WebGL is available without a major performance caveat.
  */
-function supportsWebGL() {
-  if (defined(result)) {
+export default function supportsWebGL(): boolean | string {
+  if (isDefined(result)) {
     return result;
   }
 
@@ -21,15 +21,15 @@ function supportsWebGL() {
     result = false;
     return result;
   }
-  var canvas = document.createElement("canvas");
+  const canvas = document.createElement("canvas");
 
-  var webglOptions = {
+  const webglOptions = {
     alpha: false,
     stencil: false,
     failIfMajorPerformanceCaveat: true
   };
 
-  var gl =
+  let gl =
     canvas.getContext("webgl", webglOptions) ||
     canvas.getContext("experimental-webgl", webglOptions);
   if (!gl) {
@@ -52,5 +52,3 @@ function supportsWebGL() {
 
   return result;
 }
-
-export default supportsWebGL;
