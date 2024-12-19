@@ -145,8 +145,8 @@ class SharePanel extends Component<PropTypes, SharePanelState> {
       : t("share.btnMapShareTitle");
 
     return !storyShare ? (
-      //@ts-expect-error - not yet ready to tackle tsfying MenuPanel
       <MenuPanel
+        //@ts-expect-error - not yet ready to tackle tsfying MenuPanel
         theme={dropdownTheme}
         btnText={catalogShareWithoutText ? null : btnText}
         viewState={this.props.viewState}

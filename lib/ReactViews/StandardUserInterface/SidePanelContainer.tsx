@@ -1,12 +1,13 @@
 import { action } from "mobx";
 import styled from "styled-components";
 import ViewState from "../../ReactViewModels/ViewState";
-import { withViewState } from "../Context";
+import { withViewState, type WithViewState } from "../Context";
 
-type PropsType = {
+interface PropsType extends WithViewState {
   viewState: ViewState;
   show: boolean;
-};
+  children: React.ReactNode;
+}
 
 const SidePanelContainer = styled.div.attrs<PropsType>(({ viewState }) => ({
   className: viewState.topElement === "SidePanel" ? "top-element" : "",
