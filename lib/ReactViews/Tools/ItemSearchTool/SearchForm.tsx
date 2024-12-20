@@ -6,11 +6,7 @@ import {
   withTranslation,
   TFunction
 } from "react-i18next";
-import ReactSelect, {
-  ActionMeta,
-  OptionTypeBase,
-  ValueType
-} from "react-select";
+import ReactSelect, { ActionMeta, OnChangeValue } from "react-select";
 import styled from "styled-components";
 import ItemSearchProvider, {
   EnumItemSearchParameter,
@@ -221,11 +217,8 @@ interface EnumParameterProps {
   disabled: boolean;
 }
 
-type SelectOnChangeHandler<
-  OptionType extends OptionTypeBase,
-  IsMulti extends boolean
-> = (
-  value: ValueType<OptionType, IsMulti>,
+type SelectOnChangeHandler<OptionType, IsMulti extends boolean> = (
+  value: OnChangeValue<OptionType, IsMulti>,
   actionMeta: ActionMeta<OptionType>
 ) => void;
 
@@ -335,7 +328,9 @@ const Input = styled.input`
   font-size: 1.1em;
 `;
 
-const Select = styled(ReactSelect).attrs({
+const Select = styled(
+  ReactSelect<{ value: string; label: string }, true>
+).attrs({
   classNamePrefix: "ReactSelect"
 })`
   color: ${(p) => p.theme.dark};
