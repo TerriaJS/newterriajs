@@ -1,5 +1,4 @@
 import { createTransformer } from "mobx-utils";
-import defined from "terriajs-cesium/Source/Core/defined";
 import isDefined from "../../../Core/isDefined";
 import loadXML from "../../../Core/loadXML";
 import TerriaError from "../../../Core/TerriaError";
@@ -178,7 +177,11 @@ export default class WebFeatureServiceCapabilities {
     createTransformer((url: string) => {
       return loadXML(url).then(function (capabilitiesXml: any) {
         const json = xml2json(capabilitiesXml);
-        if (!defined(json.ServiceIdentification)) {
+        if (
+          !json ||
+          typeof json === "string" ||
+          !isDefined(json.ServiceIdentification)
+        ) {
           throw new TerriaError({
             title: "Invalid GetCapabilities",
             message:
