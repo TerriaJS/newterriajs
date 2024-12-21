@@ -145,7 +145,6 @@ Run any of these tasks with `yarn gulp <task name>` from within the TerriaJS dir
 - `lint` - Runs ESLint on the files in the `lib` folder and reports any problems. The ESLint rules are defined in the `.eslintrc.js` file in the root directory of TerriaJS.
 - `docs` - Generates the user guide and reference documentation. The user guide is served at `http://localhost:3002/doc/guide/` and the reference documentation is at `http://localhost:3002/doc/reference/`.
 - `test` - Detects browsers available on the local system and launches the test suite in each. The results are reported on the command line.
-- `test-electron` - Runs the tests in Electron, a headless (no UI) Chrome-like browser.
 - `test-saucelabs` - Runs the tests on a bunch of browsers on [Sauce Labs](https://saucelabs.com/). You will need to [Set up Sauce Labs](setting-up-saucelabs.md).
 - `test-browserstack` - Runs the tests on a bunch of browsers on [BrowserStack](https://www.browserstack.com/). You will need to set up a BrowserStack account.
 
