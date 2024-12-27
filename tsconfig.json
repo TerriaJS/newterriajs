@@ -26,10 +26,5 @@
     ],
     "types": ["terriajs-cesium"]
   },
-  "include": [
-    "./lib/**/*",
-    "./test/**/*",
-    "./buildprocess/generateDocs.ts",
-    "./buildprocess/**/*"
-  ]
+  "include": ["./lib/**/*", "./test/**/*", "./buildprocess/**/*"]
 }
