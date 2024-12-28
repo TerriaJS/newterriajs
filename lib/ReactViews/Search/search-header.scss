@@ -1,7 +1,0 @@
-@use "../../Sass/common/_variables";
-
-.no-results {
-  composes: label from "../../Sass/common/_labels.scss";
-  padding-left: variables.$padding;
-  font-size: variables.$font-size-mid-small;
-}
