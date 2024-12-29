@@ -1,4 +1,5 @@
 @use "../../Sass/common/_variables";
+@use "../../Sass/common/mixins";
 
 .dropdown-inner {
   padding: 10px;
@@ -11,7 +12,7 @@
 }
 
 .section {
-  composes: clearfix from "~terriajs/lib/Sass/common/_base.scss";
+  composes: clearfix from "../../Sass/common/_base.scss";
   margin-bottom: 10px;
   padding: 0;
 }
@@ -25,5 +26,5 @@
 }
 
 .link {
-  composes: link from "~terriajs/lib/Sass/common/_base.scss";
+  composes: link from "../../Sass/common/_base.scss";
 }
