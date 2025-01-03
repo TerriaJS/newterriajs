@@ -46,7 +46,7 @@ describe("BoxDrawing", function () {
         new TranslationRotationScale(
           Cartesian3.ZERO,
           Quaternion.IDENTITY,
-          Cartesian3.ZERO
+          Cartesian3.ONE
         )
       );
       expect(boxDrawing).toBeDefined();
