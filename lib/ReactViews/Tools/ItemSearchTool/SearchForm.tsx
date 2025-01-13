@@ -308,8 +308,7 @@ const Field = styled(Box).attrs({
 })``;
 
 const ParameterName = styled(Text).attrs({
-  semiBold: true,
-  breakWord: true
+  semiBold: true
 })``;
 
 const Label = styled.label``;

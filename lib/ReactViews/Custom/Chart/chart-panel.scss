@@ -8,7 +8,6 @@
   left: 0;
   right: 0;
   z-index: 10;
-  background: variables.$chart-panel-background;
   padding-bottom: 13px;
 }
 
@@ -78,6 +77,7 @@
 
 .loader {
   padding: 0px 0px 0px variables.$padding * 3 !important;
+
   &:before {
     top: 0px;
   }
@@ -89,11 +89,13 @@
   right: 0;
   top: 0;
   padding: 12px;
+
   svg {
     height: 15px;
     width: 15px;
     fill: #fff;
   }
+
   &:hover,
   &:focus {
     svg {

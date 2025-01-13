@@ -23,7 +23,9 @@ try {
 
   window.addEventListener("test", callback, options);
   window.removeEventListener("test", callback, options);
-} catch (_err) {}
+} catch (err) {
+  /* eslint-disable-line no-empty */
+}
 
 const notPassive = passiveSupported ? { passive: false } : false;
 
@@ -75,7 +77,7 @@ export const useDragHook = (
       const minX = computeSplitFraction(
         mapRect.left,
         mapRect.right,
-        mapRect.left + 100,
+        mapRect.left + 100 + (viewState.isMapFullScreen === false ? 350 : 0),
         padding,
         thumbSize
       );

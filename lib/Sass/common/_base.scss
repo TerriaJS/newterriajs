@@ -474,11 +474,11 @@
   }
 
   &::-webkit-scrollbar-track {
-    background: rgba(#888, 0.1);
+    background: $scrollbar-track-color;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: rgba(#888, 0.6);
+    background: $scrollbar-color;
   }
 }
 

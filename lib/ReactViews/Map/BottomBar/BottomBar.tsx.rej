@@ -1,0 +1,100 @@
+diff a/lib/ReactViews/Map/BottomBar/BottomBar.tsx b/lib/ReactViews/Map/BottomBar/BottomBar.tsx	(rejected hunks)
+@@ -1,32 +1,92 @@
++import { observer } from "mobx-react";
+ import { VFC } from "react";
++import styled, { useTheme } from "styled-components";
+ import Box from "../../../Styled/Box";
++import Text from "../../../Styled/Text";
+ import { useViewState } from "../../Context";
++import parseCustomHtmlToReact from "../../Custom/parseCustomHtmlToReact";
+ import { MapCredits } from "./Credits";
+ import { DistanceLegend } from "./DistanceLegend";
+ import { LocationBar } from "./LocationBar";
+-import React from "react";
+ 
+-export const BottomBar: VFC = () => {
++export const BottomBar: VFC = observer(() => {
+   const viewState = useViewState();
++  const theme = useTheme();
++
++  const screenDataAttributions =
++    viewState.terria.cesium?.cesiumScreenDataAttributions;
++
+   return (
++    <>
+     <Box
+       fullWidth
+       justifySpaceBetween
+       css={`
+-        background: linear-gradient(180deg, #000000 0%, #000000 100%);
++          flex-direction: column;
+           font-size: 0.7rem;
++          width: 100%;
++          background: ${theme.dark};
+           opacity: 0.75;
++          backdrop-filter: ${theme.blur};
++          background: ${theme.dark};
++          opacity: 0.75;
++          backdrop-filter: ${theme.blur};
++          margin-top: 2px;
+         `}
+       >
++        {/* On screen data attributions. At the moment, this supports only Cesium viewer.
++          Needed for Google Photorealistic 3D Tiles
++        */}
++        {!!screenDataAttributions?.length && (
++          <AttributionsContainer textLight mini>
++            {screenDataAttributions
++              .flatMap((attributionHtml, i) => [
++                <span key={attributionHtml}>
++                  {parseCustomHtmlToReact(attributionHtml)}
++                </span>,
++                <span key={`delimiter-${i}`}> • </span>
++              ])
++              .slice(0, -1)}
++          </AttributionsContainer>
++        )}
++        <div
++          css={`
++            width: 100%;
++            display: flex;
++            flex-direction: row;
++            justify-content: space-between;
++          `}
++        >
++          <div
++            css={`
++              ${viewState.useSmallScreenInterface ? `` : `padding: 0 15px;`}
++            `}
++          >
+       <MapCredits
+-        hideTerriaLogo={!!viewState.terria.configParameters.hideTerriaLogo}
++              hideTerriaLogo={
++                !!viewState.terria.configParameters.hideTerriaLogo
++              }
+               credits={viewState.terria.configParameters.extraCreditLinks?.slice()}
+               currentViewer={viewState.terria.mainViewer.currentViewer}
+             />
++          </div>
+       <Box paddedHorizontally={4} gap={2}>
+-        <LocationBar mouseCoords={viewState.terria.currentViewer.mouseCoords} />
++            <LocationBar
++              mouseCoords={viewState.terria.currentViewer.mouseCoords}
++            />
+             <DistanceLegend />
+           </Box>
++        </div>
+       </Box>
++    </>
+   );
+-};
++});
++
++// Use padding to avoid other UI elements
++const AttributionsContainer = styled(Text)`
++  text-shadow: 0 0 2px #000000;
++  padding: 5px 15px 0 15px;
++  @media (max-width: ${(props) => props.theme.mobile}px) {
++    padding: 3px 0;
++  }
++`;

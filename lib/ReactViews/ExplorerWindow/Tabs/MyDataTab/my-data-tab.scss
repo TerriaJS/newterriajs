@@ -30,7 +30,6 @@
   height: calc(100% - 30px);
   width: calc(100% - 30px);
   overflow: auto;
-  background: variables.$modal-secondary-bg;
   text-align: center;
   color: variables.$dark-lighter;
   line-height: 2;
@@ -54,9 +53,11 @@
   display: block;
   padding-left: 0;
   margin: 0;
+
   &__item {
     display: inline-block;
     margin-right: 15px;
+
     svg {
       display: inline;
       width: 15px;
@@ -75,6 +76,7 @@
     font-weight: variables.$font-weight-medium;
     width: 100%;
     padding: variables.$padding 0;
+
     // color: $color-primary;
     &:hover,
     &:focus,
@@ -100,6 +102,7 @@
   width: 100%;
   margin: 6px 0;
   color: variables.$dark-lighter;
+
   div {
     margin-top: 5%;
   }

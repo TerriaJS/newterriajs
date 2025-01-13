@@ -82,9 +82,14 @@ class WorkbenchItemRaw extends React.Component<IProps> {
 
     return (
       <StyledLi style={this.props.style} className={this.props.className}>
-        <Box fullWidth justifySpaceBetween padded styledMinHeight="38px">
+        <Box
+          fullWidth
+          justifySpaceBetween
+          paddedRatio={3}
+          styledMinHeight="38px"
+        >
           <Box fullWidth>
-            <Box left fullWidth paddedHorizontally centered>
+            <Box left fullWidth centered>
               <DraggableBox
                 onMouseDown={this.props.onMouseDown}
                 onTouchStart={this.props.onTouchStart}
@@ -103,20 +108,16 @@ class WorkbenchItemRaw extends React.Component<IProps> {
                   </BoxSpan>
                 )}
                 {MappableMixin.isMixedInto(item) ? (
-                  <Box
-                    left
-                    verticalCenter
-                    css={`
-                      padding-left: 5px;
-                    `}
-                  >
+                  <Box left verticalCenter>
                     <Checkbox
                       id="workbenchtoggleVisibility"
                       isChecked={item.show}
+                      isSwitch
                       title={t("workbench.toggleVisibility")}
                       onChange={() => this.toggleVisibility()}
                       css={`
                         overflow-wrap: anywhere;
+                        margin-right: 5px;
                       `}
                       textProps={{ medium: true, fullWidth: true }}
                     >
@@ -175,12 +176,14 @@ class WorkbenchItemRaw extends React.Component<IProps> {
         {this.isOpen && (
           <>
             <Spacing
-              bottom={2}
+              bottom={3}
               css={`
-                border-top: 1px solid ${this.props.theme.dark};
+                margin-left: 15px;
+                margin-right: 15px;
+                border-top: 1px solid ${this.props.theme.darkLighter};
               `}
             />
-            <Box column paddedHorizontally={2}>
+            <Box column paddedHorizontally={3}>
               <WorkbenchItemControls
                 item={this.props.item}
                 viewState={this.props.viewState}
@@ -207,8 +210,12 @@ const StyledLi = styled(Li)`
   background: ${(p) => p.theme.darkWithOverlay};
   color: ${(p) => p.theme.textLight};
   border-radius: 4px;
-  margin-bottom: 5px;
   width: 100%;
+
+  margin-bottom: 20px;
+  &:last-child {
+    margin-bottom: 0px;
+  }
 `;
 
 export default sortable(withTranslation()(withTheme(WorkbenchItemRaw)));

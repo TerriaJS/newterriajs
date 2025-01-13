@@ -89,6 +89,7 @@ class Timeline extends React.Component {
           className={Styles.textRow}
           css={`
             background: ${(p) => p.theme.dark};
+            min-height: 30px;
           `}
         >
           <div

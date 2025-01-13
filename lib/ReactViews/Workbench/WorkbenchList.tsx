@@ -11,7 +11,7 @@ import WorkbenchItem from "./WorkbenchItem";
 import WorkbenchSplitScreen from "./WorkbenchSplitScreen";
 
 const StyledUl = styled(Ul)`
-  margin: 5px 0;
+  margin: 15px 0;
   li {
     &:first-child {
       margin-top: 0;
@@ -33,7 +33,7 @@ class WorkbenchList extends React.Component<IProps> {
 
   @action.bound
   onSort(
-    _sortedArray: any,
+    sortedArray: any,
     currentDraggingSortData: any,
     currentDraggingIndex: any
   ) {
@@ -49,10 +49,13 @@ class WorkbenchList extends React.Component<IProps> {
         overflowY="auto"
         overflowX="hidden"
         scroll
-        paddedHorizontally
+        css={`
+          padding: 0 15px;
+        `}
         fullWidth
         fullHeight
         column
+        flex="1"
       >
         {this.props.terria.showSplitter && (
           <WorkbenchSplitScreen terria={this.props.terria} />

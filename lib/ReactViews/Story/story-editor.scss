@@ -44,6 +44,21 @@
   }
 }
 
+.editor {
+  background: $dark-with-overlay;
+  color: $text-light;
+  font-family: $font-pop;
+  margin: $padding-small;
+  border-radius: 4px;
+  .editorHeader {
+    padding: $padding;
+    border-bottom: 1px solid $overlay;
+  }
+  form {
+    padding: $padding;
+  }
+}
+
 .field {
   composes: field from "../../Sass/common/_form.scss";
   border: 0;
@@ -51,9 +66,24 @@
   padding: 0 !important;
 }
 
+.fieldBtn {
+  composes: btn from "../../Sass/common/_buttons.scss";
+  composes: btn--map from "../../Sass/common/_buttons.scss";
+  background: #9ca1aa;
+  border-radius: 4px;
+  padding: $padding;
+  margin-bottom: $padding + 3px;
+  box-shadow: none;
+  width: 100%;
+}
+
+.doneBtn,
 .saveBtn {
   composes: btn from "../../Sass/common/_buttons.scss";
   composes: btn-primary from "../../Sass/common/_buttons.scss";
+}
+
+.saveBtn {
   width: auto;
   padding: 5px 15px;
 }

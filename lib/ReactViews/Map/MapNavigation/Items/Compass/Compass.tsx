@@ -351,7 +351,7 @@ class Compass extends React.PureComponent<PropTypes, IStateTypes> {
               // if it's active, show a white circle only, as we need the base layer
               glyph={
                 active
-                  ? Icon.GLYPHS.compassOuterSkeleton
+                  ? null //Icon.GLYPHS.compassOuterSkeleton
                   : Icon.GLYPHS.compassOuter
               }
             />
@@ -401,9 +401,9 @@ class Compass extends React.PureComponent<PropTypes, IStateTypes> {
           // focus it anyway..
           tabIndex={0}
           onFocus={() => this.setState({ active: true })}
-          // Gotta keep menu open if blurred, and close it with the close button
-          // instead. otherwise it'll never focus on the help buttons
-          // onBlur={() => this.setState({ active: false })}
+        // Gotta keep menu open if blurred, and close it with the close button
+        // instead. otherwise it'll never focus on the help buttons
+        // onBlur={() => this.setState({ active: false })}
         >
           <div style={rotationMarkerStyle}>
             <StyledIcon

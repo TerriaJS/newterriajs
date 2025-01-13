@@ -6,16 +6,8 @@
   z-index: variables.$front-component-z-index - 1;
   padding-left: variables.$padding * 2;
   padding-right: 80px;
-  padding-top: calc(
-    (
-        100vh - #{variables.$modal-content-height} - #{variables.$modal-header-height}
-      ) / 2
-  );
-  padding-bottom: calc(
-    (
-        100vh - #{variables.$modal-content-height} - #{variables.$modal-header-height}
-      ) / 2
-  );
+  padding-top: calc((100vh - #{variables.$modal-content-height} - #{variables.$modal-header-height}) / 2);
+  padding-bottom: calc((100vh - #{variables.$modal-content-height} - #{variables.$modal-header-height}) / 2);
   top: 0;
   bottom: 0;
   right: 0;
@@ -29,7 +21,6 @@
 
 .explorer-panel {
   position: relative;
-  background: variables.$modal-bg;
   color: variables.$modal-text;
   border-radius: variables.$radius-small;
   box-shadow: 0 0 15px 6px rgba(100, 100, 100, 0.3);
@@ -46,6 +37,7 @@
     opacity: 1;
     @include mixins.transform(none);
   }
+
   a {
     @include mixins.link(variables.$modal-bg);
   }
@@ -69,11 +61,12 @@
   composes: btn-transparent from "../../Sass/common/_buttons.scss";
   font-size: variables.$font-size-mid-small;
   padding: 4px 10px;
-  margin: variables.$padding-small * 1.5 variables.$padding-small;
+  margin: 15px;
   font-weight: bold;
   position: absolute;
   top: 0;
   right: 0;
+  z-index: 1;
 
   &,
   &:hover,

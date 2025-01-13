@@ -312,7 +312,7 @@ export interface IStyledIconProps {
   opacity?: number;
 }
 
-export const StyledIcon = styled(Icon)<IStyledIconProps>`
+export const StyledIcon = styled(Icon) <IStyledIconProps>`
   display: ${(props) => (props.displayInline ? `inline` : `block`)};
   ${(props) =>
     props.displayInline

@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { TFunction } from "i18next";
 import React, {
   MouseEventHandler,
   useEffect,
@@ -43,7 +44,7 @@ interface Props {
 }
 
 interface MenuProps extends Props {
-  storyRef: React.RefObject<HTMLElement>;
+  t: TFunction;
 }
 
 const findTextContent = (content: any): string => {
@@ -258,6 +259,7 @@ const Story = (props: Props) => {
           cursor: move;
           float: none !important;
         `}
+        position="static"
         style={props.style}
         className={classNames(props.className)}
         onMouseDown={props.onMouseDown}
@@ -265,6 +267,7 @@ const Story = (props: Props) => {
       >
         <Box
           fullWidth
+          position="static"
           justifySpaceBetween
           padded
           verticalCenter
@@ -321,7 +324,7 @@ const Story = (props: Props) => {
 const MenuButton = styled(RawButton)`
   padding: 0 10px 0 10px;
   min-height: 40px;
-  border-radius: ${(props) => props.theme.radiusLarge};
+  border-radius: ${(props) => props.theme.radiusSmall};
   background: transparent;
 
   &:hover,

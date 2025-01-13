@@ -105,7 +105,7 @@ const Container = styled.div`
   flex-direction: column;
   font-family: ${(p) => p.theme.fontPop}px;
   width: ${(p) => p.theme.workflowPanelWidth}px;
-  height: 100vh;
+  height: calc(100vh - 2 * ${(p) => p.theme.workbenchMargin}px);
   max-width: ${(p) => p.theme.workflowPanelWidth}px;
   box-sizing: border-box;
   padding: 0 0 5px;
@@ -122,7 +122,7 @@ const TitleBar = styled.div`
 
 const Title = styled(Text).attrs({
   textLight: true,
-  bold: true
+  extraExtraLarge: true
 })`
   flex-grow: 1;
   padding: 0 1em;
@@ -145,13 +145,8 @@ const Content = styled.div`
 `;
 
 const CloseButton = styled(Button).attrs({
-  secondary: true
-})`
-  border: 0px;
-  border-radius: 3px;
-  min-height: 0;
-  padding: 3px 12px;
-`;
+  primary: true
+})``;
 
 const Error = styled.div`
   display: flex;

@@ -1,0 +1,13 @@
+diff a/lib/ReactViews/Tools/DiffTool/DiffTool.tsx b/lib/ReactViews/Tools/DiffTool/DiffTool.tsx	(rejected hunks)
+@@ -100,8 +101,10 @@
+         this.leftItem = leftItem;
+         this.rightItem = rightItem;
+       });
+-    } catch {}
++    } catch {
++      /* eslint-disable-line no-empty */
+     }
++  }
+ 
+   @action
+   removeSplitterItems() {

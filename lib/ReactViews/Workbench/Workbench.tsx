@@ -15,6 +15,7 @@ import {
   Category,
   DataSourceAction
 } from "../../Core/AnalyticEvents/analyticEvents";
+import MappableMixin from "../../ModelMixins/MappableMixin";
 
 interface IProps extends WithTranslation {
   terria: Terria;
@@ -27,6 +28,14 @@ class Workbench extends React.Component<IProps> {
   constructor(props: IProps) {
     super(props);
     makeObservable(this);
+  }
+
+  disableAll() {
+    this.props.terria.workbench.disableAll();
+  }
+
+  enableAll() {
+    this.props.terria.workbench.enableAll();
   }
 
   @action.bound
@@ -95,8 +104,16 @@ class Workbench extends React.Component<IProps> {
                 display: flex;
                 align-items: center;
                 padding-left: 5px;
+                min-width: 90px;
+                justify-content: space-evenly;
               `}
             >
+              <StyledIcon
+                glyph={Icon.GLYPHS.expandAll}
+                light
+                styledWidth={"12px"}
+                displayInline
+              />
               <TextSpan textLight small>
                 {t("workbench.expandAll")}
               </TextSpan>
@@ -108,13 +125,45 @@ class Workbench extends React.Component<IProps> {
                 display: flex;
                 align-items: center;
                 padding-left: 5px;
+                min-width: 90px;
+                justify-content: space-evenly;
               `}
             >
+              <StyledIcon
+                glyph={Icon.GLYPHS.collapse}
+                light
+                styledWidth={"12px"}
+                displayInline
+              />
               <TextSpan textLight small>
                 {t("workbench.collapseAll")}
               </TextSpan>
             </RawButton>
           )}
+          <RawButton
+            onClick={this.removeAll}
+            css={`
+              display: flex;
+              align-items: center;
+              padding: 0 5px;
+              min-width: 90px;
+              justify-content: space-evenly;
+              svg {
+                vertical-align: middle;
+                padding-right: 4px;
+              }
+            `}
+          >
+            <StyledIcon
+              glyph={Icon.GLYPHS.remove}
+              light
+              styledWidth={"12px"}
+              displayInline
+            />
+            <TextSpan textLight small>
+              {t("workbench.removeAll")}
+            </TextSpan>
+          </RawButton>
         </BadgeBar>
         <WorkbenchList
           viewState={this.props.viewState}

@@ -233,11 +233,12 @@ export const Box = styled.div<IBoxProps>`
     }
 
     &::-webkit-scrollbar-track {
-      background: rgba(136,136,136,0.1);
+      background: ${props.theme.scrollbarTrackColor};
     }
 
     &::-webkit-scrollbar-thumb {
-      background: rgba(136,136,136,0.6);
+      background: ${props.theme.scrollbarColor};
+      border-radius: ${props.theme.radiusLarge}
     }
   `}
 `;

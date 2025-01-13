@@ -5,7 +5,7 @@ import { CheckboxIconProps } from "../types";
 
 const StyledCheckboxIcon = styled(StyledIcon).attrs({
   styledWidth: "1em"
-})<{ disabled?: boolean }>`
+})<{ disabled?: boolean; isSwitch?: boolean }>`
   top: 0.125em;
   align-self: flex-start;
   position: relative;
@@ -17,16 +17,27 @@ const StyledCheckboxIcon = styled(StyledIcon).attrs({
       opacity: 0.6;
     }
   `}
+  ${(props) =>
+    props.isSwitch &&
+    `
+    width: 28px;
+    &:hover {
+      opacity: 0.95;
+    }
+  `}
 `;
 
 const CheckboxIcon: React.FC<CheckboxIconProps> = (
   props: CheckboxIconProps
 ) => {
+  const iconOn = props.isSwitch ? GLYPHS.switchOn : GLYPHS.checkboxOn;
+  const iconOff = props.isSwitch ? GLYPHS.switchOff : GLYPHS.checkboxOff;
   if (props.isDisabled) {
     return (
       <StyledCheckboxIcon
-        glyph={props.isChecked ? GLYPHS.checkboxOn : GLYPHS.checkboxOff}
+        glyph={props.isChecked ? iconOn : iconOff}
         disabled
+        isSwitch={props.isSwitch}
         css={`
           cursor: not-allowed;
           opacity: 0.3;
@@ -34,11 +45,17 @@ const CheckboxIcon: React.FC<CheckboxIconProps> = (
       />
     );
   } else if (props.isIndeterminate) {
-    return <StyledCheckboxIcon glyph={GLYPHS.checkboxIndeterminate} />;
+    return (
+      <StyledCheckboxIcon
+        isSwitch={props.isSwitch}
+        glyph={GLYPHS.checkboxIndeterminate}
+      />
+    );
   } else {
     return (
       <StyledCheckboxIcon
-        glyph={props.isChecked ? GLYPHS.checkboxOn : GLYPHS.checkboxOff}
+        isSwitch={props.isSwitch}
+        glyph={props.isChecked ? iconOn : iconOff}
       />
     );
   }

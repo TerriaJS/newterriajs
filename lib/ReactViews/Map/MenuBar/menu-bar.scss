@@ -4,7 +4,7 @@
   position: absolute;
   z-index: 108;
   top: variables.$map-button-top;
-  left: 0;
+  left: variables.$work-bench-width;
   right: variables.$padding;
 
   // todo: find some non-layout-change animation technique for
@@ -17,17 +17,18 @@
   justify-content: space-between;
   flex-flow: wrap;
 }
+
 .menu-bar--workbenchClosed {
   // transition-delay: 0.25s; // temporary disable delays for splitter lag w/o resizing on transitionend
   margin-left: 165px;
 }
+
 .menu {
   composes: list-reset from "../../../Sass/common/_base.scss";
   composes: clearfix from "../../../Sass/common/_base.scss";
   composes: sm-show from "../../../Sass/common/_base.scss";
 
-  margin: 0 variables.$padding-small variables.$padding-small
-    variables.$padding-small;
+  margin: 0 variables.$padding-small variables.$padding-small variables.$padding-small;
 
   /* Align About button with compass */
   // margin-right: 7px;
@@ -54,27 +55,25 @@
   // TODO(?)
   // These selectors are here so that we can support the various implementations of
   // menu item, a prop calculated with javascript would be a better option for later
-  &:first-child > div > button,
-  &:first-child > div > a,
-  &:first-child > button,
-  &:first-child > a {
-    border-radius: variables.$map-button-border-radius 0 0
-      variables.$map-button-border-radius;
+  &:first-child>div>button,
+  &:first-child>div>a,
+  &:first-child>button,
+  &:first-child>a {
+    border-radius: variables.$map-button-border-radius 0 0 variables.$map-button-border-radius;
   }
-  &:last-child > div > button,
-  &:last-child > div > a,
-  &:last-child > button,
-  &:last-child > a {
-    border-radius: 0 variables.$map-button-border-radius
-      variables.$map-button-border-radius 0;
+
+  &:last-child>div>button,
+  &:last-child>div>a,
+  &:last-child>button,
+  &:last-child>a {
+    border-radius: 0 variables.$map-button-border-radius variables.$map-button-border-radius 0;
   }
-  &:only-child > div > button,
-  &:only-child > div > a,
-  &:only-child > button,
-  &:only-child > a {
-    border-radius: variables.$map-button-border-radius
-      variables.$map-button-border-radius variables.$map-button-border-radius
-      variables.$map-button-border-radius;
+
+  &:only-child>div>button,
+  &:only-child>div>a,
+  &:only-child>button,
+  &:only-child>a {
+    border-radius: variables.$map-button-border-radius variables.$map-button-border-radius variables.$map-button-border-radius variables.$map-button-border-radius;
   }
 }
 

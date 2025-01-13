@@ -1,3 +1,4 @@
+"use strict";
 // import Chart from "../Custom/Chart/Chart";
 import { runInAction } from "mobx";
 import { observer } from "mobx-react";
@@ -103,36 +104,39 @@ class DataPreview extends React.Component {
         </div>
       );
     } else {
-      return (
-        <div className={Styles.placeholder}>
-          <p>{t("preview.selectToPreviewDataset")}</p>
-          <p>
-            <Trans i18nKey="preview.selectMultipleDatasets">
-              <span>
-                Press <strong>Shift</strong> and click
-              </span>
-              <Icon
-                glyph={Icon.GLYPHS.add}
-                css={{
-                  height: "20px",
-                  width: "20px",
-                  margin: "0px 5px",
-                  verticalAlign: "middle",
-                  fill: `${(p) => p.theme.charcoalGrey}`
-                }}
-              />
-              <span>to add multiple datasets</span>
-            </Trans>
-          </p>
-          <p>- {t("preview.selectToPreviewSeparator")} -</p>
-          <button
-            className={Styles.btnBackToMap}
-            onClick={() => this.backToMap()}
-          >
-            {t("preview.goToTheMap")}
-          </button>
-        </div>
-      );
+      // TODO: choose to show placeholder text based on whether explorer panel
+      // stays open after adding a dataset
+      return null;
+      // return (
+      //   <div className={Styles.placeholder}>
+      //     <p>{t("preview.selectToPreviewDataset")}</p>
+      //     <p>
+      //       <Trans i18nKey="preview.selectMultipleDatasets">
+      //         <span>
+      //           Press <strong>Shift</strong> and click
+      //         </span>
+      //         <Icon
+      //           glyph={Icon.GLYPHS.add}
+      //           css={{
+      //             height: "20px",
+      //             width: "20px",
+      //             margin: "0px 5px",
+      //             verticalAlign: "middle",
+      //             fill: `${(p) => p.theme.charcoalGrey}`
+      //           }}
+      //         />
+      //         <span>to add multiple datasets</span>
+      //       </Trans>
+      //     </p>
+      //     <p>- {t("preview.selectToPreviewSeparator")} -</p>
+      //     <button
+      //       className={Styles.btnBackToMap}
+      //       onClick={() => this.backToMap()}
+      //     >
+      //       {t("preview.goToTheMap")}
+      //     </button>
+      //   </div>
+      // )
     }
   }
 
@@ -172,4 +176,4 @@ class DataPreview extends React.Component {
   }
 }
 
-export default withTranslation()(DataPreview);
+module.exports = withTranslation()(DataPreview);

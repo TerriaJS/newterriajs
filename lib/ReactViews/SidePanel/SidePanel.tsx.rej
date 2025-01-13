@@ -1,0 +1,18 @@
+diff a/lib/ReactViews/SidePanel/SidePanel.tsx b/lib/ReactViews/SidePanel/SidePanel.tsx	(rejected hunks)
+@@ -89,12 +157,14 @@
+               {t("emptyWorkbench.helpfulHintsThree")}
+             </Text>
+             </Box>
++            */}
+           <ResponsiveSpacing />
+         </BoxHelpfulHints>
+-      </Box>
+       </Text>
++    </Box >
++
+   );
+-};
++});
+ 
+ type SidePanelButtonProps = {
+   btnText?: string;

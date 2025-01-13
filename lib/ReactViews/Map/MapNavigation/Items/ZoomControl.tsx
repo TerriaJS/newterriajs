@@ -30,6 +30,10 @@ export const ZOOM_CONTROL_ID = "zoom";
 class ZoomControlBase extends React.Component<PropTypes> {
   static displayName = "ZoomControl";
 
+  constructor(props: PropTypes) {
+    super(props);
+  }
+
   flyToPosition(
     scene: Scene,
     position: Cartesian3,
@@ -218,7 +222,7 @@ class ZoomControlBase extends React.Component<PropTypes> {
 }
 
 const StyledZoomControl = styled(Box).attrs((props) => ({
-  backgroundColor: props.theme.textLight,
+  backgroundColor: props.theme.dark,
   centered: true,
   column: true,
   styledWidth: "32px",
@@ -228,7 +232,7 @@ const StyledZoomControl = styled(Box).attrs((props) => ({
   svg {
     height: 20px;
     width: 20px;
-    fill: ${(props) => props.theme.darkWithOverlay};
+    fill: ${(props) => props.theme.textLight};
   }
   ${Li} {
     margin: 5px 0;

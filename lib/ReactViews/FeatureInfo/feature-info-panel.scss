@@ -4,7 +4,8 @@
 .panel {
   background: variables.$feature-info-bg;
   color: variables.$feature-info-color;
-  border-radius: variables.$radius-small;
+  border-radius: variables.$radius-xlarge;
+  overflow: hidden;
   display: none;
 
   a {
@@ -48,12 +49,14 @@
 .btnToggleFeature {
   composes: btn from "../../Sass/common/_buttons.scss";
   vertical-align: middle;
+
   &:hover,
   &:focus {
     svg {
       fill: variables.$color-primary;
     }
   }
+
   svg {
     height: 10px;
     width: 10px;
@@ -66,6 +69,7 @@
   position: absolute;
   right: 8px;
   top: 8px;
+
   svg {
     width: 15px;
     height: 26px;
@@ -86,9 +90,7 @@
 
   overflow-y: auto;
   overflow-x: auto;
-  max-height: calc(
-    80vh - #{variables.$padding * 2 + variables.$btn-default-line-height}
-  );
+  max-height: calc(80vh - #{variables.$padding * 2 + variables.$btn-default-line-height});
   font-size: variables.$font-size-feature-info;
 }
 
@@ -109,6 +111,7 @@
       fill: variables.$color-primary;
     }
   }
+
   svg {
     height: 18px;
     width: 18px;

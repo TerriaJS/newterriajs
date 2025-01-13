@@ -44,7 +44,7 @@ class MappablePreview extends React.Component {
       runInAction(() => (this.props.viewState.storyShown = false));
     }
 
-    const keepCatalogOpen = event.shiftKey || event.ctrlKey;
+    const keepCatalogOpen = true; //event.shiftKey || event.ctrlKey;
 
     await toggleItemOnMapFromCatalog(
       this.props.viewState,
