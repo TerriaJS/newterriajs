@@ -5,15 +5,17 @@
 
 $font-pop: "Inter", sans-serif;
 $font-base: "Inter", sans-serif;
-$font-mono: "Inter", sans-serif;
+$font-mono: "monospace";
 $font-feature-info: $font-mono;
 $font: $font-base;
 
 $color-primary: #35a7c4;
 $color-primary-disabled: #595b60;
+
 @function get-hover-color($base-color) {
   @return color.adjust($base-color, $lightness: 10%);
 }
+
 $color-secondary: #f59e0b;
 
 $animation-fast: 0.1s;
@@ -55,12 +57,15 @@ $text-light-dimmed: #bbbbbb;
   @if meta.variable-exists(text-link) {
     @return $text-link;
   }
+
   @return $color-primary;
 }
+
 @function get-visited-link-color($bg-color) {
   @if meta.variable-exists(text-visited-link) {
     @return $text-visited-link;
   }
+
   @return get-link-color($bg-color);
 }
 

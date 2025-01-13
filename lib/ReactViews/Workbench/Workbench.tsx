@@ -15,7 +15,6 @@ import {
   Category,
   DataSourceAction
 } from "../../Core/AnalyticEvents/analyticEvents";
-import MappableMixin from "../../ModelMixins/MappableMixin";
 
 interface IProps extends WithTranslation {
   terria: Terria;
@@ -30,13 +29,13 @@ class Workbench extends React.Component<IProps> {
     makeObservable(this);
   }
 
-  disableAll() {
-    this.props.terria.workbench.disableAll();
-  }
+  // disableAll() {
+  //   this.props.terria.workbench.disableAll();
+  // }
 
-  enableAll() {
-    this.props.terria.workbench.enableAll();
-  }
+  // enableAll() {
+  //   this.props.terria.workbench.enableAll();
+  // }
 
   @action.bound
   collapseAll() {

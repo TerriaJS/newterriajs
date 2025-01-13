@@ -33,7 +33,7 @@ class WorkbenchList extends React.Component<IProps> {
 
   @action.bound
   onSort(
-    sortedArray: any,
+    _sortedArray: any,
     currentDraggingSortData: any,
     currentDraggingIndex: any
   ) {

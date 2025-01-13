@@ -30,10 +30,6 @@ export const ZOOM_CONTROL_ID = "zoom";
 class ZoomControlBase extends React.Component<PropTypes> {
   static displayName = "ZoomControl";
 
-  constructor(props: PropTypes) {
-    super(props);
-  }
-
   flyToPosition(
     scene: Scene,
     position: Cartesian3,

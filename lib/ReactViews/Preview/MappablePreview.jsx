@@ -39,7 +39,7 @@ class MappablePreview extends React.Component {
     t: PropTypes.func.isRequired
   };
 
-  async toggleOnMap(event) {
+  async toggleOnMap(_event) {
     if (defined(this.props.viewState.storyShown)) {
       runInAction(() => (this.props.viewState.storyShown = false));
     }

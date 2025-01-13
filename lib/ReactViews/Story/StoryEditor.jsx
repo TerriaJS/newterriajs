@@ -33,7 +33,6 @@ class StoryEditor extends React.Component {
     this.escKeyListener = null;
   }
 
-  /* eslint-disable-next-line camelcase */
   UNSAFE_componentWillMount() {
     const story = this.props.story;
     this.setState({
@@ -181,7 +180,7 @@ class StoryEditor extends React.Component {
             <Suspense fallback={<div>Loading...</div>}>
               <Editor
                 html={this.state.text}
-                onChange={(newValue, editor) => {
+                onChange={(_newValue, editor) => {
                   // TODO: This makes StoryEditor tightly coupled to Editor. How to reduce coupling?
                   tinymce.activeEditor.dom.setStyles(
                     tinymce.activeEditor.dom.select("img"),

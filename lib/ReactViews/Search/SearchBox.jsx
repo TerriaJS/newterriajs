@@ -61,7 +61,6 @@ export const SearchBox = createReactClass({
     };
   },
 
-  /* eslint-disable-next-line camelcase */
   UNSAFE_componentWillMount() {
     this.searchWithDebounce = debounce(this.search, DEBOUNCE_INTERVAL);
   },

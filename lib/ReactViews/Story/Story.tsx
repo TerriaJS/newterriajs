@@ -1,5 +1,4 @@
 import classNames from "classnames";
-import { TFunction } from "i18next";
 import React, {
   MouseEventHandler,
   useEffect,
@@ -44,7 +43,7 @@ interface Props {
 }
 
 interface MenuProps extends Props {
-  t: TFunction;
+  storyRef: React.RefObject<HTMLElement>;
 }
 
 const findTextContent = (content: any): string => {

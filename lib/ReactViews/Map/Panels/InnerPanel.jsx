@@ -46,7 +46,7 @@ const InnerPanel = createReactClass({
 
   getDefaultProps() {
     return {
-      onDismissed: () => {}
+      onDismissed: () => { }
     };
   },
 

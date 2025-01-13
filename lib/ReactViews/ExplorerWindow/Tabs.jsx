@@ -7,7 +7,6 @@ import { withTranslation } from "react-i18next";
 import styled from "styled-components";
 import defined from "terriajs-cesium/Source/Core/defined";
 import MappableMixin from "../../ModelMixins/MappableMixin";
-import Box from "../../Styled/Box";
 import DataCatalogTab from "./Tabs/DataCatalogTab";
 import MyDataTab from "./Tabs/MyDataTab/MyDataTab";
 import Styles from "./tabs.scss";
@@ -67,7 +66,7 @@ class Tabs extends React.Component {
           .filter(
             (member) => member !== this.props.terria.catalog.userAddedDataGroup
           )
-          .map((member, i) => ({
+          .map((member) => ({
             name: member.nameInCatalog,
             title: `data-catalog-${member.name}`,
             category: "data-catalog",

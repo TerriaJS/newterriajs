@@ -65,7 +65,7 @@ const NotificationWindow = createReactClass({
       height: defined(this.props.height) ? this.props.height : "auto",
       width: defined(this.props.width) ? this.props.width : "500px"
     };
-    const isStory = type === "story";
+    // const isStory = type === "story";
 
     return (
       <div className={classNames(Styles.wrapper, `${type}`)}>

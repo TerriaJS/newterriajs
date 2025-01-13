@@ -49,7 +49,7 @@ interface EmptyWorkbenchProps {
   theme: DefaultTheme;
 }
 
-const EmptyWorkbench: React.FC<EmptyWorkbenchProps> = observer((props) => {
+const EmptyWorkbench: React.FC<EmptyWorkbenchProps> = observer(() => {
   const { t } = useTranslation();
   const viewState = useViewState();
   return (

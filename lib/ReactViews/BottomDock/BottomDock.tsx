@@ -38,7 +38,7 @@ class BottomDock extends React.Component<PropsType & MeasureElementProps> {
   }
 
   render() {
-    const { terria, theme } = this.props;
+    const { terria } = this.props;
     const top = terria.timelineStack.top;
 
     return (
