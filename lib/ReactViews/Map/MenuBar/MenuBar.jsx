@@ -56,12 +56,15 @@ const MenuBar = observer((props) => {
               <ToolsPanel />
             </li>
           )}
-          {!viewState.useSmallScreenInterface &&
-            props.menuLeftItems.map((element, i) => (
-              <li className={Styles.menuItem} key={i}>
-                {element}
-              </li>
-            ))}
+          {!viewState.useSmallScreenInterface && menuItems.length > 0 && (
+            <ul className={classNames(Styles.menu)}>
+              {menuItems.map((element, i) => (
+                <li className={Styles.menuItem} key={i}>
+                  {element}
+                </li>
+              ))}
+            </ul>
+          )}
         </ul>
       </section>
       <section className={classNames(Styles.flex)}>

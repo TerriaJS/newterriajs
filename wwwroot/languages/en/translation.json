@@ -618,7 +618,7 @@
     "emptyArea": "<0>This is your Data</0><1>When you add a dataset to the map, you’ll see its legend (key) and settings right here so you can easily control how it looks.</1>",
     "helpfulHints": "Helpful Hints",
     "helpfulHintsOne": "Click 'Explore map data' to see available data or 'Upload' to add your own data to the map.",
-    "helpfulHintsTwo": "Once you’ve added data to the map, your active data sets are listed here in your workbench. The workbench will help you to interact with the data.",
+    "helpfulHintsTwo": "After adding data, you’ll find your active datasets in this panel. Here, you can:<1></1><2>Turn data visibility on or off</2><2>Adjust transparency (make it more see-through)</2><2>Use split-screen to compare data side-by-side</2><2>Change styles (like map colours or lines)</2><2>Move through different dates and times if the data allows it</2>",
     "helpfulHintsThree": "In the workbench you can toggle data sets on and off, change their opacity, activate the split screen comparison, change styles, and navigate through dates and times, if the data supports this functionality."
   },
   "dataCatalog": {

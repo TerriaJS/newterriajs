@@ -8,7 +8,9 @@ import measureElement, { MeasureElementProps } from "../HOCs/measureElement";
 import withControlledVisibility from "../HOCs/withControlledVisibility";
 import ChartDisclaimer from "./ChartDisclaimer";
 import Timeline from "./Timeline/Timeline";
-import { DefaultTheme, withTheme } from "styled-components";
+import styled, { DefaultTheme, withTheme } from "styled-components";
+
+const Container = styled.div``;
 
 interface PropsType {
   terria: Terria;
@@ -55,11 +57,20 @@ class BottomDock extends React.Component<PropsType & MeasureElementProps> {
         onClick={this.handleClick.bind(this)}
         css={`
           background: ${(p: any) => p.theme.dark};
+          z-index: 10;
+          background: ${(p: any) => p.theme.transparentDark};
+          backdrop-filter: ${(p: any) => p.theme.blur};
+          bottom: 0;
+          right: 0;
         `}
       >
         <div id="TJS-BottomDockFirstPortal" />
-        <ChartDisclaimer terria={terria} viewState={this.props.viewState} />
-        <ChartPanel terria={terria} viewState={this.props.viewState} />
+        {!this.props.viewState.useSmallScreenInterface && (
+          <>
+            <ChartDisclaimer terria={terria} viewState={this.props.viewState} />
+            <ChartPanel terria={terria} viewState={this.props.viewState} />
+          </>
+        )}
         {top && (
           <Timeline
             terria={terria}

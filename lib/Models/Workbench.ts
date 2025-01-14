@@ -12,6 +12,7 @@ import LayerOrderingTraits from "../Traits/TraitsClasses/LayerOrderingTraits";
 import CommonStrata from "./Definition/CommonStrata";
 import hasTraits from "./Definition/hasTraits";
 import { BaseModel } from "./Definition/Model";
+import MappableTraits from "../Traits/TraitsClasses/MappableTraits";
 
 const keepOnTop = (model: BaseModel) =>
   hasTraits(model, LayerOrderingTraits, "keepOnTop") && model.keepOnTop;
@@ -109,6 +110,25 @@ export default class Workbench {
   expandAll(): void {
     this.items.map((item) => {
       item.setTrait(CommonStrata.user, "isOpenInWorkbench", true);
+    });
+  }
+
+  /**
+   * Disable all items in the workbench.
+   */
+  @action
+  disableAll() {
+    this.items.forEach((item) => {
+      hasTraits(item, MappableTraits, "show") &&
+        item.setTrait(CommonStrata.user, "show", false);
+    });
+  }
+
+  @action
+  enableAll() {
+    this.items.forEach((item) => {
+      hasTraits(item, MappableTraits, "show") &&
+        item.setTrait(CommonStrata.user, "show", true);
     });
   }
 

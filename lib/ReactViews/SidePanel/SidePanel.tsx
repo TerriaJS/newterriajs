@@ -79,7 +79,7 @@ const EmptyWorkbench: React.FC<EmptyWorkbenchProps> = observer(() => {
                   font-weight: bold;
                 `}
               >
-                This is Your Digital Twin Data
+                This is Your Data
               </p>
               <p>
                 When you add a dataset to the map, you’ll see its legend (key)
@@ -137,22 +137,20 @@ const EmptyWorkbench: React.FC<EmptyWorkbenchProps> = observer(() => {
             <HelpfulHintsIcon />
             <Spacing right={1} />
             <Text medium light>
-              After adding data, you’ll find your active datasets in this panel.
-              Here, you can:
-              <ul
-                css={`
-                  padding-left: 10px;
-                `}
-              >
-                <li>Turn data visibility on or off</li>
-                <li>Adjust transparency (make it more see-through)</li>
-                <li>Use split-screen to compare data side-by-side</li>
-                <li>Change styles (like map colours or lines)</li>
-                <li>
-                  Move through different dates and times if the data allows it
-                </li>
-              </ul>
-              {/*t("emptyWorkbench.helpfulHintsTwo")*/}
+              <Trans
+                i18nKey="emptyWorkbench.helpfulHintsTwo"
+                components={{
+                  1: (
+                    <ul
+                      css={`
+                        padding-left: 10px;
+                      `}
+                    />
+                  ),
+                  2: <li />
+                }}
+              ></Trans>
+              {/* {t("emptyWorkbench.helpfulHintsTwo",)} */}
             </Text>
           </Box>
 
@@ -282,11 +280,6 @@ const SidePanel = observer<React.FC<SidePanelProps>>(
           {terria.workbench.items.length === 0 && (
             <EmptyWorkbench theme={theme} />
           )}
-          {/*          {terria.workbench.items && terria.workbench.items.length > 0 ? (
-            <Workbench viewState={viewState} terria={terria} />
-          ) : (
-            <EmptyWorkbench theme={theme} />
-            )}*/}
         </Box>
       </Box>
     );
