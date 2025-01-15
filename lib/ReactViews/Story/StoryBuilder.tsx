@@ -424,6 +424,7 @@ class StoryBuilder extends React.Component<
                     closeMenu={() => this.openMenu(undefined)}
                     editStory={() => this.editStory(story)}
                     parentRef={this.storiesWrapperRef}
+                    index={index}
                   />
                 ))}
               </Sortable>
@@ -587,7 +588,7 @@ const RemoveDialog: React.FC<RemoveDialogProps> = (props) => {
   const { t } = useTranslation();
   return (
     <Box
-      backgroundColor={props.theme.darkWithOverlay}
+      backgroundColor={props.theme.darkLighter}
       position="absolute"
       rounded
       paddedVertically={3}
@@ -602,7 +603,6 @@ const RemoveDialog: React.FC<RemoveDialogProps> = (props) => {
       <Box>
         <Button
           denyButton
-          rounded
           fullWidth
           textProps={{
             large: true,

@@ -17,18 +17,10 @@ import { applyTranslationIfExists } from "../../Language/languageHelpers";
 import { Category, HelpAction } from "../../Core/AnalyticEvents/analyticEvents";
 import { runInAction } from "mobx";
 
-const BoxHelpfulHints = styled(Box)``;
-
-const ResponsiveSpacing = styled(Box)`
-  height: 110px;
-  height: 110px;
-  // Hardcoded px value, TODO: make it not hardcoded
-  @media (max-height: 700px) {
-    height: 3vh;
-  }
-  @media (max-height: 700px) {
-    height: 3vh;
-  }
+const BoxHelpfulHints = styled(Box)`
+  align-self: flex-end;
+  margin-top: auto;
+  color: ${(p) => p.theme.greyLighter};
 `;
 
 const HelpfulHintsIcon = () => {
@@ -149,8 +141,7 @@ const EmptyWorkbench: React.FC<EmptyWorkbenchProps> = observer(() => {
                   ),
                   2: <li />
                 }}
-              ></Trans>
-              {/* {t("emptyWorkbench.helpfulHintsTwo",)} */}
+              />
             </Text>
           </Box>
 
@@ -162,7 +153,6 @@ const EmptyWorkbench: React.FC<EmptyWorkbenchProps> = observer(() => {
               {t("emptyWorkbench.helpfulHintsThree")}
             </Text>
           </Box>
-          <ResponsiveSpacing />
         </BoxHelpfulHints>
       </Text>
     </Box>
@@ -269,9 +259,9 @@ const SidePanel = observer<React.FC<SidePanelProps>>(
           <Spacing bottom={2} />
         </div>
         <Box
-          styledMinHeight={"0"}
-          flex={1}
+          fullHeight
           column
+          flex={1}
           css={`
             overflow: hidden;
           `}

@@ -54,10 +54,7 @@ class BottomDock extends React.Component<PropsType & MeasureElementProps> {
         tabIndex={0}
         onClick={this.handleClick.bind(this)}
         css={`
-          background: ${(p: any) => p.theme.dark};
           z-index: 10;
-          background: ${(p: any) => p.theme.transparentDark};
-          backdrop-filter: ${(p: any) => p.theme.blur};
           bottom: 0;
           right: 0;
         `}

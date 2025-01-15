@@ -4,6 +4,9 @@ import classNames from "classnames";
 import Styles from "./story-editor.scss";
 import { withTranslation } from "react-i18next";
 import tinymce from "tinymce";
+import Text from "../../Styled/Text";
+import Box from "../../Styled/Box";
+import Button from "../../Styled/Button";
 
 // Lazy load the Editor component as the tinyMCE library is large
 const Editor = React.lazy(() => import("../Generic/Editor.jsx"));
@@ -158,40 +161,54 @@ class StoryEditor extends React.Component {
               value={this.state.title}
               onChange={this.updateTitle}
             />
-            <button
-              className={Styles.cancelBtn}
-              onClick={this.cancelEditing}
-              type="button"
-              title={t("story.editor.cancelBtn")}
-            >
-              {t("story.editor.cancelEditing")}
-            </button>
-            <button
-              disabled={!this.state.title.length}
-              className={Styles.saveBtn}
-              onClick={this.saveStory}
-              type="button"
-              title={t("story.editor.saveBtn")}
-            >
-              {t("story.editor.saveStory")}
-            </button>
-          </div>
-          <div className={Styles.body}>
-            <Suspense fallback={<div>Loading...</div>}>
-              <Editor
-                html={this.state.text}
-                onChange={(_newValue, editor) => {
-                  // TODO: This makes StoryEditor tightly coupled to Editor. How to reduce coupling?
-                  tinymce.activeEditor.dom.setStyles(
-                    tinymce.activeEditor.dom.select("img"),
-                    { "max-height": `${maxImageHeight}`, width: "auto" }
-                  );
-                  const text = editor.getBody().innerHTML;
-                  this.setState({ text });
+            <div className={Styles.body}>
+              <Text small textGreyLighter css={{ marginBottom: "8px" }}>
+                {t("story.editor.descriptionLabel")}
+              </Text>
+              <Suspense fallback={<div>Loading...</div>}>
+                <Editor
+                  html={this.state.text}
+                  onChange={(_newValue, editor) => {
+                    // TODO: This makes StoryEditor tightly coupled to Editor. How to reduce coupling?
+                    tinymce.activeEditor.dom.setStyles(
+                      tinymce.activeEditor.dom.select("img"),
+                      { "max-height": `${maxImageHeight}`, width: "auto" }
+                    );
+                    const text = editor.getBody().innerHTML;
+                    this.setState({ text });
+                  }}
+                  terria={this.props.terria}
+                />
+              </Suspense>
+            </div>
+            <Box centered gap={3}>
+              <Button
+                styledWidth={"240px"}
+                transparentBg
+                onClick={this.cancelEditing}
+                type="button"
+                title={t("story.editor.cancelBtn")}
+                textProps={{
+                  textGreyLighter: true,
+                  medium: true
                 }}
-                terria={this.props.terria}
-              />
-            </Suspense>
+              >
+                {t("story.editor.cancelEditing")}
+              </Button>
+              <Button
+                styledWidth={"240px"}
+                primary
+                disabled={!this.state.title.length}
+                onClick={this.saveStory}
+                type="button"
+                title={t("story.editor.saveBtn")}
+                textProps={{
+                  medium: true
+                }}
+              >
+                {t("story.editor.saveStory")}
+              </Button>
+            </Box>
           </div>
         </div>
       </div>

@@ -62,6 +62,7 @@ const WorkflowPanel: React.FC<PropsType> = observer((props) => {
         </Content>
         {props.footer ? (
           <PanelButton
+            css={{ marginBottom: "15px" }}
             onClick={props.footer.onClick}
             title={props.footer.buttonText}
           />
@@ -141,12 +142,14 @@ const Content = styled.div`
   flex-direction: column;
   min-height: 0;
   padding-bottom: 4em;
-  ${addTerriaScrollbarStyles()}
+  ${() => addTerriaScrollbarStyles()}
 `;
 
 const CloseButton = styled(Button).attrs({
   primary: true
-})``;
+})`
+  font-size: 14px;
+`;
 
 const Error = styled.div`
   display: flex;

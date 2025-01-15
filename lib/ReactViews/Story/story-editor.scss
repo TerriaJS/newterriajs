@@ -11,51 +11,60 @@
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 2;
+  z-index: 100;
   display: flex;
   flex-direction: column;
   justify-content: center;
+
   &.is-mounted {
     opacity: 1;
     @include mixins.transform(none);
   }
+
   .inner {
     max-width: 800px;
     width: 80vw;
-    background: #ffffff;
+    background: variables.$dark;
     z-index: 9999;
     margin: 0 auto;
     color: variables.$text-dark;
-    box-shadow: 0 0 15px 6px rgba(100, 100, 100, 0.3);
-    border-radius: 4px;
-    padding: 6px;
+    // box-shadow: 0 0 15px 6px rgba(100, 100, 100, 0.3);
+    border: 1px solid variables.$dark-lighter;
+    border-radius: 6px;
+    padding: 15px;
   }
+
   .header {
-    display: flex;
-    align-items: baseline;
-    padding: variables.$padding;
-    border-bottom: 1px solid variables.$field-border;
+    border-bottom: 1px solid variables.$dark-lighter;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
   }
+
   .body {
     min-height: 150px;
+
     p {
       margin-top: 0;
     }
+
+    margin-bottom: 15px;
   }
 }
 
 .editor {
-  background: $dark-with-overlay;
-  color: $text-light;
-  font-family: $font-pop;
-  margin: $padding-small;
-  border-radius: 4px;
+  background: variables.$dark-with-overlay;
+  color: variables.$text-light;
+  font-family: variables.$font-pop;
+  margin: variables.$padding-small;
+  border-radius: 6px;
+
   .editorHeader {
-    padding: $padding;
-    border-bottom: 1px solid $overlay;
+    padding: variables.$padding;
+    border-bottom: 1px solid variables.$overlay;
   }
+
   form {
-    padding: $padding;
+    padding: variables.$padding;
   }
 }
 
@@ -63,7 +72,12 @@
   composes: field from "../../Sass/common/_form.scss";
   border: 0;
   margin-right: variables.$padding;
-  padding: 0 !important;
+  padding-left: 15px !important;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  background: variables.$dark-mid;
+  border: 1px solid variables.$dark-lighter;
+  color: white;
 }
 
 .fieldBtn {
@@ -71,8 +85,8 @@
   composes: btn--map from "../../Sass/common/_buttons.scss";
   background: #9ca1aa;
   border-radius: 4px;
-  padding: $padding;
-  margin-bottom: $padding + 3px;
+  padding: variables.$padding;
+  margin-bottom: variables.$padding + 3px;
   box-shadow: none;
   width: 100%;
 }
@@ -84,13 +98,15 @@
 }
 
 .saveBtn {
-  width: auto;
-  padding: 5px 15px;
+  composes: btn from "../../Sass/common/_buttons.scss";
+  composes: btn--primary from "../../Sass/common/_buttons.scss";
+  padding: 15px 15px;
 }
+
 .cancelBtn {
   composes: btn from "../../Sass/common/_buttons.scss";
-  composes: btn--secondary from "../../Sass/common/_buttons.scss";
-  padding: 5px 15px;
-  margin-right: variables.$padding;
-  border: 2px solid #ffffff;
+  composes: btn--transparent from "../../Sass/common/_buttons.scss";
+  border: none;
+  background: variables.$dark-mid;
+  padding: 15px;
 }

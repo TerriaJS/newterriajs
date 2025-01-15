@@ -11,11 +11,9 @@ $font: $font-base;
 
 $color-primary: #35a7c4;
 $color-primary-disabled: #595b60;
-
 @function get-hover-color($base-color) {
   @return color.adjust($base-color, $lightness: 10%);
 }
-
 $color-secondary: #f59e0b;
 
 $animation-fast: 0.1s;
@@ -26,9 +24,10 @@ $blur: blur(5px);
 
 $dark: #111827;
 $dark-with-overlay: #111827;
+$dark-mid: #1f2937;
 $dark-lighter: #374151;
-$grey: #888888;
-$grey-lighter: #ddd;
+$grey: #9ca3af;
+$grey-lighter: #d1d5db;
 // todo: Fix during overhaul
 $grey-lighter2: #e6e6e6;
 $grey-lightest: #f2f2f2;
@@ -57,15 +56,12 @@ $text-light-dimmed: #bbbbbb;
   @if meta.variable-exists(text-link) {
     @return $text-link;
   }
-
   @return $color-primary;
 }
-
 @function get-visited-link-color($bg-color) {
   @if meta.variable-exists(text-visited-link) {
     @return $text-visited-link;
   }
-
   @return get-link-color($bg-color);
 }
 
@@ -185,7 +181,7 @@ $chart-line-color: #ccc;
 $chart-preview-line-color: $chart-line-color;
 $chart-darker: color.adjust($dark, $lightness: -8%);
 $chart-panel-background: $dark;
-$chart-panel-header: $chart-darker;
+$chart-panel-header: $dark-with-overlay;
 
 $charcoal-grey: #3f4854;
 $turquoise-blue: #08abd5;
@@ -202,4 +198,4 @@ $legend-spacer-height: calc($legend-padding / 2);
 $tool-primary-color: $color-primary;
 
 $scrollbar-color: $color-primary;
-$scrollbar-track-color: $dark;
+$scrollbar-track-color: transparent;

@@ -225,10 +225,11 @@ const StyledZoomControl = styled(Box).attrs((props) => ({
   styledMargin: "7px 0 0 0"
 }))`
   border-radius: 100px;
+  border: 1px solid ${(props) => props.theme.darkLighter};
   svg {
     height: 20px;
     width: 20px;
-    fill: ${(props) => props.theme.textLight};
+    fill: #9ca3af;
   }
   ${Li} {
     margin: 5px 0;

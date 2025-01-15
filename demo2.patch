@@ -1,0 +1,1947 @@
+
+diff --color -bur -x * ./lib/ReactViews/BottomDock/BottomDock.tsx ../../../DemoMap/packages/terriajs/lib/ReactViews/BottomDock/BottomDock.tsx
+--- ./lib/ReactViews/BottomDock/BottomDock.tsx	2025-01-15 13:59:32
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/BottomDock/BottomDock.tsx	2025-01-15 13:54:36
+@@ -38,7 +38,7 @@
+   }
+ 
+   render() {
+-    const { terria } = this.props;
++    const { terria, theme } = this.props;
+     const top = terria.timelineStack.top;
+ 
+     return (
+@@ -54,10 +54,7 @@
+         tabIndex={0}
+         onClick={this.handleClick.bind(this)}
+         css={`
+-          background: ${(p: any) => p.theme.dark};
+           z-index: 10;
+-          background: ${(p: any) => p.theme.transparentDark};
+-          backdrop-filter: ${(p: any) => p.theme.blur};
+           bottom: 0;
+           right: 0;
+         `}
+
+diff --color -bur -x * ./lib/ReactViews/BottomDock/Timeline/timeline.scss ../../../DemoMap/packages/terriajs/lib/ReactViews/BottomDock/Timeline/timeline.scss
+--- ./lib/ReactViews/BottomDock/Timeline/timeline.scss	2025-01-09 16:17:17
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/BottomDock/Timeline/timeline.scss	2025-01-15 13:54:36
+@@ -8,6 +8,8 @@
+   padding-bottom: 5px;
+   padding-right: 5px;
+   font-family: $font-base;
++  background: $transparent-dark;
++  backdrop-filter: $blur;
+ }
+ 
+ .text-row {
+
+
+diff --color -bur -x * ./lib/ReactViews/Custom/Chart/chart-panel.scss ../../../DemoMap/packages/terriajs/lib/ReactViews/Custom/Chart/chart-panel.scss
+--- ./lib/ReactViews/Custom/Chart/chart-panel.scss	2025-01-09 16:17:17
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/Custom/Chart/chart-panel.scss	2025-01-15 13:54:36
+@@ -8,9 +8,11 @@
+   left: 0;
+   right: 0;
+   z-index: 10;
+-  // background: $transparent-dark;
+-  // backdrop-filter: $blur;
+-  padding-bottom: 13px;
++  background: $transparent-dark;
++  backdrop-filter: $blur;
++  padding-bottom: 40px; //hack to allow timeline visible  
++  margin-bottom: 6px;
++  border-radius: 8px 8px 0 0;
+ }
+ 
+ .header {
+@@ -20,6 +22,7 @@
+   background-color: $chart-panel-header;
+   font-size: $font-size-mid-small;
+   fill: #fff;
++  border-radius: 8px 8px 0 0;
+ }
+ 
+ .chart {
+
+
+diff --color -bur -x * ./lib/ReactViews/DataCatalog/CatalogItem.tsx ../../../DemoMap/packages/terriajs/lib/ReactViews/DataCatalog/CatalogItem.tsx
+--- ./lib/ReactViews/DataCatalog/CatalogItem.tsx	2024-12-12 12:56:09
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/DataCatalog/CatalogItem.tsx	2025-01-15 13:54:36
+@@ -20,8 +20,8 @@
+ 
+ const STATE_TO_ICONS: Record<ButtonState, React.ReactElement> = {
+   [ButtonState.Loading]: <Icon glyph={Icon.GLYPHS.loader} />,
+-  [ButtonState.Remove]: <Icon glyph={Icon.GLYPHS.remove} />,
+-  [ButtonState.Add]: <Icon glyph={Icon.GLYPHS.add} />,
++  [ButtonState.Remove]: <Icon glyph={Icon.GLYPHS.minus} />,
++  [ButtonState.Add]: <Icon glyph={Icon.GLYPHS.plus} />,
+   [ButtonState.Trash]: <Icon glyph={Icon.GLYPHS.trashcan} />,
+   [ButtonState.Stats]: <Icon glyph={Icon.GLYPHS.barChart} />,
+   [ButtonState.Preview]: <Icon glyph={Icon.GLYPHS.right} />
+@@ -103,8 +103,9 @@
+   text-align: left;
+   word-break: normal;
+   overflow-wrap: anywhere;
+-  padding: 8px;
++  padding: 15px;
+   width: 100%;
++  font-size: 0.9rem;
+ 
+   &:focus,
+   &:hover {
+@@ -123,10 +124,10 @@
+ 
+ const ActionButton = styled(RawButton)`
+   svg {
+-    height: 20px;
+-    width: 20px;
++    height: 12px;
++    width: 12px;
+     margin: 5px;
+-    fill: ${(p) => p.theme.charcoalGrey};
++    fill: ${(p) => p.theme.grey};
+   }
+ 
+   &:hover,
+
+
+
+diff --color -bur -x * ./lib/ReactViews/DataCatalog/data-catalog-group.scss ../../../DemoMap/packages/terriajs/lib/ReactViews/DataCatalog/data-catalog-group.scss
+--- ./lib/ReactViews/DataCatalog/data-catalog-group.scss	2024-12-12 12:56:09
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/DataCatalog/data-catalog-group.scss	2025-01-15 13:54:36
+@@ -21,7 +21,7 @@
+     height: 18px;
+     width: 18px;
+     margin: 3px;
+-    fill: $charcoal-grey;
++    fill: $grey;
+   }
+ }
+ 
+@@ -30,8 +30,8 @@
+   @extend %wrap;
+ 
+   text-align: left;
+-  font-size: $font-size-small;
+-  padding: 8px 30px + $padding;
++  font-size: $font-size-mid-small;
++  padding: 15px 30px + $padding;
+   padding-right: 0;
+   min-height: 35px;
+   position: relative;
+@@ -44,7 +44,6 @@
+     display: inline-block;
+   }
+   @media (max-width: $sm) {
+-    font-size: $font-size-mid-small;
+     padding-top: 10px;
+     padding-bottom: 10px;
+     border-bottom: 1px solid $grey-lighter;
+@@ -79,7 +78,7 @@
+     display: block;
+   }
+   @media (min-width: $sm) {
+-    top: 5px;
++    top: 11px;
+     svg {
+       height: 25px;
+       width: 25px;
+@@ -94,14 +93,14 @@
+   top: 10px;
+   margin: 0 5px 0 10px;
+   svg {
+-    fill: $charcoal-grey;
++    fill: $grey;
+   }
+   @media (min-width: $sm) {
+     right: 5px;
+     top: 8px;
+     svg {
+-      height: 10px;
+-      width: 10px;
++      height: 12px;
++      width: 12px;
+     }
+   }
+   &.offsetRight {
+@@ -143,6 +142,6 @@
+     height: 18px;
+     width: 18px;
+     margin: 3px;
+-    fill: $charcoal-grey;
++    fill: $grey;
+   }
+ }
+
+diff --color -bur -x * ./lib/ReactViews/ExplorerWindow/ExplorerWindow.tsx ../../../DemoMap/packages/terriajs/lib/ReactViews/ExplorerWindow/ExplorerWindow.tsx
+--- ./lib/ReactViews/ExplorerWindow/ExplorerWindow.tsx	2025-01-13 12:18:55
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/ExplorerWindow/ExplorerWindow.tsx	2025-01-15 13:54:36
+@@ -4,12 +4,15 @@
+ import { useViewState } from "../Context";
+ import ModalPopup from "./ModalPopup";
+ import Tabs from "./Tabs";
++import Text from "../../Styled/Text";
++import Box from "../../Styled/Box";
++import { useTheme } from "styled-components";
+ 
+ export const ExplorerWindowElementName = "AddData";
+ 
+ export default observer<React.FC>(function ExplorerWindow() {
+   const viewState = useViewState();
+-
++  const theme = useTheme();
+   const onClose = action(() => {
+     viewState.closeCatalog();
+     viewState.switchMobileView("nowViewing");
+@@ -37,6 +40,18 @@
+       onStartAnimatingIn={onStartAnimatingIn}
+       onDoneAnimatingIn={onDoneAnimatingIn}
+     >
++      <Box
++        css={`
++          background: ${theme.dark};
++          border-radius: 6px 6px 0 0;
++        `}
++        paddedRatio={4}
++        fullWidth
++      >
++        <Text extraExtraLarge textLight css={{ fontWeight: 500 }}>
++          Terria Data Catalogue
++        </Text>
++      </Box>
+       <Tabs terria={viewState.terria} viewState={viewState} />
+     </ModalPopup>
+   );
+
+diff --color -bur -x * ./lib/ReactViews/Map/BottomBar/BottomBar.tsx ../../../DemoMap/packages/terriajs/lib/ReactViews/Map/BottomBar/BottomBar.tsx
+--- ./lib/ReactViews/Map/BottomBar/BottomBar.tsx	2025-01-09 15:53:32
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/Map/BottomBar/BottomBar.tsx	2024-11-19 14:44:42
+@@ -1,32 +1,92 @@
++import { observer } from "mobx-react";
+ import { VFC } from "react";
++import styled, { useTheme } from "styled-components";
+ import Box from "../../../Styled/Box";
++import Text from "../../../Styled/Text";
+ import { useViewState } from "../../Context";
++import parseCustomHtmlToReact from "../../Custom/parseCustomHtmlToReact";
+ import { MapCredits } from "./Credits";
+ import { DistanceLegend } from "./DistanceLegend";
+ import { LocationBar } from "./LocationBar";
+-import React from "react";
+ 
+-export const BottomBar: VFC = () => {
++export const BottomBar: VFC = observer(() => {
+   const viewState = useViewState();
++  const theme = useTheme();
++
++  const screenDataAttributions =
++    viewState.terria.cesium?.cesiumScreenDataAttributions;
++
+   return (
++    <>
+     <Box
+       fullWidth
+       justifySpaceBetween
+       css={`
+-        background: linear-gradient(180deg, #000000 0%, #000000 100%);
++          flex-direction: column;
+           font-size: 0.7rem;
++          width: 100%;
++          background: ${theme.dark};
+           opacity: 0.75;
++          backdrop-filter: ${theme.blur};
++          background: ${theme.dark};
++          opacity: 0.75;
++          backdrop-filter: ${theme.blur};
++          margin-top: 2px;
+         `}
+       >
++        {/* On screen data attributions. At the moment, this supports only Cesium viewer.
++          Needed for Google Photorealistic 3D Tiles
++        */}
++        {!!screenDataAttributions?.length && (
++          <AttributionsContainer textLight mini>
++            {screenDataAttributions
++              .flatMap((attributionHtml, i) => [
++                <span key={attributionHtml}>
++                  {parseCustomHtmlToReact(attributionHtml)}
++                </span>,
++                <span key={`delimiter-${i}`}> • </span>
++              ])
++              .slice(0, -1)}
++          </AttributionsContainer>
++        )}
++        <div
++          css={`
++            width: 100%;
++            display: flex;
++            flex-direction: row;
++            justify-content: space-between;
++          `}
++        >
++          <div
++            css={`
++              ${viewState.useSmallScreenInterface ? `` : `padding: 0 15px;`}
++            `}
++          >
+       <MapCredits
+-        hideTerriaLogo={!!viewState.terria.configParameters.hideTerriaLogo}
++              hideTerriaLogo={
++                !!viewState.terria.configParameters.hideTerriaLogo
++              }
+               credits={viewState.terria.configParameters.extraCreditLinks?.slice()}
+               currentViewer={viewState.terria.mainViewer.currentViewer}
+             />
++          </div>
+       <Box paddedHorizontally={4} gap={2}>
+-        <LocationBar mouseCoords={viewState.terria.currentViewer.mouseCoords} />
++            <LocationBar
++              mouseCoords={viewState.terria.currentViewer.mouseCoords}
++            />
+             <DistanceLegend />
+           </Box>
++        </div>
+       </Box>
++    </>
+   );
+-};
++});
++
++// Use padding to avoid other UI elements
++const AttributionsContainer = styled(Text)`
++  text-shadow: 0 0 2px #000000;
++  padding: 5px 15px 0 15px;
++  @media (max-width: ${(props) => props.theme.mobile}px) {
++    padding: 3px 0;
++  }
++`;
+Only in ./lib/ReactViews/Map/BottomBar: BottomBar.tsx.rej
+diff --color -bur -x * ./lib/ReactViews/Map/MapColumn.tsx ../../../DemoMap/packages/terriajs/lib/ReactViews/Map/MapColumn.tsx
+--- ./lib/ReactViews/Map/MapColumn.tsx	2025-01-09 16:17:17
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/Map/MapColumn.tsx	2025-01-15 13:54:36
+@@ -99,7 +99,6 @@
+               <div
+                 css={`
+                   position: absolute;
+-                  border-radius: ${theme.radiusXL};
+                   margin-left: ${viewState.useSmallScreenInterface
+                     ? `0px`
+                     : viewState.isMapFullScreen
+@@ -113,7 +112,6 @@
+                     : `${theme.workbenchMargin}px`};
+                   left: 0;
+                   right: 0;
+-                  overflow: hidden;
+                 `}
+               >
+                 <BottomLeftBar />
+diff --color -bur -x * ./lib/ReactViews/Map/MapNavigation/Items/ZoomControl.tsx ../../../DemoMap/packages/terriajs/lib/ReactViews/Map/MapNavigation/Items/ZoomControl.tsx
+--- ./lib/ReactViews/Map/MapNavigation/Items/ZoomControl.tsx	2025-01-13 13:11:45
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/Map/MapNavigation/Items/ZoomControl.tsx	2025-01-15 13:54:36
+@@ -226,10 +230,11 @@
+   styledMargin: "7px 0 0 0"
+ }))`
+   border-radius: 100px;
++  border: 1px solid ${(props) => props.theme.darkLighter};
+   svg {
+     height: 20px;
+     width: 20px;
+-    fill: ${(props) => props.theme.textLight};
++    fill: #9ca3af;
+   }
+   ${Li} {
+     margin: 5px 0;
+diff --color -bur -x * ./lib/ReactViews/Map/MenuBar/MenuBar.jsx ../../../DemoMap/packages/terriajs/lib/ReactViews/Map/MenuBar/MenuBar.jsx
+--- ./lib/ReactViews/Map/MenuBar/MenuBar.jsx	2025-01-14 14:13:31
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/Map/MenuBar/MenuBar.jsx	2024-11-19 14:44:42
+@@ -56,16 +56,13 @@
+               <ToolsPanel />
+             </li>
+           )}
+-          {!viewState.useSmallScreenInterface && menuItems.length > 0 && (
+-            <ul className={classNames(Styles.menu)}>
+-              {menuItems.map((element, i) => (
++          {!viewState.useSmallScreenInterface &&
++            props.menuLeftItems.map((element, i) => (
+                 <li className={Styles.menuItem} key={i}>
+                   {element}
+                 </li>
+               ))}
+             </ul>
+-          )}
+-        </ul>
+       </section>
+       <section className={classNames(Styles.flex)}>
+         <ul className={classNames(Styles.menu)}>
+@@ -105,12 +102,15 @@
+             />
+           </li>
+         </ul>
+-        {!viewState.useSmallScreenInterface &&
+-          menuItems.map((element, i) => (
++        {!viewState.useSmallScreenInterface && menuItems.length > 0 && (
++          <ul className={classNames(Styles.menu)}>
++            {menuItems.map((element, i) => (
+               <li className={Styles.menuItem} key={i}>
+                 {element}
+               </li>
+             ))}
++          </ul>
++        )}
+       </section>
+     </StyledMenuBar>
+   );
+diff --color -bur -x * ./lib/ReactViews/MapIconButton/MapIconButton.tsx ../../../DemoMap/packages/terriajs/lib/ReactViews/MapIconButton/MapIconButton.tsx
+--- ./lib/ReactViews/MapIconButton/MapIconButton.tsx	2025-01-09 16:17:17
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/MapIconButton/MapIconButton.tsx	2025-01-15 13:54:36
+@@ -30,6 +30,7 @@
+   ${(props) => props.roundLeft && `border-radius: 16px 0 0 16px;`}
+   ${(props) => props.roundRight && `border-radius: 0 16px 16px 0;`}
+ 
++  border: 1px solid ${(props) => props.theme.darkLighter};
+   background: ${(props) => props.theme.dark};
+   color: ${(props) => props.theme.textLight};
+ 
+@@ -42,7 +43,7 @@
+     width: 20px;
+     margin: 0 auto;
+     vertical-align: middle;
+-    fill: ${(props) => props.theme.textLight};
++    fill: #9ca3af;
+   }
+ 
+   ${(props) =>
+diff --color -bur -x * ./lib/ReactViews/Notification/NotificationWindow.jsx ../../../DemoMap/packages/terriajs/lib/ReactViews/Notification/NotificationWindow.jsx
+--- ./lib/ReactViews/Notification/NotificationWindow.jsx	2025-01-13 13:25:06
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/Notification/NotificationWindow.jsx	2025-01-15 13:54:36
+@@ -1,3 +1,5 @@
++"use strict";
++
+ import classNames from "classnames";
+ import createReactClass from "create-react-class";
+ import PropTypes from "prop-types";
+@@ -5,6 +7,8 @@
+ import defined from "terriajs-cesium/Source/Core/defined";
+ import parseCustomMarkdownToReact from "../Custom/parseCustomMarkdownToReact";
+ import Styles from "./notification-window.scss";
++import Button from "../../Styled/Button";
++import { withTheme } from "styled-components";
+ 
+ const NotificationWindow = createReactClass({
+   displayName: "NotificationWindow",
+@@ -25,7 +29,8 @@
+     onDeny: PropTypes.func.isRequired,
+     type: PropTypes.string,
+     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+-    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
++    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
++    theme: PropTypes.object
+   },
+ 
+   confirm(e) {
+@@ -65,15 +70,16 @@
+       height: defined(this.props.height) ? this.props.height : "auto",
+       width: defined(this.props.width) ? this.props.width : "500px"
+     };
+-    // const isStory = type === "story";
++    const isStory = type === "story";
+ 
+     return (
+       <div className={classNames(Styles.wrapper, `${type}`)}>
+         <div
+           className={Styles.notification}
++          /* eslint-disable-next-line react/no-unknown-property */
++          isStory={isStory}
+           css={`
+-            background: ${(p) =>
+-              p.isStory ? p.theme.colorPrimary : p.theme.dark};
++            background: ${(p) => p.theme.dark};
+             a,
+             a:visited {
+               color: ${(p) => p.theme.primary};
+@@ -92,13 +98,30 @@
+           </div>
+           <div className={Styles.footer}>
+             {denyText && (
+-              <button type="button" className={Styles.btn} onClick={this.deny}>
++              <Button
++                css={{
++                  backgroundColor: this.props.theme.darkLighter,
++                  border: "none",
++                  color: "white"
++                }}
++                onClick={this.deny}
++                textProps={{
++                  medium: true
++                }}
++              >
+                 {denyText}
+-              </button>
++              </Button>
+             )}
+-            <button type="button" className={Styles.btn} onClick={this.confirm}>
++            <Button
++              primary
++              transparent
++              onClick={this.confirm}
++              textProps={{
++                medium: true
++              }}
++            >
+               {confirmText}
+-            </button>
++            </Button>
+           </div>
+         </div>
+       </div>
+@@ -106,4 +129,4 @@
+   }
+ });
+ 
+-export default NotificationWindow;
++module.exports.default = withTheme(NotificationWindow);
+diff --color -bur -x * ./lib/ReactViews/Notification/notification-window.scss ../../../DemoMap/packages/terriajs/lib/ReactViews/Notification/notification-window.scss
+--- ./lib/ReactViews/Notification/notification-window.scss	2024-12-18 14:25:56
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/Notification/notification-window.scss	2025-01-15 13:54:36
+@@ -27,7 +27,7 @@
+ }
+ 
+ .notification {
+-  border-radius: $radius-small;
++  border-radius: 6px;
+   border: 1px solid color.adjust($dark, $lightness: -3%);
+   // background: $dark;
+   z-index: 300;
+@@ -37,15 +37,18 @@
+ 
+     &::-webkit-scrollbar {
+       width: 5px; /* for vertical scrollbars */
+-      height: 5px; /* for horizontal scrollbars */
++      height: 8px; /* for horizontal scrollbars */
+     }
+ 
+     &::-webkit-scrollbar-track {
+-      background: rgba(#000, 0.1);
++      background: $scrollbar-track-color;
++      border-radius: $radius-large;
++      
+     }
+ 
+     &::-webkit-scrollbar-thumb {
+-      background: rgba(#000, 0.3);
++      background: $scrollbar-color;
++      border-radius: $radius-large;
+     }
+   }
+ }
+@@ -56,7 +59,7 @@
+ 
+ .inner {
+   composes: scrollbars from "../../Sass/common/_base.scss";
+-  padding: $padding $padding * 2;
++  padding: 15px;
+   height: 100%;
+   max-height: calc(100vh - #{$input-height * 3});
+   overflow-y: auto;
+@@ -65,20 +68,15 @@
+ }
+ 
+ .footer {
+-  display: block;
+-}
+-
+-.body {
+-  font-size: $font-size-small;
++  padding: 15px;
++  display: flex;
++  gap: 15px;
++  justify-content: center;
++  button {
++    flex: 1;
++  }
+ }
+ 
+-.btn {
+-  composes: btn from "../../Sass/common/_buttons.scss";
+-  padding: $padding;
+-  background: rgba(#fff, 0.5);
+-  text-align: center;
+-  width: 100%;
+-  font-size: $font-size-small;
+-  color: $text-light;
+-  border-radius: 0 0 $radius-small $radius-small;
++.body {
++  font-size: 14px;
+ }
+diff --color -bur -x * ./lib/ReactViews/SelectableDimensions/Group.tsx ../../../DemoMap/packages/terriajs/lib/ReactViews/SelectableDimensions/Group.tsx
+--- ./lib/ReactViews/SelectableDimensions/Group.tsx	2025-01-13 13:02:37
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/SelectableDimensions/Group.tsx	2025-01-15 13:54:36
+@@ -39,6 +39,7 @@
+                 ? t("selectableDimensions.enabled")
+                 : t("selectableDimensions.disabled"))
+         }
++        titleTextProps={{ bold: false }}
+         bodyBoxProps={{
+           displayInlineBlock: true,
+           fullWidth: true
+@@ -48,13 +49,11 @@
+         onToggle={
+           dim.type === "group"
+             ? dim.onToggle
+-            : (isOpen) => {
++            : (isOpen) =>
+                 dim.setDimensionValue(
+                   CommonStrata.user,
+                   isOpen ? "true" : "false"
+-                );
+-                return true;
+-              }
++                )
+         }
+         btnStyle={dim.type === "checkbox-group" ? "checkbox" : undefined}
+         btnRight={dim.type === "group"}
+diff --color -bur -x * ./lib/ReactViews/SelectableDimensions/SelectableDimension.tsx ../../../DemoMap/packages/terriajs/lib/ReactViews/SelectableDimensions/SelectableDimension.tsx
+--- ./lib/ReactViews/SelectableDimensions/SelectableDimension.tsx	2024-12-12 12:56:09
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/SelectableDimensions/SelectableDimension.tsx	2025-01-15 13:54:36
+@@ -31,12 +31,12 @@
+   dim: SelectableDimensionModel;
+ }> = ({ id, dim }) => {
+   return (
+-    <Box displayInlineBlock fullWidth styledPadding="5px 0">
++    <Box displayInlineBlock fullWidth styledMargin="0 0 5px 0">
+       {/* Render label for all SelectableDimensions except for groups */}
+       {dim.name && dim.type !== "group" ? (
+         <>
+           <label htmlFor={id}>
+-            <Text textLight medium as="span">
++            <Text textGreyLighter medium as="span">
+               {parseCustomMarkdownToReactWithOptions(dim.name, {
+                 inline: true
+               })}
+diff --color -bur -x * ./lib/ReactViews/SidePanel/Branding.tsx ../../../DemoMap/packages/terriajs/lib/ReactViews/SidePanel/Branding.tsx
+--- ./lib/ReactViews/SidePanel/Branding.tsx	2025-01-14 15:36:39
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/SidePanel/Branding.tsx	2024-11-19 14:44:42
+@@ -89,6 +89,11 @@
+           }
+         `}
+       >
++        <div
++          css={`
++            height: fit-content;
++          `}
++        >
+           {brandingHtmlElements.map((element, idx) => (
+             <React.Fragment key={idx}>
+               {parseCustomHtmlToReact(
+@@ -97,6 +102,7 @@
+               )}
+             </React.Fragment>
+           ))}
++        </div>
+       </div>
+     );
+   })
+diff --color -bur -x * ./lib/ReactViews/SidePanel/FullScreenButton.jsx ../../../DemoMap/packages/terriajs/lib/ReactViews/SidePanel/FullScreenButton.jsx
+--- ./lib/ReactViews/SidePanel/FullScreenButton.jsx	2025-01-09 16:17:17
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/SidePanel/FullScreenButton.jsx	2025-01-15 13:54:36
+@@ -84,6 +84,9 @@
+               : `width: 100%; border-radius: 0;`}
+           `}
+           primary
++          textProps={{
++            medium: true
++          }}
+           onClick={() => this.toggleFullScreen()}
+           aria-label={
+             this.props.viewState.isMapFullScreen
+diff --color -bur -x * ./lib/ReactViews/SidePanel/SidePanel.tsx ../../../DemoMap/packages/terriajs/lib/ReactViews/SidePanel/SidePanel.tsx
+--- ./lib/ReactViews/SidePanel/SidePanel.tsx	2025-01-14 15:36:39
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/SidePanel/SidePanel.tsx	2025-01-15 13:54:36
+@@ -17,7 +17,11 @@
+ import { Category, HelpAction } from "../../Core/AnalyticEvents/analyticEvents";
+ import { runInAction } from "mobx";
+ 
+-const BoxHelpfulHints = styled(Box)``;
++const BoxHelpfulHints = styled(Box)`
++  align-self: flex-end;
++  margin-top: auto;
++  color: ${(p) => p.theme.greyLighter};
++`;
+ 
+ const ResponsiveSpacing = styled(Box)`
+   height: 110px;
+@@ -53,18 +57,10 @@
+   const { t } = useTranslation();
+   const viewState = useViewState();
+   return (
+-    <Box overflowY="auto" scroll column fullWidth>
++    <Box overflowY="auto" scroll column fullWidth flex={1}>
+       {/*hacky margin fix for spacing */}
+-      <Text large textLight>
+-        <Box
+-          styledMargin="70px 0 0 0"
+-          centered
+-          column
+-          paddedRatio={3}
+-          justifySpaceBetween
+-          gap={3}
+-        >
+-          <Text textAlignCenter large color="#E5E7EB">
++      <Box centered column paddedHorizontally={3} justifySpaceBetween gap={3}>
++        <Text textAlignCenter large textGreyLighter>
+           <div>
+             <img
+               css={`
+@@ -105,7 +100,7 @@
+             )}
+             textProps={{
+               large: true,
+-              textLight: true
++            textGreyLighter: true
+           }}
+           css={``}
+         >
+@@ -116,8 +111,8 @@
+           column
+           paddedVertically={5}
+           paddedRatio={3}
+-          overflowY="auto"
+-          scroll
++        // overflowY="auto"
++        // scroll
+       >
+         <Box left>
+           <Text extraLarge bold>
+@@ -162,9 +159,9 @@
+               {t("emptyWorkbench.helpfulHintsThree")}
+             </Text>
+           </Box>
+-          <ResponsiveSpacing />
++            */}
++        {/* <ResponsiveSpacing /> */}
+         </BoxHelpfulHints>
+-      </Text>
+     </Box>
+   );
+ });
+@@ -269,9 +266,9 @@
+           <Spacing bottom={2} />
+         </div>
+         <Box
+-          styledMinHeight={"0"}
+-          flex={1}
++          fullHeight
+           column
++          flex={1}
+           css={`
+             overflow: hidden;
+           `}
+diff --color -bur -x * ./lib/ReactViews/Story/Story.tsx ../../../DemoMap/packages/terriajs/lib/ReactViews/Story/Story.tsx
+--- ./lib/ReactViews/Story/Story.tsx	2025-01-13 13:46:12
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/Story/Story.tsx	2025-01-15 13:54:36
+@@ -1,10 +1,6 @@
+ import classNames from "classnames";
+-import React, {
+-  MouseEventHandler,
+-  useEffect,
+-  useLayoutEffect,
+-  useRef
+-} from "react";
++import { TFunction } from "i18next";
++import React, { MouseEventHandler, useEffect, useRef } from "react";
+ import { sortable } from "react-anything-sortable";
+ import { useTranslation } from "react-i18next";
+ import styled, { useTheme } from "styled-components";
+@@ -13,7 +9,7 @@
+ import Icon, { StyledIcon } from "../../Styled/Icon";
+ import Ul from "../../Styled/List";
+ import Spacing from "../../Styled/Spacing";
+-import Text from "../../Styled/Text";
++import Text, { TextSpan } from "../../Styled/Text";
+ import parseCustomHtmlToReact from "../Custom/parseCustomHtmlToReact";
+ 
+ export interface Story {
+@@ -34,7 +30,7 @@
+   openMenu: () => void;
+   closeMenu: () => void;
+   parentRef: any;
+-
++  index: number;
+   //props for react-anything-sortable
+   className: any;
+   style: any;
+@@ -43,7 +39,7 @@
+ }
+ 
+ interface MenuProps extends Props {
+-  storyRef: React.RefObject<HTMLElement>;
++  t: TFunction;
+ }
+ 
+ const findTextContent = (content: any): string => {
+@@ -84,7 +80,7 @@
+ 
+   border-radius: 0;
+ 
+-  width: 114px;
++  width: 124px;
+   // ensure we support long strings
+   min-height: 32px;
+   display: block;
+@@ -148,40 +144,24 @@
+     hideList(props);
+   };
+ 
+-const StoryMenu = (props: MenuProps) => {
+-  const { t } = useTranslation();
+-  const menuRef = useRef<HTMLDivElement | null>(null);
+-  useLayoutEffect(() => {
+-    // Adjust the position of the menu so it stays inside the scroll container.
++const calculateOffset =
++  (props: Props) => (storyRef: React.RefObject<HTMLElement>) => {
++    const offsetTop = storyRef.current?.offsetTop || 0;
++    const scrollTop = props.parentRef.current.scrollTop || 0;
++    const heightParent =
++      (storyRef.current?.offsetParent as HTMLElement)?.offsetHeight || 0;
+ 
+-    if (!menuRef.current) return;
+-    if (!props.parentRef.current) return;
++    const offsetTopScroll = offsetTop - scrollTop + 25;
++    if (offsetTopScroll + 125 > heightParent) {
++      return `bottom ${offsetTopScroll + 125 - heightParent + 45}px;`;
++    }
++    return `top: ${offsetTopScroll}px;`;
++  };
+ 
+-    // Grow downwards, by default:
+-    Object.assign(menuRef.current.style, { top: "0px", bottom: "unset" });
++const renderMenu = (props: MenuProps) => {
++  const { t } = props;
+ 
+-    const selfRect = menuRef.current.getBoundingClientRect();
+-    const parentRect = props.parentRef.current.getBoundingClientRect();
+-    if (selfRect.bottom > parentRect.bottom) {
+-      // Looks like there's no room to the bottom; grow upwards.
+-      Object.assign(menuRef.current.style, { top: "unset", bottom: "0px" });
+-    }
+-  }, [props.parentRef]);
+   return (
+-    <Box
+-      ref={menuRef}
+-      css={`
+-        position: absolute;
+-        z-index: 100;
+-        right: 0px;
+-        padding: 0;
+-        margin: 0;
+-
+-        ul {
+-          list-style: none;
+-        }
+-      `}
+-    >
+     <Ul column>
+       <li>
+         <StoryMenuButton
+@@ -228,7 +208,6 @@
+           </StoryMenuButton>
+         </li>
+       </Ul>
+-    </Box>
+   );
+ };
+ 
+@@ -257,6 +236,7 @@
+         css={`
+           cursor: move;
+           float: none !important;
++          border: 1px solid #baebf8;
+         `}
+         position="static"
+         style={props.style}
+@@ -270,7 +250,7 @@
+           justifySpaceBetween
+           padded
+           verticalCenter
+-          styledHeight={"40px"}
++          styledHeight={"57px"}
+           backgroundColor={theme.darkWithOverlay}
+           rounded
+           css={`
+@@ -279,11 +259,23 @@
+             border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+           `}
+         >
+-          <Text textLight medium>
++          <div>
++            <TextSpan
++              css={`
++                color: #baebf8;
++                margin-right: 8px;
++              `}
++              medium
++              bold
++            >
++              {props.index + 1}
++            </TextSpan>
++            <TextSpan textLight medium>
+             {story.title && story.title.length > 0
+               ? story.title
+               : t("story.untitledScene")}
+-          </Text>
++            </TextSpan>
++          </div>
+           <Box>
+             {props.recaptureStorySuccessful && (
+               <RawButton>
+@@ -305,17 +297,28 @@
+               />
+             </MenuButton>
+           </Box>
+-          {props.menuOpen && <StoryMenu {...props} storyRef={storyRef} />}
++          {props.menuOpen && (
++            <Box
++              css={`
++                position: absolute;
++                z-index: 100;
++                right: 20px;
++
++                ${calculateOffset(props)(storyRef)}
++                padding: 0;
++                margin: 0;
++
++                ul {
++                  list-style: none;
++                }
++              `}
++            >
++              {renderMenu({ ...props, t })}
+         </Box>
+-        {bodyText.length > 0 && (
+-          <Box paddedRatio={2} paddedHorizontally={3}>
+-            <Text textLight medium>
+-              {bodyText}
+-            </Text>
+-          </Box>
+         )}
+       </Box>
+-      <Spacing bottom={1} />
++      </Box>
++      <Spacing bottom={3} />
+     </>
+   );
+ };
+diff --color -bur -x * ./lib/ReactViews/Story/StoryBuilder.tsx ../../../DemoMap/packages/terriajs/lib/ReactViews/Story/StoryBuilder.tsx
+--- ./lib/ReactViews/Story/StoryBuilder.tsx	2025-01-09 16:17:17
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/Story/StoryBuilder.tsx	2025-01-15 13:54:36
+@@ -424,6 +424,7 @@
+                     closeMenu={() => this.openMenu(undefined)}
+                     editStory={() => this.editStory(story)}
+                     parentRef={this.storiesWrapperRef}
++                    index={index}
+                   />
+                 ))}
+               </Sortable>
+@@ -587,7 +588,7 @@
+   const { t } = useTranslation();
+   return (
+     <Box
+-      backgroundColor={props.theme.darkWithOverlay}
++      backgroundColor={props.theme.darkLighter}
+       position="absolute"
+       rounded
+       paddedVertically={3}
+@@ -602,7 +603,6 @@
+       <Box>
+         <Button
+           denyButton
+-          rounded
+           fullWidth
+           textProps={{
+             large: true,
+diff --color -bur -x * ./lib/ReactViews/Story/StoryEditor.jsx ../../../DemoMap/packages/terriajs/lib/ReactViews/Story/StoryEditor.jsx
+--- ./lib/ReactViews/Story/StoryEditor.jsx	2025-01-13 13:07:18
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/Story/StoryEditor.jsx	2025-01-15 13:54:36
+@@ -4,6 +4,9 @@
+ import Styles from "./story-editor.scss";
+ import { withTranslation } from "react-i18next";
+ import tinymce from "tinymce";
++import Text from "../../Styled/Text";
++import Box from "../../Styled/Box";
++import Button from "../../Styled/Button";
+ 
+ // Lazy load the Editor component as the tinyMCE library is large
+ const Editor = React.lazy(() => import("../Generic/Editor.jsx"));
+@@ -33,6 +36,7 @@
+     this.escKeyListener = null;
+   }
+ 
++  /* eslint-disable-next-line camelcase */
+   UNSAFE_componentWillMount() {
+     const story = this.props.story;
+     this.setState({
+@@ -148,6 +152,15 @@
+       >
+         <div className={Styles.inner}>
+           <div className={Styles.header}>
++            <Text textLight as="h3" css={{ margin: "0" }}>
++              {t("story.editor.modalHeader")}
++            </Text>
++          </div>
++          <label htmlFor="title">
++            <Text small textGreyLighter css={{ marginBottom: "8px" }}>
++              {t("story.editor.titleLabel")}
++            </Text>
++          </label>
+           <input
+             ref={(titleInput) => (this.titleInput = titleInput)}
+             placeholder={t("story.editor.placeholder")}
+@@ -158,25 +171,10 @@
+               value={this.state.title}
+               onChange={this.updateTitle}
+             />
+-            <button
+-              className={Styles.cancelBtn}
+-              onClick={this.cancelEditing}
+-              type="button"
+-              title={t("story.editor.cancelBtn")}
+-            >
+-              {t("story.editor.cancelEditing")}
+-            </button>
+-            <button
+-              disabled={!this.state.title.length}
+-              className={Styles.saveBtn}
+-              onClick={this.saveStory}
+-              type="button"
+-              title={t("story.editor.saveBtn")}
+-            >
+-              {t("story.editor.saveStory")}
+-            </button>
+-          </div>
+           <div className={Styles.body}>
++            <Text small textGreyLighter css={{ marginBottom: "8px" }}>
++              {t("story.editor.descriptionLabel")}
++            </Text>
+             <Suspense fallback={<div>Loading...</div>}>
+               <Editor
+                 html={this.state.text}
+@@ -193,6 +191,34 @@
+               />
+             </Suspense>
+           </div>
++          <Box centered gap={3}>
++            <Button
++              styledWidth={"240px"}
++              transparentBg
++              onClick={this.cancelEditing}
++              type="button"
++              title={t("story.editor.cancelBtn")}
++              textProps={{
++                textGreyLighter: true,
++                medium: true
++              }}
++            >
++              {t("story.editor.cancelEditing")}
++            </Button>
++            <Button
++              styledWidth={"240px"}
++              primary
++              disabled={!this.state.title.length}
++              onClick={this.saveStory}
++              type="button"
++              title={t("story.editor.saveBtn")}
++              textProps={{
++                medium: true
++              }}
++            >
++              {t("story.editor.saveStory")}
++            </Button>
++          </Box>
+         </div>
+       </div>
+     );
+diff --color -bur -x * ./lib/ReactViews/Story/StoryPanel/StoryBody.tsx ../../../DemoMap/packages/terriajs/lib/ReactViews/Story/StoryPanel/StoryBody.tsx
+--- ./lib/ReactViews/Story/StoryPanel/StoryBody.tsx	2024-12-18 14:25:56
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/Story/StoryPanel/StoryBody.tsx	2025-01-15 13:54:36
+@@ -9,6 +9,8 @@
+   paddedVertically: props.isCollapsed ? 0 : 2,
+   scroll: true
+ }))<{ isCollapsed: boolean }>`
++  background-color: ${(props) => props.theme.transparentDark}
++  backdrop-filter: ${(props) => props.theme.blur}
+   padding-top: 0;
+   max-height: ${(props) => (props.isCollapsed ? 0 : "100px")};
+   @media (min-height: 700px) {
+diff --color -bur -x * ./lib/ReactViews/Story/StoryPanel/StoryButtons.tsx ../../../DemoMap/packages/terriajs/lib/ReactViews/Story/StoryPanel/StoryButtons.tsx
+--- ./lib/ReactViews/Story/StoryPanel/StoryButtons.tsx	2024-12-18 14:25:56
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/Story/StoryPanel/StoryButtons.tsx	2025-01-15 13:54:36
+@@ -19,7 +19,11 @@
+       onClick={onClick}
+     >
+       {isCollapsed ? (
+-        <StoryIcon styledWidth={"20px"} glyph={Icon.GLYPHS.info} />
++        <StoryIcon
++          styledWidth={"12px"}
++          glyph={Icon.GLYPHS.arrowDown}
++          rotation={180}
++        />
+       ) : (
+         <StoryIcon styledWidth={"12px"} glyph={Icon.GLYPHS.arrowDown} />
+       )}
+@@ -37,7 +41,7 @@
+         glyph={Icon.GLYPHS.close}
+         css={`
+           border-radius: 50%;
+-          border: 2px solid ${theme.textDark};
++          border: 2px solid white;
+           padding: 2px;
+           &:hover {
+             border-color: ${theme.colorPrimary};
+@@ -49,7 +53,7 @@
+ };
+ 
+ export const StoryIcon = styled(StyledIcon).attrs((props) => ({
+-  fillColor: props.theme.textDark,
++  fillColor: "white",
+   opacity: 0.5
+ }))`
+   &:hover {
+diff --color -bur -x * ./lib/ReactViews/Story/StoryPanel/StoryFooterBar.tsx ../../../DemoMap/packages/terriajs/lib/ReactViews/Story/StoryPanel/StoryFooterBar.tsx
+--- ./lib/ReactViews/Story/StoryPanel/StoryFooterBar.tsx	2024-12-18 14:25:56
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/Story/StoryPanel/StoryFooterBar.tsx	2025-01-15 13:54:36
+@@ -54,7 +54,7 @@
+             <StoryIcon
+               displayInline
+               styledWidth="15px"
+-              fillColor={theme.grey}
++              fillColor={"white"}
+               glyph={Icon.GLYPHS.left}
+             />
+             <Text medium>{t("story.prev")}</Text>
+@@ -68,7 +68,7 @@
+             displayInline
+             styledWidth="15px"
+             glyph={Icon.GLYPHS.menu}
+-            fillColor={theme.grey}
++            fillColor={"white"}
+           />
+         </FooterButton>
+         <Box paddedRatio={3}>
+@@ -96,7 +96,7 @@
+                   displayInline
+                   styledWidth="15px"
+                   glyph={Icon.GLYPHS.revert}
+-                  fillColor={theme.grey}
++                  fillColor={"white"}
+                 />
+               </>
+             ) : (
+@@ -106,7 +106,7 @@
+                   displayInline
+                   styledWidth="15px"
+                   glyph={Icon.GLYPHS.right}
+-                  fillColor={theme.grey}
++                  fillColor={"white"}
+                 />
+               </>
+             )}
+diff --color -bur -x * ./lib/ReactViews/Story/StoryPanel/StoryPanel.tsx ../../../DemoMap/packages/terriajs/lib/ReactViews/Story/StoryPanel/StoryPanel.tsx
+--- ./lib/ReactViews/Story/StoryPanel/StoryPanel.tsx	2024-12-18 14:25:56
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/Story/StoryPanel/StoryPanel.tsx	2025-01-15 13:54:36
+@@ -254,23 +254,39 @@
+               @media (min-width: 992px) {
+                 max-width: 60vw;
+               }
++              border-radius: 6px;
++              overflow: hidden;
+             `}
+           >
+-            <Box paddedHorizontally={3} paddedVertically={2.4} column>
++            <Box
++              backgroundColor={this.props.theme.dark}
++              css={{ color: "white" }}
++              paddedRatio={3}
++              column
++            >
+               <TitleBar
+                 title={story.title}
+                 isCollapsed={this.state.isCollapsed}
+                 collapseHandler={() => this.toggleCollapse()}
+                 closeHandler={() => this.exitStory()}
+               />
++            </Box>
++            <Box
++              paddedRatio={3}
++              backgroundColor={this.props.theme.dark}
++              css={{
++                backgroundColor: this.props.theme.transparentDark,
++                color: "white"
++              }}
++            >
+               <StoryBody isCollapsed={this.state.isCollapsed} story={story} />
+             </Box>
+-            <Hr
++            <Box
++              backgroundColor={this.props.theme.dark}
++              css={{ color: "white" }}
++              paddedHorizontally={3}
+               fullWidth
+-              size={1}
+-              borderBottomColor={this.props.theme.greyLighter}
+-            />
+-            <Box paddedHorizontally={3} fullWidth>
++            >
+               <FooterBar
+                 goPrev={() => this.goToPrevStory()}
+                 goNext={() => this.goToNextStory()}
+diff --color -bur -x * ./lib/ReactViews/Story/StoryPanel/TitleBar.tsx ../../../DemoMap/packages/terriajs/lib/ReactViews/Story/StoryPanel/TitleBar.tsx
+--- ./lib/ReactViews/Story/StoryPanel/TitleBar.tsx	2024-12-12 12:56:09
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/Story/StoryPanel/TitleBar.tsx	2025-01-15 13:54:36
+@@ -1,6 +1,6 @@
+ import React from "react";
+ import { useTranslation } from "react-i18next";
+-import styled from "styled-components";
++import styled, { useTheme } from "styled-components";
+ import Box from "../../../Styled/Box";
+ import Text from "../../../Styled/Text";
+ import { CollapseBtn, ExitBtn } from "./StoryButtons";
+@@ -11,10 +11,11 @@
+   verticalCenter: true
+ })``;
+ 
+-const ClampedTitle = styled(Text).attrs({ as: "h3", bold: true })`
++const ClampedTitle = styled(Text).attrs({ as: "h3" })`
+   /* clamp fallback */
+   white-space: nowrap;
+   text-overflow: ellipsis;
++  font-weight: 500;
+ 
+   overflow: hidden;
+   padding: 0;
+diff --color -bur -x * ./lib/ReactViews/Story/story-editor.scss ../../../DemoMap/packages/terriajs/lib/ReactViews/Story/story-editor.scss
+--- ./lib/ReactViews/Story/story-editor.scss	2025-01-09 16:17:17
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/Story/story-editor.scss	2025-01-15 13:54:36
+@@ -11,7 +11,7 @@
+   left: 0;
+   right: 0;
+   bottom: 0;
+-  z-index: 2;
++  z-index: 100;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+@@ -22,25 +22,26 @@
+   .inner {
+     max-width: 800px;
+     width: 80vw;
+-    background: #ffffff;
++    background: $dark;
+     z-index: 9999;
+     margin: 0 auto;
+     color: $text-dark;
+-    box-shadow: 0 0 15px 6px rgba(100, 100, 100, 0.3);
+-    border-radius: 4px;
+-    padding: 6px;
++    // box-shadow: 0 0 15px 6px rgba(100, 100, 100, 0.3);
++    border: 1px solid $dark-lighter;
++    border-radius: 6px;
++    padding: 15px;
+   }
+   .header {
+-    display: flex;
+-    align-items: baseline;
+-    padding: $padding;
+-    border-bottom: 1px solid $field-border;
++    border-bottom: 1px solid $dark-lighter;
++    margin-bottom: 15px;
++    padding-bottom: 15px;
+   }
+   .body {
+     min-height: 150px;
+     p {
+       margin-top: 0;
+     }
++    margin-bottom: 15px;
+   }
+ }
+ 
+@@ -49,7 +50,7 @@
+   color: $text-light;
+   font-family: $font-pop;
+   margin: $padding-small;
+-  border-radius: 4px;
++  border-radius: 6px;
+   .editorHeader {
+     padding: $padding;
+     border-bottom: 1px solid $overlay;
+@@ -63,7 +64,12 @@
+   composes: field from "../../Sass/common/_form.scss";
+   border: 0;
+   margin-right: $padding;
+-  padding: 0 !important;
++  padding-left: 15px !important;
++  margin-bottom: 15px;
++  border-radius: 6px;
++  background: $dark-mid;
++  border: 1px solid $dark-lighter;
++  color: white;
+ }
+ 
+ .fieldBtn {
+@@ -84,13 +90,14 @@
+ }
+ 
+ .saveBtn {
+-  width: auto;
+-  padding: 5px 15px;
++  composes: btn from "../../Sass/common/_buttons.scss";
++  composes: btn--primary from "../../Sass/common/_buttons.scss";  
++  padding: 15px 15px;
+ }
+ .cancelBtn {
+   composes: btn from "../../Sass/common/_buttons.scss";
+-  composes: btn--secondary from "../../Sass/common/_buttons.scss";
+-  padding: 5px 15px;
+-  margin-right: $padding;
+-  border: 2px solid #ffffff;
++  composes: btn--transparent from "../../Sass/common/_buttons.scss";  
++  border: none;
++  background: $dark-mid;  
++  padding: 15px;
+ }
+diff --color -bur -x * ./lib/ReactViews/Story/story-panel.scss ../../../DemoMap/packages/terriajs/lib/ReactViews/Story/story-panel.scss
+--- ./lib/ReactViews/Story/story-panel.scss	2024-12-18 14:25:56
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/Story/story-panel.scss	2025-01-15 13:54:36
+@@ -10,12 +10,16 @@
+   width: 100%;
+   min-height: 2em;
+   max-width: 1200px;
+-  background-color: #ffffff;
+   color: $text-dark;
+   text-align: left;
+   box-sizing: border-box;
+-  box-shadow: 0 0 15px 6px rgba(100, 100, 100, 0.3);
++  box-shadow: 0px 1px 0px 0px #1F2937 inset;
++  border-radius: 6px;
+ 
++  a,a:visited,a:focus {
++    color: $color-primary;
++  }
++
+   &.is-mounted {
+     opacity: 1;
+     @include transform(none);
+@@ -40,18 +44,6 @@
+       color: #ffffff;
+       border: 1px solid rgba(#ffffff, 0.1);
+       text-align: center;
+-    }
+-    .tjs-notification-window__footer {
+-      display: flex;
+-      border-top: 1px solid rgba(#ffffff, 0.8);
+-      button {
+-        color: #ffffff;
+-        background-color: transparent;
+-        font-weight: bold;
+-        &:first-of-type {
+-          border-right: 1px solid rgba(#ffffff, 0.8);
+-        }
+-      }
+     }
+   }
+ }
+diff --color -bur -x * ./lib/ReactViews/Workbench/Controls/DateTimeSelectorSection.tsx ../../../DemoMap/packages/terriajs/lib/ReactViews/Workbench/Controls/DateTimeSelectorSection.tsx
+--- ./lib/ReactViews/Workbench/Controls/DateTimeSelectorSection.tsx	2024-12-12 12:56:09
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/Workbench/Controls/DateTimeSelectorSection.tsx	2025-01-15 13:54:36
+@@ -4,7 +4,7 @@
+ import { observer } from "mobx-react";
+ import React from "react";
+ import { WithTranslation, withTranslation } from "react-i18next";
+-import styled from "styled-components";
++import styled, { DefaultTheme, withTheme } from "styled-components";
+ import JulianDate from "terriajs-cesium/Source/Core/JulianDate";
+ import isDefined from "../../../Core/isDefined";
+ import DiscretelyTimeVaryingMixin from "../../../ModelMixins/DiscretelyTimeVaryingMixin";
+@@ -24,6 +24,7 @@
+ interface IProps extends WithTranslation {
+   item: DiscretelyTimeVaryingMixin.Instance;
+   t: TFunction;
++  theme: DefaultTheme;
+ }
+ 
+ @observer
+@@ -161,9 +162,9 @@
+           {item.timeLabel ?? t("dateTime.selectorLabel")}
+         </Text>
+         <Spacing bottom={1} />
+-        <Box fullWidth justifySpaceBetween styledHeight={"30px"} gap>
++        <Box fullWidth justifySpaceBetween styledHeight={"40px"} gap>
+           <Box
+-            backgroundColor="rgba(250, 250, 250, 0.2)"
++            backgroundColor={this.props.theme.darkLighter}
+             css={`
+               border-radius: 2px;
+               flex-grow: 1;
+@@ -178,7 +179,11 @@
+                 border-radius: 2px 0 0 2px;
+               `}
+             >
+-              <StyledIcon glyph={GLYPHS.previous} styledWidth={"8px"} />
++              <StyledIcon
++                fillColor={this.props.theme.grey}
++                glyph={GLYPHS.previous}
++                styledWidth={"8px"}
++              />
+             </StyledButton>
+             <StyledButton
+               onClick={this.toggleOpen}
+@@ -189,7 +194,7 @@
+                 padding: 0 10px;
+               `}
+             >
+-              <TextSpan large textLight id="current-date">
++              <TextSpan textLight id="current-date">
+                 {isDefined(discreteTime)
+                   ? discreteTime
+                   : t("dateTime.outOfRange")}
+@@ -282,4 +287,4 @@
+   `}
+ `;
+ 
+-export default withTranslation()(DateTimeSelectorSection);
++export default withTranslation()(withTheme(DateTimeSelectorSection));
+diff --color -bur -x * ./lib/ReactViews/Workbench/Controls/OpacitySection.tsx ../../../DemoMap/packages/terriajs/lib/ReactViews/Workbench/Controls/OpacitySection.tsx
+--- ./lib/ReactViews/Workbench/Controls/OpacitySection.tsx	2025-01-13 13:04:39
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/Workbench/Controls/OpacitySection.tsx	2025-01-15 13:54:36
+@@ -1,10 +1,12 @@
++"use strict";
++
+ import { TFunction } from "i18next";
+ import { runInAction } from "mobx";
+ import { observer } from "mobx-react";
+ import Slider from "rc-slider";
+ import React from "react";
+ import { WithTranslation, withTranslation } from "react-i18next";
+-import styled from "styled-components";
++import styled, { DefaultTheme, withTheme } from "styled-components";
+ import CommonStrata from "../../../Models/Definition/CommonStrata";
+ import hasTraits from "../../../Models/Definition/hasTraits";
+ import { BaseModel } from "../../../Models/Definition/Model";
+@@ -16,6 +18,7 @@
+ interface OpacitySectionProps extends WithTranslation {
+   item: BaseModel;
+   t: TFunction;
++  theme: DefaultTheme;
+ }
+ 
+ @observer
+@@ -44,10 +47,8 @@
+       return null;
+     }
+     return (
+-      <>
+-        <Spacing bottom={2} />
+-        <Box verticalCenter>
+-          <StyledLabel small htmlFor="opacity">
++      <Box verticalCenter paddedHorizontally={3} paddedVertically={2}>
++        <StyledLabel medium htmlFor="opacity">
+           {t("workbench.opacity", {
+             opacity: Math.round(item.opacity * 100)
+           })}
+@@ -60,7 +61,6 @@
+             onChange={this.changeOpacity}
+           />
+         </Box>
+-      </>
+     );
+   }
+ }
+@@ -70,4 +70,4 @@
+   flex-basis: 50%;
+ `;
+ 
+-export default withTranslation()(OpacitySection);
++export default withTranslation()(withTheme(OpacitySection));
+diff --color -bur -x * ./lib/ReactViews/Workbench/Controls/ShortReport.tsx ../../../DemoMap/packages/terriajs/lib/ReactViews/Workbench/Controls/ShortReport.tsx
+--- ./lib/ReactViews/Workbench/Controls/ShortReport.tsx	2024-12-18 14:25:56
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/Workbench/Controls/ShortReport.tsx	2025-01-15 13:54:36
+@@ -59,10 +59,10 @@
+     }
+ 
+     return (
+-      <Box fullWidth displayInlineBlock padded>
++      <Box fullWidth displayInlineBlock>
+         {/* Show shortReport */}
+         {isDefined(item.shortReport) && (
+-          <Text textLight medium>
++          <Text textGreyLighter medium>
+             {parseCustomMarkdownToReact(item.shortReport, {
+               catalogItem: item
+             })}
+@@ -87,7 +87,7 @@
+                   })}
+                 </Collapsible>
+               ) : (
+-                <Text textLight medium>
++                <Text textGreyLighter medium>
+                   {parseCustomMarkdownToReact(r.name!, {
+                     catalogItem: item
+                   })}
+diff --color -bur -x * ./lib/ReactViews/Workbench/Controls/ViewingControls.tsx ../../../DemoMap/packages/terriajs/lib/ReactViews/Workbench/Controls/ViewingControls.tsx
+--- ./lib/ReactViews/Workbench/Controls/ViewingControls.tsx	2025-01-13 13:04:39
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/Workbench/Controls/ViewingControls.tsx	2025-01-15 13:54:36
+@@ -73,7 +73,7 @@
+ 
+   border-radius: 0;
+ 
+-  width: 114px;
++  width: 124px;
+   // ensure we support long strings
+   min-height: 32px;
+   display: block;
+diff --color -bur -x * ./lib/ReactViews/Workbench/Controls/legend.scss ../../../DemoMap/packages/terriajs/lib/ReactViews/Workbench/Controls/legend.scss
+--- ./lib/ReactViews/Workbench/Controls/legend.scss	2024-12-18 14:25:56
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/Workbench/Controls/legend.scss	2025-01-15 13:54:36
+@@ -23,7 +23,7 @@
+ }
+ 
+ .legend__inner {
+-  padding: $padding 0 0 0;
++  padding: 0;
+   a {
+     // Only the actual legend should be clickable rather than the whole area
+     display: inline-block;
+@@ -77,7 +77,7 @@
+ }
+ 
+ .legendTitles {
+-  font-size: 12px;
++  font-size: 14px;
+   line-height: $legend-item-height;
+   padding-left: 5px;
+ }
+diff --color -bur -x * ./lib/ReactViews/Workbench/Controls/timer-section.scss ../../../DemoMap/packages/terriajs/lib/ReactViews/Workbench/Controls/timer-section.scss
+--- ./lib/ReactViews/Workbench/Controls/timer-section.scss	2025-01-09 16:17:17
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/Workbench/Controls/timer-section.scss	2025-01-15 13:54:36
+@@ -4,7 +4,7 @@
+   background: $dark;
+   margin-top: 10px;
+   display: flex;
+-  padding: $padding;
++  padding: 0 $padding;
+   // align-items: center;
+   align-content: flex-start;
+ 
+diff --color -bur -x * ./lib/ReactViews/Workbench/Workbench.tsx ../../../DemoMap/packages/terriajs/lib/ReactViews/Workbench/Workbench.tsx
+--- ./lib/ReactViews/Workbench/Workbench.tsx	2025-01-14 15:36:39
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/Workbench/Workbench.tsx	2025-01-15 13:54:36
+@@ -70,6 +70,7 @@
+   render() {
+     const { t } = this.props;
+     const shouldExpandAll = this.props.terria.workbench.shouldExpandAll;
++
+     // show enable all button if some items are disabled
+     const showEnableAll = this.props.terria.workbench.items
+       .filter((it): it is MappableMixin.Instance =>
+@@ -78,7 +79,7 @@
+       .every((it) => !it.show);
+ 
+     return (
+-      <Box column fullWidth styledMinHeight={"0"} flex="1">
++      <Box column fullWidth styledMinHeight={"0"} flex={1}>
+         <BadgeBar
+           label={t("workbench.label")}
+           badge={this.props.terria.workbench.items.length}
+diff --color -bur -x * ./lib/ReactViews/Workbench/WorkbenchItem.tsx ../../../DemoMap/packages/terriajs/lib/ReactViews/Workbench/WorkbenchItem.tsx
+--- ./lib/ReactViews/Workbench/WorkbenchItem.tsx	2025-01-09 16:17:17
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/Workbench/WorkbenchItem.tsx	2025-01-15 13:54:36
+@@ -175,16 +175,15 @@
+           ) : null}
+         </Box>
+         {this.isOpen && (
+-          <>
+-            <Spacing
+-              bottom={3}
+-              css={`
+-                margin-left: 15px;
+-                margin-right: 15px;
+-                border-top: 1px solid ${this.props.theme.darkLighter};
+-              `}
+-            />
+-            <Box column paddedHorizontally={3}>
++          <Box
++            column
++            gap={3}
++            paddedRatio={3}
++            css={{
++              borderTop: `1px solid ${this.props.theme.darkLighter}`,
++              color: this.props.theme.greyLighter
++            }}
++          >
+             <WorkbenchItemControls
+               item={this.props.item}
+               viewState={this.props.viewState}
+@@ -195,8 +194,6 @@
+                 </Box>
+               ) : null}
+             </Box>
+-            <Spacing bottom={2} />
+-          </>
+         )}
+       </StyledLi>
+     );
+diff --color -bur -x * ./lib/ReactViews/Workbench/WorkbenchList.tsx ../../../DemoMap/packages/terriajs/lib/ReactViews/Workbench/WorkbenchList.tsx
+--- ./lib/ReactViews/Workbench/WorkbenchList.tsx	2025-01-13 13:06:50
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/Workbench/WorkbenchList.tsx	2025-01-15 13:54:36
+@@ -33,7 +33,7 @@
+ 
+   @action.bound
+   onSort(
+-    _sortedArray: any,
++    sortedArray: any,
+     currentDraggingSortData: any,
+     currentDraggingIndex: any
+   ) {
+@@ -53,7 +53,6 @@
+           padding: 0 15px;
+         `}
+         fullWidth
+-        fullHeight
+         column
+         flex="1"
+       >
+diff --color -bur -x * ./lib/ReactViews/Workbench/WorkbenchSplitScreen.tsx ../../../DemoMap/packages/terriajs/lib/ReactViews/Workbench/WorkbenchSplitScreen.tsx
+--- ./lib/ReactViews/Workbench/WorkbenchSplitScreen.tsx	2024-12-18 14:25:56
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/Workbench/WorkbenchSplitScreen.tsx	2025-01-15 13:54:36
+@@ -37,6 +37,7 @@
+             background: ${theme.darkWithOverlay};
+             color: ${theme.textLight};
+             border-radius: 2px;
++            flex-basis: 145px;
+           `}
+         >
+           <Box
+@@ -67,13 +68,17 @@
+             </RawButton>
+           </Box>
+ 
+-          <Box fullWidth paddedHorizontally>
++          <Box fullWidth paddedRatio={3}>
+             <TerrainSide
+               terria={terria}
+               spaced={false}
+               buttonProps={{
+                 css: `border: 0;
+                 padding: 8px 0;
++                border-radius: 3px;
++                &:nth-of-type(even) {
++                  border-radius: 0;
++                }
+               `
+               }}
+               activeColor={theme.colorSecondary}
+diff --color -bur -x * ./lib/ReactViews/Workflow/Panel.tsx ../../../DemoMap/packages/terriajs/lib/ReactViews/Workflow/Panel.tsx
+--- ./lib/ReactViews/Workflow/Panel.tsx	2024-12-12 12:56:09
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/Workflow/Panel.tsx	2025-01-15 13:54:36
+@@ -38,7 +38,12 @@
+ 
+   return props.title && props.collapsible ? (
+     <Wrapper className={props.className}>
+-      <CollapsibleTitleBar onClick={toggleOpen} fullWidth isOpen={isOpen}>
++      <CollapsibleTitleBar
++        onClick={toggleOpen}
++        fullWidth
++        isOpen={isOpen}
++        css={{ paddingBottom: isOpen ? "15px" : "0px" }}
++      >
+         {props.icon !== undefined ? (
+           <Icon glyph={props.icon} styledWidth="16px" styledHeight="16px" />
+         ) : null}
+@@ -76,6 +81,7 @@
+       fullWidth
+       isOpen={false}
+       activeStyles
++      css={{ paddingBottom: "0px" }}
+     >
+       <Title css={{ textAlign: "center" }}>{title}</Title>
+     </CollapsibleTitleBar>
+@@ -84,9 +90,9 @@
+ 
+ const Wrapper = styled.div`
+   background-color: ${(p) => p.theme.darkWithOverlay};
+-  margin: 10px 5px 0px 5px;
++  margin: 15px 15px 0px 15px;
++  padding: 15px;
+   border-radius: 5px;
+-  border: 1px solid rgba(255, 255, 255, 0.15);
+ `;
+ 
+ const TitleBar = styled.div`
+@@ -96,7 +102,7 @@
+   justify-content: space-between;
+   align-items: center;
+   border-bottom: 1px solid ${(p) => p.theme.darkLighter};
+-  padding-left: 0.4em;
++  padding-bottom: 15px;
+ `;
+ 
+ const CollapsibleTitleBar = styled(RawButton)<
+@@ -108,17 +114,16 @@
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
++  padding-bottom: 15px;
+   ${(p) => (p.isOpen ? `border-bottom: 1px solid ${p.theme.darkLighter}` : "")};
+-  padding-left: 0.4em;
+-  padding-right: 0.4em;
+ `;
+ 
+ const Title = styled(Text).attrs({
+   textLight: true,
+-  bold: true
++  medium: true
+ })`
+   flex-grow: 1;
+-  padding: 1em 0.4em;
++  // padding: 15px 15px;
+ `;
+ 
+ const Icon = styled(StyledIcon).attrs({
+@@ -128,6 +133,5 @@
+ })``;
+ 
+ const Content = styled.div`
+-  padding: 0.4em;
+   color: ${(p) => p.theme.textLight};
+ `;
+diff --color -bur -x * ./lib/ReactViews/Workflow/WorkflowPanel.tsx ../../../DemoMap/packages/terriajs/lib/ReactViews/Workflow/WorkflowPanel.tsx
+--- ./lib/ReactViews/Workflow/WorkflowPanel.tsx	2025-01-09 16:17:17
++++ ../../../DemoMap/packages/terriajs/lib/ReactViews/Workflow/WorkflowPanel.tsx	2025-01-15 13:54:36
+@@ -62,6 +62,7 @@
+         </Content>
+         {props.footer ? (
+           <PanelButton
++            css={{ marginBottom: "15px" }}
+             onClick={props.footer.onClick}
+             title={props.footer.buttonText}
+           />
+@@ -141,12 +142,14 @@
+   flex-direction: column;
+   min-height: 0;
+   padding-bottom: 4em;
+-  ${addTerriaScrollbarStyles()}
++  ${(p) => addTerriaScrollbarStyles(p)}
+ `;
+ 
+ const CloseButton = styled(Button).attrs({
+   primary: true
+-})``;
++})`
++  font-size: 14px;
++`;
+ 
+ const Error = styled.div`
+   display: flex;
+diff --color -bur -x * ./lib/Sass/common/_base.scss ../../../DemoMap/packages/terriajs/lib/Sass/common/_base.scss
+--- ./lib/Sass/common/_base.scss	2025-01-09 16:17:17
++++ ../../../DemoMap/packages/terriajs/lib/Sass/common/_base.scss	2025-01-15 13:54:36
+@@ -360,7 +360,7 @@
+   -ms-flex: 1 1 auto;
+   flex: 1 1 auto;
+   min-width: 0;
+-  min-height: 0;
++  // min-height: 0;
+ }
+ 
+ .flex-grow {
+@@ -469,16 +469,19 @@
+   -webkit-overflow-scrolling: touch;
+ 
+   &::-webkit-scrollbar {
+-    width: 10px; /* for vertical scrollbars */
++    width: 5px; /* for vertical scrollbars */
+     height: 8px; /* for horizontal scrollbars */
+   }
+ 
+   &::-webkit-scrollbar-track {
+     background: $scrollbar-track-color;
++    border-radius: $radius-large;
++    
+   }
+ 
+   &::-webkit-scrollbar-thumb {
+     background: $scrollbar-color;
++    border-radius: $radius-large;
+   }
+ }
+ 
+diff --color -bur -x * ./lib/Sass/common/_variables.scss ../../../DemoMap/packages/terriajs/lib/Sass/common/_variables.scss
+--- ./lib/Sass/common/_variables.scss	2025-01-13 16:01:26
++++ ../../../DemoMap/packages/terriajs/lib/Sass/common/_variables.scss	2025-01-15 13:54:36
+@@ -4,30 +4,29 @@
+ 
+ $font-pop: "Inter", sans-serif;
+ $font-base: "Inter", sans-serif;
+ $font-mono: monospace;
+ $font-feature-info: $font-mono;
+ $font: $font-base;
+ 
+ $color-primary: #35a7c4;
+ $color-primary-disabled: #595b60;
+-
+ @function get-hover-color($base-color) {
+   @return color.adjust($base-color, $lightness: 10%);
+ }
++$color-secondary: #F59E0B;
+ 
+-$color-secondary: #f59e0b;
+-
+ $animation-fast: 0.1s;
+ 
+-$transparent-dark: #111827bf;
++$transparent-dark: #111827BF; 
+ 
+ $blur: blur(5px);
+ 
+ $dark: #111827;
+ $dark-with-overlay: #111827;
++$dark-mid: #1F2937;
+ $dark-lighter: #374151;
+-$grey: #888888;
+-$grey-lighter: #ddd;
++$grey: #9CA3AF;
++$grey-lighter: #D1D5DB;
+ // todo: Fix during overhaul
+ $grey-lighter2: #e6e6e6;
+ $grey-lightest: #f2f2f2;
+@@ -56,15 +55,12 @@
+   @if variable-exists(text-link) {
+     @return $text-link;
+   }
+-
+   @return $color-primary;
+ }
+-
+ @function get-visited-link-color($bg-color) {
+   @if variable-exists(text-visited-link) {
+     @return $text-visited-link;
+   }
+-
+   @return get-link-color($bg-color);
+ }
+ 
+@@ -184,7 +180,7 @@
+ $chart-preview-line-color: $chart-line-color;
+ $chart-darker: color.adjust($dark, $lightness: -8%);
+ $chart-panel-background: $dark;
+-$chart-panel-header: $chart-darker;
++$chart-panel-header: $dark-with-overlay;
+ 
+ $charcoal-grey: #3f4854;
+ $turquoise-blue: #08abd5;
+@@ -201,4 +197,4 @@
+ $tool-primary-color: $color-primary;
+ 
+ $scrollbar-color: $color-primary;
+-$scrollbar-track-color: $dark;
++$scrollbar-track-color: transparent;
+diff --color -bur -x * ./lib/Sass/exports/_variables-export.scss ../../../DemoMap/packages/terriajs/lib/Sass/exports/_variables-export.scss
+--- ./lib/Sass/exports/_variables-export.scss	2025-01-09 16:17:17
++++ ../../../DemoMap/packages/terriajs/lib/Sass/exports/_variables-export.scss	2025-01-15 13:54:36
+@@ -54,6 +54,7 @@
+   blur: $blur;
+   dark: $dark;
+   darkWithOverlay: $dark-with-overlay;
++  darkMid: $dark-mid;
+   darkLighter: $dark-lighter;
+   grey: $grey;
+   greyLighter: $grey-lighter;
+diff --color -bur -x * ./lib/Sass/global/_slider.scss ../../../DemoMap/packages/terriajs/lib/Sass/global/_slider.scss
+--- ./lib/Sass/global/_slider.scss	2024-12-12 12:56:09
++++ ../../../DemoMap/packages/terriajs/lib/Sass/global/_slider.scss	2025-01-15 13:54:36
+@@ -8,7 +8,7 @@
+     width: 2px;
+     border-radius: 1px;
+     border: none;
+-    background-color: #8b919b;
++    background-color: $color-primary;
+     height: 10px;
+     bottom: -4px;
+     margin-left: -2px;
+@@ -23,11 +23,12 @@
+     border: 0;
+     width: 12px;
+     height: 12px;
++    background-color: $color-primary;
+   }
+   .rc-slider-rail {
+     background-color: #8b919b;
+   }
+   .rc-slider-track {
+-    background-color: #ffffff;
++    background-color: $color-primary;
+   }
+ }
+diff --color -bur -x * ./lib/Styled/Box.tsx ../../../DemoMap/packages/terriajs/lib/Styled/Box.tsx
+--- ./lib/Styled/Box.tsx	2025-01-09 16:17:17
++++ ../../../DemoMap/packages/terriajs/lib/Styled/Box.tsx	2025-01-15 13:54:36
+@@ -228,12 +228,13 @@
+     -webkit-overflow-scrolling: touch;
+ 
+     &::-webkit-scrollbar {
+-      width: 10px; /* for vertical scrollbars */
++      width: 5px; /* for vertical scrollbars */
+       height: 8px; /* for horizontal scrollbars */
+     }
+ 
+     &::-webkit-scrollbar-track { 
+       background: ${props.theme.scrollbarTrackColor};
++      border-radius: ${props.theme.radiusLarge};
+     }
+ 
+     &::-webkit-scrollbar-thumb {
+diff --color -bur -x * ./lib/Styled/Input.tsx ../../../DemoMap/packages/terriajs/lib/Styled/Input.tsx
+--- ./lib/Styled/Input.tsx	2024-12-18 14:25:56
++++ ../../../DemoMap/packages/terriajs/lib/Styled/Input.tsx	2025-01-15 13:54:36
+@@ -112,11 +112,13 @@
+   }
+ 
+   &::-webkit-scrollbar-track {
+-    background: rgba(136, 136, 136, 0.1);
++    background: ${(props) => props.theme.scrollbarTrackColor};
++    border-radius: ${(props) => props.theme.radiusLarge};
+   }
+ 
+   &::-webkit-scrollbar-thumb {
+-    background: rgba(136, 136, 136, 0.6);
++    background: ${(props) => props.theme.scrollbarColor};
++    border-radius: ${(props) => props.theme.radiusLarge};
+   }
+ `;
+ 
+diff --color -bur -x * ./lib/Styled/Text.tsx ../../../DemoMap/packages/terriajs/lib/Styled/Text.tsx
+--- ./lib/Styled/Text.tsx	2024-12-18 14:25:56
++++ ../../../DemoMap/packages/terriajs/lib/Styled/Text.tsx	2025-01-15 13:54:36
+@@ -19,6 +19,7 @@
+   textLightDimmed?: boolean;
+   textDark?: boolean;
+   textDarker?: boolean;
++  textGreyLighter?: boolean;
+ }
+ 
+ interface ITextWeight {
+@@ -100,6 +101,13 @@
+     `
+     color: ${props.theme.textLightDimmed};
+   `}
++
++  ${(props) =>
++    props.textGreyLighter &&
++    `
++    color: ${props.theme.greyLighter};
++  `}
++
+   ${(props) =>
+     props.textDark &&
+     `

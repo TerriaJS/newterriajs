@@ -69,6 +69,7 @@ class Workbench extends React.Component<IProps> {
   render() {
     const { t } = this.props;
     const shouldExpandAll = this.props.terria.workbench.shouldExpandAll;
+
     // show enable all button if some items are disabled
     const showEnableAll = this.props.terria.workbench.items
       .filter((it): it is MappableMixin.Instance =>
@@ -77,7 +78,7 @@ class Workbench extends React.Component<IProps> {
       .every((it) => !it.show);
 
     return (
-      <Box column fullWidth styledMinHeight={"0"} flex="1">
+      <Box column fullWidth styledMinHeight={"0"} flex={1}>
         <BadgeBar
           label={t("workbench.label")}
           badge={this.props.terria.workbench.items.length}

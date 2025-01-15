@@ -53,7 +53,6 @@ class WorkbenchList extends React.Component<IProps> {
           padding: 0 15px;
         `}
         fullWidth
-        fullHeight
         column
         flex="1"
       >

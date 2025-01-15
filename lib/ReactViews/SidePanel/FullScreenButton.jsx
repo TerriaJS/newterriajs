@@ -84,6 +84,9 @@ class FullScreenButton extends React.Component {
               : `width: 100%; border-radius: 0;`}
           `}
           primary
+          textProps={{
+            medium: true
+          }}
           onClick={() => this.toggleFullScreen()}
           aria-label={
             this.props.viewState.isMapFullScreen

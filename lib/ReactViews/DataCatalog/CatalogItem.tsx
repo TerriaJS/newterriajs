@@ -20,8 +20,8 @@ export enum ButtonState {
 
 const STATE_TO_ICONS: Record<ButtonState, React.ReactElement> = {
   [ButtonState.Loading]: <Icon glyph={Icon.GLYPHS.loader} />,
-  [ButtonState.Remove]: <Icon glyph={Icon.GLYPHS.remove} />,
-  [ButtonState.Add]: <Icon glyph={Icon.GLYPHS.add} />,
+  [ButtonState.Remove]: <Icon glyph={Icon.GLYPHS.minus} />,
+  [ButtonState.Add]: <Icon glyph={Icon.GLYPHS.plus} />,
   [ButtonState.Trash]: <Icon glyph={Icon.GLYPHS.trashcan} />,
   [ButtonState.Stats]: <Icon glyph={Icon.GLYPHS.barChart} />,
   [ButtonState.Preview]: <Icon glyph={Icon.GLYPHS.right} />
@@ -103,8 +103,9 @@ const ItemTitleButton = styled(RawButton)<{
   text-align: left;
   word-break: normal;
   overflow-wrap: anywhere;
-  padding: 8px;
+  padding: 15px;
   width: 100%;
+  font-size: 0.9rem;
 
   &:focus,
   &:hover {
@@ -123,10 +124,10 @@ const ItemTitleButton = styled(RawButton)<{
 
 const ActionButton = styled(RawButton)`
   svg {
-    height: 20px;
-    width: 20px;
+    height: 12px;
+    width: 12px;
     margin: 5px;
-    fill: ${(p) => p.theme.charcoalGrey};
+    fill: ${(p) => p.theme.grey};
   }
 
   &:hover,

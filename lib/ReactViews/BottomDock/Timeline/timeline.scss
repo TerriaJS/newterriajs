@@ -8,6 +8,8 @@
   padding-bottom: 5px;
   padding-right: 5px;
   font-family: variables.$font-base;
+  background: variables.$transparent-dark;
+  backdrop-filter: variables.$blur;
 }
 
 .text-row {

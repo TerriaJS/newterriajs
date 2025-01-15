@@ -99,7 +99,6 @@ export const MapColumn: FC<IMapColumnProps> = observer(
               <div
                 css={`
                   position: absolute;
-                  border-radius: ${theme.radiusXL};
                   margin-left: ${viewState.useSmallScreenInterface
                     ? `0px`
                     : viewState.isMapFullScreen
@@ -113,7 +112,6 @@ export const MapColumn: FC<IMapColumnProps> = observer(
                     : `${theme.workbenchMargin}px`};
                   left: 0;
                   right: 0;
-                  overflow: hidden;
                 `}
               >
                 <BottomLeftBar />

@@ -9,17 +9,17 @@
   // TODO: find a better solution for this - some of these we need to provide as
   // numbers only so we can do math on them and add the unit afterwards 😵
   // screen sizes for media queries
-  // mobile: $mobile;
-  // sm: $sm;
-  // md: $md;
-  // lg: $lg;
+  // mobile: variables.$mobile;
+  // sm: variables.$sm;
+  // md: variables.$md;
+  // lg: variables.$lg;
   mobile: 767;
   sm: 768;
   md: 992;
   lg: 1300;
 
   // Compass styles
-  // compassWidth: $compass-width;
+  // compassWidth: variables.$compass-width;
   // We have to deviate from our "divide by 5" here, due to 55 being an odd number
   // and thus meaning some things will scale to contain half pixels
   // bumped up to 56 to hit an even number
@@ -56,6 +56,7 @@
   blur: variables.$blur;
   dark: variables.$dark;
   darkWithOverlay: variables.$dark-with-overlay;
+  darkMid: variables.$dark-mid;
   darkLighter: variables.$dark-lighter;
   grey: variables.$grey;
   greyLighter: variables.$grey-lighter;

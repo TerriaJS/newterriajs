@@ -18,7 +18,6 @@ import { RawButton } from "../../Styled/Button";
 import Checkbox from "../../Styled/Checkbox/Checkbox";
 import Icon, { StyledIcon } from "../../Styled/Icon";
 import { Li } from "../../Styled/List";
-import Spacing from "../../Styled/Spacing";
 import { TextSpan } from "../../Styled/Text";
 import Loader from "../Loader";
 import PrivateIndicator from "../PrivateIndicator/PrivateIndicator";
@@ -174,28 +173,25 @@ class WorkbenchItemRaw extends React.Component<IProps> {
           ) : null}
         </Box>
         {this.isOpen && (
-          <>
-            <Spacing
-              bottom={3}
-              css={`
-                margin-left: 15px;
-                margin-right: 15px;
-                border-top: 1px solid ${this.props.theme.darkLighter};
-              `}
+          <Box
+            column
+            gap={3}
+            paddedRatio={3}
+            css={{
+              borderTop: `1px solid ${this.props.theme.darkLighter}`,
+              color: this.props.theme.greyLighter
+            }}
+          >
+            <WorkbenchItemControls
+              item={this.props.item}
+              viewState={this.props.viewState}
             />
-            <Box column paddedHorizontally={3}>
-              <WorkbenchItemControls
-                item={this.props.item}
-                viewState={this.props.viewState}
-              />
-              {isLoading ? (
-                <Box paddedVertically>
-                  <Loader light />
-                </Box>
-              ) : null}
-            </Box>
-            <Spacing bottom={2} />
-          </>
+            {isLoading ? (
+              <Box paddedVertically>
+                <Loader light />
+              </Box>
+            ) : null}
+          </Box>
         )}
       </StyledLi>
     );
