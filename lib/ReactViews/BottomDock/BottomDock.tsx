@@ -8,9 +8,7 @@ import measureElement, { MeasureElementProps } from "../HOCs/measureElement";
 import withControlledVisibility from "../HOCs/withControlledVisibility";
 import ChartDisclaimer from "./ChartDisclaimer";
 import Timeline from "./Timeline/Timeline";
-import styled, { DefaultTheme, withTheme } from "styled-components";
-
-const Container = styled.div``;
+import { DefaultTheme, withTheme } from "styled-components";
 
 interface PropsType {
   terria: Terria;
