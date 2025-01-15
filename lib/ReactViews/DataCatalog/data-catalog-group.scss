@@ -32,8 +32,8 @@
   @extend %wrap;
 
   text-align: left;
-  font-size: variables.$font-size-mid-small;
-  padding: 15px 30px + $padding;
+  font-size: variables.$font-size-small;
+  padding: 10px 30px + variables.$padding;
   padding-right: 0;
   min-height: 35px;
   position: relative;
@@ -54,7 +54,7 @@
 
   &:hover,
   &:focus {
-    // background: $modal-highlight;
+    // background: variables.$modal-highlight;
     // color: #fff;
   }
 }
@@ -66,7 +66,7 @@
 }
 
 .isPreviewed {
-  // background: $modal-highlight;
+  // background: variables.$modal-highlight;
   // color: #ffffff;
 }
 
@@ -121,7 +121,7 @@
 .catalog-group {
   composes: list-reset from "../../Sass/common/_base.scss";
   padding-left: variables.$padding;
-  padding-top: calc(variables.$padding / 2);
+  padding-top: calc($padding / 2);
 
   &--lower-level {
     margin-left: 20px;

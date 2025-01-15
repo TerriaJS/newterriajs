@@ -380,6 +380,9 @@
     "captureSceneTitle": "capture current scene",
     "captureScene": "Capture Scene",
     "editor": {
+      "modalHeader": "Story Editor - Scene capture",
+      "titleLabel": "Title (required)",
+      "descriptionLabel": "Description",
       "placeholder": "Enter a title here",
       "cancelBtn": "cancel",
       "cancelEditing": "Cancel",

@@ -103,9 +103,9 @@ const ItemTitleButton = styled(RawButton)<{
   text-align: left;
   word-break: normal;
   overflow-wrap: anywhere;
-  padding: 15px;
+  padding: 10px;
   width: 100%;
-  font-size: 0.9rem;
+  font-size: 0.8125rem;
 
   &:focus,
   &:hover {
