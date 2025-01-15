@@ -151,65 +151,73 @@ class StoryEditor extends React.Component {
       >
         <div className={Styles.inner}>
           <div className={Styles.header}>
-            <input
-              ref={(titleInput) => (this.titleInput = titleInput)}
-              placeholder={t("story.editor.placeholder")}
-              autoComplete="off"
-              className={Styles.field}
-              type="text"
-              id="title"
-              value={this.state.title}
-              onChange={this.updateTitle}
-            />
-            <div className={Styles.body}>
-              <Text small textGreyLighter css={{ marginBottom: "8px" }}>
-                {t("story.editor.descriptionLabel")}
-              </Text>
-              <Suspense fallback={<div>Loading...</div>}>
-                <Editor
-                  html={this.state.text}
-                  onChange={(_newValue, editor) => {
-                    // TODO: This makes StoryEditor tightly coupled to Editor. How to reduce coupling?
-                    tinymce.activeEditor.dom.setStyles(
-                      tinymce.activeEditor.dom.select("img"),
-                      { "max-height": `${maxImageHeight}`, width: "auto" }
-                    );
-                    const text = editor.getBody().innerHTML;
-                    this.setState({ text });
-                  }}
-                  terria={this.props.terria}
-                />
-              </Suspense>
-            </div>
-            <Box centered gap={3}>
-              <Button
-                styledWidth={"240px"}
-                transparentBg
-                onClick={this.cancelEditing}
-                type="button"
-                title={t("story.editor.cancelBtn")}
-                textProps={{
-                  textGreyLighter: true,
-                  medium: true
-                }}
-              >
-                {t("story.editor.cancelEditing")}
-              </Button>
-              <Button
-                styledWidth={"240px"}
-                primary
-                disabled={!this.state.title.length}
-                onClick={this.saveStory}
-                type="button"
-                title={t("story.editor.saveBtn")}
-                textProps={{
-                  medium: true
-                }}
-              >
-                {t("story.editor.saveStory")}
-              </Button>
-            </Box>
+            <Text textLight as="h3" css={{ margin: "0" }}>
+              {t("story.editor.modalHeader")}
+            </Text>
           </div>
+          <label htmlFor="title">
+            <Text small textGreyLighter css={{ marginBottom: "8px" }}>
+              {t("story.editor.titleLabel")}
+            </Text>
+          </label>
+          <input
+            ref={(titleInput) => (this.titleInput = titleInput)}
+            placeholder={t("story.editor.placeholder")}
+            autoComplete="off"
+            className={Styles.field}
+            type="text"
+            id="title"
+            value={this.state.title}
+            onChange={this.updateTitle}
+          />
+          <div className={Styles.body}>
+            <Text small textGreyLighter css={{ marginBottom: "8px" }}>
+              {t("story.editor.descriptionLabel")}
+            </Text>
+            <Suspense fallback={<div>Loading...</div>}>
+              <Editor
+                html={this.state.text}
+                onChange={(_newValue, editor) => {
+                  // TODO: This makes StoryEditor tightly coupled to Editor. How to reduce coupling?
+                  tinymce.activeEditor.dom.setStyles(
+                    tinymce.activeEditor.dom.select("img"),
+                    { "max-height": `${maxImageHeight}`, width: "auto" }
+                  );
+                  const text = editor.getBody().innerHTML;
+                  this.setState({ text });
+                }}
+                terria={this.props.terria}
+              />
+            </Suspense>
+          </div>
+          <Box centered gap={3}>
+            <Button
+              styledWidth={"240px"}
+              transparentBg
+              onClick={this.cancelEditing}
+              type="button"
+              title={t("story.editor.cancelBtn")}
+              textProps={{
+                textGreyLighter: true,
+                medium: true
+              }}
+            >
+              {t("story.editor.cancelEditing")}
+            </Button>
+            <Button
+              styledWidth={"240px"}
+              primary
+              disabled={!this.state.title.length}
+              onClick={this.saveStory}
+              type="button"
+              title={t("story.editor.saveBtn")}
+              textProps={{
+                medium: true
+              }}
+            >
+              {t("story.editor.saveStory")}
+            </Button>
+          </Box>
         </div>
       </div>
     );

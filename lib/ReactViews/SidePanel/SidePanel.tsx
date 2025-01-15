@@ -266,8 +266,9 @@ const SidePanel = observer<React.FC<SidePanelProps>>(
             overflow: hidden;
           `}
         >
-          <Workbench viewState={viewState} terria={terria} />
-          {terria.workbench.items.length === 0 && (
+          {terria.workbench.items.length > 0 ? (
+            <Workbench viewState={viewState} terria={terria} />
+          ) : (
             <EmptyWorkbench theme={theme} />
           )}
         </Box>

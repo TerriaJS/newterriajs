@@ -469,8 +469,10 @@
   -webkit-overflow-scrolling: touch;
 
   &::-webkit-scrollbar {
-    width: 5px; /* for vertical scrollbars */
-    height: 8px; /* for horizontal scrollbars */
+    width: 5px;
+    /* for vertical scrollbars */
+    height: 8px;
+    /* for horizontal scrollbars */
   }
 
   &::-webkit-scrollbar-track {
