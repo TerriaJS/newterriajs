@@ -105,6 +105,7 @@ const TitleBar = styled.div`
   align-items: center;
   border-bottom: 1px solid ${(p) => p.theme.darkLighter};
   padding-bottom: 15px;
+  margin-bottom: 5px;
 `;
 
 const CollapsibleTitleBar = styled(RawButton)<
@@ -117,6 +118,7 @@ const CollapsibleTitleBar = styled(RawButton)<
   justify-content: space-between;
   align-items: center;
   padding-bottom: 15px;
+  margin-bottom: 5px;
   ${(p) => (p.isOpen ? `border-bottom: 1px solid ${p.theme.darkLighter}` : "")};
 `;
 
@@ -125,7 +127,6 @@ const Title = styled(Text).attrs({
   medium: true
 })`
   flex-grow: 1;
-  // padding: 15px 15px;
 `;
 
 const Icon = styled(StyledIcon).attrs({

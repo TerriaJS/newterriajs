@@ -5,7 +5,7 @@ import styled from "styled-components";
 import ViewState from "../../ReactViewModels/ViewState";
 import Button from "../../Styled/Button";
 import { IconProps, StyledIcon } from "../../Styled/Icon";
-import { addTerriaScrollbarStyles } from "../../Styled/mixins";
+import { scrollBars } from "../../Styled/mixins";
 import Text from "../../Styled/Text";
 import { PortalChild } from "../StandardUserInterface/Portal";
 import { PanelButton } from "./Panel";
@@ -142,7 +142,7 @@ const Content = styled.div`
   flex-direction: column;
   min-height: 0;
   padding-bottom: 4em;
-  ${() => addTerriaScrollbarStyles()}
+  ${(p) => scrollBars(p)}
 `;
 
 const CloseButton = styled(Button).attrs({
