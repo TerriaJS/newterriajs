@@ -166,15 +166,16 @@ export default class ArcGisPortalItemReference extends AccessControlMixin(
       createStratumInstance(ArcGisPortalItemFormatTraits, {
         id: "WMS",
         formatRegex: "WMS",
-        urlRegex: "WMSServer",
+        urlRegex: "WMSServer|wms$",
         definition: {
-          type: "wms"
+          type: "wms-group"
         }
       }),
       createStratumInstance(ArcGisPortalItemFormatTraits, {
         id: "ArcGIS MapServer Group",
         formatRegex: "Map Service",
-        urlRegex: "MapServer$|MapServer/$",
+        urlRegex:
+          /MapServer$|MapServer\/$|MapServer\?f=pjson$|MapServer\?f=json$/,
         definition: {
           type: "esri-mapServer-group"
         }
@@ -185,6 +186,14 @@ export default class ArcGisPortalItemReference extends AccessControlMixin(
         urlRegex: /MapServer\/\d/,
         definition: {
           type: "esri-mapServer"
+        }
+      }),
+      createStratumInstance(ArcGisPortalItemFormatTraits, {
+        id: "ArcGIS ImageServer",
+        formatRegex: "Map Service",
+        urlRegex: /ImageServer/,
+        definition: {
+          type: "esri-imageServer"
         }
       }),
       createStratumInstance(ArcGisPortalItemFormatTraits, {
