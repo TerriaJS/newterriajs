@@ -93,10 +93,6 @@
 }
 
 .caret {
-  // position: absolute;
-  width: 15px;
-  right: 8px;
-  top: 10px;
   margin: 0 5px 0 10px;
 
   svg {
@@ -104,9 +100,6 @@
   }
 
   @media (min-width: variables.$sm) {
-    right: 5px;
-    top: 8px;
-
     svg {
       height: 12px;
       width: 12px;
