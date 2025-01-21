@@ -52,10 +52,6 @@ class FullScreenButton extends React.Component {
   }
 
   render() {
-    // const btnClassName = classNames(Styles.btn, {
-    //   [Styles.isActive]: this.props.viewState.isMapFullScreen,
-    //   [Styles.minified]: this.props.minified
-    // });
     const { t } = this.props;
     return (
       <div

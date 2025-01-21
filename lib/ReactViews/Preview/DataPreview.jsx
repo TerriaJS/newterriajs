@@ -4,7 +4,7 @@ import { runInAction } from "mobx";
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
 import React from "react";
-import { withTranslation } from "react-i18next";
+import { Trans, withTranslation } from "react-i18next";
 import CatalogFunctionMixin from "../../ModelMixins/CatalogFunctionMixin";
 import ReferenceMixin from "../../ModelMixins/ReferenceMixin";
 import InvokeFunction from "../Analytics/InvokeFunction";
@@ -14,6 +14,7 @@ import GroupPreview from "./GroupPreview";
 import MappablePreview from "./MappablePreview";
 import WarningBox from "./WarningBox";
 import Styles from "./data-preview.scss";
+import Icon from "../../Styled/Icon";
 
 /**
  * Data preview section, for the preview map see DataPreviewMap
@@ -102,40 +103,39 @@ class DataPreview extends React.Component {
           />
         </div>
       );
-    } else {
-      // TODO: choose to show placeholder text based on whether explorer panel
-      // stays open after adding a dataset
+    } else if (this.props.terria.configParameters.keepCatalogOpen) {
       return null;
-      // return (
-      //   <div className={Styles.placeholder}>
-      //     <p>{t("preview.selectToPreviewDataset")}</p>
-      //     <p>
-      //       <Trans i18nKey="preview.selectMultipleDatasets">
-      //         <span>
-      //           Press <strong>Shift</strong> and click
-      //         </span>
-      //         <Icon
-      //           glyph={Icon.GLYPHS.add}
-      //           css={{
-      //             height: "20px",
-      //             width: "20px",
-      //             margin: "0px 5px",
-      //             verticalAlign: "middle",
-      //             fill: `${(p) => p.theme.charcoalGrey}`
-      //           }}
-      //         />
-      //         <span>to add multiple datasets</span>
-      //       </Trans>
-      //     </p>
-      //     <p>- {t("preview.selectToPreviewSeparator")} -</p>
-      //     <button
-      //       className={Styles.btnBackToMap}
-      //       onClick={() => this.backToMap()}
-      //     >
-      //       {t("preview.goToTheMap")}
-      //     </button>
-      //   </div>
-      // )
+    } else {
+      return (
+        <div className={Styles.placeholder}>
+          <p>{t("preview.selectToPreviewDataset")}</p>
+          <p>
+            <Trans i18nKey="preview.selectMultipleDatasets">
+              <span>
+                Press <strong>Shift</strong> and click
+              </span>
+              <Icon
+                glyph={Icon.GLYPHS.add}
+                css={{
+                  height: "20px",
+                  width: "20px",
+                  margin: "0px 5px",
+                  verticalAlign: "middle",
+                  fill: `${(p) => p.theme.charcoalGrey}`
+                }}
+              />
+              <span>to add multiple datasets</span>
+            </Trans>
+          </p>
+          <p>- {t("preview.selectToPreviewSeparator")} -</p>
+          <button
+            className={Styles.btnBackToMap}
+            onClick={() => this.backToMap()}
+          >
+            {t("preview.goToTheMap")}
+          </button>
+        </div>
+      );
     }
   }
 

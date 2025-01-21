@@ -34,11 +34,6 @@ const BottomLeftBar: FC = observer(() => {
 
   return (
     <BottomLeftContainer>
-      {/* <MapDataCount
-        terria={viewState.terria}
-        viewState={viewState}
-        elementConfig={viewState.terria.elements.get("map-data-count")}
-      /> */}
       {shouldShowPlayStoryButton(viewState) ? (
         <Box paddedHorizontally={2}>
           <MapIconButton

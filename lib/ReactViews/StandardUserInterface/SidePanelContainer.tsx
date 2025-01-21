@@ -21,10 +21,6 @@ const SidePanelContainer = styled.div.attrs<PropsType>(({ viewState }) => ({
   left: ${(p) => p.theme.workbenchMargin}px;
   top: ${(p) => p.theme.workbenchMargin}px;
   max-height: calc(100% - 2 * ${(p) => p.theme.workbenchMargin}px);
-  /* when using position:absolute on we need to set min-height
-     to stretch the panel (eg: workbench)
-  */
-  min-height: calc(100% - 2 * ${(p) => p.theme.workbenchMargin}px);
   z-index: 100;
   background: ${(p) => p.theme.transparentDark};
   backdrop-filter: ${(p) => p.theme.blur};

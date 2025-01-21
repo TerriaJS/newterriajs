@@ -88,7 +88,6 @@ const EmptyWorkbench: React.FC<EmptyWorkbenchProps> = observer(() => {
                 HelpAction.takeTour
               );
               runInAction(() => {
-                // viewState.hideHelpPanel();
                 viewState.setTourIndex(0);
               });
             }}
