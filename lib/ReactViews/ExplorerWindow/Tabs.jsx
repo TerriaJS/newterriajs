@@ -85,7 +85,7 @@ class Tabs extends React.Component {
     } else {
       return [
         {
-          name: t("addData.dataCatalogue"),
+          name: t("addData.data"),
           title: "data-catalog",
           category: "data-catalog",
           panel: (

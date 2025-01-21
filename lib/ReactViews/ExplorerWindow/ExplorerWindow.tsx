@@ -7,6 +7,7 @@ import Tabs from "./Tabs";
 import Text from "../../Styled/Text";
 import Box from "../../Styled/Box";
 import { useTheme } from "styled-components";
+import { t } from "i18next";
 
 export const ExplorerWindowElementName = "AddData";
 
@@ -49,7 +50,7 @@ export default observer<React.FC>(function ExplorerWindow() {
         fullWidth
       >
         <Text extraExtraLarge textLight css={{ fontWeight: 500 }}>
-          Terria Data Catalogue
+          {t("addData.dataCatalogue")}
         </Text>
       </Box>
       <Tabs terria={viewState.terria} viewState={viewState} />
