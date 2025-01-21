@@ -283,6 +283,8 @@ export default class ViewState {
     // If we're enabling the tour, make sure the trainer is collapsed
     if (bool) {
       this.setTrainerBarExpanded(false);
+      // Ensure workbench is shown
+      this.setIsMapFullScreen(false);
     }
   }
   @action
