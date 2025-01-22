@@ -7,9 +7,8 @@
 .holder {
   left: 0;
   right: 0;
-  z-index: 10;
   background: variables.$transparent-dark;
-  backdrop-filter: $blur;
+  backdrop-filter: variables.$blur;
   padding-bottom: 40px; //hack to allow timeline visible
   margin-bottom: 6px;
   border-radius: 8px 8px 0 0;
