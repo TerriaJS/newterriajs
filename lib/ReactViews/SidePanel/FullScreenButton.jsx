@@ -44,13 +44,6 @@ class FullScreenButton extends React.Component {
     );
   }
 
-  renderButtonText() {
-    const btnText = this.props.btnText ? this.props.btnText : null;
-    if (this.props.viewState.isMapFullScreen) {
-      return <span>{btnText}</span>;
-    }
-  }
-
   render() {
     const { t } = this.props;
     return (
@@ -110,9 +103,7 @@ class FullScreenButton extends React.Component {
               />
             )
           }
-        >
-          {this.renderButtonText()}
-        </Button>
+        ></Button>
       </div>
     );
   }

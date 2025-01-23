@@ -191,6 +191,7 @@ const ButtonTab = styled.button`
 
     background: transparent;
     color: ${props.theme.dark};
+    border: 1px solid transparent;
     &:hover,
     &:focus {
       background: ${props.theme.textLight};
