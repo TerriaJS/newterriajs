@@ -54,7 +54,6 @@ export type ICheckboxProps = {
 export interface CheckboxIconProps {
   /* Override svg icon to use switch icon */
   isSwitch?: boolean;
-  iconIndeterminate?: any;
   /** Sets whether the checkbox is checked or unchecked. */
   isChecked?: boolean;
   /** Sets whether the checkbox is disabled. */

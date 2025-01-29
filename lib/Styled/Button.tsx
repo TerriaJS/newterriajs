@@ -76,10 +76,6 @@ export const StyledButton = styled.button<IStyledButtonProps>`
     background-color: ${props.theme.colorPrimary};
     border: none;
     border-radius:4px;
-        &:hover,
-    &:focus {
-
-    }
   `}
   ${(props) => props.rounded && ` border-radius: 32px; `}
   ${(props) => props.roundLeft && `border-radius: 32px 0 0 32px;`}
