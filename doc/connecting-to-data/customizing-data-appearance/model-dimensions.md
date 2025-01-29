@@ -43,7 +43,7 @@ For example - this renders a new drop down called "Color" that changes the `colo
 }
 ```
 
-<img src="../img/model-dim.jpeg">
+![Model dimensions](./img/model-dim.jpeg)
 
 ## Example with Mustache template
 
