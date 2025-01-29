@@ -20,7 +20,7 @@ const SidePanelContainer = styled.div.attrs<PropsType>(({ viewState }) => ({
   position: absolute;
   left: ${(p) => p.theme.workbenchMargin}px;
   top: ${(p) => p.theme.workbenchMargin}px;
-  max-height: calc(100% - 2 * ${(p) => p.theme.workbenchMargin}px);
+  height: calc(100% - 2 * ${(p) => p.theme.workbenchMargin}px);
   z-index: 100;
   background: ${(p) => p.theme.transparentDark};
   backdrop-filter: ${(p) => p.theme.blur};
