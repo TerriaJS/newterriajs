@@ -62,7 +62,7 @@ class OpacitySection extends React.Component<OpacitySectionProps> {
   }
 }
 
-const StyledLabel = styled(Text).attrs({ as: "label" }) <{ htmlFor: string }>`
+const StyledLabel = styled(Text).attrs({ as: "label" })<{ htmlFor: string }>`
   white-space: nowrap;
   flex-basis: 50%;
 `;

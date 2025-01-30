@@ -270,7 +270,7 @@ const StyledButton = styled(RawButton)`
   `}
 `;
 
-const TimelineButton = styled(RawButton) <{ active: boolean }>`
+const TimelineButton = styled(RawButton)<{ active: boolean }>`
   padding: 0 5px;
   border-radius: 2px;
   background-color: rgba(250, 250, 250, 0.2);

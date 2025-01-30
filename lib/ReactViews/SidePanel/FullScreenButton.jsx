@@ -1,6 +1,6 @@
 "use strict";
-const React = require("react");
-const PropTypes = require("prop-types");
+import React from "react";
+import PropTypes from "prop-types";
 import classNames from "classnames";
 import { observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
