@@ -70,7 +70,10 @@
     "errorGettingLocation": "Chyba při zjišťování polohy",
     "myLocation": "Moje poloha",
     "location": "Poloha",
-    "centreMap": "Vystředit mapu v místě, kde se právě nacházíte"
+    "centreMap": "Vystředit mapu v místě, kde se právě nacházíte",
+    "positionUnavailable": "Informace o vaší poloze jsou nedostupné.",
+    "timeout": "Získání informací o vaší poloze trvalo příliš dlouho.Zkuste to prosím později.",
+    "permissionDenied": "Povolení k získání vaší polohy bylo odepřeno. Zkontrolujte prosím nastavení prohlížeče."
   },
   "splitterTool": {
     "title": "Přetažením doleva nebo doprava upravíte zobrazení",
@@ -1401,11 +1404,11 @@
       "serviceContact": "Kontakt služby",
       "getCapabilitiesUrl": "URL GetCapabilities",
       "missingDataTitle": "Chybějící data",
-      "missingDataMessage": "Datová sada WFS '{{name}}' nevrátila žádná data.{{line}}{{line}}Buď byl katalogový soubor nesprávně nastaven, nebo se změnila adresa serveru.",
+      "missingDataMessage": "Datová sada WFS '{{name}}' nevrátila žádná data. Buď byl katalogový soubor nastaven nesprávně, nebo se změnila adresa serveru.",
       "missingUrlTitle": "Nelze načíst GetCapabilities",
       "missingUrlMessage": "Nepodařilo se načíst dokument GetCapabilities služby WFS (Web Feature Service), protože položka katalogu nemá `url`.",
       "noLayerFoundTitle": "Nenalezena žádná vrstva",
-      "noLayerFoundMessage": "Datová sada WFS '{{name}}' nemá žádné vrstvy odpovídající '{{typeNames}}'. {{suggested}} {{line}}{{line}}Buď byl katalogový soubor nastaven nesprávně, nebo se změnil server WFS.",
+      "noLayerFoundMessage": "Datová sada WFS '{{name}}' nemá žádné vrstvy odpovídající '{{typeNames}}'. Buď byl katalogový soubor nastaven nesprávně, nebo se změnil server WFS.",
       "reachedMaxFeatureLimit": "Varování: Tato vrstva dosáhla limitu funkcí WFS ({{maxFeatures}})"
     },
     "webMapServiceCatalogGroup": {
@@ -1434,7 +1437,7 @@
       "getCapabilitiesUrl": "URL GetCapabilities",
       "metadataUrls": "Odkazy metadat",
       "wms": "Web Map Service (WMS)",
-      "noLayerFoundMessage": "Datová sada WMS '{{name}}' nemá žádné vrstvy odpovídající '{{layers}}'. {{suggested}} {{line}}{{line}}Buď byl katalogový soubor nastaven nesprávně, nebo se změnil server WMS.",
+      "noLayerFoundMessage": "Datová sada WMS '{{name}}' nemá žádné vrstvy odpovídající '{{layers}}'. Buď byl katalogový soubor nastaven nesprávně, nebo se změnil server WMS.",
       "missingUrlTitle": "Nelze načíst GetCapabilities",
       "missingUrlMessage": "Nepodařilo se načíst dokument GetCapabilities Web Map Service (WMS), protože položka katalogu nemá `url`."
     },
