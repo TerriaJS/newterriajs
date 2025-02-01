@@ -838,5 +838,8 @@
   },
   "printView": {
     "loading": "Membuat tampilan cetak..."
+  },
+  "selectableDimensions": {
+    "colorAdd": "Tambahkan"
   }
 }
