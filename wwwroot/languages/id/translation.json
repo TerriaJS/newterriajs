@@ -292,7 +292,7 @@
     "closeButtonTitle": "Tutup Alat {{toolName}}"
   },
   "AR": {
-    "confirmText": "Mengerti",
+    "confirmText": "Paham",
     "title": "Fitur Eksperimental: Augmented Reality"
   },
   "compass": {
@@ -303,7 +303,7 @@
       "innerCircleDescription1": "Klik di bagian tengah dan seret perlahan ke atas, bawah, kiri atau kanan untuk memiringkan dan memutar peta secara bersamaan.",
       "innerCircleDescription2": "Klik dua kali di sini untuk mengatur ulang tampilan ke kondisi default.",
       "ctrlDragDescription": "Anda juga dapat memiringkan dan memutar peta dengan menahan tombol CTRL dan menyeret peta.",
-      "outerRingTitle": "Cincin Luar",
+      "outerRingTitle": "Lingkar luar",
       "outerRingDescription": "Seret cincin luar dengan gerakan melingkar untuk memutar tampilan peta 360˚.",
       "innerCircleTitle": "Lingkaran Dalam"
     },
@@ -312,7 +312,7 @@
   },
   "zoomCotrol": {
     "zoomOut": "Perkecil",
-    "zoomIn": "Perbesar",
+    "zoomIn": "Memperbesar",
     "zoomReset": "Setel ulang zum"
   },
   "splitterTool": {
@@ -320,7 +320,7 @@
       "copyName": "{{name}} (salinan)",
       "goright": "Kanan",
       "gorightTitle": "Tampilkan di sisi kanan",
-      "both": "Keduanya",
+      "both": "Kedua",
       "bothTitle": "Tampilkan di kedua sisi",
       "goleft": "Kiri",
       "goleftTitle": "Tampilkan di sisi kiri"
@@ -357,7 +357,9 @@
     },
     "resetBtnText": "Hapus input",
     "loading": "Memuat parameter pencarian",
-    "resultsCount": "{{count}} cocok"
+    "resultsCount": "{{count}} cocok",
+    "noParameters": "Tidak ditemukan parameter yang dicari",
+    "loadError": "Gagal memuat parameter yang dicari. Cek konsol untuk detail error."
   },
   "deltaTool": {
     "cancelBtn": "Batal",
@@ -791,7 +793,8 @@
     "controls": {
       "title": "Kontrol"
     },
-    "toolButtonTitle": "Mode pejalan kaki"
+    "toolButtonTitle": "Mode pejalan kaki",
+    "dropPedestrianTooltipMessage": "<b>Klik kiri</b> untuk memilih titik lokasi<br /><b>Klik kanan / Esc</b> untuk batal"
   },
   "indexedItemSearchProvider": {
     "errorParsingIndexRoot": "Kesalahan saat mengurai file indexRoot: {{indexRootUrl}}.",
@@ -799,8 +802,41 @@
   },
   "browsers": {
     "chrome": "Google Chrome",
-    "firefox": "Mozilla Firefox",
+    "firefox": "",
     "edge": "Microsoft Edge",
     "safari": "Apple Safari"
+  },
+  "compare": {
+    "title": "Bandingkan",
+    "dateLocationFilter": {
+      "filter": "Filter tanggal berdasarkan lokasi"
+    },
+    "entireMapMenu": {
+      "browse": "Jelajahi map data",
+      "hideAll": "Sembunyikan semua",
+      "sendAllToBack": "Kirim semuanya ke belakang",
+      "sendAllToFront": "Kirim semuanya ke depan"
+    },
+    "entireMap": {
+      "title": "Seluruh peta",
+      "emptyText": "Tambah data baru untuk menampilan di seluruh peta melalui titik menu di atas."
+    },
+    "done": "Selesai",
+    "dateButton": {
+      "left": "Kiri",
+      "select": "Pilih tanggal",
+      "right": "Kanan"
+    },
+    "leftPanel": "Panel kiri",
+    "dimensionSelector": {
+      "undefinedLabel": "Tidak ditentukan"
+    },
+    "dataset": {
+      "selectOne": "Pilih satu"
+    },
+    "rightPanel": "Panel kanan"
+  },
+  "printView": {
+    "loading": "Membuat tampilan cetak..."
   }
 }
