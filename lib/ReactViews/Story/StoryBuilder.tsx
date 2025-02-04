@@ -395,6 +395,7 @@ class StoryBuilder extends React.Component<
               styledMaxHeight="100%"
               ref={this.storiesWrapperRef as React.RefObject<HTMLDivElement>}
               css={`
+                min-height: 130px;
                 margin-right: -10px;
               `}
             >
