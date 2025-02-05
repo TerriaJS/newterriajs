@@ -84,7 +84,7 @@ export const MapColumn: FC<IMapColumnProps> = observer(
           {!viewState.hideMapUi && (
             <>
               <ActionBarPortal show={viewState.isActionBarVisible} />
-              <SlideUpFadeIn isVisible={true}>
+              <SlideUpFadeIn isVisible={viewState.isMapZooming}>
                 <Toast>
                   <Loader
                     message={t("toast.mapIsZooming")}

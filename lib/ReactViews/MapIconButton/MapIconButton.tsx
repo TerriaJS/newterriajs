@@ -31,6 +31,7 @@ const StyledMapIconButton = styled(RawButton)<IStyledMapIconButtonProps>`
 
   background:  ${(props) => props.theme.dark};
   color: ${(props) => props.theme.textLight};
+  border: 1px solid ${(props) => props.theme.darkLighter};
 
   height: 32px;
   min-width: 32px;

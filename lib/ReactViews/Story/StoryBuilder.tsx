@@ -23,7 +23,6 @@ import Button, { RawButton } from "../../Styled/Button";
 import Icon, { StyledIcon } from "../../Styled/Icon";
 import Spacing from "../../Styled/Spacing";
 import Text, { TextSpan } from "../../Styled/Text";
-import BadgeBar from "../BadgeBar";
 import { WithViewState, withViewState } from "../Context";
 import measureElement, { MeasureElementProps } from "../HOCs/measureElement";
 import VideoGuide from "../Map/Panels/HelpPanel/VideoGuide";
@@ -527,7 +526,7 @@ type PanelProps = React.ComponentPropsWithoutRef<typeof Box> & {
   isHidden?: boolean;
 };
 
-const Panel = styled(Box)<PanelProps>`
+const Panel = styled(Box) <PanelProps>`
   transition: all 0.25s;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   width: 320px;
