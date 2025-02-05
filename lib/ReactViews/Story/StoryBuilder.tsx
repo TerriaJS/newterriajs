@@ -339,10 +339,19 @@ class StoryBuilder extends React.Component<
       : "";
     return (
       <>
-        <BadgeBar
-          label={t("story.badgeBarLabel")}
-          badge={this.props.viewState.terria.stories.length}
+        <Box
+          justifySpaceBetween
+          verticalCenter
+          paddedRatio={2}
+          css={`
+            border-top: 1px solid ${this.props.theme.darkLighter};
+            border-bottom: 1px solid ${this.props.theme.darkLighter};
+          `}
         >
+          <TextSpan textLight uppercase overflowHide overflowEllipsis>
+            {t("story.badgeBarLabel")}{" "}
+            {`(${this.props.viewState.terria.stories.length})`}
+          </TextSpan>
           <RawButton
             type="button"
             onClick={this.toggleRemoveDialog}
@@ -351,7 +360,7 @@ class StoryBuilder extends React.Component<
           >
             <Icon glyph={Icon.GLYPHS.remove} /> {t("story.removeAllStories")}
           </RawButton>
-        </BadgeBar>
+        </Box>
         <Spacing bottom={2} />
         <Box column paddedHorizontally={2} flex={1} styledMinHeight="0">
           {this.state.isRemoving && (
