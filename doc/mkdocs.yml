@@ -30,7 +30,7 @@ nav:
       - Customizing Data Appearance:
           - Overview: connecting-to-data/customizing-data-appearance/overview.md
           - Imagery Data: connecting-to-data/customizing-data-appearance/imagery-data.md
-          - Tabular Data: connecting-to-data/customizing-data-appearance/tabular-data.md
+          - Tabular and Vector Data: connecting-to-data/customizing-data-appearance/tabular-vector-data.md
           - Feature Information Template: connecting-to-data/customizing-data-appearance/feature-info-template.md
           - Model Dimensions: connecting-to-data/customizing-data-appearance/model-dimensions.md
       - Catalog Functions: connecting-to-data/catalog-functions.md
