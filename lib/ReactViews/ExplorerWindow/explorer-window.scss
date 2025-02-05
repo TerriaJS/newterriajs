@@ -22,7 +22,7 @@
 .explorer-panel {
   position: relative;
   color: variables.$modal-text;
-  border-radius: variables.$radius-small;
+  border-radius: variables.$radius-xlarge;
   box-shadow: 0 0 15px 6px rgba(100, 100, 100, 0.3);
   z-index: variables.$front-component-z-index - 1;
   height: 100%;

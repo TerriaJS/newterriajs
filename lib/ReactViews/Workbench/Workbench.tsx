@@ -70,7 +70,7 @@ class Workbench extends React.Component<IProps> {
     const { t } = this.props;
     const shouldExpandAll = this.props.terria.workbench.shouldExpandAll;
 
-    // show enable all button if some items are disabled
+    // show enable all button if all items are disabled
     const showEnableAll = this.props.terria.workbench.items
       .filter((it): it is MappableMixin.Instance =>
         MappableMixin.isMixedInto(it)

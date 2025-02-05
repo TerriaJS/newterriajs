@@ -44,7 +44,7 @@ export default observer<React.FC>(function ExplorerWindow() {
       <Box
         css={`
           background: ${theme.dark};
-          border-radius: 6px 6px 0 0;
+          border-radius: ${theme.radiusXL} ${theme.radiusXL} 0 0;
         `}
         paddedRatio={4}
         fullWidth

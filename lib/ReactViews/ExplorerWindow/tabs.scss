@@ -33,8 +33,8 @@
   border-top: 1px solid variables.$grey-lighter;
   height: 100%;
   overflow: hidden;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: $radius-xlarge;
+  border-bottom-right-radius: $radius-xlarge;
 }
 
 .tab-left-col {

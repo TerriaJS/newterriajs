@@ -10,7 +10,7 @@
   // todo: find some non-layout-change animation technique for
   // this flex-menu-bar-workbench problem
   transition: margin-left 0.25s;
-  // margin-left: $work-bench-width + 40px;
+  // margin-left: variables.$work-bench-width + 40px;
   margin-left: 50px;
 
   display: flex;
@@ -20,7 +20,7 @@
 
 .menu-bar--workbenchClosed {
   // transition-delay: 0.25s; // temporary disable delays for splitter lag w/o resizing on transitionend
-  margin-left: 165px;
+  margin-left: 35px;
 }
 
 .menu {
