@@ -9,6 +9,7 @@ import TourPortal, {
   TourPreface
 } from "../../../lib/ReactViews/Tour/TourPortal";
 import { createWithContexts } from "../withContext";
+import { animationDuration } from "../../../lib/ReactViews/StandardUserInterface/StandardUserInterface";
 
 describe("TourPortal", function () {
   let terria: Terria;
@@ -56,6 +57,7 @@ describe("TourPortal", function () {
         expect(() => testRenderer.root.findByType(TourExplanation)).toThrow();
       });
       it("renders something using the TourGrouping path under showPortal conditions", function () {
+        jasmine.clock().install();
         const testRef: any = React.createRef();
         const testRef2: any = React.createRef();
         const testRef3: any = React.createRef();
@@ -88,6 +90,7 @@ describe("TourPortal", function () {
         runInAction(() => {
           viewState.setTourIndex(0);
           viewState.setShowTour(true);
+
           viewState.updateAppRef("TestRef", testRef);
           viewState.updateAppRef("TestRef2", testRef2);
           viewState.updateAppRef("TestRef3", testRef3);
@@ -112,7 +115,7 @@ describe("TourPortal", function () {
         act(() => {
           testRenderer = createWithContexts(viewState, <TourPortal />);
         });
-
+        jasmine.clock().tick(animationDuration); // wait for workbench hide animation
         // 3 test tour points
         expect(testRenderer.root.findAllByType(TourExplanation).length).toBe(3);
 
@@ -127,6 +130,7 @@ describe("TourPortal", function () {
         });
         // 2 test tour points
         expect(testRenderer.root.findAllByType(TourExplanation).length).toBe(2);
+        jasmine.clock().uninstall();
       });
     });
   });
