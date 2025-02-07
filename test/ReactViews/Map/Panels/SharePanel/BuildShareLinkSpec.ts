@@ -23,23 +23,6 @@ import {
   SHARE_VERSION
 } from "../../../../../lib/ReactViews/Map/Panels/SharePanel/BuildShareLink";
 
-let terria: Terria;
-let viewState: ViewState;
-
-beforeEach(function () {
-  terria = new Terria({
-    baseUrl: "./"
-  });
-  // terria.baseMap = {
-  //   name: "Bing Maps Aerial"
-  // };
-
-  viewState = new ViewState({
-    terria: terria,
-    catalogSearchProvider: undefined
-  });
-});
-
 const decodeAndParseStartHash = (url: string) => {
   const parsed = URI.parse(url);
   if (parsed.fragment) {
@@ -55,6 +38,19 @@ const flattenInitSources = (initSources: InitSourceData[]): InitSourceData =>
   );
 
 describe("BuildShareLink", function () {
+  let terria: Terria;
+  let viewState: ViewState;
+
+  beforeEach(function () {
+    terria = new Terria({
+      baseUrl: "./"
+    });
+    viewState = new ViewState({
+      terria: terria,
+      catalogSearchProvider: undefined
+    });
+  });
+
   it("should generate a url with default catalog related flags missing/undefined", function () {
     const shareLink = buildShareLink(terria, viewState);
     const params = decodeAndParseStartHash(shareLink);
