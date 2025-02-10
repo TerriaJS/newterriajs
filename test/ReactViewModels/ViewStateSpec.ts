@@ -103,9 +103,13 @@ describe("ViewState", function () {
     });
   });
   describe("tour and trainer interaction", function () {
-    it("disables trainer bar if turning on tour", function () {
+    beforeEach(function () {
       jasmine.clock().install();
-
+    });
+    afterEach(function () {
+      jasmine.clock().uninstall();
+    });
+    it("disables trainer bar if turning on tour", function () {
       runInAction(() => {
         viewState.setTrainerBarExpanded(true);
         viewState.setTrainerBarShowingAllSteps(true);
@@ -123,7 +127,6 @@ describe("ViewState", function () {
       expect(viewState.trainerBarExpanded).toEqual(false);
       expect(viewState.trainerBarShowingAllSteps).toEqual(false);
       expect(viewState.showTour).toEqual(true);
-      jasmine.clock().uninstall();
     });
   });
 
