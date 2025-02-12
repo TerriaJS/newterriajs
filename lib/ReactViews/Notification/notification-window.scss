@@ -45,13 +45,13 @@
     }
 
     &::-webkit-scrollbar-track {
-      background: $scrollbar-track-color;
-      border-radius: $radius-large;
+      background: variables.$scrollbar-track-color;
+      border-radius: variables.$radius-large;
     }
 
     &::-webkit-scrollbar-thumb {
-      background: $scrollbar-color;
-      border-radius: $radius-large;
+      background: variables.$scrollbar-color;
+      border-radius: variables.$radius-large;
     }
   }
 }

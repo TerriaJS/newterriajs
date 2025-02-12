@@ -58,7 +58,8 @@
   // color: $text-light;
   font-size: variables.$font-size-mid-small;
   text-transform: uppercase;
-  padding: variables.$padding variables.$padding variables.$padding 5 * variables.$padding;
+  padding: variables.$padding variables.$padding variables.$padding 5 *
+    variables.$padding;
   border: 0;
 
   svg {
@@ -274,7 +275,7 @@
 .VideoGuideWrapper--closing {
   @include mixins.animation("story-fade-out 0.3s");
 
-  &>div {
+  & > div {
     @include mixins.animation("story-slide-down 0.3s");
   }
 }

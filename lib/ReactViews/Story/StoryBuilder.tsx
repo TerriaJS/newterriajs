@@ -526,7 +526,7 @@ type PanelProps = React.ComponentPropsWithoutRef<typeof Box> & {
   isHidden?: boolean;
 };
 
-const Panel = styled(Box) <PanelProps>`
+const Panel = styled(Box)<PanelProps>`
   transition: all 0.25s;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   width: 320px;

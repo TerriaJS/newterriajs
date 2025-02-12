@@ -15,10 +15,10 @@
   flex-direction: column;
   align-items: center;
   align-content: space-around;
-  background-color: $transparent-dark;
-  backdrop-filter: $blur;
-  width: $work-bench-width;
-  border-radius: $radius-xlarge;
+  background-color: variables.$transparent-dark;
+  backdrop-filter: variables.$blur;
+  width: variables.$work-bench-width;
+  border-radius: variables.$radius-xlarge;
   overflow: hidden;
 }
 
@@ -48,7 +48,6 @@
 }
 
 .minified {
-
   &,
   &:hover,
   &:focus {

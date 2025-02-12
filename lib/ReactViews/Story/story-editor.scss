@@ -71,7 +71,7 @@
 
 .cancelBtn {
   composes: btn from "../../Sass/common/_buttons.scss";
-  composes: btn--transparent from "../../Sass/common/_buttons.scss";
+  composes: btn-transparent from "../../Sass/common/_buttons.scss";
   border: none;
   background: variables.$dark-mid;
   padding: 15px;

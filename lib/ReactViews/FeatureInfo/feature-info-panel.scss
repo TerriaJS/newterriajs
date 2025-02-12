@@ -90,7 +90,9 @@
 
   overflow-y: auto;
   overflow-x: auto;
-  max-height: calc(80vh - #{variables.$padding * 2 + variables.$btn-default-line-height});
+  max-height: calc(
+    80vh - #{variables.$padding * 2 + variables.$btn-default-line-height}
+  );
   font-size: variables.$font-size-feature-info;
 }
 

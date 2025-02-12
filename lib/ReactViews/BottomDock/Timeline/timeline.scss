@@ -36,7 +36,7 @@
   padding-right: variables.$padding-small;
 
   @media (max-width: variables.$mobile),
-  (min-width: variables.$sm) and (max-width: variables.$lg) {
+    (min-width: variables.$sm) and (max-width: variables.$lg) {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
