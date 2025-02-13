@@ -10,6 +10,7 @@
     "jsx": "react-jsx",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "noUncheckedSideEffectImports": true,
     "useDefineForClassFields": true, // required for mobx6 - https://mobx.js.org/installation.html#use-spec-compliant-transpilation-for-class-properties
     "outDir": "ts-out",
     "resolveJsonModule": true,
