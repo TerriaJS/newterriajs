@@ -5,7 +5,7 @@
   z-index: 108;
   top: variables.$map-button-top;
   left: variables.$work-bench-width;
-  right: variables.$padding;
+  right: variables.$padding * 2;
 
   // todo: find some non-layout-change animation technique for
   // this flex-menu-bar-workbench problem
