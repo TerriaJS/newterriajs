@@ -1,6 +1,6 @@
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
-import React from "react";
+import { Component } from "react";
 import GroupMixin from "../../ModelMixins/GroupMixin";
 import ReferenceMixin from "../../ModelMixins/ReferenceMixin";
 import DataCatalogGroup from "./DataCatalogGroup";
@@ -11,7 +11,7 @@ import DataCatalogReference from "./DataCatalogReference";
  * Component that is either a {@link CatalogItem} or a {@link DataCatalogMember} and encapsulated this choosing logic.
  */
 @observer
-class DataCatalogMember extends React.Component {
+class DataCatalogMember extends Component {
   static propTypes = {
     member: PropTypes.object.isRequired,
     viewState: PropTypes.object.isRequired,

@@ -25,7 +25,7 @@ or with overrides on icon
 </Select>
  */
 
-import React from "react";
+import { ReactNode, FC } from "react";
 import styled, { useTheme } from "styled-components";
 import Box from "./Box";
 import { GLYPHS, StyledIcon } from "./Icon";
@@ -78,13 +78,13 @@ export interface SelectProps {
   boxProps?: any;
   dropdownIconProps?: any;
   light?: boolean;
-  leftIcon?: () => React.ReactNode;
+  leftIcon?: () => ReactNode;
   paddingForLeftIcon?: string;
-  children: React.ReactNode;
+  children: ReactNode;
   [spread: string]: any;
 }
 
-const Select: React.FC<SelectProps> = (props) => {
+const Select: FC<SelectProps> = (props) => {
   const {
     leftIcon,
     children,

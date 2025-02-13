@@ -3,13 +3,13 @@ import { computed, makeObservable } from "mobx";
 import { Tooltip as VisxTooltip } from "@visx/tooltip";
 import { CSSTransition } from "react-transition-group";
 import PropTypes from "prop-types";
-import React from "react";
+import { Component, PureComponent } from "react";
 import dateformat from "dateformat";
 import groupBy from "lodash-es/groupBy";
 import Styles from "./tooltip.scss";
 
 @observer
-class Tooltip extends React.Component {
+class Tooltip extends Component {
   static propTypes = {
     items: PropTypes.array.isRequired,
     left: PropTypes.number,
@@ -108,7 +108,7 @@ class Tooltip extends React.Component {
   }
 }
 
-class TooltipGroup extends React.PureComponent {
+class TooltipGroup extends PureComponent {
   static propTypes = {
     name: PropTypes.string,
     items: PropTypes.array.isRequired
@@ -128,7 +128,7 @@ class TooltipGroup extends React.PureComponent {
 }
 
 @observer
-class TooltipItem extends React.Component {
+class TooltipItem extends Component {
   static propTypes = {
     item: PropTypes.object.isRequired
   };

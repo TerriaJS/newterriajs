@@ -1,5 +1,4 @@
 import { create } from "react-test-renderer";
-import React from "react";
 import { runInAction } from "mobx";
 import { ThemeProvider } from "styled-components";
 import { act } from "react-dom/test-utils";

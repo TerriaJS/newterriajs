@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { runInAction } from "mobx";
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
-import React from "react";
+import { Component } from "react";
 import { withTranslation } from "react-i18next";
 import Box from "../../Styled/Box";
 import Icon from "../../Styled/Icon";
@@ -13,7 +13,7 @@ import Styles from "./mobile-modal-window.scss";
 import MobileSearch from "./MobileSearch";
 
 @observer
-class MobileModalWindow extends React.Component {
+class MobileModalWindow extends Component {
   static propTypes = {
     terria: PropTypes.object,
     viewState: PropTypes.object.isRequired,

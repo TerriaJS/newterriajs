@@ -1,6 +1,6 @@
 import { runInAction } from "mobx";
 import { observer } from "mobx-react";
-import React, { FC, useCallback, useEffect } from "react";
+import { FC, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 import Terria from "../../../../Models/Terria";

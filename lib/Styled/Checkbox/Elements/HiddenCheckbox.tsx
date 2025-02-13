@@ -1,16 +1,16 @@
-import React from "react";
+import { HTMLProps, ChangeEventHandler, Ref, forwardRef } from "react";
 
-export interface HiddenCheckboxProps extends React.HTMLProps<HTMLInputElement> {
+export interface HiddenCheckboxProps extends HTMLProps<HTMLInputElement> {
   disabled?: boolean;
   checked?: boolean;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
   value?: number | string;
   name?: string;
   isIndeterminate?: boolean;
 }
-export default React.forwardRef(function HiddenCheckbox(
+export default forwardRef(function HiddenCheckbox(
   { isIndeterminate, ...props }: HiddenCheckboxProps,
-  ref: React.Ref<HTMLInputElement>
+  ref: Ref<HTMLInputElement>
 ) {
   return (
     <input

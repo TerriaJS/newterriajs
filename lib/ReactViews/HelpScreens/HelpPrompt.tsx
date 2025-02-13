@@ -1,7 +1,7 @@
 /**
  * Prompt.tsx - don't use without guarding on useSmallScreenInterface - it won't look pretty!
  */
-import React, { useState } from "react";
+import { FC, useState } from "react";
 import { useTheme } from "styled-components";
 import FadeIn from "../Transitions/FadeIn/FadeIn";
 import SlideUpFadeIn from "../Transitions/SlideUpFadeIn/SlideUpFadeIn";
@@ -25,7 +25,7 @@ interface PromptProps {
   isVisible: boolean;
 }
 
-export const HelpPrompt: React.FC<PromptProps> = ({
+export const HelpPrompt: FC<PromptProps> = ({
   title,
   content,
   dismissLabel,

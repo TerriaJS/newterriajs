@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import styled from "styled-components";
 import { Portal } from "../StandardUserInterface/Portal";
 import { useViewState } from "../Context";
@@ -8,7 +8,7 @@ type PropsType = {
   show: boolean;
 };
 
-const WorkflowPanelPortal: React.FC<PropsType> = ({ show }) => {
+const WorkflowPanelPortal: FC<PropsType> = ({ show }) => {
   const viewState = useViewState();
   return (
     <Container

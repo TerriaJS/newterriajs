@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import { BaseModel } from "../../../Models/Definition/Model";
 import {
   filterSelectableDimensions,
@@ -14,7 +14,7 @@ export interface GeneratedControlSectionProps {
   placement: Placement;
 }
 
-const GeneratedControlSection: React.FC<GeneratedControlSectionProps> = ({
+const GeneratedControlSection: FC<GeneratedControlSectionProps> = ({
   item,
   controls,
   placement

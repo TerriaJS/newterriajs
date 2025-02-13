@@ -1,6 +1,5 @@
 import Story, { StoryRaw } from "../../../lib/ReactViews/Story/Story";
 import { getShallowRenderedOutput } from "../MoreShallowTools";
-import React from "react";
 import { sortable } from "react-anything-sortable";
 
 describe("Story", function () {

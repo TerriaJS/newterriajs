@@ -8,7 +8,7 @@ import {
 } from "mobx";
 import { observer } from "mobx-react";
 import moment from "moment";
-import React from "react";
+import { Component } from "react";
 import { withTranslation, WithTranslation } from "react-i18next";
 import styled from "styled-components";
 import isDefined from "../../../Core/isDefined";
@@ -154,7 +154,7 @@ interface PropsType extends WithTranslation {
 type Granularity = "century" | "year" | "month" | "day" | "time" | "hour";
 
 @observer
-class DateTimePicker extends React.Component<PropsType> {
+class DateTimePicker extends Component<PropsType> {
   public static defaultProps = {
     openDirection: "down"
   };

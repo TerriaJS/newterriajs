@@ -2,7 +2,6 @@ import WorkbenchItem, {
   WorkbenchItemRaw
 } from "../../../lib/ReactViews/Workbench/WorkbenchItem";
 import { getShallowRenderedOutput } from "../MoreShallowTools";
-import React from "react";
 import { sortable } from "react-anything-sortable";
 import Terria from "../../../lib/Models/Terria";
 import ViewState from "../../../lib/ReactViewModels/ViewState";

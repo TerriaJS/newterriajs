@@ -1,11 +1,11 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import { FC, ChangeEvent, useEffect, useState } from "react";
 import { observer } from "mobx-react";
 import CommonStrata from "../../Models/Definition/CommonStrata";
 import NumberParameter from "../../Models/FunctionParameters/NumberParameter";
 
 import Styles from "./parameter-editors.scss";
 
-const NumberParameterEditor: React.FC<{ parameter: NumberParameter }> = ({
+const NumberParameterEditor: FC<{ parameter: NumberParameter }> = ({
   parameter
 }) => {
   const [value, setValue] = useState<number | undefined>(0);

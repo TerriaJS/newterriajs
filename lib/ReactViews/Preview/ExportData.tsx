@@ -1,4 +1,4 @@
-import React from "react";
+import { Component } from "react";
 
 import { withTranslation, WithTranslation } from "react-i18next";
 
@@ -29,7 +29,7 @@ export async function exportData(item: ExportableMixin.Instance) {
  * CatalogItem ExportData.
  */
 @observer
-class ExportData extends React.Component<PropsType> {
+class ExportData extends Component<PropsType> {
   exportDataClicked(item: ExportableMixin.Instance) {
     exportData(item).catch((e) => {
       this.props.item.terria.raiseErrorToUser(e);

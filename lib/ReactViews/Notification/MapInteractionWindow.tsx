@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { Lambda, observable, reaction, makeObservable } from "mobx";
 import { observer } from "mobx-react";
-import React from "react";
+import { Component } from "react";
 import styled from "styled-components";
 import isDefined from "../../Core/isDefined";
 import MapInteractionMode, { UIMode } from "../../Models/MapInteractionMode";
@@ -28,7 +28,7 @@ const MapInteractionWindowWrapper = styled.div<{ isDiffTool: boolean }>`
 `;
 
 @observer
-class MapInteractionWindow extends React.Component<{
+class MapInteractionWindow extends Component<{
   viewState: ViewState;
 }> {
   displayName = "MapInteractionWindow";

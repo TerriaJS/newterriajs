@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import Icon from "../../../../Styled/Icon";
 import { useViewState } from "../../../Context";

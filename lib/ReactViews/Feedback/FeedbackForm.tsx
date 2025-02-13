@@ -1,6 +1,17 @@
 import { runInAction } from "mobx";
 import { observer } from "mobx-react";
-import React, { useEffect, useRef } from "react";
+import {
+  ChangeEvent,
+  FormEvent,
+  FC,
+  ReactNode,
+  Component,
+  Children,
+  isValidElement,
+  cloneElement,
+  useEffect,
+  useRef
+} from "react";
 import { withTranslation, WithTranslation } from "react-i18next";
 import { useUID } from "react-uid";
 import styled, { DefaultTheme, withTheme } from "styled-components";
@@ -33,7 +44,7 @@ interface IState {
 }
 
 @observer
-class FeedbackForm extends React.Component<IProps, IState> {
+class FeedbackForm extends Component<IProps, IState> {
   static displayName = "FeedbackForm";
 
   state: IState = {
@@ -94,19 +105,19 @@ class FeedbackForm extends React.Component<IProps, IState> {
     this.resetState();
   }
 
-  updateName(e: React.ChangeEvent<HTMLInputElement>) {
+  updateName(e: ChangeEvent<HTMLInputElement>) {
     this.setState({
       name: e.target.value
     });
   }
 
-  updateEmail(e: React.ChangeEvent<HTMLInputElement>) {
+  updateEmail(e: ChangeEvent<HTMLInputElement>) {
     this.setState({
       email: e.target.value
     });
   }
 
-  updateComment(e: React.ChangeEvent<HTMLTextAreaElement>) {
+  updateComment(e: ChangeEvent<HTMLTextAreaElement>) {
     this.setState({
       comment: e.target.value
     });
@@ -124,13 +135,13 @@ class FeedbackForm extends React.Component<IProps, IState> {
     }
   }
 
-  changeSendShareUrl(_e: React.ChangeEvent<HTMLInputElement>) {
+  changeSendShareUrl(_e: ChangeEvent<HTMLInputElement>) {
     this.setState((prevState: IState) => ({
       sendShareURL: !prevState.sendShareURL
     }));
   }
 
-  onSubmit(e: React.FormEvent<HTMLFormElement | HTMLDivElement>) {
+  onSubmit(e: FormEvent<HTMLFormElement | HTMLDivElement>) {
     e.preventDefault();
 
     if (
@@ -329,13 +340,13 @@ const WarningText = styled(Text)`
 interface TextAreaProps {
   value: string;
   valueIsValid: boolean;
-  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   styledMinHeight: string;
   styledMaxHeight?: string;
   [spread: string]: any;
 }
 
-const TextArea: React.FC<TextAreaProps> = (props: TextAreaProps) => {
+const TextArea: FC<TextAreaProps> = (props: TextAreaProps) => {
   const {
     value,
     onChange,
@@ -377,17 +388,17 @@ interface StyledLabelProps {
   viewState: ViewState;
   label: string;
   textProps?: any;
-  children: React.ReactNode;
+  children: ReactNode;
   spacingBottom?: boolean;
 }
 
-const StyledLabel: React.FC<StyledLabelProps> = (props: StyledLabelProps) => {
+const StyledLabel: FC<StyledLabelProps> = (props: StyledLabelProps) => {
   const { viewState, label, textProps } = props;
   const id = useUID();
-  const childrenWithId = React.Children.map(props.children, (child) => {
+  const childrenWithId = Children.map(props.children, (child) => {
     // checking isValidElement is the safe way and avoids a typescript error too
-    if (React.isValidElement(child)) {
-      return React.cloneElement(child, { id: id } as any);
+    if (isValidElement(child)) {
+      return cloneElement(child, { id: id } as any);
     }
     return child;
   });

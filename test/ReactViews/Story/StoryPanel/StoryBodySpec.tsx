@@ -1,4 +1,3 @@
-import React from "react";
 import StoryBody from "../../../../lib/ReactViews/Story/StoryPanel/StoryBody";
 import { act } from "react-dom/test-utils";
 import {

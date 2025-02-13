@@ -1,8 +1,6 @@
 // proptypes are in mixin.
 /* eslint react/prop-types:0*/
 
-import React from "react";
-
 import createReactClass from "create-react-class";
 
 import MobileMenuItem from "../../Mobile/MobileMenuItem";

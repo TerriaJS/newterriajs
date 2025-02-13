@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { runInAction } from "mobx";
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
-import React from "react";
+import { Component } from "react";
 import { withTranslation } from "react-i18next";
 import styled, { withTheme } from "styled-components";
 import { applyTranslationIfExists } from "../../Language/languageHelpers";
@@ -18,7 +18,7 @@ import MobileMenu from "./MobileMenu";
 import MobileModalWindow from "./MobileModalWindow";
 
 @observer
-class MobileHeader extends React.Component {
+class MobileHeader extends Component {
   static displayName = "MobileHeader";
 
   showSearch() {

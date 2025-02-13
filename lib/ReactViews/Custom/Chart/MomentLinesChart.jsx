@@ -1,10 +1,10 @@
 import { observer } from "mobx-react";
 import { Line } from "@visx/shape";
 import PropTypes from "prop-types";
-import React from "react";
+import { Component } from "react";
 
 @observer
-class MomentLines extends React.Component {
+class MomentLines extends Component {
   static propTypes = {
     id: PropTypes.string.isRequired,
     chartItem: PropTypes.object.isRequired,

@@ -1,4 +1,4 @@
-import React from "react";
+import { HTMLProps, FC } from "react";
 import { useTheme } from "styled-components";
 import AnimatedSpinnerIcon from "../../Styled/AnimatedSpinnerIcon";
 import { ButtonProps } from "../../Styled/Button";
@@ -7,7 +7,7 @@ import StyledButton from "./StyledButton";
 
 export interface ActionButtonProps
   extends Omit<
-    ButtonProps & React.HTMLProps<HTMLButtonElement>,
+    ButtonProps & HTMLProps<HTMLButtonElement>,
     "iconProps" | "renderIcon"
   > {
   className?: string;
@@ -18,7 +18,7 @@ export interface ActionButtonProps
 /**
  * A themed button to use inside {@link ActionBar}
  */
-export const ActionButton: React.FC<ActionButtonProps> = ({
+export const ActionButton: FC<ActionButtonProps> = ({
   className,
   icon,
   showProcessingIcon,

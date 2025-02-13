@@ -1,13 +1,11 @@
-import React from "react";
+import { FC } from "react";
 import styled from "styled-components";
 import Button from "../../Styled/Button";
 import { StyledIcon } from "../../Styled/Icon";
 import Text from "../../Styled/Text";
 import { FeatureInfoPanelButton as FeatureInfoPanelButtonModel } from "../../ViewModels/FeatureInfoPanel";
 
-const FeatureInfoPanelButton: React.FC<FeatureInfoPanelButtonModel> = (
-  props
-) => {
+const FeatureInfoPanelButton: FC<FeatureInfoPanelButtonModel> = (props) => {
   const { text, icon } = props;
   if (!text) {
     return null;

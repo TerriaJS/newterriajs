@@ -1,4 +1,4 @@
-import React from "react";
+import { MouseEvent, useState, useEffect } from "react";
 import { observer } from "mobx-react";
 import URI from "urijs";
 import { string } from "prop-types";
@@ -149,27 +149,27 @@ function CesiumIonConnector() {
       viewState.terria.configParameters.cesiumIonLoginTokenPersistence ?? ""
     ] ?? loginTokenPersistenceTypes.page;
 
-  const [codeChallenge, setCodeChallenge] = React.useState({
+  const [codeChallenge, setCodeChallenge] = useState({
     value: "",
     hash: ""
   });
 
-  const [tokens, setTokens] = React.useState<CesiumIonToken[]>([]);
-  const [isLoadingTokens, setIsLoadingTokens] = React.useState<boolean>(false);
-  const [assets, setAssets] = React.useState<CesiumIonAsset[]>([]);
-  const [isLoadingAssets, setIsLoadingAssets] = React.useState<boolean>(false);
+  const [tokens, setTokens] = useState<CesiumIonToken[]>([]);
+  const [isLoadingTokens, setIsLoadingTokens] = useState<boolean>(false);
+  const [assets, setAssets] = useState<CesiumIonAsset[]>([]);
+  const [isLoadingAssets, setIsLoadingAssets] = useState<boolean>(false);
 
   // This is the Cesium ion token representing the currently logged-in user, as obtained via
   // an OAuth2 Authorization Code Grant flow with Cesium ion.
-  const [loginToken, setLoginToken] = React.useState(
+  const [loginToken, setLoginToken] = useState(
     loginTokenPersistence.get() ?? ""
   );
 
-  const [userProfile, setUserProfile] = React.useState(defaultUserProfile);
+  const [userProfile, setUserProfile] = useState(defaultUserProfile);
   const [isLoadingUserProfile, setIsLoadingUserProfile] =
-    React.useState<boolean>(false);
+    useState<boolean>(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!crypto || !crypto.subtle) return;
 
     const codeChallenge = [...crypto.getRandomValues(new Uint8Array(32))]
@@ -189,7 +189,7 @@ function CesiumIonConnector() {
       });
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (loginToken.length === 0) return;
 
     setIsLoadingUserProfile(true);
@@ -212,7 +212,7 @@ function CesiumIonConnector() {
       });
   }, [loginToken]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (loginToken.length === 0) return;
 
     setIsLoadingAssets(true);
@@ -235,7 +235,7 @@ function CesiumIonConnector() {
       });
   }, [loginToken]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (
       !viewState.terria.configParameters.cesiumIonAllowSharingAddedAssets ||
       loginToken.length === 0
@@ -570,7 +570,7 @@ function CesiumIonConnector() {
   function addToMap(
     terria: Terria,
     asset: CesiumIonAsset,
-    event: React.MouseEvent<HTMLButtonElement>
+    event: MouseEvent<HTMLButtonElement>
   ) {
     // If the asset may be shared, the user must choose a suitable token.
     // If not, we can access the asset using the login token.

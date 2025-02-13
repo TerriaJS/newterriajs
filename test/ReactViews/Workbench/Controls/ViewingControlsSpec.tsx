@@ -1,4 +1,3 @@
-import React from "react";
 import { create } from "react-test-renderer";
 import ViewingControls from "../../../../lib/ReactViews/Workbench/Controls/ViewingControls";
 import Terria from "../../../../lib/Models/Terria";

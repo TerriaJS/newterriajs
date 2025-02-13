@@ -1,4 +1,4 @@
-import React, { ComponentProps } from "react";
+import { ElementType, ComponentProps } from "react";
 import styled from "styled-components";
 
 interface ITextSize {
@@ -40,7 +40,7 @@ export interface ITextPropsBase {
   primary?: boolean;
   fullWidth?: boolean;
   noWrap?: boolean;
-  as?: React.ElementType | keyof JSX.IntrinsicElements;
+  as?: ElementType | keyof JSX.IntrinsicElements;
   styledLineHeight?: string;
   highlightLinks?: boolean;
   overflowHide?: boolean;
@@ -217,7 +217,7 @@ export const Text = styled.div<ITextProps>`
 
 export const TextSpan = styled(Text).attrs<{
   as?: React.ElementType | keyof JSX.IntrinsicElements;
-}>((props: { as?: React.ElementType | keyof JSX.IntrinsicElements }) => ({
+}>((props: { as?: ElementType | keyof JSX.IntrinsicElements }) => ({
   as: props.as || "span"
 }))``;
 

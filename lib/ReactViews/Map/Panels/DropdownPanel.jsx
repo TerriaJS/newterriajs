@@ -1,9 +1,5 @@
 "use strict";
 
-// proptypes are in mixin
-/* eslint react/prop-types:0*/
-
-import React from "react";
 import createReactClass from "create-react-class";
 import classNames from "classnames";
 import Icon from "../../../Styled/Icon";

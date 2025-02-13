@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import {
   isButton,
   isCheckbox,
@@ -26,7 +26,7 @@ import {
 } from "./Select";
 import { SelectableDimensionText } from "./Text";
 
-const SelectableDimension: React.FC<{
+const SelectableDimension: FC<{
   id: string;
   dim: SelectableDimensionModel;
 }> = ({ id, dim }) => {

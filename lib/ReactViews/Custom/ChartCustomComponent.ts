@@ -1,5 +1,5 @@
 import { action, runInAction } from "mobx";
-import React, { ReactElement } from "react";
+import { createElement, ReactElement } from "react";
 import createGuid from "terriajs-cesium/Source/Core/createGuid";
 import DeveloperError from "terriajs-cesium/Source/Core/DeveloperError";
 import Ellipsoid from "terriajs-cesium/Source/Core/Ellipsoid";
@@ -301,7 +301,7 @@ export default abstract class ChartCustomComponent<
       );
 
       chartElements.push(
-        React.createElement(ChartExpandAndDownloadButtons, {
+        createElement(ChartExpandAndDownloadButtons, {
           key: "button",
           terria: context.terria,
           sourceItems: sourceItems,
@@ -331,7 +331,7 @@ export default abstract class ChartCustomComponent<
       });
 
       chartElements.push(
-        React.createElement(Chart, {
+        createElement(Chart, {
           key: "chart",
           item: chartItem,
           xAxisLabel: attrs.previewXLabel,
@@ -346,7 +346,7 @@ export default abstract class ChartCustomComponent<
       );
     }
 
-    return React.createElement(
+    return createElement(
       "div",
       {
         key: "chart-wrapper",
@@ -453,7 +453,7 @@ export default abstract class ChartCustomComponent<
   ): ReactElement | undefined {
     const title = node.parent!.children![0].children![0].data;
     const revisedChildren: ReactElement[] = [
-      React.createElement(
+      createElement(
         "div",
         {
           key: "title",
@@ -462,7 +462,7 @@ export default abstract class ChartCustomComponent<
         title
       ) as ReactElement
     ].concat(children);
-    return React.createElement(
+    return createElement(
       "td",
       { key: "chart", colSpan: 2, className: ChartPreviewStyles.chartTd },
       node.data,

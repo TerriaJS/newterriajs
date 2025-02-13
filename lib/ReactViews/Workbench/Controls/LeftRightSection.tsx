@@ -1,6 +1,6 @@
 import { runInAction } from "mobx";
 import { observer } from "mobx-react";
-import React from "react";
+import { FC } from "react";
 import { useTranslation, withTranslation } from "react-i18next";
 import styled from "styled-components";
 import defined from "terriajs-cesium/Source/Core/defined";
@@ -39,7 +39,7 @@ interface ILeftRightSection {
   item: Model<SplitterTraits>;
 }
 
-const LeftRightSection: React.FC<ILeftRightSection> = observer(
+const LeftRightSection: FC<ILeftRightSection> = observer(
   ({ item }: ILeftRightSection) => {
     const goLeft = () => {
       runInAction(() => {

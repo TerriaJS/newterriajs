@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import CommonStrata from "../../Models/Definition/CommonStrata";
@@ -17,7 +17,7 @@ import SelectableDimension from "./SelectableDimension";
 /**
  * Component to render a SelectableDimensionGroup or DimensionSelectorCheckboxGroup.
  */
-export const SelectableDimensionGroup: React.FC<{
+export const SelectableDimensionGroup: FC<{
   id: string;
   dim: SelectableDimensionGroupModel | SelectableDimensionCheckboxGroupModel;
 }> = ({ id, dim }) => {

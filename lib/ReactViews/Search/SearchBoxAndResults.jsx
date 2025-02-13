@@ -1,7 +1,7 @@
 import { reaction, runInAction } from "mobx";
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
-import React from "react";
+import { createRef, Component } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { addMarker, removeMarker } from "../../Models/LocationMarkerUtils";
@@ -67,10 +67,10 @@ const PresentationBox = styled(Box).attrs({
 
 export const LOCATION_SEARCH_INPUT_NAME = "LocationSearchInput";
 
-export class SearchBoxAndResultsRaw extends React.Component {
+export class SearchBoxAndResultsRaw extends Component {
   constructor(props) {
     super(props);
-    this.locationSearchRef = React.createRef();
+    this.locationSearchRef = createRef();
   }
 
   componentDidMount() {

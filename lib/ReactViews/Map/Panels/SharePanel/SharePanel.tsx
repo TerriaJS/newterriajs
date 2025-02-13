@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { observer } from "mobx-react";
-import React from "react";
+import { Component } from "react";
 import {
   WithTranslation,
   withTranslation,
@@ -35,7 +35,7 @@ interface SharePanelState {
 }
 
 @observer
-class SharePanel extends React.Component<PropTypes, SharePanelState> {
+class SharePanel extends Component<PropTypes, SharePanelState> {
   static displayName = "SharePanel";
 
   constructor(props: PropTypes) {

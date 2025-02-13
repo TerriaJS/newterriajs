@@ -1,6 +1,6 @@
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
-import React from "react";
+import { Component } from "react";
 import { withTranslation } from "react-i18next";
 // if we must use a placeholder image,
 // do not bundle in the full res `wwwroot/images/bing-aerial-labels-wide.png`
@@ -42,7 +42,7 @@ const DisclaimerButton = styled(Button).attrs({
 `;
 
 @observer
-class Disclaimer extends React.Component {
+class Disclaimer extends Component {
   static displayName = "Disclaimer";
 
   static propTypes = {

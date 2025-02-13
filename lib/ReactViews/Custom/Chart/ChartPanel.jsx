@@ -3,7 +3,7 @@
 import { computed, makeObservable } from "mobx";
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
-import React from "react";
+import { Component } from "react";
 import { withTranslation } from "react-i18next";
 import defined from "terriajs-cesium/Source/Core/defined";
 import ChartView from "../../../Charts/ChartView.ts";
@@ -18,7 +18,7 @@ import { ChartPanelDownloadButton } from "./ChartPanelDownloadButton";
 const height = 300;
 
 @observer
-class ChartPanel extends React.Component {
+class ChartPanel extends Component {
   static displayName = "ChartPanel";
 
   static propTypes = {

@@ -4,7 +4,7 @@ import { useParentSize } from "@visx/responsive";
 import { scaleLinear, scaleTime } from "@visx/scale";
 import { computed, makeObservable } from "mobx";
 import { observer } from "mobx-react";
-import React, { useEffect, useState } from "react";
+import { FC, Component, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import ChartableMixin, { ChartItem } from "../../../ModelMixins/ChartableMixin";
@@ -36,8 +36,8 @@ const defaultMargin: Margin = { top: 5, left: 5, right: 5, bottom: 5 };
 /**
  * Chart component for feature info panel popup
  */
-const FeatureInfoPanelChart: React.FC<FeatureInfoPanelChartPropTypes> =
-  observer((props) => {
+const FeatureInfoPanelChart: FC<FeatureInfoPanelChartPropTypes> = observer(
+  (props) => {
     const [loadingFailed, setLoadingFailed] = useState(false);
     const { t } = useTranslation();
 
@@ -106,7 +106,8 @@ const FeatureInfoPanelChart: React.FC<FeatureInfoPanelChartPropTypes> =
         )}
       </div>
     );
-  });
+  }
+);
 
 const isLineType = (chartItem: ChartItem) =>
   chartItem.type === "line" || chartItem.type === "lineAndPoint";
@@ -124,7 +125,7 @@ interface ChartPropsType {
  * Private Chart component that renders the SVG chart
  */
 @observer
-class Chart extends React.Component<ChartPropsType> {
+class Chart extends Component<ChartPropsType> {
   xAxisHeight = 30;
   yAxisWidth = 10;
 

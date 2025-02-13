@@ -1,10 +1,10 @@
-import React, { createContext, useContext } from "react";
+import { FC, ComponentType, createContext, useContext } from "react";
 import ViewState from "../../ReactViewModels/ViewState";
 import TerriaError from "../../Core/TerriaError";
 
 export const ViewStateContext = createContext<ViewState | undefined>(undefined);
 
-export const ViewStateProvider: React.FC<{ viewState: ViewState }> = ({
+export const ViewStateProvider: FC<{ viewState: ViewState }> = ({
   viewState,
   children
 }) => (
@@ -21,8 +21,8 @@ export const useViewState = () => {
 };
 
 export const withViewState = <P extends WithViewState>(
-  Component: React.ComponentType<P>
-): React.FC<Omit<P, "viewState">> =>
+  Component: ComponentType<P>
+): FC<Omit<P, "viewState">> =>
   function withViewState(props) {
     return (
       <ViewStateContext.Consumer>

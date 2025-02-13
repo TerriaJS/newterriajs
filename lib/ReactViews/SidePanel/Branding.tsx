@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import React from "react";
+import { Fragment } from "react";
 import isDefined from "../../Core/isDefined";
 import ViewState from "../../ReactViewModels/ViewState";
 import parseCustomHtmlToReact from "../Custom/parseCustomHtmlToReact";
@@ -80,12 +80,12 @@ export default withViewState(
         `}
       >
         {brandingHtmlElements.map((element, idx) => (
-          <React.Fragment key={idx}>
+          <Fragment key={idx}>
             {parseCustomHtmlToReact(
               element.replace(/\{\{\s*version\s*\}\}/g, version),
               { disableExternalLinkIcon: true }
             )}
-          </React.Fragment>
+          </Fragment>
         ))}
       </div>
     );

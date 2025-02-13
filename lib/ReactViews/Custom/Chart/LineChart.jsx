@@ -1,11 +1,11 @@
 import { LinePath } from "@visx/shape";
 import { line } from "d3-shape";
 import PropTypes from "prop-types";
-import React from "react";
+import { PureComponent } from "react";
 import { observer } from "mobx-react";
 
 @observer
-class LineChart extends React.PureComponent {
+class LineChart extends PureComponent {
   static propTypes = {
     id: PropTypes.string.isRequired,
     chartItem: PropTypes.object.isRequired,

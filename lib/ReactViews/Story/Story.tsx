@@ -1,5 +1,6 @@
 import classNames from "classnames";
-import React, {
+import {
+  RefObject,
   MouseEventHandler,
   useEffect,
   useLayoutEffect,
@@ -43,7 +44,7 @@ interface Props {
 }
 
 interface MenuProps extends Props {
-  storyRef: React.RefObject<HTMLElement>;
+  storyRef: RefObject<HTMLElement>;
 }
 
 const findTextContent = (content: any): string => {

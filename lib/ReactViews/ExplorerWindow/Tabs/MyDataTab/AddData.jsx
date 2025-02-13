@@ -1,7 +1,7 @@
 import { observer } from "mobx-react";
 import { runInAction } from "mobx";
 import PropTypes from "prop-types";
-import React from "react";
+import { Component } from "react";
 import { Trans, withTranslation } from "react-i18next";
 import {
   Category,
@@ -28,7 +28,7 @@ import TerriaError from "../../../../Core/TerriaError";
  * Add data panel in modal window -> My data tab
  */
 @observer
-class AddData extends React.Component {
+class AddData extends Component {
   static propTypes = {
     terria: PropTypes.object,
     viewState: PropTypes.object,

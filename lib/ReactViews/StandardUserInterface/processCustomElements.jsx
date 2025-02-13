@@ -1,4 +1,4 @@
-import React from "react";
+import { Children, cloneElement } from "react";
 import {
   Nav,
   Menu,
@@ -29,7 +29,7 @@ const groupElementKeys = Object.keys(GROUP_ELEMENT_TO_KEY_MAPPING);
  *      for "menu", an array for "nav" etc.
  */
 export default function processCustomElements(isSmallScreen, customUI) {
-  const groupElements = React.Children.toArray(customUI);
+  const groupElements = Children.toArray(customUI);
 
   return groupElements.reduce((soFar, groupElement) => {
     const key = findKeyForGroupElement(groupElement);
@@ -65,7 +65,7 @@ function findKeyForGroupElement(groupElement) {
  * @returns {Array<Element>} a collection of processed children.
  */
 function getGroupChildren(isSmallScreen, groupElement) {
-  return React.Children.map(groupElement.props.children, (child) => {
+  return Children.map(groupElement.props.children, (child) => {
     if (typeof child === "string") {
       return <span>{child}</span>;
     } else if (
@@ -73,7 +73,7 @@ function getGroupChildren(isSmallScreen, groupElement) {
       child.type.propTypes &&
       child.type.propTypes.smallScreen
     ) {
-      return React.cloneElement(child, {
+      return cloneElement(child, {
         smallScreen: isSmallScreen
       });
     } else {

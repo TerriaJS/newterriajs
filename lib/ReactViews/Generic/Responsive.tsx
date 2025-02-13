@@ -1,5 +1,4 @@
 import PropTypes, { InferProps } from "prop-types";
-import React from "react";
 import MediaQuery from "react-responsive";
 
 // This should come from some config some where

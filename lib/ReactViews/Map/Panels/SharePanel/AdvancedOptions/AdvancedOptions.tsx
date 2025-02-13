@@ -1,4 +1,4 @@
-import React, { FC, useState, MutableRefObject } from "react";
+import { FC, useState, MutableRefObject } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 

@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import { lazy, Component, Suspense } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import Styles from "./story-editor.scss";
@@ -6,8 +6,8 @@ import { withTranslation } from "react-i18next";
 import tinymce from "tinymce";
 
 // Lazy load the Editor component as the tinyMCE library is large
-const Editor = React.lazy(() => import("../Generic/Editor.jsx"));
-class StoryEditor extends React.Component {
+const Editor = lazy(() => import("../Generic/Editor.jsx"));
+class StoryEditor extends Component {
   constructor(props) {
     super(props);
     this.state = {

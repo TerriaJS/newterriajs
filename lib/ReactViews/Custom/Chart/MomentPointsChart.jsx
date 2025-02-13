@@ -3,12 +3,12 @@ import { interpolateNumber as d3InterpolateNumber } from "d3-interpolate";
 import { computed, makeObservable } from "mobx";
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
-import React from "react";
+import { Component } from "react";
 import Glyphs from "./Glyphs";
 import { GlyphCircle } from "@visx/glyph";
 
 @observer
-class MomentPointsChart extends React.Component {
+class MomentPointsChart extends Component {
   static propTypes = {
     id: PropTypes.string.isRequired,
     chartItem: PropTypes.object.isRequired,

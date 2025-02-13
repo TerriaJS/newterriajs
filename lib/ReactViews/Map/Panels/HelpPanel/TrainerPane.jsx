@@ -1,6 +1,6 @@
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
-import React from "react";
+import { Component } from "react";
 import { withTranslation } from "react-i18next";
 import { withTheme } from "styled-components";
 import styled from "styled-components";
@@ -23,7 +23,7 @@ const UlTrainerItems = styled(Box).attrs({
 const TrainerButton = styled(Button)``;
 
 @observer
-class TrainerPane extends React.Component {
+class TrainerPane extends Component {
   static displayName = "TrainerPane";
 
   static propTypes = {

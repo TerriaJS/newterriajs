@@ -1,7 +1,7 @@
 import "!!style-loader!css-loader!./sortable.css";
 import { action, makeObservable } from "mobx";
 import { observer } from "mobx-react";
-import React from "react";
+import { Component } from "react";
 import Sortable from "react-anything-sortable";
 import styled from "styled-components";
 import Terria from "../../Models/Terria";
@@ -25,7 +25,7 @@ interface IProps {
 }
 
 @observer
-class WorkbenchList extends React.Component<IProps> {
+class WorkbenchList extends Component<IProps> {
   constructor(props: IProps) {
     super(props);
     makeObservable(this);

@@ -1,10 +1,10 @@
 import { runInAction } from "mobx";
-import React from "react";
+import { FC } from "react";
 import CommonStrata from "../../Models/Definition/CommonStrata";
 import { SelectableDimensionText as SelectableDimensionTextModel } from "../../Models/SelectableDimensions/SelectableDimensions";
 import Input from "../../Styled/Input";
 
-export const SelectableDimensionText: React.FC<{
+export const SelectableDimensionText: FC<{
   id: string;
   dim: SelectableDimensionTextModel;
 }> = ({ id, dim }) => {

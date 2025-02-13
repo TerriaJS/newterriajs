@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import React, { useState } from "react";
+import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   applyTranslationIfExists,
@@ -28,7 +28,7 @@ interface CountDatasetsProps {
   updateResults: (resultsHtml: string) => void;
 }
 
-const CountDatasets: React.FC<CountDatasetsProps> = observer((props) => {
+const CountDatasets: FC<CountDatasetsProps> = observer((props) => {
   const [btnStringOrComponent, setBtnStringOrComponent] = useState<
     string | JSX.Element
   >(`${TRANSLATE_KEY_PREFIX}countDatasets.btnText`);

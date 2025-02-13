@@ -4,7 +4,6 @@
 /* eslint react/prop-types:0*/
 
 import createReactClass from "create-react-class";
-import React from "react";
 import Button from "../../../../Styled/Button";
 import Icon from "../../../../Styled/Icon";
 import BaseOuterPanel from "../BaseOuterPanel";

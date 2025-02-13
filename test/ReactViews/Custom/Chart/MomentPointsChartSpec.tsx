@@ -2,7 +2,6 @@ import { scaleLinear, scaleTime } from "@visx/scale";
 import { Glyph, GlyphSquare } from "@visx/glyph";
 import maxBy from "lodash-es/maxBy";
 import minBy from "lodash-es/minBy";
-import React from "react";
 import TestRenderer from "react-test-renderer";
 import MomentPointsChart from "../../../../lib/ReactViews/Custom/Chart/MomentPointsChart";
 

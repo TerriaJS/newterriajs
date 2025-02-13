@@ -1,6 +1,14 @@
 import { action, makeObservable, toJS } from "mobx";
 import { observer } from "mobx-react";
-import React from "react";
+import {
+  RefObject,
+  ComponentPropsWithoutRef,
+  FC,
+  ReactNode,
+  ReactElement,
+  createRef,
+  Component
+} from "react";
 import Sortable from "react-anything-sortable";
 import {
   Trans,
@@ -57,11 +65,11 @@ interface IState {
 }
 
 @observer
-class StoryBuilder extends React.Component<
+class StoryBuilder extends Component<
   IProps & MeasureElementProps & WithTranslation & WithViewState,
   IState
 > {
-  storiesWrapperRef = React.createRef<HTMLElement>();
+  storiesWrapperRef = createRef<HTMLElement>();
 
   refToMeasure: any;
 
@@ -393,7 +401,7 @@ class StoryBuilder extends React.Component<
               scroll
               overflowY={"auto"}
               styledMaxHeight="100%"
-              ref={this.storiesWrapperRef as React.RefObject<HTMLDivElement>}
+              ref={this.storiesWrapperRef as RefObject<HTMLDivElement>}
               css={`
                 margin-right: -10px;
               `}
@@ -509,7 +517,7 @@ class StoryBuilder extends React.Component<
   }
 }
 
-type PanelProps = React.ComponentPropsWithoutRef<typeof Box> & {
+type PanelProps = ComponentPropsWithoutRef<typeof Box> & {
   isVisible?: boolean;
   isHidden?: boolean;
 };
@@ -539,7 +547,7 @@ interface CaptureSceneProps {
   disabled?: boolean;
 }
 
-const CaptureScene: React.FC<CaptureSceneProps> = (props) => {
+const CaptureScene: FC<CaptureSceneProps> = (props) => {
   const { t } = useTranslation();
   return (
     <StoryButton
@@ -554,12 +562,12 @@ const CaptureScene: React.FC<CaptureSceneProps> = (props) => {
   );
 };
 
-type StoryButtonProps = React.ComponentPropsWithoutRef<typeof Button> & {
+type StoryButtonProps = ComponentPropsWithoutRef<typeof Button> & {
   btnText: string;
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
-export const StoryButton: React.FC<StoryButtonProps> = (props) => {
+export const StoryButton: FC<StoryButtonProps> = (props) => {
   const { btnText, ...rest } = props;
   return (
     <Button
@@ -577,12 +585,12 @@ export const StoryButton: React.FC<StoryButtonProps> = (props) => {
 
 interface RemoveDialogProps {
   theme: DefaultTheme;
-  text: React.ReactElement;
+  text: ReactElement;
   onConfirm: () => void;
   closeDialog: () => void;
 }
 
-const RemoveDialog: React.FC<RemoveDialogProps> = (props) => {
+const RemoveDialog: FC<RemoveDialogProps> = (props) => {
   const { t } = useTranslation();
   return (
     <Box

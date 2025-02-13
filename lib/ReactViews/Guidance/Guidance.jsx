@@ -2,7 +2,7 @@
  * <Guidance /> is the (currently unused) "in app tour" where we have the dots,
  * whereas <Guide /> is the generic "slider/static tour"
  */
-import React, { useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
