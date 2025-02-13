@@ -49,6 +49,7 @@ const StyledMapIconButton = styled(RawButton)<IStyledMapIconButtonProps>`
     props.primary &&
     `
     background: ${props.theme.colorPrimary};
+    border: 1px solid ${props.theme.colorPrimary};
     color: ${props.theme.textLight};
     svg {
       fill: ${props.theme.textLight};
