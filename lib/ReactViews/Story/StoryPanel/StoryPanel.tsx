@@ -254,7 +254,7 @@ class StoryPanel extends React.Component<Props, State> {
             ref={this.slideRef as React.RefObject<HTMLDivElement>}
             css={`
               @media (min-width: 992px) {
-                max-width: 60vw;
+                max-width: 36vw;
               }
               border-radius: 6px;
               overflow: hidden;
@@ -274,7 +274,6 @@ class StoryPanel extends React.Component<Props, State> {
               />
             </Box>
             <Box
-              paddedRatio={3}
               backgroundColor={this.props.theme.dark}
               css={{
                 backgroundColor: this.props.theme.transparentDark,

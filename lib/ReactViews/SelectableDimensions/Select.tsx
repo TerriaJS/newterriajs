@@ -49,7 +49,7 @@ export const SelectableDimensionEnum: React.FC<{
           ...baseStyles,
           borderColor: theme.darkLighter
         }),
-        option: (baseStyles, { isSelected }) => ({
+        option: (baseStyles) => ({
           ...baseStyles,
           color: "white"
         })
@@ -88,7 +88,7 @@ export const SelectableDimensionEnum: React.FC<{
           ...baseStyles,
           borderColor: theme.darkLighter
         }),
-        option: (baseStyles, { isSelected }) => ({
+        option: (baseStyles) => ({
           ...baseStyles,
           color: "white"
         })

@@ -119,16 +119,18 @@ export default class Workbench {
   @action
   disableAll() {
     this.items.forEach((item) => {
-      hasTraits(item, MappableTraits, "show") &&
+      if (hasTraits(item, MappableTraits, "show")) {
         item.setTrait(CommonStrata.user, "show", false);
+      }
     });
   }
 
   @action
   enableAll() {
     this.items.forEach((item) => {
-      hasTraits(item, MappableTraits, "show") &&
+      if (hasTraits(item, MappableTraits, "show")) {
         item.setTrait(CommonStrata.user, "show", true);
+      }
     });
   }
 

@@ -48,8 +48,8 @@ const DropdownPanel = createReactClass({
       // the offsets for the button/panel are relative to their container.
       const caretOffset = Math.max(
         buttonElementClientWidth / 2 -
-        10 -
-        (dropdownOffset - buttonElementOffsetLeft),
+          10 -
+          (dropdownOffset - buttonElementOffsetLeft),
         0
       );
 

@@ -278,7 +278,13 @@ const Story = (props: Props) => {
             border-bottom: 1px solid rgba(255, 255, 255, 0.15);
           `}
         >
-          <div>
+          <div
+            css={`
+              width: 100%;
+              overflow-x: hidden;
+              display: flex;
+            `}
+          >
             <TextSpan
               css={`
                 color: #baebf8;
@@ -289,7 +295,15 @@ const Story = (props: Props) => {
             >
               {props.index + 1}
             </TextSpan>
-            <TextSpan textLight medium>
+            <TextSpan
+              overflowEllipsis
+              textLight
+              medium
+              css={`
+                overflow-x: hidden;
+                white-space: nowrap;
+              `}
+            >
               {story.title && story.title.length > 0
                 ? story.title
                 : t("story.untitledScene")}
@@ -320,7 +334,15 @@ const Story = (props: Props) => {
         </Box>
         {bodyText.length > 0 && (
           <Box paddedRatio={2} paddedHorizontally={3}>
-            <Text textLight medium>
+            <Text
+              overflowEllipsis
+              textLight
+              medium
+              css={`
+                overflow-x: hidden;
+                white-space: nowrap;
+              `}
+            >
               {bodyText}
             </Text>
           </Box>
