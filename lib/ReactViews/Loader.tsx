@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import { withTranslation, WithTranslation, TFunction } from "react-i18next";
 import Box from "../Styled/Box";
 import { TextSpan } from "../Styled/Text";
@@ -12,7 +12,7 @@ interface PropsType extends WithTranslation {
   t: TFunction;
   [spread: string]: any;
 }
-const Loader: React.FC<PropsType> = (props: PropsType) => {
+const Loader: FC<PropsType> = (props: PropsType) => {
   const { message, t, boxProps, textProps, hideMessage, ...rest }: PropsType =
     props;
   return (

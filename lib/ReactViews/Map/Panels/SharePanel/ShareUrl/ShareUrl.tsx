@@ -1,9 +1,10 @@
-import React, {
+import {
   useEffect,
   useImperativeHandle,
   useState,
   PropsWithChildren
 } from "react";
+import * as React from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 

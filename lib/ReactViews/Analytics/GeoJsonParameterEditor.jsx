@@ -1,4 +1,4 @@
-import React from "react";
+import { Component } from "react";
 import PropTypes from "prop-types";
 import defined from "terriajs-cesium/Source/Core/defined";
 import Styles from "./parameter-editors.scss";
@@ -22,7 +22,7 @@ import { runInAction } from "mobx";
 import CommonStrata from "../../Models/Definition/CommonStrata";
 
 @observer
-class GeoJsonParameterEditor extends React.Component {
+class GeoJsonParameterEditor extends Component {
   static propTypes = {
     previewed: PropTypes.object,
     parameter: PropTypes.object,

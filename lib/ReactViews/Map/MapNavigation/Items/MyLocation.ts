@@ -1,6 +1,6 @@
 import i18next from "i18next";
 import { action, observable, runInAction, makeObservable } from "mobx";
-import React from "react";
+import { RefObject, createRef } from "react";
 import CesiumCartographic from "terriajs-cesium/Source/Core/Cartographic";
 import URI from "urijs";
 import createGuid from "terriajs-cesium/Source/Core/createGuid";
@@ -24,7 +24,7 @@ export class MyLocation extends MapNavigationItemController {
   static id = "my-location";
   static displayName = "MyLocation";
   readonly terria: Terria;
-  itemRef: React.RefObject<HTMLDivElement> = React.createRef();
+  itemRef: RefObject<HTMLDivElement> = createRef();
   private readonly _marker: GeoJsonCatalogItem;
   @observable private watchId: number | undefined;
   @observable private flown: boolean | undefined;

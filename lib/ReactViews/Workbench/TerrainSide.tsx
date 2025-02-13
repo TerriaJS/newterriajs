@@ -1,6 +1,6 @@
 import { runInAction } from "mobx";
 import { observer } from "mobx-react";
-import React from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 import SplitDirection from "terriajs-cesium/Source/Scene/SplitDirection";
@@ -25,7 +25,7 @@ interface ITerrainSideProps {
   activeColor: string;
 }
 
-const TerrainSide: React.FC<ITerrainSideProps> = observer(
+const TerrainSide: FC<ITerrainSideProps> = observer(
   (props: ITerrainSideProps) => {
     const { t } = useTranslation();
     const theme = useTheme();

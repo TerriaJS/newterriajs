@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import React from "react";
+import { Component } from "react";
 import { WithTranslation, withTranslation } from "react-i18next";
 import isDefined from "../../../Core/isDefined";
 import { BaseModel } from "../../../Models/Definition/Model";
@@ -17,7 +17,7 @@ interface PropsType extends WithTranslation {
 }
 
 @observer
-class SelectableDimensionSection extends React.Component<PropsType> {
+class SelectableDimensionSection extends Component<PropsType> {
   render() {
     const item = this.props.item;
     if (!SelectableDimensions.is(item)) {

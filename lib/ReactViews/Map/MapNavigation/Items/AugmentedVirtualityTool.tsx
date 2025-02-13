@@ -1,7 +1,7 @@
 import i18next from "i18next";
 import { action, computed, observable, makeObservable } from "mobx";
 import { observer } from "mobx-react";
-import React from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import AugmentedVirtuality from "../../../../Models/AugmentedVirtuality";
@@ -174,7 +174,7 @@ export class AugmentedVirtualityRealignController extends MapNavigationItemContr
   }
 }
 
-export const AugmentedVirtualityRealign: React.FC<{
+export const AugmentedVirtualityRealign: FC<{
   arRealignController: AugmentedVirtualityRealignController;
 }> = observer(
   (props: { arRealignController: AugmentedVirtualityRealignController }) => {

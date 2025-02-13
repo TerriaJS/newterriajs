@@ -9,7 +9,7 @@ import { withParentSize } from "@visx/responsive";
 import { scaleLinear, scaleTime } from "@visx/scale";
 import { Line } from "@visx/shape";
 import PropTypes from "prop-types";
-import React from "react";
+import { Component, createRef, PureComponent } from "react";
 import groupBy from "lodash-es/groupBy";
 import minBy from "lodash-es/minBy";
 import Legends from "./Legends";
@@ -27,7 +27,7 @@ const defaultGridColor = "#efefef";
 const labelColor = "#efefef";
 
 @observer
-class BottomDockChart extends React.Component {
+class BottomDockChart extends Component {
   static propTypes = {
     terria: PropTypes.object.isRequired,
     parentWidth: PropTypes.number,
@@ -58,7 +58,7 @@ class BottomDockChart extends React.Component {
 export default withParentSize(BottomDockChart);
 
 @observer
-class Chart extends React.Component {
+class Chart extends Component {
   static propTypes = {
     terria: PropTypes.object.isRequired,
     width: PropTypes.number,
@@ -330,7 +330,7 @@ class Chart extends React.Component {
 }
 
 @observer
-class Plot extends React.Component {
+class Plot extends Component {
   static propTypes = {
     chartItems: PropTypes.array.isRequired,
     initialScales: PropTypes.array.isRequired,
@@ -344,7 +344,7 @@ class Plot extends React.Component {
 
   @computed
   get chartRefs() {
-    return this.props.chartItems.map((_) => React.createRef());
+    return this.props.chartItems.map((_) => createRef());
   }
 
   componentDidUpdate() {
@@ -418,7 +418,7 @@ class Plot extends React.Component {
   }
 }
 
-class XAxis extends React.PureComponent {
+class XAxis extends PureComponent {
   static propTypes = {
     top: PropTypes.number.isRequired,
     scale: PropTypes.func.isRequired,
@@ -453,7 +453,7 @@ class XAxis extends React.PureComponent {
   }
 }
 
-class YAxis extends React.PureComponent {
+class YAxis extends PureComponent {
   static propTypes = {
     scale: PropTypes.func.isRequired,
     color: PropTypes.string.isRequired,
@@ -490,7 +490,7 @@ class YAxis extends React.PureComponent {
   }
 }
 
-class Cursor extends React.PureComponent {
+class Cursor extends PureComponent {
   static propTypes = {
     x: PropTypes.number.isRequired
   };

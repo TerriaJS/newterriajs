@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import styled, { useTheme } from "styled-components";
 import { Li } from "../../Styled/List";
 import Icon, { StyledIcon } from "../../Styled/Icon";
@@ -31,9 +31,7 @@ interface SearchResultProps {
   icon: keyof typeof Icon.GLYPHS;
 }
 
-const SearchResult: React.FC<SearchResultProps> = (
-  props: SearchResultProps
-) => {
+const SearchResult: FC<SearchResultProps> = (props: SearchResultProps) => {
   const theme = useTheme();
   const highlightedResultName = highlightKeyword(
     props.name,

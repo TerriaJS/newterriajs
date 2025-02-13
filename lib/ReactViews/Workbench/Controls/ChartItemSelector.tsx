@@ -1,6 +1,6 @@
 import { runInAction } from "mobx";
 import { observer } from "mobx-react";
-import React from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 import ChartView from "../../../Charts/ChartView";
@@ -21,7 +21,7 @@ interface IChartItemSelector {
   item: BaseModel;
 }
 
-export const ChartItem: React.FC<IChartItem> = observer(
+export const ChartItem: FC<IChartItem> = observer(
   ({ chartItem }: IChartItem) => {
     const { t } = useTranslation();
     const lineColor = chartItem.isSelectedInWorkbench
@@ -58,7 +58,7 @@ export const ChartItem: React.FC<IChartItem> = observer(
   }
 );
 
-const ChartItemSelector: React.FC<IChartItemSelector> = observer(
+const ChartItemSelector: FC<IChartItemSelector> = observer(
   ({ item }: IChartItemSelector) => {
     const theme = useTheme();
     const chartView = new ChartView(item.terria);

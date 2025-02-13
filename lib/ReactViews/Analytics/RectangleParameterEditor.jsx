@@ -1,6 +1,6 @@
 "use strict";
 
-import React from "react";
+import { Component } from "react";
 
 import PropTypes from "prop-types";
 
@@ -18,7 +18,7 @@ import { runInAction } from "mobx";
 import CommonStrata from "../../Models/Definition/CommonStrata";
 
 @observer
-class RectangleParameterEditor extends React.Component {
+class RectangleParameterEditor extends Component {
   static propTypes = {
     previewed: PropTypes.object,
     parameter: PropTypes.object,

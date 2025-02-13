@@ -1,4 +1,4 @@
-import React from "react";
+import { Component } from "react";
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
@@ -9,7 +9,7 @@ import DataCatalogMember from "./DataCatalogMember";
 
 // Displays the data catalog.
 @observer
-class DataCatalog extends React.Component {
+class DataCatalog extends Component {
   static propTypes = {
     terria: PropTypes.object,
     viewState: PropTypes.object,

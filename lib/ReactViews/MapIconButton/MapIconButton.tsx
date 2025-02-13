@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { ReactNode, RefObject, useRef, useState } from "react";
 import styled, { useTheme } from "styled-components";
 import Box from "../../Styled/Box";
 import { RawButton } from "../../Styled/Button";
@@ -95,9 +95,9 @@ interface IMapIconButtonProps extends IStyledMapIconButtonProps {
   iconElement: () => JSX.Element;
   closeIconElement?: () => JSX.Element;
   onClick?: () => void;
-  children?: React.ReactNode;
+  children?: ReactNode;
   className?: string;
-  buttonRef?: React.RefObject<any>;
+  buttonRef?: RefObject<any>;
   noExpand?: boolean;
 }
 

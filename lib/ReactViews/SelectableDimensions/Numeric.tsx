@@ -1,11 +1,11 @@
 import { runInAction } from "mobx";
-import React, { useState } from "react";
+import { FC, useState } from "react";
 import CommonStrata from "../../Models/Definition/CommonStrata";
 import { SelectableDimensionNumeric as SelectableDimensionNumericModel } from "../../Models/SelectableDimensions/SelectableDimensions";
 import Input from "../../Styled/Input";
 import { observer } from "mobx-react";
 
-export const SelectableDimensionNumeric: React.FC<{
+export const SelectableDimensionNumeric: FC<{
   id: string;
   dim: SelectableDimensionNumericModel;
 }> = observer(({ id, dim }) => {

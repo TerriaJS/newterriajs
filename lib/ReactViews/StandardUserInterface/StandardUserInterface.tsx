@@ -2,7 +2,7 @@ import classNames from "classnames";
 import "inobounce";
 import { action } from "mobx";
 import { observer } from "mobx-react";
-import React, { ReactNode, useEffect } from "react";
+import { FC, DragEvent, ReactNode, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { DefaultTheme } from "styled-components";
 import combine from "terriajs-cesium/Source/Core/combine";
@@ -54,8 +54,8 @@ interface StandardUserInterfaceProps {
   children?: ReactNode;
 }
 
-const StandardUserInterfaceBase: React.FC<StandardUserInterfaceProps> =
-  observer((props) => {
+const StandardUserInterfaceBase: FC<StandardUserInterfaceProps> = observer(
+  (props) => {
     const { t } = useTranslation();
 
     const acceptDragDropFile = action(() => {
@@ -66,7 +66,7 @@ const StandardUserInterfaceBase: React.FC<StandardUserInterfaceProps> =
       }
     });
 
-    const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
       if (!e.dataTransfer.types || !e.dataTransfer.types.includes("Files")) {
         return;
       }
@@ -300,7 +300,8 @@ const StandardUserInterfaceBase: React.FC<StandardUserInterfaceProps> =
         <ClippingBoxToolLauncher viewState={props.viewState} />
       </ContextProviders>
     );
-  });
+  }
+);
 
 export const StandardUserInterface = withFallback(StandardUserInterfaceBase);
 export default withFallback(StandardUserInterfaceBase);

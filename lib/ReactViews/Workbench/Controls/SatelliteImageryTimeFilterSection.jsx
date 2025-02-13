@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React from "react";
+import { Component } from "react";
 import defined from "terriajs-cesium/Source/Core/defined";
 import Ellipsoid from "terriajs-cesium/Source/Core/Ellipsoid";
 import Rectangle from "terriajs-cesium/Source/Core/Rectangle";
@@ -13,7 +13,7 @@ import { runInAction, reaction } from "mobx";
 import Styles from "./satellite-imagery-time-filter-section.scss";
 
 @observer
-class SatelliteImageryTimeFilterSection extends React.Component {
+class SatelliteImageryTimeFilterSection extends Component {
   static propTypes = {
     item: PropTypes.object,
     t: PropTypes.func.isRequired

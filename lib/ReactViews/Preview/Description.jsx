@@ -1,6 +1,6 @@
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
-import React from "react";
+import { Component } from "react";
 import { Trans, withTranslation } from "react-i18next";
 import defined from "terriajs-cesium/Source/Core/defined";
 import Box from "../../Styled/Box";
@@ -17,7 +17,7 @@ import WarningBox from "./WarningBox";
  * CatalogItem description.
  */
 @observer
-class Description extends React.Component {
+class Description extends Component {
   static propTypes = {
     item: PropTypes.object.isRequired,
     printView: PropTypes.bool,

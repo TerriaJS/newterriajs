@@ -3,7 +3,6 @@ import DataCatalogMember from "../../lib/ReactViews/DataCatalog/DataCatalogMembe
 import { DataCatalog } from "../../lib/ReactViews/DataCatalog/DataCatalog";
 import { findAllWithType } from "react-shallow-testutils";
 import { getShallowRenderedOutput } from "./MoreShallowTools";
-import React from "react";
 import Terria from "../../lib/Models/Terria";
 import ViewState from "../../lib/ReactViewModels/ViewState";
 import { USER_ADDED_CATEGORY_ID } from "../../lib/Core/addedByUser";

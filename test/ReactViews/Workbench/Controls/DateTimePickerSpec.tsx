@@ -1,4 +1,3 @@
-import React from "react";
 import { act } from "react-dom/test-utils";
 import TestRenderer, { ReactTestRenderer } from "react-test-renderer";
 import JulianDate from "terriajs-cesium/Source/Core/JulianDate";

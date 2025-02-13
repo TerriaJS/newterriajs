@@ -1,6 +1,6 @@
 import { autorun } from "mobx";
 import { observer } from "mobx-react";
-import React, { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { WithTranslation, withTranslation } from "react-i18next";
 import CatalogMemberMixin from "../../../ModelMixins/CatalogMemberMixin";
 import SearchableItemMixin from "../../../ModelMixins/SearchableItemMixin";
@@ -38,7 +38,7 @@ export type ItemSearchQuery = Record<
 export type ItemSearchResults = ItemSearchResult[];
 export type ActiveSelectionDisposer = () => void | undefined;
 
-const ItemSearchTool: React.FC<PropsType> = observer((props) => {
+const ItemSearchTool: FC<PropsType> = observer((props) => {
   const { viewState, item, itemSearchProvider, t } = props;
   const itemName = CatalogMemberMixin.isMixedInto(item) ? item.name : "Item";
 

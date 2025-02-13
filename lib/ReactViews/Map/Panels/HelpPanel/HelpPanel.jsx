@@ -1,7 +1,7 @@
 import { runInAction } from "mobx";
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
-import React from "react";
+import { Component } from "react";
 import { withTranslation } from "react-i18next";
 import { withTheme } from "styled-components";
 import {
@@ -20,7 +20,7 @@ import HelpPanelItem from "./HelpPanelItem";
 export const HELP_PANEL_ID = "help";
 
 @observer
-class HelpPanel extends React.Component {
+class HelpPanel extends Component {
   static displayName = "HelpPanel";
 
   static propTypes = {

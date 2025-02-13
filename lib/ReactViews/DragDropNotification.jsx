@@ -2,13 +2,13 @@ import classNames from "classnames";
 import { reaction } from "mobx";
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
-import React from "react";
+import { Component } from "react";
 import Icon from "../Styled/Icon";
 import Styles from "./drag-drop-notification.scss";
 import { withViewState } from "./Context";
 
 @observer
-class DragDropNotification extends React.Component {
+class DragDropNotification extends Component {
   constructor(props) {
     super(props);
     this.state = {

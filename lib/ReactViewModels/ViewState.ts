@@ -7,7 +7,7 @@ import {
   runInAction,
   makeObservable
 } from "mobx";
-import React, { Ref } from "react";
+import { ReactNode, MouseEvent, ComponentType, Ref } from "react";
 import defined from "terriajs-cesium/Source/Core/defined";
 import addedByUser from "../Core/addedByUser";
 import {
@@ -371,7 +371,7 @@ export default class ViewState {
    */
   @observable currentTool?: Tool;
 
-  @observable panel: React.ReactNode;
+  @observable panel: ReactNode;
 
   private _pickedFeaturesSubscription: IReactionDisposer;
   private _disclaimerVisibleSubscription: IReactionDisposer;
@@ -711,7 +711,7 @@ export default class ViewState {
 
   @action
   openHelpPanelItemFromSharePanel(
-    evt: React.MouseEvent<HTMLDivElement>,
+    evt: MouseEvent<HTMLDivElement>,
     itemName: string
   ): void {
     evt.preventDefault();
@@ -882,9 +882,7 @@ export default class ViewState {
 
 interface Tool {
   toolName: string;
-  getToolComponent: () =>
-    | React.ComponentType<any>
-    | Promise<React.ComponentType<any>>;
+  getToolComponent: () => ComponentType<any> | Promise<ComponentType<any>>;
 
   showCloseButton: boolean;
   params?: any;

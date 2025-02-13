@@ -1,6 +1,6 @@
 import { runInAction } from "mobx";
 import { observer } from "mobx-react";
-import React from "react";
+import { MouseEvent } from "react";
 import defined from "terriajs-cesium/Source/Core/defined";
 import addedByUser from "../../Core/addedByUser";
 import { DataSourceAction } from "../../Core/AnalyticEvents/analyticEvents";
@@ -38,7 +38,7 @@ export default observer(function DataCatalogReference({
       .viewCatalogMember(reference)
       .then((result) => result.raiseError(viewState.terria));
 
-  const add = async (event: React.MouseEvent<HTMLButtonElement>) => {
+  const add = async (event: MouseEvent<HTMLButtonElement>) => {
     const keepCatalogOpen = event.shiftKey || event.ctrlKey;
 
     if (onActionButtonClicked) {

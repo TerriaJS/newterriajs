@@ -10,7 +10,7 @@ import {
 } from "mobx";
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
-import React from "react";
+import { Component } from "react";
 import { withTranslation } from "react-i18next";
 import CesiumMath from "terriajs-cesium/Source/Core/Math";
 import filterOutUndefined from "../../Core/filterOutUndefined";
@@ -68,7 +68,7 @@ class AdaptForPreviewMap extends MappableMixin(CreateModel(MappableTraits)) {
  * @extends {React.Component<Props>}
  */
 @observer
-class DataPreviewMap extends React.Component {
+class DataPreviewMap extends Component {
   @observable
   isZoomedToExtent = false;
 

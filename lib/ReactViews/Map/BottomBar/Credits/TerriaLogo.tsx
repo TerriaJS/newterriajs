@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import Box from "../../../../Styled/Box";
 import logo from "../../../../../wwwroot/images/terria-watermark.svg";
 

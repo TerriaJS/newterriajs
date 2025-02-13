@@ -1,10 +1,13 @@
 import DOMPurify from "dompurify";
-import React, {
+
+import {
   AnchorHTMLAttributes,
   createElement,
   DetailedReactHTMLElement,
   ReactElement
 } from "react";
+
+import * as React from "react";
 import combine from "terriajs-cesium/Source/Core/combine";
 import defined from "terriajs-cesium/Source/Core/defined";
 import CustomComponent, {

@@ -1,4 +1,4 @@
-import React, { Ref } from "react";
+import { ElementType, Ref } from "react";
 import styled from "styled-components";
 import { Overflow, WhiteSpace, WordBreak } from "./Styled.types";
 
@@ -65,7 +65,7 @@ export interface IBoxPropsBase {
   scroll?: boolean;
   style?: any;
   gap?: number | boolean;
-  as?: React.ElementType | keyof JSX.IntrinsicElements;
+  as?: ElementType | keyof JSX.IntrinsicElements;
 }
 
 export type IBoxProps = IBoxPropsBase & Column;
@@ -243,7 +243,7 @@ export const Box = styled.div<IBoxProps>`
 `;
 
 export const BoxSpan = styled(Box).attrs(
-  (_props: { as?: React.ElementType | keyof JSX.IntrinsicElements }) => ({
+  (_props: { as?: ElementType | keyof JSX.IntrinsicElements }) => ({
     as: "span"
   })
 )``;

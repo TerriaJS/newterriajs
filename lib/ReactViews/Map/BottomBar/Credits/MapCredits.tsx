@@ -1,6 +1,6 @@
 import { reaction } from "mobx";
 import { observer } from "mobx-react";
-import React, { FC, useCallback, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import GlobeOrMap from "../../../../Models/GlobeOrMap";
 import { ICredit } from "./Credit.type";

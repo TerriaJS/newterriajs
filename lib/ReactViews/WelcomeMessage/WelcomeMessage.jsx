@@ -1,7 +1,7 @@
 import { runInAction } from "mobx";
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
-import React, { useState } from "react";
+import { Component, useState } from "react";
 import { Trans, useTranslation, withTranslation } from "react-i18next";
 import styled, { withTheme } from "styled-components";
 import Box from "../../Styled/Box";
@@ -51,7 +51,7 @@ WelcomeMessageButton.propTypes = {
 };
 
 @observer
-class WelcomeMessage extends React.Component {
+class WelcomeMessage extends Component {
   static displayName = "WelcomeMessage";
 
   static propTypes = {

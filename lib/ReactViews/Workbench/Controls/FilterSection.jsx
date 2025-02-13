@@ -2,12 +2,12 @@ import { runInAction } from "mobx";
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
 import { Range } from "rc-slider";
-import React from "react";
+import { Component } from "react";
 import CommonStrata from "../../../Models/Definition/CommonStrata";
 import Styles from "./filter-section.scss";
 
 @observer
-class FilterSection extends React.Component {
+class FilterSection extends Component {
   static propTypes = {
     item: PropTypes.object.isRequired
   };

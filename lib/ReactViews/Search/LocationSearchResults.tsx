@@ -7,7 +7,7 @@
 
 import { action, computed, makeObservable, observable } from "mobx";
 import { observer } from "mobx-react";
-import React from "react";
+import { FC, Component } from "react";
 import {
   useTranslation,
   withTranslation,
@@ -51,7 +51,7 @@ interface PropsType extends WithTranslation {
 }
 
 @observer
-class LocationSearchResults extends React.Component<PropsType> {
+class LocationSearchResults extends Component<PropsType> {
   @observable isExpanded = false;
 
   constructor(props: PropsType) {
@@ -185,7 +185,7 @@ interface SearchResultsFooterProps {
   name: string;
 }
 
-const SearchResultsFooter: React.FC<SearchResultsFooterProps> = (
+const SearchResultsFooter: FC<SearchResultsFooterProps> = (
   props: SearchResultsFooterProps
 ) => {
   const { t, i18n } = useTranslation();
@@ -207,7 +207,7 @@ interface NameWithLoaderProps {
   isWaitingForSearchToStart: boolean;
 }
 
-const NameWithLoader: React.FC<NameWithLoaderProps> = observer(
+const NameWithLoader: FC<NameWithLoaderProps> = observer(
   (props: NameWithLoaderProps) => {
     const { i18n } = useTranslation();
     return (

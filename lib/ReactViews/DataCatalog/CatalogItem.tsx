@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React from "react";
+import { ReactElement, MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import defaultValue from "terriajs-cesium/Source/Core/defaultValue";
@@ -18,7 +18,7 @@ export enum ButtonState {
   Preview
 }
 
-const STATE_TO_ICONS: Record<ButtonState, React.ReactElement> = {
+const STATE_TO_ICONS: Record<ButtonState, ReactElement> = {
   [ButtonState.Loading]: <Icon glyph={Icon.GLYPHS.loader} />,
   [ButtonState.Remove]: <Icon glyph={Icon.GLYPHS.remove} />,
   [ButtonState.Add]: <Icon glyph={Icon.GLYPHS.add} />,
@@ -35,9 +35,9 @@ interface Props {
   trashable?: boolean;
 
   btnState: ButtonState;
-  onBtnClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  onTextClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  onTrashClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onBtnClick: (event: MouseEvent<HTMLButtonElement>) => void;
+  onTextClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+  onTrashClick?: (event: MouseEvent<HTMLButtonElement>) => void;
   titleOverrides?: Partial<Record<ButtonState, string>>;
 }
 

@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import Checkbox from "./../../../Styled/Checkbox/Checkbox";
 import { useTheme } from "styled-components";
@@ -9,7 +9,7 @@ interface IDisplayAsPercentSection {
   item: any;
 }
 
-const DisplayAsPercentSection: React.FC<IDisplayAsPercentSection> = (
+const DisplayAsPercentSection: FC<IDisplayAsPercentSection> = (
   props: IDisplayAsPercentSection
 ) => {
   const { t } = useTranslation();

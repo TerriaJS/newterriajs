@@ -1,11 +1,11 @@
-import React from "react";
+import { ReactNode, FC } from "react";
 import styled from "styled-components";
 import ViewState from "../../ReactViewModels/ViewState";
 import { withViewState } from "../Context";
 
 interface IProps {
   viewState: ViewState;
-  experimentalItems?: React.ReactNode[];
+  experimentalItems?: ReactNode[];
 }
 
 const ControlsWrapper = styled.div`
@@ -25,7 +25,7 @@ const Control = styled.div`
     margin-bottom: 0;
   }
 `;
-const ExperimentalFeatures: React.FC<IProps> = (props) => {
+const ExperimentalFeatures: FC<IProps> = (props) => {
   return (
     <ControlsWrapper>
       {(props.experimentalItems || []).map((item, i) => (

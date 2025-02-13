@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import React from "react";
+import { FC } from "react";
 import CommonStrata from "../../Models/Definition/CommonStrata";
 import DateParameter from "../../Models/FunctionParameters/DateParameter";
 import Styles from "./parameter-editors.scss";
@@ -8,7 +8,7 @@ interface DateParameterEditorProps {
   parameter: DateParameter;
 }
 
-const DateParameterEditor: React.FC<DateParameterEditorProps> = observer(
+const DateParameterEditor: FC<DateParameterEditorProps> = observer(
   ({ parameter }) => {
     const style =
       parameter?.value !== undefined

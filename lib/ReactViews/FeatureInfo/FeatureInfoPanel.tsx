@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { action, reaction, runInAction, makeObservable } from "mobx";
 import { disposeOnUnmount, observer } from "mobx-react";
-import React from "react";
+import { Component } from "react";
 import { withTranslation, TFunction } from "react-i18next";
 import Cartesian3 from "terriajs-cesium/Source/Core/Cartesian3";
 import Ellipsoid from "terriajs-cesium/Source/Core/Ellipsoid";
@@ -38,7 +38,7 @@ interface Props {
 }
 
 @observer
-class FeatureInfoPanel extends React.Component<Props> {
+class FeatureInfoPanel extends Component<Props> {
   constructor(props: Props) {
     super(props);
     makeObservable(this);
@@ -366,13 +366,11 @@ class FeatureInfoPanel extends React.Component<Props> {
               viewState.featureInfoPanelIsVisible ? (
                 // Are picked features loading -> show Loader
                 isDefined(terria.pickedFeatures) &&
-                terria.pickedFeatures.isLoading ? (
+                terria.pickedFeatures.isLoading ? ( // Do we have no features/catalog items to show?
                   <li>
                     <Loader light />
                   </li>
-                ) : // Do we have no features/catalog items to show?
-
-                featureInfoCatalogItems.length === 0 ? (
+                ) : featureInfoCatalogItems.length === 0 ? (
                   <li className={Styles.noResults}>
                     {this.getMessageForNoResults()}
                   </li>

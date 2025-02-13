@@ -1,5 +1,4 @@
 // for all the panels and modals we will eventually normalise
-import React from "react";
 import styled from "styled-components";
 // import Box  from "../../Styled/Box";
 import Icon from "../../Styled/Icon";
