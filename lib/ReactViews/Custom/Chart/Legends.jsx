@@ -55,7 +55,7 @@ class Legend extends React.PureComponent {
     const squareSize = 20;
     const Glyph = Glyphs[this.props.glyph] ?? GlyphCircle;
     return (
-      <LegendWrapper title={label.text} ariaLabel={label.text}>
+      <LegendWrapper title={label.text} aria-label={label.text}>
         <svg
           width={`${squareSize}px`}
           height={`${squareSize}px`}
