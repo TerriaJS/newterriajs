@@ -37,6 +37,12 @@ export type CapabilitiesDimension = string & {
   readonly current?: boolean;
 };
 
+export type Palettes = {
+  palettes: ReadonlyArray<string>;
+  defaultPalette: string;
+  scaleRange: number[];
+};
+
 export type CapabilitiesExtent = string & {
   readonly name: string;
   readonly default?: string;

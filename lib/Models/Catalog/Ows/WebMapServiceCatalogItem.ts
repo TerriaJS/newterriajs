@@ -54,6 +54,7 @@ import proxyCatalogItemUrl from "../proxyCatalogItemUrl";
 import WebMapServiceCapabilities from "./WebMapServiceCapabilities";
 import WebMapServiceCapabilitiesStratum from "./WebMapServiceCapabilitiesStratum";
 import WebMapServiceCatalogGroup from "./WebMapServiceCatalogGroup";
+import NcWMSGetMetadataStratum from "./NcWMSGetMetadataStratum";
 
 // Remove problematic query parameters from URLs (GetCapabilities, GetMap, ...) - these are handled separately
 const QUERY_PARAMETERS_TO_REMOVE = [
@@ -227,14 +228,33 @@ class WebMapServiceCatalogItem
 
   protected async forceLoadMetadata(): Promise<void> {
     if (
-      this.strata.get(GetCapabilitiesMixin.getCapabilitiesStratumName) !==
-      undefined
+      isDefined(
+        this.strata.get(GetCapabilitiesMixin.getCapabilitiesStratumName)
+      )
     )
       return;
+
     const stratum = await WebMapServiceCapabilitiesStratum.load(this);
+
     runInAction(() => {
       this.strata.set(GetCapabilitiesMixin.getCapabilitiesStratumName, stratum);
     });
+
+    // Fetch NcWMS GetMetadata if supported
+    if (
+      this.supportsNcWmsGetMetadata &&
+      !isDefined(this.strata.get(NcWMSGetMetadataStratum.stratumName))
+    ) {
+      const ncWMSGetMetadataStratum = await NcWMSGetMetadataStratum.load(this);
+
+      if (ncWMSGetMetadataStratum)
+        runInAction(() => {
+          this.strata.set(
+            NcWMSGetMetadataStratum.stratumName,
+            ncWMSGetMetadataStratum
+          );
+        });
+    }
   }
 
   @override
@@ -396,6 +416,20 @@ class WebMapServiceCatalogItem
       uri.addQuery("time", time);
     }
     return uri.toString();
+  }
+
+  getPalettesUrl() {
+    const url = this.uri!.clone()
+      .setSearch({
+        service: "WMS",
+        version: this.useWmsVersion130 ? "1.3.0" : "1.1.1",
+        request: "GetMetadata",
+        item: "layerDetails",
+        layerName: this.layersArray[0]
+      })
+      .toString();
+
+    return proxyCatalogItemUrl(this, url);
   }
 
   @computed
@@ -574,9 +608,23 @@ class WebMapServiceCatalogItem
         parameters.COLORSCALERANGE = this.colorScaleRange;
       }
 
+      let styles = this.styles;
+      // If we are also using NcWMS Palettes - we need to append the palette to the styles parameter (for the first style only)
+      if (
+        this.stylesArray.length > 0 &&
+        this.supportsNcWmsPalettes &&
+        this.palette &&
+        !this.noPaletteStyles?.includes(this.stylesArray[0])
+      ) {
+        styles = [
+          `${this.stylesArray[0]}/${this.palette}`,
+          ...this.stylesArray.slice(1)
+        ].join(",");
+      }
+
       // Styles parameter is mandatory (for GetMap and GetFeatureInfo requests), but can be empty string to use default style
-      parameters.styles = this.styles ?? "";
-      getFeatureInfoParameters.styles = this.styles ?? "";
+      parameters.styles = styles ?? "";
+      getFeatureInfoParameters.styles = styles ?? "";
 
       Object.assign(parameters, this.diffModeParameters);
       Object.assign(
@@ -640,6 +688,29 @@ class WebMapServiceCatalogItem
   );
 
   @computed
+  get paletteDimensions(): SelectableDimensionEnum | undefined {
+    if (
+      this.supportsNcWmsPalettes &&
+      !this.noPaletteStyles?.includes(this.stylesArray[0])
+    ) {
+      return {
+        name: "Palettes",
+        id: `${this.uniqueId}-palettes`,
+        options: this.availablePalettes.map((palette) => ({ id: palette })),
+        selectedId: this.palette,
+        setDimensionValue: (
+          stratumId: string,
+          newPalette: string | undefined
+        ) => {
+          runInAction(() => {
+            this.setTrait(stratumId, "palette", newPalette);
+          });
+        }
+      };
+    }
+  }
+
+  @computed
   get styleSelectableDimensions(): SelectableDimensionEnum[] {
     return this.availableStyles.map((layer, layerIndex) => {
       let name = "Styles";
@@ -685,6 +756,7 @@ class WebMapServiceCatalogItem
           newStyle: string | undefined
         ) => {
           if (!newStyle) return;
+
           runInAction(() => {
             const styles = this.styleSelectableDimensions.map(
               (style) => style.selectedId || ""
@@ -778,7 +850,8 @@ class WebMapServiceCatalogItem
     return filterOutUndefined([
       ...super.selectableDimensions,
       ...this.wmsDimensionSelectableDimensions,
-      ...this.styleSelectableDimensions
+      ...this.styleSelectableDimensions,
+      this.paletteDimensions
     ]);
   }
 

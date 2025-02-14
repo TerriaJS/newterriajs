@@ -102,6 +102,9 @@
 
 #### 8.7.4 - 2024-06-07
 
+- Add ability for users to select the palettes supplied by ncWMS servers for changing the visualisation of data.
+
+- [The next improvement]
 - Fix position of draggable point after moving.
 - Fix `getFeatureProperties` (in `FeatureInfoSection`) failing due to bad JSON parsing of nested strings.
 - The `TableFeatureInfoStratum` default `featureInfoTemplate` will now not show `_id_` (internal Terria feature ID) in feature info

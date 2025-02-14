@@ -63,6 +63,7 @@ const ParameterEditor = createReactClass({
   renderEditor() {
     for (let i = 0; i < ParameterEditor.parameterTypeConverters.length; ++i) {
       const converter = ParameterEditor.parameterTypeConverters[i];
+
       const editor = converter.parameterTypeToDiv(
         this.props.parameter.type,
         this

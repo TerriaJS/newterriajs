@@ -69,6 +69,29 @@ export class WebMapServiceAvailableLayerStylesTraits extends ModelTraits {
   styles?: WebMapServiceAvailableStyleTraits[];
 }
 
+export class WebMapServiceAvailablePaletteTraits extends ModelTraits {
+  @primitiveTrait({
+    type: "string",
+    name: "Style Name",
+    description: "The name of the style."
+  })
+  name: string = "default";
+
+  @primitiveTrait({
+    type: "string",
+    name: "Title",
+    description: "The title of the style."
+  })
+  title: string = "default";
+
+  @primitiveTrait({
+    type: "string",
+    name: "Abstract",
+    description: "The abstract describing the style."
+  })
+  abstract: string = "default";
+}
+
 export class WebMapServiceAvailableDimensionTraits extends ModelTraits {
   @primitiveTrait({
     type: "string",
@@ -315,6 +338,44 @@ export default class WebMapServiceCatalogItemTraits extends mixTraits(
       "The maximum of the color scale range. Because COLORSCALERANGE is a non-standard property supported by ncWMS servers, this property is ignored unless WebMapServiceCatalogItem's supportsColorScaleRange is true. WebMapServiceCatalogItem's colorScaleMinimum must be set as well."
   })
   colorScaleMaximum: number = 50;
+
+  @primitiveTrait({
+    type: "boolean",
+    name: "Supports NcWMS Palettes",
+    description:
+      "Gets or sets whether this WMS server has been identified as supporting NcWMS Palettes. This will default to true if the server is identified as an NcWMS server."
+  })
+  supportsNcWmsPalettes: boolean = false;
+
+  @primitiveTrait({
+    type: "boolean",
+    name: "Supports NcWMS GetMetadata requests",
+    description:
+      "Gets or sets whether this WMS server supports NcWMS GetMetadata requests. This will default to true if the server is identified as an NcWMS server."
+  })
+  supportsNcWmsGetMetadata: boolean = false;
+
+  @primitiveTrait({
+    type: "string",
+    name: "Palette",
+    description:
+      "palette is a non-standard property supported by THREDDS servers. This property is ignored unless WebMapServiceCatalogItem's isThredds is true. If the server doesn't provide a default, the default palette is 'default'."
+  })
+  palette?: string = "default";
+
+  @primitiveArrayTrait({
+    type: "string",
+    name: "Available Palettes",
+    description: "The available palettes."
+  })
+  availablePalettes: string[] = [];
+
+  @primitiveArrayTrait({
+    type: "string",
+    name: "No Palettes styles",
+    description: "Styles that do not support palettes"
+  })
+  noPaletteStyles: string[] = [];
 
   @primitiveTrait({
     type: "boolean",
