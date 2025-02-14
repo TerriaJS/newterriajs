@@ -19,7 +19,6 @@
   "unused": "vars",
   "strict": true,
   "trailing": true,
-  "asi": false,
   "boss": false,
   "debug": false,
   "eqnull": false,
