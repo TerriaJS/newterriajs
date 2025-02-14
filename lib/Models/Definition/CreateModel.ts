@@ -31,10 +31,12 @@ import StratumOrder from "./StratumOrder";
 export default function CreateModel<T extends TraitsConstructor<ModelTraits>>(
   Traits: T
 ): ModelConstructor<ModelType<InstanceType<T>>> {
-  type Traits = InstanceType<T>;
-  type StratumTraits = StratumFromTraits<Traits>;
+  type StratumTraits = StratumFromTraits<InstanceType<T>>;
 
-  abstract class Model extends BaseModel implements ModelInterface<Traits> {
+  abstract class Model
+    extends BaseModel
+    implements ModelInterface<InstanceType<T>>
+  {
     abstract get type(): string;
     static readonly TraitsClass = Traits;
     static readonly traits = Traits.traits;
@@ -131,13 +133,13 @@ export default function CreateModel<T extends TraitsConstructor<ModelTraits>>(
       return this.getOrCreateStratum(stratumId)[trait];
     }
 
-    addObject<Key extends keyof ArrayElementTypes<Traits>>(
+    addObject<Key extends keyof ArrayElementTypes<InstanceType<T>>>(
       stratumId: string,
       traitId: Key,
       objectId?: string | undefined
-    ): ModelType<ArrayElementTypes<Traits>[Key]> | undefined {
+    ): ModelType<ArrayElementTypes<InstanceType<T>>[Key]> | undefined {
       const trait = this.traits[traitId as string] as ObjectArrayTrait<
-        ArrayElementTypes<Traits>[Key]
+        ArrayElementTypes<InstanceType<T>>[Key]
       >;
       const nestedTraitsClass = trait.type;
       const newStratum = createStratumInstance(nestedTraitsClass);
@@ -154,9 +156,9 @@ export default function CreateModel<T extends TraitsConstructor<ModelTraits>>(
         (newStratum as any)[trait.idProperty] = objectId;
         array.push(newStratum);
 
-        const models: readonly ModelType<ArrayElementTypes<Traits>[Key]>[] = (
-          this as any
-        )[traitId];
+        const models: readonly ModelType<
+          ArrayElementTypes<InstanceType<T>>[Key]
+        >[] = (this as any)[traitId];
         return models.find(
           (o: any, i: number) =>
             getObjectId(trait.idProperty, o, i) === objectId
@@ -181,9 +183,9 @@ export default function CreateModel<T extends TraitsConstructor<ModelTraits>>(
         array[maxIndex + 1] = newStratum;
 
         // Return newly created model
-        const models: readonly ModelType<ArrayElementTypes<Traits>[Key]>[] = (
-          this as any
-        )[traitId];
+        const models: readonly ModelType<
+          ArrayElementTypes<InstanceType<T>>[Key]
+        >[] = (this as any)[traitId];
         return models[models.length - 1];
       }
     }
