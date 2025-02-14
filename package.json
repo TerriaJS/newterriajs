@@ -39,6 +39,7 @@
     "@types/d3-scale-chromatic": "^3.0.3",
     "@types/d3-selection": "^3.0.10",
     "@types/d3-transition": "^3.0.8",
+    "@types/d3-zoom": "^3.0.8",
     "@types/dateformat": "^5.0.1",
     "@types/dompurify": "^2.4.0",
     "@types/file-saver": "^1.3.0",

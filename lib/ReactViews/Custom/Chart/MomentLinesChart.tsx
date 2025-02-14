@@ -1,17 +1,23 @@
 import { observer } from "mobx-react";
+import { makeObservable } from "mobx";
 import { Line } from "@visx/shape";
-import PropTypes from "prop-types";
 import React from "react";
+import { ChartItem } from "../../../ModelMixins/ChartableMixin";
+
+interface MomentLinesProps {
+  id: string;
+  chartItem: ChartItem;
+  scales: any;
+}
 
 @observer
-class MomentLines extends React.Component {
-  static propTypes = {
-    id: PropTypes.string.isRequired,
-    chartItem: PropTypes.object.isRequired,
-    scales: PropTypes.object.isRequired
-  };
+class MomentLines extends React.Component<MomentLinesProps> {
+  constructor(props: MomentLinesProps) {
+    super(props);
+    makeObservable(this);
+  }
 
-  doZoom(scales) {
+  doZoom(scales: any) {
     const lines = document.querySelectorAll(`g#${this.props.id} line`);
     lines.forEach((line, i) => {
       const point = this.props.chartItem.points[i];

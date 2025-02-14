@@ -8,8 +8,8 @@ import { Group } from "@visx/group";
 import { withParentSize } from "@visx/responsive";
 import { scaleLinear, scaleTime } from "@visx/scale";
 import { Line } from "@visx/shape";
-import PropTypes from "prop-types";
-import React from "react";
+import type { ZoomScale } from "d3-zoom";
+import React, { type MouseEvent, type RefObject } from "react";
 import groupBy from "lodash-es/groupBy";
 import minBy from "lodash-es/minBy";
 import Legends from "./Legends";
@@ -21,26 +21,36 @@ import ZoomX from "./ZoomX";
 import Styles from "./bottom-dock-chart.scss";
 import LineAndPointChart from "./LineAndPointChart";
 import PointOnMap from "./PointOnMap";
+import { ChartItem } from "../../../ModelMixins/ChartableMixin";
+import Terria from "../../../Models/Terria";
+import isDefined from "../../../Core/isDefined";
 
 const chartMinWidth = 110;
 const defaultGridColor = "#efefef";
 const labelColor = "#efefef";
 
-@observer
-class BottomDockChart extends React.Component {
-  static propTypes = {
-    terria: PropTypes.object.isRequired,
-    parentWidth: PropTypes.number,
-    width: PropTypes.number,
-    height: PropTypes.number,
-    chartItems: PropTypes.array.isRequired,
-    xAxis: PropTypes.object.isRequired,
-    margin: PropTypes.object
-  };
+type MouseCoords = { x: number; y: number };
 
+interface BottomDockChartProps {
+  terria: Terria;
+  parentWidth: number;
+  width?: number;
+  height: number;
+  chartItems: ChartItem[];
+  xAxis: any; // object
+  margin?: { left: number; right: number; top: number; bottom: number };
+}
+
+@observer
+class BottomDockChart extends React.Component<BottomDockChartProps> {
   static defaultProps = {
     parentWidth: 0
   };
+
+  constructor(props: BottomDockChartProps) {
+    super(props);
+    makeObservable(this);
+  }
 
   render() {
     return (
@@ -57,25 +67,25 @@ class BottomDockChart extends React.Component {
 
 export default withParentSize(BottomDockChart);
 
-@observer
-class Chart extends React.Component {
-  static propTypes = {
-    terria: PropTypes.object.isRequired,
-    width: PropTypes.number,
-    height: PropTypes.number,
-    chartItems: PropTypes.array.isRequired,
-    xAxis: PropTypes.object.isRequired,
-    margin: PropTypes.object
-  };
+interface ChartProps {
+  terria: Terria;
+  width: number;
+  height: number;
+  chartItems: ChartItem[];
+  xAxis: any; // object
+  margin: { left: number; right: number; top: number; bottom: number };
+}
 
+@observer
+class Chart extends React.Component<ChartProps> {
   static defaultProps = {
     margin: { left: 20, right: 30, top: 10, bottom: 50 }
   };
 
-  @observable.ref zoomedXScale;
-  @observable mouseCoords;
+  @observable.ref zoomedXScale: ZoomScale | undefined;
+  @observable mouseCoords: MouseCoords | undefined;
 
-  constructor(props) {
+  constructor(props: ChartProps) {
     super(props);
     makeObservable(this);
   }
@@ -86,7 +96,7 @@ class Chart extends React.Component {
       .map((chartItem) => {
         return {
           ...chartItem,
-          points: chartItem.points.sort((p1, p2) => p1.x - p2.x)
+          points: chartItem.points.sort((p1: any, p2: any) => p1.x - p2.x)
         };
       })
       .filter((chartItem) => chartItem.points.length > 0);
@@ -126,7 +136,7 @@ class Chart extends React.Component {
   }
 
   @computed
-  get xScale() {
+  get xScale(): ZoomScale {
     return this.zoomedXScale || this.initialXScale;
   }
 
@@ -147,7 +157,7 @@ class Chart extends React.Component {
   get initialScales() {
     return this.chartItems.map((c) => ({
       x: this.initialXScale,
-      y: this.yAxes.find((y) => y.units === c.units).scale
+      y: this.yAxes.find((y) => y.units === c.units)?.scale
     }));
   }
 
@@ -155,29 +165,26 @@ class Chart extends React.Component {
   get zoomedScales() {
     return this.chartItems.map((c) => ({
       x: this.xScale,
-      y: this.yAxes.find((y) => y.units === c.units).scale
+      y: this.yAxes.find((y) => y.units === c.units)?.scale
     }));
   }
 
   @computed
   get cursorX() {
     if (this.pointsNearMouse.length > 0)
+      // @ts-expect-error xScale is not a function.
       return this.xScale(this.pointsNearMouse[0].point.x);
     return this.mouseCoords && this.mouseCoords.x;
   }
 
   @computed
   get pointsNearMouse() {
-    if (!this.mouseCoords) return [];
+    const coords = this.mouseCoords;
+    if (!isDefined(coords)) return [];
     return this.chartItems
       .map((chartItem) => ({
         chartItem,
-        point: findNearestPoint(
-          chartItem.points,
-          this.mouseCoords,
-          this.xScale,
-          7
-        )
+        point: findNearestPoint(chartItem.points, coords, this.xScale, 7)
       }))
       .filter(({ point }) => point !== undefined);
   }
@@ -185,18 +192,18 @@ class Chart extends React.Component {
   @computed
   get tooltip() {
     const margin = this.adjustedMargin;
-    const tooltip = {
-      items: this.pointsNearMouse
+    const tooltipCommon = {
+      items: this.pointsNearMouse,
+      bottom: this.props.height - (margin.top + this.plotHeight)
     };
 
     if (!this.mouseCoords || this.mouseCoords.x < this.plotWidth * 0.5) {
-      tooltip.right = this.props.width - (this.plotWidth + margin.right);
-    } else {
-      tooltip.left = margin.left;
+      return {
+        right: this.props.width - (this.plotWidth + margin.right),
+        ...tooltipCommon
+      };
     }
-
-    tooltip.bottom = this.props.height - (margin.top + this.plotHeight);
-    return tooltip;
+    return { left: margin.left, ...tooltipCommon };
   }
 
   @computed
@@ -215,17 +222,18 @@ class Chart extends React.Component {
   }
 
   @action
-  setZoomedXScale(scale) {
+  setZoomedXScale(scale: ZoomScale | undefined) {
     this.zoomedXScale = scale;
   }
 
   @action
-  setMouseCoords(coords) {
+  setMouseCoords(coords: MouseCoords | undefined) {
     this.mouseCoords = coords;
   }
 
-  setMouseCoordsFromEvent(event) {
+  setMouseCoordsFromEvent(event: MouseEvent<SVGSVGElement>) {
     const coords = localPoint(
+      // @ts-expect-error no ownerSVGElement.
       event.target.ownerSVGElement || event.target,
       event
     );
@@ -236,7 +244,7 @@ class Chart extends React.Component {
     });
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: ChartProps) {
     // Unset zoom scale if any chartItems are added or removed
     if (prevProps.chartItems.length !== this.props.chartItems.length) {
       this.setZoomedXScale(undefined);
@@ -322,28 +330,31 @@ class Chart extends React.Component {
             </Group>
           </svg>
           <Tooltip {...this.tooltip} />
-          <PointsOnMap terria={terria} chartItems={this.chartItems} />
+          {this.chartItems.map((chartItem: ChartItem) =>
+            pointOnMap(terria, chartItem)
+          )}
         </div>
       </ZoomX>
     );
   }
 }
 
-@observer
-class Plot extends React.Component {
-  static propTypes = {
-    chartItems: PropTypes.array.isRequired,
-    initialScales: PropTypes.array.isRequired,
-    zoomedScales: PropTypes.array.isRequired
-  };
+interface PlotProps {
+  chartItems: ChartItem[];
+  initialScales: any[];
+  zoomedScales: any[];
+}
 
-  constructor(props) {
+@observer
+class Plot extends React.Component<PlotProps> {
+  constructor(props: PlotProps) {
     super(props);
     makeObservable(this);
   }
 
+  // FIXME: real return type is LegacyRef<T>[].
   @computed
-  get chartRefs() {
+  get chartRefs(): RefObject<any>[] {
     return this.props.chartItems.map((_) => React.createRef());
   }
 
@@ -418,15 +429,15 @@ class Plot extends React.Component {
   }
 }
 
-class XAxis extends React.PureComponent {
-  static propTypes = {
-    top: PropTypes.number.isRequired,
-    scale: PropTypes.func.isRequired,
-    label: PropTypes.string.isRequired
-  };
+interface XAxisProps {
+  top: number;
+  scale: any; // func
+  label: string;
+}
 
+class XAxis extends React.PureComponent<XAxisProps> {
   render() {
-    const { scale, ...restProps } = this.props;
+    const { scale, children, ...restProps } = this.props;
     return (
       <AxisBottom
         stroke="#efefef"
@@ -443,24 +454,26 @@ class XAxis extends React.PureComponent {
           textAnchor: "middle",
           fontFamily: "Arial"
         }}
-        // .nice() rounds the scale so that the aprox beginning and
-        // aprox end labels are shown
+        // .nice() rounds the scale so that the approximate beginning and end
+        // labels are shown.
         // See: https://stackoverflow.com/questions/21753126/d3-js-starting-and-ending-tick
         scale={scale.nice()}
+        // @ts-expect-error Wrong type for children in AxisProps vs React.
+        children={children} // eslint-disable-line react/no-children-prop
         {...restProps}
       />
     );
   }
 }
 
-class YAxis extends React.PureComponent {
-  static propTypes = {
-    scale: PropTypes.func.isRequired,
-    color: PropTypes.string.isRequired,
-    units: PropTypes.string,
-    offset: PropTypes.number.isRequired
-  };
+interface YAxisProps {
+  scale: any; // func
+  color: string;
+  units?: string;
+  offset: number;
+}
 
+class YAxis extends React.PureComponent<YAxisProps> {
   render() {
     const { scale, color, units, offset } = this.props;
     return (
@@ -490,36 +503,36 @@ class YAxis extends React.PureComponent {
   }
 }
 
-class Cursor extends React.PureComponent {
-  static propTypes = {
-    x: PropTypes.number.isRequired
-  };
+interface CursorProps {
+  x: number;
+  stroke: string;
+}
 
+class Cursor extends React.PureComponent<CursorProps> {
   render() {
     const { x, ...rest } = this.props;
     return <Line from={{ x, y: 0 }} to={{ x, y: 1000 }} {...rest} />;
   }
 }
 
-function PointsOnMap({ chartItems, terria }) {
-  return chartItems.map(
-    (chartItem) =>
-      chartItem.pointOnMap && (
-        <PointOnMap
-          key={`point-on-map-${chartItem.key}`}
-          terria={terria}
-          color={chartItem.getColor()}
-          point={chartItem.pointOnMap}
-        />
-      )
-  );
+function pointOnMap(terria: Terria, chartItem: ChartItem) {
+  return chartItem.pointOnMap ? (
+    <PointOnMap
+      key={`point-on-map-${chartItem.key}`}
+      terria={terria}
+      color={chartItem.getColor()}
+      point={chartItem.pointOnMap}
+    />
+  ) : null;
 }
 
 /**
  * Calculates a combined domain of all chartItems.
  */
-function calculateDomain(chartItems) {
+function calculateDomain(chartItems: ChartItem[]) {
+  // @ts-expect-error number | Date not assignable to number.
   const xmin = Math.min(...chartItems.map((c) => c.domain.x[0]));
+  // @ts-expect-error number | Date not assignable to number.
   const xmax = Math.max(...chartItems.map((c) => c.domain.x[1]));
   const ymin = Math.min(...chartItems.map((c) => c.domain.y[0]));
   const ymax = Math.max(...chartItems.map((c) => c.domain.y[1]));
@@ -532,9 +545,9 @@ function calculateDomain(chartItems) {
 /**
  * Sorts chartItems so that `momentPoints` are rendered on top then
  * `momentLines` and then any other types.
- * @param {ChartItem[]} chartItems array of chartItems to sort
+ * @param chartItems array of chartItems to sort
  */
-function sortChartItemsByType(chartItems) {
+function sortChartItemsByType(chartItems: ChartItem[]) {
   return chartItems.slice().sort((a, b) => {
     if (a.type === "momentPoints") return 1;
     else if (b.type === "momentPoints") return -1;
@@ -544,8 +557,14 @@ function sortChartItemsByType(chartItems) {
   });
 }
 
-function findNearestPoint(points, coords, xScale, maxDistancePx) {
-  function distance(coords, point) {
+function findNearestPoint(
+  points: any[],
+  coords: MouseCoords,
+  xScale: ZoomScale,
+  maxDistancePx: number
+) {
+  function distance(coords: MouseCoords, point: any) {
+    // @ts-expect-error xScale is not a function.
     return point ? coords.x - xScale(point.x) : Infinity;
   }
 
@@ -573,7 +592,7 @@ function findNearestPoint(points, coords, xScale, maxDistancePx) {
     : undefined;
 }
 
-function sanitizeIdString(id) {
+function sanitizeIdString(id: string) {
   // delete all non-alphanum chars
   return id.replace(/[^a-zA-Z0-9_-]/g, "");
 }

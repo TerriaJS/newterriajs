@@ -2,27 +2,27 @@ import { scaleLinear } from "@visx/scale";
 import { interpolateNumber as d3InterpolateNumber } from "d3-interpolate";
 import { computed, makeObservable } from "mobx";
 import { observer } from "mobx-react";
-import PropTypes from "prop-types";
 import React from "react";
 import Glyphs from "./Glyphs";
 import { GlyphCircle } from "@visx/glyph";
+import { ChartItem } from "../../../ModelMixins/ChartableMixin";
+
+interface MomentPointsChartProps {
+  id: string;
+  chartItem: ChartItem;
+  basisItem?: any; // object
+  basisItemScales?: any; // object
+  scales: any; // object
+  glyph: keyof typeof Glyphs;
+}
 
 @observer
-class MomentPointsChart extends React.Component {
-  static propTypes = {
-    id: PropTypes.string.isRequired,
-    chartItem: PropTypes.object.isRequired,
-    basisItem: PropTypes.object,
-    basisItemScales: PropTypes.object,
-    scales: PropTypes.object.isRequired,
-    glyph: PropTypes.string
-  };
-
+class MomentPointsChart extends React.Component<MomentPointsChartProps> {
   static defaultProps = {
     glyph: "circle"
   };
 
-  constructor(props) {
+  constructor(props: MomentPointsChartProps) {
     super(props);
     makeObservable(this);
   }
@@ -38,16 +38,15 @@ class MomentPointsChart extends React.Component {
         domain: basisItemScales.y.domain(),
         range: scales.y.domain()
       });
-      const interpolatedPoints = chartItem.points.map((p) => ({
+      return chartItem.points.map((p) => ({
         ...p,
         ...interpolate(p, basisItem.points, basisToSourceScale)
       }));
-      return interpolatedPoints;
     }
     return chartItem.points;
   }
 
-  doZoom(scales) {
+  doZoom(scales: any) {
     const points = this.points;
     if (points.length === 0) {
       return;
@@ -55,14 +54,14 @@ class MomentPointsChart extends React.Component {
     const glyphs = document.querySelectorAll(
       `g#${this.props.id} > g.visx-glyph`
     );
-    glyphs.forEach((glyph, i) => {
+    glyphs.forEach((glyph: Element, i: number) => {
       const point = points[i];
       if (point) {
         const left = scales.x(point.x);
         const top = scales.y(point.y);
         const scale = point.isSelected ? "scale(1.4, 1.4)" : "";
         glyph.setAttribute("transform", `translate(${left}, ${top}) ${scale}`);
-        glyph.setAttribute("fill-opacity", point.isSelected ? 1.0 : 0.3);
+        glyph.setAttribute("fill-opacity", point.isSelected ? "1.0" : "0.3");
       }
     });
   }
@@ -72,7 +71,7 @@ class MomentPointsChart extends React.Component {
     const baseKey = `moment-point-${chartItem.categoryName}-${chartItem.name}`;
     const fillColor = chartItem.getColor();
     const isClickable = chartItem.onClick !== undefined;
-    const clickProps = (point) => {
+    const clickProps = (point: any) => {
       if (isClickable) {
         return {
           pointerEvents: "all",
@@ -106,7 +105,11 @@ class MomentPointsChart extends React.Component {
  * The source point and `sortedBasisPoints` may be of different scale, so we use `basisToSourceScale`
  * to generate a point in the original source items scale.
  */
-function interpolate({ x, y }, sortedBasisPoints, basisToSourceScale) {
+function interpolate(
+  { x, y }: { x: any; y: any },
+  sortedBasisPoints: any[],
+  basisToSourceScale: any
+) {
   const closest = closestPointIndex(x, sortedBasisPoints);
   if (closest === undefined) {
     return { x, y };
@@ -131,7 +134,7 @@ function interpolate({ x, y }, sortedBasisPoints, basisToSourceScale) {
   return interpolated;
 }
 
-function closestPointIndex(x, sortedPoints) {
+function closestPointIndex(x: any, sortedPoints: any[]) {
   for (let i = 0; i < sortedPoints.length; i++) {
     if (sortedPoints[i].x.getTime() >= x.getTime()) {
       if (i === 0) return 0;

@@ -2,25 +2,26 @@ import { observer } from "mobx-react";
 import { computed, makeObservable } from "mobx";
 import { Tooltip as VisxTooltip } from "@visx/tooltip";
 import { CSSTransition } from "react-transition-group";
-import PropTypes from "prop-types";
 import React from "react";
 import dateformat from "dateformat";
 import groupBy from "lodash-es/groupBy";
 import Styles from "./tooltip.scss";
 
+type ItemType = any;
+
+interface TooltipProps {
+  items: ItemType[];
+  left?: number;
+  right?: number;
+  top?: number;
+  bottom?: number;
+}
+
 @observer
-class Tooltip extends React.Component {
-  static propTypes = {
-    items: PropTypes.array.isRequired,
-    left: PropTypes.number,
-    right: PropTypes.number,
-    top: PropTypes.number,
-    bottom: PropTypes.number
-  };
+class Tooltip extends React.Component<TooltipProps> {
+  prevItems: ItemType[] = [];
 
-  prevItems = [];
-
-  constructor(props) {
+  constructor(props: TooltipProps) {
     super(props);
     makeObservable(this);
   }
@@ -90,9 +91,14 @@ class Tooltip extends React.Component {
         <VisxTooltip
           className={Styles.tooltip}
           key={Math.random()}
+          // @ts-expect-error position is string, not the expected "Position".
           style={this.style}
         >
-          <div className={Styles.title}>{this.title}</div>
+          <div // @ts-expect-error Styles.title is not defined.
+            className={Styles.title}
+          >
+            {this.title}
+          </div>
           <div>
             {this.groups.map((group) => (
               <TooltipGroup
@@ -108,17 +114,24 @@ class Tooltip extends React.Component {
   }
 }
 
-class TooltipGroup extends React.PureComponent {
-  static propTypes = {
-    name: PropTypes.string,
-    items: PropTypes.array.isRequired
-  };
+interface TooltipGroupProps {
+  name: string | undefined;
+  items: ItemType[];
+}
+
+class TooltipGroup extends React.PureComponent<TooltipGroupProps> {
+  constructor(props: TooltipGroupProps) {
+    super(props);
+    makeObservable(this);
+  }
 
   render() {
     const { name, items } = this.props;
     return (
       <div className={Styles.group}>
-        {name && <div className={Styles.groupName}>{name}</div>}
+        {name ? ( // @ts-expect-error Styles.groupName is not defined.
+          <div className={Styles.groupName}>{name}</div>
+        ) : null}
         {items.map((item) => (
           <TooltipItem key={`tooltipitem-${item.chartItem.key}`} item={item} />
         ))}
@@ -127,11 +140,16 @@ class TooltipGroup extends React.PureComponent {
   }
 }
 
+interface TooltipItemProps {
+  item: ItemType;
+}
+
 @observer
-class TooltipItem extends React.Component {
-  static propTypes = {
-    item: PropTypes.object.isRequired
-  };
+class TooltipItem extends React.Component<TooltipItemProps> {
+  constructor(props: TooltipItemProps) {
+    super(props);
+    makeObservable(this);
+  }
 
   render() {
     const chartItem = this.props.item.chartItem;
@@ -145,7 +163,11 @@ class TooltipItem extends React.Component {
         />
         <div className={Styles.itemName}>{chartItem.name}</div>
         <div className={Styles.itemValue}>{formattedValue}</div>
-        <div className={Styles.itemUnits}>{chartItem.units}</div>
+        <div // @ts-expect-error Styles.itemUnits is not defined.
+          className={Styles.itemUnits}
+        >
+          {chartItem.units}
+        </div>
       </div>
     );
   }

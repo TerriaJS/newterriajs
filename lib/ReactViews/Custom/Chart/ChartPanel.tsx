@@ -1,12 +1,9 @@
-"use strict";
-
 import { computed, makeObservable } from "mobx";
 import { observer } from "mobx-react";
-import PropTypes from "prop-types";
 import React from "react";
-import { withTranslation } from "react-i18next";
+import { type TFunction, withTranslation } from "react-i18next";
 import defined from "terriajs-cesium/Source/Core/defined";
-import ChartView from "../../../Charts/ChartView.ts";
+import ChartView from "../../../Charts/ChartView";
 import Result from "../../../Core/Result";
 import MappableMixin from "../../../ModelMixins/MappableMixin";
 import Icon from "../../../Styled/Icon";
@@ -14,22 +11,24 @@ import Loader from "../../Loader";
 import Chart from "./BottomDockChart";
 import Styles from "./chart-panel.scss";
 import { ChartPanelDownloadButton } from "./ChartPanelDownloadButton";
+import type Terria from "../../../Models/Terria";
+import ViewState from "../../../ReactViewModels/ViewState";
+
+interface ChartPanelProps {
+  terria: Terria;
+  onHeightChange?: any; // func
+  viewState: ViewState;
+  animationDuration?: number;
+  t: TFunction;
+}
 
 const height = 300;
 
 @observer
-class ChartPanel extends React.Component {
+class ChartPanel extends React.Component<ChartPanelProps> {
   static displayName = "ChartPanel";
 
-  static propTypes = {
-    terria: PropTypes.object.isRequired,
-    onHeightChange: PropTypes.func,
-    viewState: PropTypes.object.isRequired,
-    animationDuration: PropTypes.number,
-    t: PropTypes.func.isRequired
-  };
-
-  constructor(props) {
+  constructor(props: ChartPanelProps) {
     super(props);
     makeObservable(this);
   }
@@ -80,7 +79,7 @@ class ChartPanel extends React.Component {
       Promise.all(
         items
           .filter((item) => MappableMixin.isMixedInto(item))
-          .map((item) => item.loadMapItems())
+          .map((item: any) => item.loadMapItems())
       ).then((results) =>
         Result.combine(results, {
           message: "Failed to load chart items",
@@ -102,7 +101,9 @@ class ChartPanel extends React.Component {
       <div className={Styles.holder}>
         <div className={Styles.inner}>
           <div className={Styles.chartPanel} style={{ height: height }}>
-            <div className={Styles.body}>
+            <div // @ts-expect-error No Styles.body defined.
+              className={Styles.body}
+            >
               <div className={Styles.header}>
                 <label className={Styles.sectionLabel}>
                   {loader || t("chart.sectionLabel")}
