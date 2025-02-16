@@ -18,7 +18,6 @@ gh api /repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA} -f state=pending -f co
 
 # Install some tools we need from npm
 npm install -g https://github.com/terriajs/sync-dependencies
-npm install -g yarn@^1.19.0
 yarn add -W request@2.83.0
 
 # Clone and build TerriaMap, using this version of TerriaJS
