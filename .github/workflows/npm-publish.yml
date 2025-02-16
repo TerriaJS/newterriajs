@@ -40,7 +40,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.detect.outputs.previous-version != steps.detect.outputs.current-version
-        run: yarn install --ignore-engines
+        run: yarn install --ignore-engines --frozen-lockfile
         env:
           NODE_OPTIONS: "--max_old_space_size=8192"
 
