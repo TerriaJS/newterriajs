@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import { runInAction } from "mobx";
 import { observer } from "mobx-react";
-import { RefObject, createRef, Component } from "react";
+import { Component, RefObject, createRef, type ReactNode } from "react";
 import { WithTranslation, withTranslation } from "react-i18next";
-import { Swipeable } from "react-swipeable";
+import { useSwipeable, type SwipeableProps } from "react-swipeable";
 import { DefaultTheme, withTheme } from "styled-components";
 import {
   Category,
@@ -15,8 +15,8 @@ import TerriaError from "../../../Core/TerriaError";
 import Terria from "../../../Models/Terria";
 import Box from "../../../Styled/Box";
 import Hr from "../../../Styled/Hr";
-import { onStoryButtonClick } from "../../Map/MenuBar/StoryButton/StoryButton";
 import { WithViewState, withViewState } from "../../Context";
+import { onStoryButtonClick } from "../../Map/MenuBar/StoryButton/StoryButton";
 import { Story } from "../Story";
 import Styles from "../story-panel.scss";
 import StoryBody from "./StoryBody";
@@ -81,6 +81,15 @@ interface State {
   inView: boolean;
   isCollapsed: boolean;
 }
+
+export const Swipeable = ({
+  children,
+  ...props
+}: { children: ReactNode } & SwipeableProps) => {
+  const handlers = useSwipeable(props);
+
+  return <div {...handlers}>{children}</div>;
+};
 
 @observer
 class StoryPanel extends Component<Props, State> {
