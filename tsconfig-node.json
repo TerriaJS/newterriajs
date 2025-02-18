@@ -13,14 +13,5 @@
       "react"
     ]
   },
-  "include": [
-    "./lib/Core/**/*",
-    "./lib/Models/**/*",
-    "./lib/Map/**/*",
-    "./lib/ModelMixins/**/*",
-    "./lib/Traits/**/*",
-    "./lib/Language/**/*",
-    "./lib/ReactViews/**/*",
-    "./lib/ThirdParty/**/*"
-  ]
+  "include": ["./lib/**/*"]
 }
