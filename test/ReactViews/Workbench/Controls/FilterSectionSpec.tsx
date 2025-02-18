@@ -1,4 +1,3 @@
-import { act } from "react-dom/test-utils";
 import TestRenderer, { ReactTestRenderer } from "react-test-renderer";
 import FilterSection from "../../../../lib/ReactViews/Workbench/Controls/FilterSection";
 import { Range } from "rc-slider";
@@ -53,10 +52,8 @@ describe("FilterSectionSpec", function () {
       filter?.setTrait(CommonStrata.user, "maximumShown", 20);
     });
 
-    act(() => {
-      testRenderer = TestRenderer.create(<FilterSection item={item} />);
-      const rangeInputs = testRenderer.root.findAllByType(Range);
-      expect(rangeInputs.length).toBe(1);
-    });
+    testRenderer = TestRenderer.create(<FilterSection item={item} />);
+    const rangeInputs = testRenderer.root.findAllByType(Range);
+    expect(rangeInputs.length).toBe(1);
   });
 });
