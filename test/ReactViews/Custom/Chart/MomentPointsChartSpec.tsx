@@ -5,9 +5,15 @@ import minBy from "lodash-es/minBy";
 import React from "react";
 import TestRenderer from "react-test-renderer";
 import MomentPointsChart from "../../../../lib/ReactViews/Custom/Chart/MomentPointsChart";
+import type { ChartItem } from "../../../../lib/ModelMixins/ChartableMixin";
 
 describe("MomentPointsChart", function () {
-  const chartItem = {
+  const chartItem: ChartItem = {
+    item: {} as any,
+    id: "zzz",
+    key: `key-zzz`,
+    type: "line",
+    xAxis: { name: "Time", scale: "time" },
     categoryName: "Points chart",
     name: "chartitem",
     points: [
@@ -18,11 +24,15 @@ describe("MomentPointsChart", function () {
       { x: new Date("2020-05-29"), y: 0.5 },
       { x: new Date("2020-05-30"), y: 0.5 }
     ],
+    domain: { x: [new Date("2020-05-25"), new Date("2020-05-30")], y: [0, 10] },
+    isSelectedInWorkbench: true,
+    showInChartPanel: true,
+    updateIsSelectedInWorkbench: () => {},
     getColor: () => "red",
     onClick: () => {}
   };
 
-  const scales = getScales(chartItem.points);
+  const scales = getScales(chartItem.points as { x: Date; y: number }[]);
   const props = {
     id: "testid",
     chartItem,
@@ -63,7 +73,9 @@ describe("MomentPointsChart", function () {
           y: [0, 10, 2, 5, 8, 6][i]
         }))
       };
-      const basisItemScales = getScales(basisItem.points);
+      const basisItemScales = getScales(
+        basisItem.points as { x: Date; y: number }[]
+      );
       const propsWithBasisItem = {
         ...props,
         basisItem,

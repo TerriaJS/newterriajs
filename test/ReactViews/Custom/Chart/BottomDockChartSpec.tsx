@@ -30,7 +30,7 @@ describe("BottomDockChart", function () {
         updateIsSelectedInWorkbench: () => {},
         getColor: () => "#fff",
         pointOnMap: { latitude: -33.8688, longitude: 151.2093 }
-      } as ChartItem,
+      },
       {
         item: {} as any,
         id: "aaa",
@@ -47,7 +47,7 @@ describe("BottomDockChart", function () {
         updateIsSelectedInWorkbench: () => {},
         getColor: () => "#fff",
         pointOnMap: { latitude: -37.814, longitude: 144.96332 }
-      } as ChartItem
+      }
     ];
   });
 
