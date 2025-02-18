@@ -1,4 +1,3 @@
-import clipboard from "clipboard";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
@@ -24,42 +23,35 @@ interface ClipboardProps {
 }
 
 const Clipboard: React.FC<ClipboardProps> = (props) => {
-  const { id, source, theme, rounded } = props;
+  const { id, source, theme, rounded, text, onCopy } = props;
   const { t } = useTranslation();
   const [status, setStatus] = useState<CopyStatus>(
     CopyStatus.NotCopiedOrWaiting
   );
-  useEffect(() => {
-    // Setup clipboard.js and show a tooltip on copy success or error for 3s
-    const clipboardBtn = new clipboard(`.btn-copy-${id}`);
-    let timerId: ReturnType<typeof setTimeout> | null = null;
-    function removeTimeout() {
-      if (timerId !== null) {
-        clearTimeout(timerId);
-        timerId = null;
+
+  const handleCopy = async () => {
+    try {
+      if (text) {
+        await navigator.clipboard.writeText(text);
+        setStatus(CopyStatus.Success);
+        if (onCopy) onCopy(text);
+      } else {
+        setStatus(CopyStatus.Error);
       }
+    } catch {
+      setStatus(CopyStatus.Error);
     }
-    function resetTooltipLater() {
-      removeTimeout();
-      timerId = setTimeout(() => {
+  };
+
+  useEffect(() => {
+    if (status === CopyStatus.Success || status === CopyStatus.Error) {
+      const timer = setTimeout(() => {
         setStatus(CopyStatus.NotCopiedOrWaiting);
       }, 3000);
+
+      return () => clearTimeout(timer);
     }
-    clipboardBtn.on("success", (evt) => {
-      props.onCopy?.(evt.text);
-      setStatus(CopyStatus.Success);
-      resetTooltipLater();
-    });
-    clipboardBtn.on("error", () => {
-      setStatus(CopyStatus.Error);
-      resetTooltipLater();
-    });
-    return function cleanup() {
-      removeTimeout();
-      clipboardBtn.destroy();
-    };
-    /* eslint-disable-next-line react-hooks/exhaustive-deps */
-  }, [id]);
+  }, [status]);
 
   const isLightTheme = theme === "light";
   return (
@@ -67,6 +59,7 @@ const Clipboard: React.FC<ClipboardProps> = (props) => {
       <Box>
         {source}
         <Button
+          onClick={handleCopy}
           primary
           css={`
             width: 80px;
@@ -74,7 +67,6 @@ const Clipboard: React.FC<ClipboardProps> = (props) => {
             ${rounded && `border-radius:  0 32px 32px 0;`}
           `}
           className={`btn-copy-${id}`}
-          data-clipboard-target={`#${id}`}
           textProps={{ large: true }}
         >
           {t("clipboard.copy")}
