@@ -38,7 +38,7 @@ const CatalogGroupButton = styled.button`
  *
  * @constructor
  */
-function CatalogGroup(props) {
+const CatalogGroup = observer((props) => {
   const { t } = useTranslation();
   return (
     <li className={Styles.root}>
@@ -148,7 +148,7 @@ function CatalogGroup(props) {
       )}
     </li>
   );
-}
+});
 
 CatalogGroup.propTypes = {
   text: PropTypes.string,
@@ -171,4 +171,4 @@ CatalogGroup.propTypes = {
   addRemoveButtonFunction: PropTypes.func
 };
 
-export default observer(CatalogGroup);
+export default CatalogGroup;

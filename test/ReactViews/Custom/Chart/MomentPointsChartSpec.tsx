@@ -1,5 +1,5 @@
-import { scaleLinear, scaleTime } from "@visx/scale";
 import { Glyph, GlyphSquare } from "@visx/glyph";
+import { scaleLinear, scaleTime } from "@visx/scale";
 import maxBy from "lodash-es/maxBy";
 import minBy from "lodash-es/minBy";
 import TestRenderer from "react-test-renderer";
@@ -7,8 +7,13 @@ import MomentPointsChart from "../../../../lib/ReactViews/Custom/Chart/MomentPoi
 
 describe("MomentPointsChart", function () {
   const chartItem = {
+    id: "chartitem",
+    item: {} as any,
     categoryName: "Points chart",
+    key: "key-chartitem",
     name: "chartitem",
+    type: "momentPoints" as const,
+    xAxis: { name: "xAxis", scale: "time" as const },
     points: [
       { x: new Date("2020-05-25"), y: 0.5 },
       { x: new Date("2020-05-26"), y: 0.5 },
@@ -17,8 +22,15 @@ describe("MomentPointsChart", function () {
       { x: new Date("2020-05-29"), y: 0.5 },
       { x: new Date("2020-05-30"), y: 0.5 }
     ],
+    domain: {
+      x: [new Date("2020-05-25").valueOf(), new Date("2020-05-30").valueOf()],
+      y: [0.5, 0.5]
+    },
     getColor: () => "red",
-    onClick: () => {}
+    onClick: () => {},
+    showInChartPanel: true,
+    isSelectedInWorkbench: true,
+    updateIsSelectedInWorkbench: () => {}
   };
 
   const scales = getScales(chartItem.points);
