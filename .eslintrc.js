@@ -7,6 +7,7 @@ module.exports = {
     // https://github.com/typescript-eslint/typescript-eslint/blob/v6/packages/eslint-plugin/src/configs/recommended.ts
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
     "prettier"
   ],
@@ -66,6 +67,9 @@ module.exports = {
     "react/self-closing-comp": "error",
     "react/jsx-no-undef": ["error", { allowGlobals: true }],
 
+    /* Ignore styled-components css property */
+    "react/no-unknown-property": ["error", { ignore: ["css"] }],
+
     /*Possible Errors */
     "no-console": "off",
     "no-inner-declarations": [1, "functions"],
@@ -120,11 +124,7 @@ module.exports = {
     "no-array-constructor": "error",
     "no-new-object": 1,
     "no-unneeded-ternary": 1 /* ECMAScript 6 */,
-    "prefer-const": "error",
-    /* See https://stackoverflow.com/questions/64646248/eslintrc-js-for-react-17-and-jsx-without-import-react/64646593#64646593 */
-    "react/jsx-uses-react": "off",
-    "react/react-in-jsx-scope": "off",
-    "react/no-unknown-property": ["error", { ignore: ["css"] }]
+    "prefer-const": "error"
   },
   overrides: [
     {
