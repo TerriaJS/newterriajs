@@ -24,7 +24,7 @@ interface IMapColumnProps {
  * Right-hand column that contains the map, controls that sit over the map and sometimes the bottom dock containing
  * the timeline and charts.
  */
-export const MapColumn: FC<IMapColumnProps> = observer(
+export const MapColumn: FC<React.PropsWithChildren<IMapColumnProps>> = observer(
   ({ customElements, animationDuration }) => {
     const viewState = useViewState();
     const { t } = useTranslation();

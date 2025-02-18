@@ -16,7 +16,9 @@ interface ChartDisclaimerProps {
   viewState: ViewState;
 }
 
-const ChartDisclaimer: FC<ChartDisclaimerProps> = ({ terria }) => {
+const ChartDisclaimer: FC<React.PropsWithChildren<ChartDisclaimerProps>> = ({
+  terria
+}) => {
   const chartView = new ChartView(terria);
 
   const uniqueChartDisclaimers: string[] = [

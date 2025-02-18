@@ -15,7 +15,9 @@ interface Props {
   children: ReactNode;
 }
 
-export const ExternalLinkWithWarning: FC<Props> = (props: {
+export const ExternalLinkWithWarning: FC<
+  React.PropsWithChildren<Props>
+> = (props: {
   attributes: AnchorHTMLAttributes<HTMLAnchorElement>;
   children: ReactNode;
 }) => {

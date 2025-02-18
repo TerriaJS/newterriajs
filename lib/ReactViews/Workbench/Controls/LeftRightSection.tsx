@@ -39,8 +39,8 @@ interface ILeftRightSection {
   item: Model<SplitterTraits>;
 }
 
-const LeftRightSection: FC<ILeftRightSection> = observer(
-  ({ item }: ILeftRightSection) => {
+const LeftRightSection: FC<React.PropsWithChildren<ILeftRightSection>> =
+  observer(({ item }: ILeftRightSection) => {
     const goLeft = () => {
       runInAction(() => {
         item.setTrait(CommonStrata.user, "splitDirection", SplitDirection.LEFT);
@@ -106,7 +106,6 @@ const LeftRightSection: FC<ILeftRightSection> = observer(
         </Box>
       </>
     );
-  }
-);
+  });
 
 export default withTranslation()(LeftRightSection);

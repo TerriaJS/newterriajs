@@ -8,10 +8,12 @@ import { parseCustomMarkdownToReactWithOptions } from "../Custom/parseCustomMark
 import Button from "../../Styled/Button";
 import AnimatedSpinnerIcon from "../../Styled/AnimatedSpinnerIcon";
 
-export const SelectableDimensionButton: FC<{
-  id: string;
-  dim: SelectableDimensionButtonModel;
-}> = ({ dim }) => {
+export const SelectableDimensionButton: FC<
+  React.PropsWithChildren<{
+    id: string;
+    dim: SelectableDimensionButtonModel;
+  }>
+> = ({ dim }) => {
   const iconGlyph = dim.icon;
   const iconProps = { light: true, styledWidth: "16px", styledHeight: "16px" };
   return (

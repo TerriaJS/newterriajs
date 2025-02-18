@@ -12,7 +12,7 @@ interface PropsType extends WithTranslation {
   t: TFunction;
   [spread: string]: any;
 }
-const Loader: FC<PropsType> = (props: PropsType) => {
+const Loader: FC<React.PropsWithChildren<PropsType>> = (props: PropsType) => {
   const { message, t, boxProps, textProps, hideMessage, ...rest }: PropsType =
     props;
   return (

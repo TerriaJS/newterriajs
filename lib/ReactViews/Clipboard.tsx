@@ -23,7 +23,7 @@ interface ClipboardProps {
   onCopy?: (contents: string) => void;
 }
 
-const Clipboard: FC<ClipboardProps> = (props) => {
+const Clipboard: FC<React.PropsWithChildren<ClipboardProps>> = (props) => {
   const { id, source, theme, rounded } = props;
   const { t } = useTranslation();
   const [status, setStatus] = useState<CopyStatus>(

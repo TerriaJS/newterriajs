@@ -17,8 +17,8 @@ interface IMapCreditsProps {
   currentViewer: GlobeOrMap;
 }
 
-export const MapCredits: FC<IMapCreditsProps> = observer(
-  ({ currentViewer, hideTerriaLogo, credits }) => {
+export const MapCredits: FC<React.PropsWithChildren<IMapCreditsProps>> =
+  observer(({ currentViewer, hideTerriaLogo, credits }) => {
     const { t } = useTranslation();
     const [dataAttributionVisible, setDataAttributionVisible] = useState(false);
 
@@ -68,5 +68,4 @@ export const MapCredits: FC<IMapCreditsProps> = observer(
         ) : null}
       </CreditsContainer>
     );
-  }
-);
+  });

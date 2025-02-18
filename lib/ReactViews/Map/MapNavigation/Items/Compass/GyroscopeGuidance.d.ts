@@ -7,4 +7,6 @@ interface PropsType {
   onClose: () => void;
 }
 
-export declare const GyroscopeGuidance: React.FC<PropsType>;
+export declare const GyroscopeGuidance: React.FC<
+  React.PropsWithChildren<PropsType>
+>;

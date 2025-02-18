@@ -4,10 +4,9 @@ import TerriaError from "../../Core/TerriaError";
 
 export const ViewStateContext = createContext<ViewState | undefined>(undefined);
 
-export const ViewStateProvider: FC<{ viewState: ViewState }> = ({
-  viewState,
-  children
-}) => (
+export const ViewStateProvider: FC<
+  React.PropsWithChildren<{ viewState: ViewState }>
+> = ({ viewState, children }) => (
   <ViewStateContext.Provider value={viewState}>
     {children}
   </ViewStateContext.Provider>
@@ -21,8 +20,8 @@ export const useViewState = () => {
 };
 
 export const withViewState = <P extends WithViewState>(
-  Component: ComponentType<P>
-): FC<Omit<P, "viewState">> =>
+  Component: ComponentType<React.PropsWithChildren<P>>
+): FC<React.PropsWithChildren<Omit<P, "viewState">>> =>
   function withViewState(props) {
     return (
       <ViewStateContext.Consumer>

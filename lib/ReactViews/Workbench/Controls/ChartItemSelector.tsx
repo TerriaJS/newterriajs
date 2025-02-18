@@ -21,7 +21,7 @@ interface IChartItemSelector {
   item: BaseModel;
 }
 
-export const ChartItem: FC<IChartItem> = observer(
+export const ChartItem: FC<React.PropsWithChildren<IChartItem>> = observer(
   ({ chartItem }: IChartItem) => {
     const { t } = useTranslation();
     const lineColor = chartItem.isSelectedInWorkbench
@@ -58,8 +58,8 @@ export const ChartItem: FC<IChartItem> = observer(
   }
 );
 
-const ChartItemSelector: FC<IChartItemSelector> = observer(
-  ({ item }: IChartItemSelector) => {
+const ChartItemSelector: FC<React.PropsWithChildren<IChartItemSelector>> =
+  observer(({ item }: IChartItemSelector) => {
     const theme = useTheme();
     const chartView = new ChartView(item.terria);
     // We don't need to show selectors for moment datasets. They are part of
@@ -89,8 +89,7 @@ const ChartItemSelector: FC<IChartItemSelector> = observer(
         ))}
       </Ul>
     );
-  }
-);
+  });
 
 function unselectChartItemsWithXAxisNotMatching(
   items: BaseModel[],

@@ -38,107 +38,111 @@ export type ItemSearchQuery = Record<
 export type ItemSearchResults = ItemSearchResult[];
 export type ActiveSelectionDisposer = () => void | undefined;
 
-const ItemSearchTool: FC<PropsType> = observer((props) => {
-  const { viewState, item, itemSearchProvider, t } = props;
-  const itemName = CatalogMemberMixin.isMixedInto(item) ? item.name : "Item";
+const ItemSearchTool: FC<React.PropsWithChildren<PropsType>> = observer(
+  (props) => {
+    const { viewState, item, itemSearchProvider, t } = props;
+    const itemName = CatalogMemberMixin.isMixedInto(item) ? item.name : "Item";
 
-  const [state, setState] = useState<State>({ is: "loadingParameters" });
-  const [parameters, setParameters] = useState<ItemSearchParameter[]>([]);
-  const [query, setQuery] = useState<ItemSearchQuery>({});
+    const [state, setState] = useState<State>({ is: "loadingParameters" });
+    const [parameters, setParameters] = useState<ItemSearchParameter[]>([]);
+    const [query, setQuery] = useState<ItemSearchQuery>({});
 
-  useEffect(
-    function loadParameters() {
-      itemSearchProvider
-        .initialize()
-        .then(() =>
-          itemSearchProvider.describeParameters().then((parameters) => {
-            setState({ is: "search" });
-            setParameters(parameters);
-            setQuery({});
+    useEffect(
+      function loadParameters() {
+        itemSearchProvider
+          .initialize()
+          .then(() =>
+            itemSearchProvider.describeParameters().then((parameters) => {
+              setState({ is: "search" });
+              setParameters(parameters);
+              setQuery({});
+            })
+          )
+          .catch((error: Error) => {
+            console.warn(error);
+            setState({
+              is: "error",
+              error
+            });
           })
-        )
-        .catch((error: Error) => {
-          console.warn(error);
-          setState({
-            is: "error",
-            error
-          });
-        })
-        .finally(() => props.afterLoad?.());
-    },
-    /* eslint-disable-next-line react-hooks/exhaustive-deps */
-    [itemSearchProvider]
-  );
+          .finally(() => props.afterLoad?.());
+      },
+      /* eslint-disable-next-line react-hooks/exhaustive-deps */
+      [itemSearchProvider]
+    );
 
-  useEffect(
-    function closeSearchTool() {
-      // Close item search tool if the parent item is disabled or removed from
-      // the workbench
-      const disposeListener = onItemDisabledOrRemovedFromWorkbench(item, () =>
-        viewState.closeTool()
-      );
-      return disposeListener;
-    },
-    /* eslint-disable-next-line react-hooks/exhaustive-deps */
-    [item]
-  );
+    useEffect(
+      function closeSearchTool() {
+        // Close item search tool if the parent item is disabled or removed from
+        // the workbench
+        const disposeListener = onItemDisabledOrRemovedFromWorkbench(item, () =>
+          viewState.closeTool()
+        );
+        return disposeListener;
+      },
+      /* eslint-disable-next-line react-hooks/exhaustive-deps */
+      [item]
+    );
 
-  const setResults = (query: ItemSearchQuery, results: ItemSearchResults) => {
-    setQuery(query);
-    setState({ is: "results", results });
-  };
+    const setResults = (query: ItemSearchQuery, results: ItemSearchResults) => {
+      setQuery(query);
+      setState({ is: "results", results });
+    };
 
-  const searchAgain = () => setState({ is: "search" });
-  const loadIndexForParameter =
-    itemSearchProvider.loadParameterHint?.bind(itemSearchProvider);
+    const searchAgain = () => setState({ is: "search" });
+    const loadIndexForParameter =
+      itemSearchProvider.loadParameterHint?.bind(itemSearchProvider);
 
-  return (
-    <Frame
-      viewState={viewState}
-      title={t("itemSearchTool.title", { itemName })}
-    >
-      <Main textLight light>
-        <Box
-          centered
-          css={`
-            text-align: center;
-          `}
-        >
-          {state.is === "loadingParameters" && (
-            <Loading>{t("itemSearchTool.loading")}</Loading>
+    return (
+      <Frame
+        viewState={viewState}
+        title={t("itemSearchTool.title", { itemName })}
+      >
+        <Main textLight light>
+          <Box
+            centered
+            css={`
+              text-align: center;
+            `}
+          >
+            {state.is === "loadingParameters" && (
+              <Loading>{t("itemSearchTool.loading")}</Loading>
+            )}
+            {state.is === "error" && (
+              <ErrorComponent>{t("itemSearchTool.loadError")}</ErrorComponent>
+            )}
+            {state.is === "search" && parameters.length === 0 && (
+              <ErrorComponent>
+                {t("itemSearchTool.noParameters")}
+              </ErrorComponent>
+            )}
+          </Box>
+          {state.is === "search" && parameters.length > 0 && (
+            <SearchForm
+              itemSearchProvider={itemSearchProvider}
+              parameters={parameters}
+              query={query}
+              onResults={setResults}
+              onValueChange={loadIndexForParameter}
+            />
           )}
-          {state.is === "error" && (
-            <ErrorComponent>{t("itemSearchTool.loadError")}</ErrorComponent>
+          {state.is === "results" && (
+            <SearchResults
+              item={item}
+              results={state.results}
+              template={item.search.resultTemplate}
+            />
           )}
-          {state.is === "search" && parameters.length === 0 && (
-            <ErrorComponent>{t("itemSearchTool.noParameters")}</ErrorComponent>
+          {state.is === "results" && (
+            <BackButton onClick={searchAgain}>
+              {t("itemSearchTool.backBtnText")}
+            </BackButton>
           )}
-        </Box>
-        {state.is === "search" && parameters.length > 0 && (
-          <SearchForm
-            itemSearchProvider={itemSearchProvider}
-            parameters={parameters}
-            query={query}
-            onResults={setResults}
-            onValueChange={loadIndexForParameter}
-          />
-        )}
-        {state.is === "results" && (
-          <SearchResults
-            item={item}
-            results={state.results}
-            template={item.search.resultTemplate}
-          />
-        )}
-        {state.is === "results" && (
-          <BackButton onClick={searchAgain}>
-            {t("itemSearchTool.backBtnText")}
-          </BackButton>
-        )}
-      </Main>
-    </Frame>
-  );
-});
+        </Main>
+      </Frame>
+    );
+  }
+);
 
 /**
  * Callback when the given item is disabled or removed from the workbench.

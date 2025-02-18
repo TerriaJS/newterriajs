@@ -8,27 +8,23 @@ interface DateParameterEditorProps {
   parameter: DateParameter;
 }
 
-const DateParameterEditor: FC<DateParameterEditorProps> = observer(
-  ({ parameter }) => {
-    const style =
-      parameter?.value !== undefined
-        ? Styles.field
-        : Styles.fieldDatePlaceholder;
+const DateParameterEditor: FC<
+  React.PropsWithChildren<DateParameterEditorProps>
+> = observer(({ parameter }) => {
+  const style =
+    parameter?.value !== undefined ? Styles.field : Styles.fieldDatePlaceholder;
 
-    return (
-      <div>
-        <input
-          className={style}
-          type="date"
-          placeholder="YYYY-MM-DD"
-          onChange={(e) =>
-            parameter.setValue(CommonStrata.user, e.target.value)
-          }
-          value={parameter.value ?? ""}
-        />
-      </div>
-    );
-  }
-);
+  return (
+    <div>
+      <input
+        className={style}
+        type="date"
+        placeholder="YYYY-MM-DD"
+        onChange={(e) => parameter.setValue(CommonStrata.user, e.target.value)}
+        value={parameter.value ?? ""}
+      />
+    </div>
+  );
+});
 
 export default DateParameterEditor;

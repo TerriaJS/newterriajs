@@ -31,7 +31,9 @@ interface SearchResultProps {
   icon: keyof typeof Icon.GLYPHS;
 }
 
-const SearchResult: FC<SearchResultProps> = (props: SearchResultProps) => {
+const SearchResult: FC<React.PropsWithChildren<SearchResultProps>> = (
+  props: SearchResultProps
+) => {
   const theme = useTheme();
   const highlightedResultName = highlightKeyword(
     props.name,

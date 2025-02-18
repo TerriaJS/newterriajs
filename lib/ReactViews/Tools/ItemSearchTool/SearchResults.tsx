@@ -19,7 +19,9 @@ export interface SearchResultsProps {
 
 type ResultClickHandler = (result: ItemSearchResult) => void;
 
-const SearchResults: FC<SearchResultsProps> = (props) => {
+const SearchResults: FC<React.PropsWithChildren<SearchResultsProps>> = (
+  props
+) => {
   const { item, results } = props;
   const [currentMapEffect, setCurrentMapEffect] = useState<MapEffect>({
     is: "highlightAll"
@@ -105,30 +107,32 @@ type ResultProps = {
   style: any;
 };
 
-export const Result: FC<ResultProps> = observer((props) => {
-  const { result, template, isEven, isSelected, style } = props;
-  const content = template
-    ? parseCustomMarkdownToReact(Mustache.render(template, result.properties))
-    : result.id;
-  const onClick: MouseEventHandler<HTMLAnchorElement> = (e) => {
-    try {
-      props.onClick(result);
-    } finally {
-      e.preventDefault();
-    }
-  };
-  return (
-    <ClickableItem
-      role="button"
-      isEven={isEven}
-      isSelected={isSelected}
-      onClick={onClick}
-      style={style}
-    >
-      {content}
-    </ClickableItem>
-  );
-});
+export const Result: FC<React.PropsWithChildren<ResultProps>> = observer(
+  (props) => {
+    const { result, template, isEven, isSelected, style } = props;
+    const content = template
+      ? parseCustomMarkdownToReact(Mustache.render(template, result.properties))
+      : result.id;
+    const onClick: MouseEventHandler<HTMLAnchorElement> = (e) => {
+      try {
+        props.onClick(result);
+      } finally {
+        e.preventDefault();
+      }
+    };
+    return (
+      <ClickableItem
+        role="button"
+        isEven={isEven}
+        isSelected={isSelected}
+        onClick={onClick}
+        style={style}
+      >
+        {content}
+      </ClickableItem>
+    );
+  }
+);
 
 const ClickableItem = styled.a<{ isEven: boolean; isSelected: boolean }>`
   display: block;
@@ -165,7 +169,9 @@ const Wrapper = styled(Box).attrs({ column: true, flex: 1 })`
   }
 `;
 
-export const ResultsCount: FC<{ count: number }> = ({ count }) => {
+export const ResultsCount: FC<React.PropsWithChildren<{ count: number }>> = ({
+  count
+}) => {
   const [t] = useTranslation();
   return (
     <Box

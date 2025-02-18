@@ -42,7 +42,7 @@ type State =
   | { is: "error"; error: Error }
   | { is: "results"; results: ItemSearchResult[] };
 
-const SearchForm: FC<SearchFormProps> = (props) => {
+const SearchForm: FC<React.PropsWithChildren<SearchFormProps>> = (props) => {
   const { parameters, itemSearchProvider } = props;
   const [t] = useTranslation();
   const [state, setState] = useState<State>({ is: "initial" });
@@ -137,7 +137,7 @@ interface ParameterProps {
   t: TFunction;
 }
 
-const Parameter: FC<ParameterProps> = (props) => {
+const Parameter: FC<React.PropsWithChildren<ParameterProps>> = (props) => {
   const { parameter } = props;
   switch (parameter.type) {
     case "numeric":
@@ -156,7 +156,9 @@ interface NumericParameterProps {
   t: TFunction;
 }
 
-export const NumericParameter: FC<NumericParameterProps> = (props) => {
+export const NumericParameter: FC<
+  React.PropsWithChildren<NumericParameterProps>
+> = (props) => {
   const { parameter, value, t } = props;
   const { min, max } = parameter.range;
 
@@ -227,7 +229,9 @@ type SelectOnChangeHandler<
   actionMeta: ActionMeta<OptionType>
 ) => void;
 
-const EnumParameter: FC<EnumParameterProps> = (props) => {
+const EnumParameter: FC<React.PropsWithChildren<EnumParameterProps>> = (
+  props
+) => {
   const { parameter, disabled } = props;
   const options = parameter.values.map(({ id }) => ({
     value: id,
@@ -268,7 +272,9 @@ interface TextParameterProps {
   onChange: (value: string | undefined) => void;
 }
 
-const TextParameter: FC<TextParameterProps> = (props) => {
+const TextParameter: FC<React.PropsWithChildren<TextParameterProps>> = (
+  props
+) => {
   const { parameter, value, onChange } = props;
   return (
     <Box column>

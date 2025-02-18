@@ -12,7 +12,9 @@ interface WithControlledVisibilityProps {
  * element is available inside either "hidden" or "shown" lists passed
  * as prop
  */
-export default <P extends object>(WrappedComponent: ComponentType<P>) => {
+export default <P extends object>(
+  WrappedComponent: ComponentType<React.PropsWithChildren<P>>
+) => {
   function WithControlledVisibility({
     elementConfig,
     ...props

@@ -26,10 +26,12 @@ import {
 } from "./Select";
 import { SelectableDimensionText } from "./Text";
 
-const SelectableDimension: FC<{
-  id: string;
-  dim: SelectableDimensionModel;
-}> = ({ id, dim }) => {
+const SelectableDimension: FC<
+  React.PropsWithChildren<{
+    id: string;
+    dim: SelectableDimensionModel;
+  }>
+> = ({ id, dim }) => {
   return (
     <Box displayInlineBlock fullWidth styledPadding="5px 0">
       {/* Render label for all SelectableDimensions except for groups */}

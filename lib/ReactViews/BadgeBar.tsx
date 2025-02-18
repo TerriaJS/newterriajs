@@ -8,7 +8,7 @@ interface IProps {
   badge?: number;
   children: ReactNode;
 }
-const BadgeBar: FC<IProps> = (props: IProps) => {
+const BadgeBar: FC<React.PropsWithChildren<IProps>> = (props: IProps) => {
   const theme = useTheme();
   return (
     <Box

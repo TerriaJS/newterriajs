@@ -19,11 +19,9 @@ interface ISharePanelContentProps {
   closePanel: () => void;
 }
 
-export const SharePanelContent: FC<ISharePanelContentProps> = ({
-  terria,
-  viewState,
-  closePanel
-}) => {
+export const SharePanelContent: FC<
+  React.PropsWithChildren<ISharePanelContentProps>
+> = ({ terria, viewState, closePanel }) => {
   const { t } = useTranslation();
   const canShortenUrl = useMemo(() => !!canShorten(terria), [terria]);
 

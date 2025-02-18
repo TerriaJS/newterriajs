@@ -7,5 +7,5 @@ interface PropsType {
   transitionProps?: any;
 }
 
-declare const FadeIn: React.FC<PropsType>;
+declare const FadeIn: React.FC<React.PropsWithChildren<PropsType>>;
 export default FadeIn;

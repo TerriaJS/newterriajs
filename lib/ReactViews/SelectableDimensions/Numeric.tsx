@@ -5,10 +5,12 @@ import { SelectableDimensionNumeric as SelectableDimensionNumericModel } from ".
 import Input from "../../Styled/Input";
 import { observer } from "mobx-react";
 
-export const SelectableDimensionNumeric: FC<{
-  id: string;
-  dim: SelectableDimensionNumericModel;
-}> = observer(({ id, dim }) => {
+export const SelectableDimensionNumeric: FC<
+  React.PropsWithChildren<{
+    id: string;
+    dim: SelectableDimensionNumericModel;
+  }>
+> = observer(({ id, dim }) => {
   const [value, setValue] = useState(dim.value?.toString());
 
   return (

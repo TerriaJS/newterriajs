@@ -12,10 +12,12 @@ import {
   SelectableDimensionMultiEnum as SelectableDimensionEnumMultiModel
 } from "../../Models/SelectableDimensions/SelectableDimensions";
 
-export const SelectableDimensionEnum: FC<{
-  id: string;
-  dim: SelectableDimensionEnumModel;
-}> = observer(({ dim }) => {
+export const SelectableDimensionEnum: FC<
+  React.PropsWithChildren<{
+    id: string;
+    dim: SelectableDimensionEnumModel;
+  }>
+> = observer(({ dim }) => {
   const theme = useTheme();
 
   const undefinedOption = {
@@ -93,10 +95,12 @@ export const SelectableDimensionEnum: FC<{
 });
 
 /** Similar to SelectableDimensionEnum, but allows multiple values to be selected */
-export const SelectableDimensionEnumMulti: FC<{
-  id: string;
-  dim: SelectableDimensionEnumMultiModel;
-}> = observer(({ dim }) => {
+export const SelectableDimensionEnumMulti: FC<
+  React.PropsWithChildren<{
+    id: string;
+    dim: SelectableDimensionEnumMultiModel;
+  }>
+> = observer(({ dim }) => {
   const theme = useTheme();
 
   const options = dim.options?.map((option) => ({

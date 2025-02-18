@@ -56,42 +56,42 @@ const DataAttributionBox = styled(Box).attrs({
   }
 `;
 
-export const DataAttributionModal: FC<IDataAttributionModalProps> = observer(
-  ({ closeModal, attributions }) => {
-    const { t } = useTranslation();
-    if (!attributions || attributions.length === 0) {
-      return null;
-    }
-
-    return ReactDOM.createPortal(
-      <>
-        <PrefaceBox
-          onClick={closeModal}
-          role="presentation"
-          aria-hidden="true"
-          pseudoBg
-          css={{ top: 0, left: 0, zIndex: 99989 }}
-        />
-        <DataAttributionBox>
-          <CloseButton color="#red" topRight onClick={closeModal} />
-          <Text extraExtraLarge bold textDarker>
-            {t("map.extraCreditLinks.dataProvider")}
-          </Text>
-          <Spacing bottom={2} />
-          <Box paddedHorizontally={4}>
-            <ul css={{ padding: 0, margin: 0 }}>
-              {attributions.map((attribution, index: number) => (
-                <Li key={index}>
-                  <AttributionText>
-                    {parseCustomHtmlToReact(attribution)}
-                  </AttributionText>
-                </Li>
-              ))}
-            </ul>
-          </Box>
-        </DataAttributionBox>
-      </>,
-      document.getElementById("map-data-attribution") || document.body
-    );
+export const DataAttributionModal: FC<
+  React.PropsWithChildren<IDataAttributionModalProps>
+> = observer(({ closeModal, attributions }) => {
+  const { t } = useTranslation();
+  if (!attributions || attributions.length === 0) {
+    return null;
   }
-);
+
+  return ReactDOM.createPortal(
+    <>
+      <PrefaceBox
+        onClick={closeModal}
+        role="presentation"
+        aria-hidden="true"
+        pseudoBg
+        css={{ top: 0, left: 0, zIndex: 99989 }}
+      />
+      <DataAttributionBox>
+        <CloseButton color="#red" topRight onClick={closeModal} />
+        <Text extraExtraLarge bold textDarker>
+          {t("map.extraCreditLinks.dataProvider")}
+        </Text>
+        <Spacing bottom={2} />
+        <Box paddedHorizontally={4}>
+          <ul css={{ padding: 0, margin: 0 }}>
+            {attributions.map((attribution, index: number) => (
+              <Li key={index}>
+                <AttributionText>
+                  {parseCustomHtmlToReact(attribution)}
+                </AttributionText>
+              </Li>
+            ))}
+          </ul>
+        </Box>
+      </DataAttributionBox>
+    </>,
+    document.getElementById("map-data-attribution") || document.body
+  );
+});

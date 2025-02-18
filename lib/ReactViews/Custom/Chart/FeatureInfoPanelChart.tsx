@@ -36,78 +36,78 @@ const defaultMargin: Margin = { top: 5, left: 5, right: 5, bottom: 5 };
 /**
  * Chart component for feature info panel popup
  */
-const FeatureInfoPanelChart: FC<FeatureInfoPanelChartPropTypes> = observer(
-  (props) => {
-    const [loadingFailed, setLoadingFailed] = useState(false);
-    const { t } = useTranslation();
+const FeatureInfoPanelChart: FC<
+  React.PropsWithChildren<FeatureInfoPanelChartPropTypes>
+> = observer((props) => {
+  const [loadingFailed, setLoadingFailed] = useState(false);
+  const { t } = useTranslation();
 
-    const parentSize = useParentSize();
-    const width = props.width || Math.max(parentSize.width, 300) || 0;
-    const height = props.height || Math.max(parentSize.height, 200) || 0;
+  const parentSize = useParentSize();
+  const width = props.width || Math.max(parentSize.width, 300) || 0;
+  const height = props.height || Math.max(parentSize.height, 200) || 0;
 
-    const catalogItem = props.item;
+  const catalogItem = props.item;
 
-    // If a yColumn is specified, use it if it is of line type, otherwise use
-    // the first line type chart item.
-    let chartItem = props.yColumn
-      ? catalogItem.chartItems.find((it) => it.id === props.yColumn)
-      : catalogItem.chartItems.find(isLineType);
-    chartItem = chartItem && isLineType(chartItem) ? chartItem : undefined;
+  // If a yColumn is specified, use it if it is of line type, otherwise use
+  // the first line type chart item.
+  let chartItem = props.yColumn
+    ? catalogItem.chartItems.find((it) => it.id === props.yColumn)
+    : catalogItem.chartItems.find(isLineType);
+  chartItem = chartItem && isLineType(chartItem) ? chartItem : undefined;
 
-    const notChartable = !ChartableMixin.isMixedInto(catalogItem);
-    const isLoading =
-      !chartItem &&
-      MappableMixin.isMixedInto(catalogItem) &&
-      catalogItem.isLoadingMapItems;
-    const noData = !chartItem || chartItem.points.length === 0;
+  const notChartable = !ChartableMixin.isMixedInto(catalogItem);
+  const isLoading =
+    !chartItem &&
+    MappableMixin.isMixedInto(catalogItem) &&
+    catalogItem.isLoadingMapItems;
+  const noData = !chartItem || chartItem.points.length === 0;
 
-    // Text to show when chart is not ready or available
-    const chartStatus = notChartable
-      ? "chart.noData"
-      : isLoading
-      ? "chart.loading"
-      : loadingFailed
-      ? "chart.noData"
-      : noData
-      ? "chart.noData"
-      : undefined;
+  // Text to show when chart is not ready or available
+  const chartStatus = notChartable
+    ? "chart.noData"
+    : isLoading
+    ? "chart.loading"
+    : loadingFailed
+    ? "chart.noData"
+    : noData
+    ? "chart.noData"
+    : undefined;
 
-    const canShowChart = chartStatus === undefined;
-    const margin = { ...defaultMargin, ...props.margin };
-    const baseColor = props.baseColor ?? "#efefef";
+  const canShowChart = chartStatus === undefined;
+  const margin = { ...defaultMargin, ...props.margin };
+  const baseColor = props.baseColor ?? "#efefef";
 
-    useEffect(() => {
-      if (MappableMixin.isMixedInto(catalogItem)) {
-        catalogItem.loadMapItems().then((result) => {
-          setLoadingFailed(result.error !== undefined);
-          result.logError();
-        });
-      } else {
-        setLoadingFailed(false);
-      }
-    }, [catalogItem]);
+  useEffect(() => {
+    if (MappableMixin.isMixedInto(catalogItem)) {
+      catalogItem.loadMapItems().then((result) => {
+        setLoadingFailed(result.error !== undefined);
+        result.logError();
+      });
+    } else {
+      setLoadingFailed(false);
+    }
+  }, [catalogItem]);
 
-    return (
-      <div className={Styles.previewChart} ref={parentSize.parentRef}>
-        {!canShowChart && (
-          <ChartStatusText width={width} height={height}>
-            {t(chartStatus)}
-          </ChartStatusText>
-        )}
-        {canShowChart && chartItem && (
-          <Chart
-            width={width}
-            height={height}
-            margin={margin}
-            chartItem={chartItem}
-            baseColor={baseColor}
-            xAxisLabel={props.xAxisLabel}
-          />
-        )}
-      </div>
-    );
-  }
-);
+  return (
+    <div className={Styles.previewChart} ref={parentSize.parentRef}>
+      {!canShowChart && (
+        <ChartStatusText width={width} height={height}>
+          {t(chartStatus)}
+        </ChartStatusText>
+      )}
+      {canShowChart && chartItem && (
+        <Chart
+          width={width}
+          height={height}
+          margin={margin}
+          chartItem={chartItem}
+          baseColor={baseColor}
+          xAxisLabel={props.xAxisLabel}
+        />
+      )}
+    </div>
+  );
+});
 
 const isLineType = (chartItem: ChartItem) =>
   chartItem.type === "line" || chartItem.type === "lineAndPoint";

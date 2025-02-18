@@ -16,74 +16,74 @@ import TerrainSide from "./TerrainSide";
 interface IWorkbenchSplitScreenProps {
   terria: Terria;
 }
-const WorkbenchSplitScreen: FC<IWorkbenchSplitScreenProps> = observer(
-  (props: IWorkbenchSplitScreenProps) => {
-    const { t } = useTranslation();
-    const theme = useTheme();
-    const { terria } = props;
-    const isCesiumWithTerrain =
-      terria.mainViewer.viewerMode === ViewerMode.Cesium &&
-      terria.mainViewer.viewerOptions.useTerrain &&
-      (terria.currentViewer as any)?.scene?.globe;
+const WorkbenchSplitScreen: FC<
+  React.PropsWithChildren<IWorkbenchSplitScreenProps>
+> = observer((props: IWorkbenchSplitScreenProps) => {
+  const { t } = useTranslation();
+  const theme = useTheme();
+  const { terria } = props;
+  const isCesiumWithTerrain =
+    terria.mainViewer.viewerMode === ViewerMode.Cesium &&
+    terria.mainViewer.viewerOptions.useTerrain &&
+    (terria.currentViewer as any)?.scene?.globe;
 
-    if (!isCesiumWithTerrain) return null;
+  if (!isCesiumWithTerrain) return null;
 
-    return (
-      <>
+  return (
+    <>
+      <Box
+        fullWidth
+        column
+        css={`
+          background: ${theme.darkWithOverlay};
+          color: ${theme.textLight};
+          border-radius: 2px;
+        `}
+      >
         <Box
           fullWidth
-          column
+          centered
+          justifySpaceBetween
           css={`
-            background: ${theme.darkWithOverlay};
+            background: ${theme.colorSecondary};
+            border-radius: 2px 2px 0 0;
+            padding: 0 10px;
+            font-weight: bold;
+            font-size: 14px;
             color: ${theme.textLight};
-            border-radius: 2px;
+            line-height: 34px;
           `}
         >
-          <Box
-            fullWidth
-            centered
-            justifySpaceBetween
+          <Box>{t("workbench.splitScreenMode")}</Box>
+          <RawButton
+            onClick={() => {
+              runInAction(() => (terria.showSplitter = !terria.showSplitter));
+            }}
             css={`
-              background: ${theme.colorSecondary};
-              border-radius: 2px 2px 0 0;
-              padding: 0 10px;
-              font-weight: bold;
-              font-size: 14px;
-              color: ${theme.textLight};
-              line-height: 34px;
+              display: flex;
+              align-items: center;
             `}
           >
-            <Box>{t("workbench.splitScreenMode")}</Box>
-            <RawButton
-              onClick={() => {
-                runInAction(() => (terria.showSplitter = !terria.showSplitter));
-              }}
-              css={`
-                display: flex;
-                align-items: center;
-              `}
-            >
-              <StyledIcon glyph={GLYPHS.close} light styledWidth={"1em"} />
-            </RawButton>
-          </Box>
+            <StyledIcon glyph={GLYPHS.close} light styledWidth={"1em"} />
+          </RawButton>
+        </Box>
 
-          <Box fullWidth paddedHorizontally>
-            <TerrainSide
-              terria={terria}
-              spaced={false}
-              buttonProps={{
-                css: `border: 0;
+        <Box fullWidth paddedHorizontally>
+          <TerrainSide
+            terria={terria}
+            spaced={false}
+            buttonProps={{
+              css: `border: 0;
                 padding: 8px 0;
               `
-              }}
-              activeColor={theme.colorSecondary}
-            />
-          </Box>
+            }}
+            activeColor={theme.colorSecondary}
+          />
         </Box>
-        <Spacing bottom={1} />
-      </>
-    );
-  }
-);
+      </Box>
+      <Spacing bottom={1} />
+    </>
+  );
+});
 
 export default WorkbenchSplitScreen;

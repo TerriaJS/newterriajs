@@ -20,7 +20,10 @@ type PortalProps = {
 /**
  * Defines a portal with given id that can be attached by calling <PortalChild portalId={id} />
  */
-export const Portal: FC<PortalProps> = ({ id, className }) => {
+export const Portal: FC<React.PropsWithChildren<PortalProps>> = ({
+  id,
+  className
+}) => {
   const viewState = useViewState();
   /* eslint-disable-next-line react-hooks/exhaustive-deps */
   useEffect(
@@ -43,9 +46,8 @@ export type PortalChildProps = {
 /**
  * Attach children to the <Portal> identified by portalId
  */
-export const PortalChild: FC<PortalChildProps> = observer(
-  ({ viewState, portalId, children }) => {
+export const PortalChild: FC<React.PropsWithChildren<PortalChildProps>> =
+  observer(({ viewState, portalId, children }) => {
     const container = viewState.portals.get(portalId);
     return container ? ReactDOM.createPortal(children, container) : null;
-  }
-);
+  });

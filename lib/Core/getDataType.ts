@@ -6,7 +6,7 @@ interface DataType {
   value: string;
   name: string;
   description?: string;
-  customComponent?: ComponentType;
+  customComponent?: ComponentType<React.PropsWithChildren<unknown>>;
 }
 
 export interface RemoteDataType extends DataType {}

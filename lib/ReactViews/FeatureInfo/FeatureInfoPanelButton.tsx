@@ -5,7 +5,9 @@ import { StyledIcon } from "../../Styled/Icon";
 import Text from "../../Styled/Text";
 import { FeatureInfoPanelButton as FeatureInfoPanelButtonModel } from "../../ViewModels/FeatureInfoPanel";
 
-const FeatureInfoPanelButton: FC<FeatureInfoPanelButtonModel> = (props) => {
+const FeatureInfoPanelButton: FC<
+  React.PropsWithChildren<FeatureInfoPanelButtonModel>
+> = (props) => {
   const { text, icon } = props;
   if (!text) {
     return null;

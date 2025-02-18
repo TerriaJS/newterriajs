@@ -34,52 +34,51 @@ const WarningLink = styled.a`
   cursor: pointer;
 `;
 
-export const ShareUrlWarning: FC<IShareUrlWarningProps> = observer(
-  ({ terria, viewState, callback }) => {
-    const { t } = useTranslation();
+export const ShareUrlWarning: FC<
+  React.PropsWithChildren<IShareUrlWarningProps>
+> = observer(({ terria, viewState, callback }) => {
+  const { t } = useTranslation();
 
-    const unshareableItems =
-      terria.catalog.userAddedDataGroup.memberModels.filter(
-        (model) => !isShareable(terria)(model.uniqueId || "")
-      );
-
-    if (unshareableItems.length === 0) {
-      return null;
-    }
-
-    const addWebData = () => {
-      viewState.openUserData();
-      callback();
-    };
-
-    return (
-      <WarningBox>
-        <Trans t={t} i18nKey="share.localDataNote">
-          <Text bold>
-            <strong>Note:</strong>
-          </Text>
-          <Text>
-            The following data sources will NOT be shared because they include
-            data from this local system or from an authenticated online service.
-            To share these data sources, publish their data on a web server and{" "}
-            <WarningLink onClick={addWebData}>add them using a url</WarningLink>
-            .
-          </Text>
-        </Trans>
-        <Ul
-          css={`
-            padding: 0;
-          `}
-        >
-          {unshareableItems.map((item, i) => {
-            return (
-              <Li key={i}>
-                <strong>{getName(item)}</strong>
-              </Li>
-            );
-          })}
-        </Ul>
-      </WarningBox>
+  const unshareableItems =
+    terria.catalog.userAddedDataGroup.memberModels.filter(
+      (model) => !isShareable(terria)(model.uniqueId || "")
     );
+
+  if (unshareableItems.length === 0) {
+    return null;
   }
-);
+
+  const addWebData = () => {
+    viewState.openUserData();
+    callback();
+  };
+
+  return (
+    <WarningBox>
+      <Trans t={t} i18nKey="share.localDataNote">
+        <Text bold>
+          <strong>Note:</strong>
+        </Text>
+        <Text>
+          The following data sources will NOT be shared because they include
+          data from this local system or from an authenticated online service.
+          To share these data sources, publish their data on a web server and{" "}
+          <WarningLink onClick={addWebData}>add them using a url</WarningLink>.
+        </Text>
+      </Trans>
+      <Ul
+        css={`
+          padding: 0;
+        `}
+      >
+        {unshareableItems.map((item, i) => {
+          return (
+            <Li key={i}>
+              <strong>{getName(item)}</strong>
+            </Li>
+          );
+        })}
+      </Ul>
+    </WarningBox>
+  );
+});

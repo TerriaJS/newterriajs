@@ -19,7 +19,9 @@ type DropPedestrianToGroundProps = {
   afterDrop: () => void;
 };
 
-const DropPedestrianToGround: FC<DropPedestrianToGroundProps> = (props) => {
+const DropPedestrianToGround: FC<
+  React.PropsWithChildren<DropPedestrianToGroundProps>
+> = (props) => {
   const cesium = props.cesium;
   const scene = cesium.scene;
   const eventHandler = new ScreenSpaceEventHandler(scene.canvas);

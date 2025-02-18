@@ -4,10 +4,12 @@ import CommonStrata from "../../Models/Definition/CommonStrata";
 import { SelectableDimensionText as SelectableDimensionTextModel } from "../../Models/SelectableDimensions/SelectableDimensions";
 import Input from "../../Styled/Input";
 
-export const SelectableDimensionText: FC<{
-  id: string;
-  dim: SelectableDimensionTextModel;
-}> = ({ id, dim }) => {
+export const SelectableDimensionText: FC<
+  React.PropsWithChildren<{
+    id: string;
+    dim: SelectableDimensionTextModel;
+  }>
+> = ({ id, dim }) => {
   return (
     <Input
       styledHeight={"34px"}

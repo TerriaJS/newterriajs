@@ -24,7 +24,7 @@ export type PanelProps = {
 /**
  * A generic panel component for left, right, context items etc.
  */
-export const Panel: FC<PanelProps> = (props) => {
+export const Panel: FC<React.PropsWithChildren<PanelProps>> = (props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   useEffect(() => {
     if (isDefined(props.isOpen)) {
@@ -68,10 +68,9 @@ export const Panel: FC<PanelProps> = (props) => {
 };
 
 /** Simple PanelButton - this mimics style of CollapsibleTitleBar */
-export const PanelButton: FC<{ onClick: () => void; title: string }> = ({
-  onClick,
-  title
-}) => (
+export const PanelButton: FC<
+  React.PropsWithChildren<{ onClick: () => void; title: string }>
+> = ({ onClick, title }) => (
   <Wrapper>
     <CollapsibleTitleBar
       onClick={onClick}

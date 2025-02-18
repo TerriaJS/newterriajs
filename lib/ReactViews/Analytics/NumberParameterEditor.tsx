@@ -5,9 +5,9 @@ import NumberParameter from "../../Models/FunctionParameters/NumberParameter";
 
 import Styles from "./parameter-editors.scss";
 
-const NumberParameterEditor: FC<{ parameter: NumberParameter }> = ({
-  parameter
-}) => {
+const NumberParameterEditor: FC<
+  React.PropsWithChildren<{ parameter: NumberParameter }>
+> = ({ parameter }) => {
   const [value, setValue] = useState<number | undefined>(0);
 
   useEffect(() => {

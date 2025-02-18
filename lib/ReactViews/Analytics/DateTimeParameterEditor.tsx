@@ -8,26 +8,22 @@ interface DateTimeParameterEditorProps {
   parameter: DateTimeParameter;
 }
 
-const DateTimeParameterEditor: FC<DateTimeParameterEditorProps> = observer(
-  ({ parameter }) => {
-    const style =
-      parameter?.value !== undefined
-        ? Styles.field
-        : Styles.fieldDatePlaceholder;
+const DateTimeParameterEditor: FC<
+  React.PropsWithChildren<DateTimeParameterEditorProps>
+> = observer(({ parameter }) => {
+  const style =
+    parameter?.value !== undefined ? Styles.field : Styles.fieldDatePlaceholder;
 
-    return (
-      <div>
-        <input
-          className={style}
-          type="datetime-local"
-          value={parameter.value ?? ""}
-          onChange={(e) =>
-            parameter.setValue(CommonStrata.user, e.target.value)
-          }
-        />
-      </div>
-    );
-  }
-);
+  return (
+    <div>
+      <input
+        className={style}
+        type="datetime-local"
+        value={parameter.value ?? ""}
+        onChange={(e) => parameter.setValue(CommonStrata.user, e.target.value)}
+      />
+    </div>
+  );
+});
 
 export default DateTimeParameterEditor;

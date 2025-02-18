@@ -12,7 +12,9 @@ interface IEmbedSectionProps {
   shareUrl: IShareUrlRef | null;
 }
 
-export const EmbedSection: FC<IEmbedSectionProps> = ({ shareUrl }) => {
+export const EmbedSection: FC<React.PropsWithChildren<IEmbedSectionProps>> = ({
+  shareUrl
+}) => {
   const { t } = useTranslation();
   const iframeCode =
     shareUrl?.url && shareUrl.url.length > 0

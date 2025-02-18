@@ -18,7 +18,7 @@ export interface ActionButtonProps
 /**
  * A themed button to use inside {@link ActionBar}
  */
-export const ActionButton: FC<ActionButtonProps> = ({
+export const ActionButton: FC<React.PropsWithChildren<ActionButtonProps>> = ({
   className,
   icon,
   showProcessingIcon,

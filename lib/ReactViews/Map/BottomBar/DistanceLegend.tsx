@@ -25,8 +25,8 @@ interface IDistanceLegendProps {
   isPrintMode?: boolean;
 }
 
-export const DistanceLegend: FC<IDistanceLegendProps> = observer(
-  ({ scale = 1, isPrintMode = false }) => {
+export const DistanceLegend: FC<React.PropsWithChildren<IDistanceLegendProps>> =
+  observer(({ scale = 1, isPrintMode = false }) => {
     const [distanceLabel, setDistanceLabel] = useState<string>();
     const [barWidth, setBarWidth] = useState<number>(0);
 
@@ -203,5 +203,4 @@ export const DistanceLegend: FC<IDistanceLegendProps> = observer(
         />
       </Box>
     ) : null;
-  }
-);
+  });

@@ -32,7 +32,9 @@ export interface ToolConfig {
    *  }
    * ```
    */
-  toolComponentLoader: () => Promise<{ default: ComponentType<any> }>;
+  toolComponentLoader: () => Promise<{
+    default: ComponentType<React.PropsWithChildren<any>>;
+  }>;
 
   /**
    * The tool button configuration

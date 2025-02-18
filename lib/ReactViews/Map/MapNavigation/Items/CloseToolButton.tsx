@@ -4,7 +4,7 @@ import Icon from "../../../../Styled/Icon";
 import { useViewState } from "../../../Context";
 import MapIconButton from "../../../MapIconButton/MapIconButton";
 
-export const CloseToolButton: FC = () => {
+export const CloseToolButton: FC<React.PropsWithChildren<unknown>> = () => {
   const { t } = useTranslation();
   const viewState = useViewState();
   const closeText = t("tool.closeButtonTitle", {

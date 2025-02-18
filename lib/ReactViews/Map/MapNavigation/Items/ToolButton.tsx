@@ -9,23 +9,25 @@ interface ToolButtonProps {
   controller: ToolButtonController;
 }
 
-const ToolButton: FC<ToolButtonProps> = observer((props: ToolButtonProps) => {
-  const { controller } = props;
+const ToolButton: FC<React.PropsWithChildren<ToolButtonProps>> = observer(
+  (props: ToolButtonProps) => {
+    const { controller } = props;
 
-  return (
-    <Box displayInlineBlock>
-      <MapIconButton
-        primary={controller.active}
-        expandInPlace
-        title={controller.title}
-        onClick={() => controller.handleClick()}
-        iconElement={() => <Icon glyph={controller.glyph} />}
-        closeIconElement={() => <Icon glyph={Icon.GLYPHS.closeTool} />}
-      >
-        {controller.title}
-      </MapIconButton>
-    </Box>
-  );
-});
+    return (
+      <Box displayInlineBlock>
+        <MapIconButton
+          primary={controller.active}
+          expandInPlace
+          title={controller.title}
+          onClick={() => controller.handleClick()}
+          iconElement={() => <Icon glyph={controller.glyph} />}
+          closeIconElement={() => <Icon glyph={Icon.GLYPHS.closeTool} />}
+        >
+          {controller.title}
+        </MapIconButton>
+      </Box>
+    );
+  }
+);
 
 export default ToolButton;

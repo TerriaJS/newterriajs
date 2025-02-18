@@ -8,7 +8,9 @@ interface IMapCreditLogoProps {
   currentViewer: GlobeOrMap;
 }
 
-export const MapCreditLogo: FC<IMapCreditLogoProps> = ({ currentViewer }) => {
+export const MapCreditLogo: FC<
+  React.PropsWithChildren<IMapCreditLogoProps>
+> = ({ currentViewer }) => {
   if (currentViewer.type === "Leaflet") {
     const prefix = (currentViewer as Leaflet).attributionPrefix;
     if (prefix) {

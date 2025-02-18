@@ -124,7 +124,7 @@ export const StyledInput = styled.input<InputProps>`
   ${commonStyles}
 `;
 
-const Input: FC<InputProps> = (props: InputProps) => {
+const Input: FC<React.PropsWithChildren<InputProps>> = (props: InputProps) => {
   const { boxProps, ...rest }: InputProps = props;
   useTheme();
   return (

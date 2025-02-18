@@ -12,7 +12,9 @@ interface WithTerriaRefProps {
     HOC to set a ref and store it in viewState
 */
 export const withTerriaRef = <P extends ComponentProps<any>>(
-  WrappedComponent: ComponentClass<P> | FunctionComponent<P>,
+  WrappedComponent:
+    | ComponentClass<P>
+    | FunctionComponent<React.PropsWithChildren<P>>,
   refName: string
 ) => {
   const WithTerriaRef = (props: P & WithTerriaRefProps) => {

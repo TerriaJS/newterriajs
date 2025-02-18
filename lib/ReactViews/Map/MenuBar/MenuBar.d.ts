@@ -8,5 +8,5 @@ interface PropsType {
   elementConfig?: IElementConfig;
 }
 
-declare const MenuBar: React.FC<PropsType>;
+declare const MenuBar: React.FC<React.PropsWithChildren<PropsType>>;
 export default MenuBar;

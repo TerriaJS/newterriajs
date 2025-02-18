@@ -4,7 +4,7 @@ import { Splitter } from "./Splitter/Splitter";
 import { useViewState } from "../../Context";
 import styled from "styled-components";
 
-export const TerriaViewerWrapper: FC = () => {
+export const TerriaViewerWrapper: FC<React.PropsWithChildren<unknown>> = () => {
   const viewState = useViewState();
   const containerRef = useRef<HTMLDivElement>(null);
 

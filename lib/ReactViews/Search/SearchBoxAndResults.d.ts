@@ -8,7 +8,9 @@ interface SearchInDataCatalogPropsType {
   handleClick: () => void;
 }
 
-export declare const SearchInDataCatalog: React.FC<SearchInDataCatalogPropsType>;
+export declare const SearchInDataCatalog: React.FC<
+  React.PropsWithChildren<SearchInDataCatalogPropsType>
+>;
 
 interface PropsType {
   viewState: ViewState;

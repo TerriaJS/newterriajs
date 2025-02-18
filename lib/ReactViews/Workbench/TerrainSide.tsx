@@ -25,7 +25,7 @@ interface ITerrainSideProps {
   activeColor: string;
 }
 
-const TerrainSide: FC<ITerrainSideProps> = observer(
+const TerrainSide: FC<React.PropsWithChildren<ITerrainSideProps>> = observer(
   (props: ITerrainSideProps) => {
     const { t } = useTranslation();
     const theme = useTheme();

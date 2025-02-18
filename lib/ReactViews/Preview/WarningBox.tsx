@@ -21,10 +21,12 @@ const showErrorNotification = (viewState: ViewState, error: TerriaError) => {
   viewState.terria.raiseErrorToUser(error, undefined, true);
 };
 
-const WarningBox: FC<{
-  error?: TerriaError;
-  viewState?: ViewState;
-}> = (props) => {
+const WarningBox: FC<
+  React.PropsWithChildren<{
+    error?: TerriaError;
+    viewState?: ViewState;
+  }>
+> = (props) => {
   // We only show FeedbankLink if the error message doesn't include the <feedbacklink> custom component (so we don't get duplicates)
   const includesFeedbackLink =
     props.error?.highestImportanceError.message.includes(

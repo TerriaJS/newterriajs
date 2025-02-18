@@ -11,7 +11,9 @@ interface IShareUrlBookmarkProps {
 
 const bookMarkHelpItemName = "bookmarkHelp";
 
-export const ShareUrlBookmark: FC<IShareUrlBookmarkProps> = ({ viewState }) => {
+export const ShareUrlBookmark: FC<
+  React.PropsWithChildren<IShareUrlBookmarkProps>
+> = ({ viewState }) => {
   const { t } = useTranslation();
 
   return viewState.terria.configParameters.helpContent?.some(

@@ -547,7 +547,9 @@ interface CaptureSceneProps {
   disabled?: boolean;
 }
 
-const CaptureScene: FC<CaptureSceneProps> = (props) => {
+const CaptureScene: FC<React.PropsWithChildren<CaptureSceneProps>> = (
+  props
+) => {
   const { t } = useTranslation();
   return (
     <StoryButton
@@ -567,7 +569,9 @@ type StoryButtonProps = ComponentPropsWithoutRef<typeof Button> & {
   children: ReactNode;
 };
 
-export const StoryButton: FC<StoryButtonProps> = (props) => {
+export const StoryButton: FC<React.PropsWithChildren<StoryButtonProps>> = (
+  props
+) => {
   const { btnText, ...rest } = props;
   return (
     <Button
@@ -590,7 +594,9 @@ interface RemoveDialogProps {
   closeDialog: () => void;
 }
 
-const RemoveDialog: FC<RemoveDialogProps> = (props) => {
+const RemoveDialog: FC<React.PropsWithChildren<RemoveDialogProps>> = (
+  props
+) => {
   const { t } = useTranslation();
   return (
     <Box

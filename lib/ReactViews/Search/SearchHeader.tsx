@@ -12,7 +12,7 @@ interface SearchHeaderProps {
   isWaitingForSearchToStart: boolean;
 }
 
-const SearchHeader: FC<SearchHeaderProps> = observer(
+const SearchHeader: FC<React.PropsWithChildren<SearchHeaderProps>> = observer(
   (props: SearchHeaderProps) => {
     const { i18n } = useTranslation();
 

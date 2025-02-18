@@ -23,7 +23,9 @@ import { useViewState } from "../Context";
 
 interface ToolProps {
   toolName: string;
-  getToolComponent: () => ComponentType | Promise<ComponentType>;
+  getToolComponent: () =>
+    | ComponentType<React.PropsWithChildren<unknown>>
+    | Promise<ComponentType<React.PropsWithChildren<unknown>>>;
   params?: any;
 }
 
@@ -35,7 +37,7 @@ interface ToolProps {
  * module that exports a default React Component. The promise is useful for
  * lazy-loading the tool.
  */
-const Tool: FC<ToolProps> = (props) => {
+const Tool: FC<React.PropsWithChildren<ToolProps>> = (props) => {
   const { getToolComponent, params, toolName } = props;
   const viewState = useViewState();
   const [t] = useTranslation();

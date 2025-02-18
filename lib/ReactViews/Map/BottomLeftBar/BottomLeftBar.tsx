@@ -40,7 +40,7 @@ const shouldShowPlayStoryButton = (viewState: ViewState) =>
   viewState.terria.stories.length > 0 &&
   viewState.useSmallScreenInterface;
 
-const BottomLeftBar: FC = observer(() => {
+const BottomLeftBar: FC<React.PropsWithChildren<unknown>> = observer(() => {
   const { t } = useTranslation();
   const theme = useTheme();
   const viewState = useViewState();

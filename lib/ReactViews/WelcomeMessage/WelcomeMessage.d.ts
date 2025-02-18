@@ -6,7 +6,9 @@ interface WelcomeMessagePurePropsType {
   isTopElement: boolean;
 }
 
-export declare const WelcomeMessagePure: React.FC<WelcomeMessagePurePropsType>;
+export declare const WelcomeMessagePure: React.FC<
+  React.PropsWithChildren<WelcomeMessagePurePropsType>
+>;
 
 declare class WelcomeMessage extends React.Component<object> {}
 export default WelcomeMessage;

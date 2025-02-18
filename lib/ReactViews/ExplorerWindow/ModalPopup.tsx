@@ -16,7 +16,7 @@ interface IProps {
   isTopElement?: boolean;
 }
 
-const ModalPopup: FC<IProps> = (props) => {
+const ModalPopup: FC<React.PropsWithChildren<IProps>> = (props) => {
   const { t } = useTranslation();
   const [inTransition, setInTransition] = useState(false);
   const animationTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);

@@ -185,9 +185,9 @@ interface SearchResultsFooterProps {
   name: string;
 }
 
-const SearchResultsFooter: FC<SearchResultsFooterProps> = (
-  props: SearchResultsFooterProps
-) => {
+const SearchResultsFooter: FC<
+  React.PropsWithChildren<SearchResultsFooterProps>
+> = (props: SearchResultsFooterProps) => {
   const { t, i18n } = useTranslation();
   if (props.isExpanded) {
     return t("search.viewLess", {
@@ -207,8 +207,8 @@ interface NameWithLoaderProps {
   isWaitingForSearchToStart: boolean;
 }
 
-const NameWithLoader: FC<NameWithLoaderProps> = observer(
-  (props: NameWithLoaderProps) => {
+const NameWithLoader: FC<React.PropsWithChildren<NameWithLoaderProps>> =
+  observer((props: NameWithLoaderProps) => {
     const { i18n } = useTranslation();
     return (
       <BoxSpan styledHeight={"25px"}>
@@ -225,6 +225,5 @@ const NameWithLoader: FC<NameWithLoaderProps> = observer(
           )}
       </BoxSpan>
     );
-  }
-);
+  });
 export default withTranslation()(LocationSearchResults);

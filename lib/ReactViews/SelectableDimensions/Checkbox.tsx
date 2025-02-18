@@ -6,10 +6,12 @@ import { SelectableDimensionCheckbox as SelectableDimensionCheckboxModel } from 
 import Checkbox from "../../Styled/Checkbox";
 import Text from "../../Styled/Text";
 
-export const SelectableDimensionCheckbox: FC<{
-  id: string;
-  dim: SelectableDimensionCheckboxModel;
-}> = ({ id, dim }) => {
+export const SelectableDimensionCheckbox: FC<
+  React.PropsWithChildren<{
+    id: string;
+    dim: SelectableDimensionCheckboxModel;
+  }>
+> = ({ id, dim }) => {
   const { t } = useTranslation();
   return (
     <Checkbox

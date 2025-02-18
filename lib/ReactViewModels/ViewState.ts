@@ -882,7 +882,9 @@ export default class ViewState {
 
 interface Tool {
   toolName: string;
-  getToolComponent: () => ComponentType<any> | Promise<ComponentType<any>>;
+  getToolComponent: () =>
+    | ComponentType<React.PropsWithChildren<any>>
+    | Promise<ComponentType<React.PropsWithChildren<any>>>;
 
   showCloseButton: boolean;
   params?: any;

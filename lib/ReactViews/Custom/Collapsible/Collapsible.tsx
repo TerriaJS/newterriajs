@@ -33,7 +33,9 @@ interface CollapsibleProps extends CollapsibleIconProps {
   bodyTextProps?: any;
 }
 
-export const CollapseIcon: FC<CollapsibleIconProps> = (props) => {
+export const CollapseIcon: FC<React.PropsWithChildren<CollapsibleIconProps>> = (
+  props
+) => {
   let glyph = GLYPHS.opened;
   let glyphWidth = 8;
   let glyphRotation = 0;
@@ -62,60 +64,62 @@ export const CollapseIcon: FC<CollapsibleIconProps> = (props) => {
   );
 };
 
-const Collapsible: FC<CollapsibleProps> = observer((props) => {
-  const [isOpen, setIsOpen] = useState<boolean | undefined>();
+const Collapsible: FC<React.PropsWithChildren<CollapsibleProps>> = observer(
+  (props) => {
+    const [isOpen, setIsOpen] = useState<boolean | undefined>();
 
-  useEffect(() => setIsOpen(props.isOpen), [props.isOpen]);
+    useEffect(() => setIsOpen(props.isOpen), [props.isOpen]);
 
-  const toggleOpen = () => {
-    const newIsOpen = !isOpen;
-    // Only update isOpen state if onToggle doesn't consume the event
-    if (!props.onToggle || !props.onToggle(newIsOpen)) setIsOpen(newIsOpen);
-  };
+    const toggleOpen = () => {
+      const newIsOpen = !isOpen;
+      // Only update isOpen state if onToggle doesn't consume the event
+      if (!props.onToggle || !props.onToggle(newIsOpen)) setIsOpen(newIsOpen);
+    };
 
-  return (
-    <>
-      <RawButton
-        fullWidth
-        onClick={toggleOpen}
-        css={`
-          text-align: left;
-          display: flex;
-          align-items: center;
-        `}
-        aria-expanded={isOpen}
-        aria-controls={`${props.title}`}
-        activeStyles
-      >
-        {!props.btnRight && <CollapseIcon {...props} isOpen={isOpen} />}
-        {!props.btnRight && <SpacingSpan right={1} />}
-        <TextSpan
-          textLight={props.light ?? true}
-          bold
-          medium
-          {...props.titleTextProps}
+    return (
+      <>
+        <RawButton
+          fullWidth
+          onClick={toggleOpen}
+          css={`
+            text-align: left;
+            display: flex;
+            align-items: center;
+          `}
+          aria-expanded={isOpen}
+          aria-controls={`${props.title}`}
+          activeStyles
         >
-          {parseCustomMarkdownToReactWithOptions(props.title, {
-            inline: true
-          })}
-        </TextSpan>
-        {props.btnRight && <SpacingSpan right={1} />}
-        {props.btnRight && <CollapseIcon {...props} isOpen={isOpen} />}
-      </RawButton>
-      {isOpen ? (
-        <Box {...props.bodyBoxProps}>
-          <Text
+          {!props.btnRight && <CollapseIcon {...props} isOpen={isOpen} />}
+          {!props.btnRight && <SpacingSpan right={1} />}
+          <TextSpan
             textLight={props.light ?? true}
-            small
-            id={`${props.title}`}
-            {...props.bodyTextProps}
+            bold
+            medium
+            {...props.titleTextProps}
           >
-            {props.children}
-          </Text>
-        </Box>
-      ) : null}
-    </>
-  );
-});
+            {parseCustomMarkdownToReactWithOptions(props.title, {
+              inline: true
+            })}
+          </TextSpan>
+          {props.btnRight && <SpacingSpan right={1} />}
+          {props.btnRight && <CollapseIcon {...props} isOpen={isOpen} />}
+        </RawButton>
+        {isOpen ? (
+          <Box {...props.bodyBoxProps}>
+            <Text
+              textLight={props.light ?? true}
+              small
+              id={`${props.title}`}
+              {...props.bodyTextProps}
+            >
+              {props.children}
+            </Text>
+          </Box>
+        ) : null}
+      </>
+    );
+  }
+);
 
 export default Collapsible;

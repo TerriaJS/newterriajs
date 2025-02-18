@@ -346,7 +346,9 @@ interface TextAreaProps {
   [spread: string]: any;
 }
 
-const TextArea: FC<TextAreaProps> = (props: TextAreaProps) => {
+const TextArea: FC<React.PropsWithChildren<TextAreaProps>> = (
+  props: TextAreaProps
+) => {
   const {
     value,
     onChange,
@@ -392,7 +394,9 @@ interface StyledLabelProps {
   spacingBottom?: boolean;
 }
 
-const StyledLabel: FC<StyledLabelProps> = (props: StyledLabelProps) => {
+const StyledLabel: FC<React.PropsWithChildren<StyledLabelProps>> = (
+  props: StyledLabelProps
+) => {
   const { viewState, label, textProps } = props;
   const id = useUID();
   const childrenWithId = Children.map(props.children, (child) => {

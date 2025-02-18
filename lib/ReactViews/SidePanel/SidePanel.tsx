@@ -53,7 +53,9 @@ interface EmptyWorkbenchProps {
   theme: DefaultTheme;
 }
 
-const EmptyWorkbench: FC<EmptyWorkbenchProps> = (props) => {
+const EmptyWorkbench: FC<React.PropsWithChildren<EmptyWorkbenchProps>> = (
+  props
+) => {
   const { t } = useTranslation();
   return (
     <Text large textLight>
@@ -217,7 +219,9 @@ const SidePanel = observer<React.FC<SidePanelProps>>(
 // Used to create two refs for <SidePanel /> to consume, rather than
 // using the withTerriaRef() HOC twice, designed for a single ref
 const SidePanelWithRefs: FC<
-  Omit<SidePanelProps, "refForExploreMapData" | "refForUploadData">
+  React.PropsWithChildren<
+    Omit<SidePanelProps, "refForExploreMapData" | "refForUploadData">
+  >
 > = (props) => {
   const refForExploreMapData = useRefForTerria(
     EXPLORE_MAP_DATA_NAME,

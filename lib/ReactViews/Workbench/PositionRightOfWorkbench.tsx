@@ -21,18 +21,18 @@ type PositionRightOfWorkbenchProps = {
  *    `;
  *
  */
-const PositionRightOfWorkbench: FC<PositionRightOfWorkbenchProps> = observer(
-  (props) => {
-    return (
-      <Container
-        className={props.className}
-        isMapFullScreen={props.viewState.isMapFullScreen}
-      >
-        {props.children}
-      </Container>
-    );
-  }
-);
+const PositionRightOfWorkbench: FC<
+  React.PropsWithChildren<PositionRightOfWorkbenchProps>
+> = observer((props) => {
+  return (
+    <Container
+      className={props.className}
+      isMapFullScreen={props.viewState.isMapFullScreen}
+    >
+      {props.children}
+    </Container>
+  );
+});
 
 const Container = styled.div<{ isMapFullScreen: boolean }>`
   position: absolute;

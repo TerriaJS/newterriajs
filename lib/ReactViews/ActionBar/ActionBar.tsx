@@ -11,7 +11,7 @@ import { ActionBarPortalId } from "./ActionBarPortal";
  * {@link ActionButton} can be used as a themed button for the action bar
  * {@link ActionButtonGroup} can be used for grouping elements inside an action bar
  */
-export const ActionBar: FC<object> = (props) => {
+export const ActionBar: FC<React.PropsWithChildren<object>> = (props) => {
   const viewState = useViewState();
 
   useEffect(function setVisibility() {

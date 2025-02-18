@@ -14,11 +14,9 @@ export interface GeneratedControlSectionProps {
   placement: Placement;
 }
 
-const GeneratedControlSection: FC<GeneratedControlSectionProps> = ({
-  item,
-  controls,
-  placement
-}) => {
+const GeneratedControlSection: FC<
+  React.PropsWithChildren<GeneratedControlSectionProps>
+> = ({ item, controls, placement }) => {
   const enabledDimensions = filterSelectableDimensions(placement)(controls);
   if (enabledDimensions.length === 0) {
     return null;

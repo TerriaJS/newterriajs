@@ -20,10 +20,12 @@ const debounceSetColorDimensionValue = debounce(
   100
 );
 
-export const SelectableDimensionColor: FC<{
-  id: string;
-  dim: SelectableDimensionColorModel;
-}> = observer(({ dim }) => {
+export const SelectableDimensionColor: FC<
+  React.PropsWithChildren<{
+    id: string;
+    dim: SelectableDimensionColorModel;
+  }>
+> = observer(({ dim }) => {
   const [open, setIsOpen] = useState(false);
   const { t } = useTranslation();
   return (

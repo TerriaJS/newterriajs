@@ -4,10 +4,12 @@ import { ExternalLinkIcon } from "../../../Custom/ExternalLink";
 import { ICredit } from "./Credit.type";
 import { Spacer } from "./Spacer";
 
-export const Credit: FC<{
-  credit: ICredit;
-  lastElement: boolean;
-}> = ({ credit, lastElement }) => {
+export const Credit: FC<
+  React.PropsWithChildren<{
+    credit: ICredit;
+    lastElement: boolean;
+  }>
+> = ({ credit, lastElement }) => {
   const { t } = useTranslation();
 
   return (

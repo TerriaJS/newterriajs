@@ -8,7 +8,9 @@ type PropsType = {
   show: boolean;
 };
 
-const WorkflowPanelPortal: FC<PropsType> = ({ show }) => {
+const WorkflowPanelPortal: FC<React.PropsWithChildren<PropsType>> = ({
+  show
+}) => {
   const viewState = useViewState();
   return (
     <Container

@@ -288,7 +288,9 @@ export interface IconProps {
   className?: string;
   rotation?: number;
 }
-export const Icon: FC<IconProps> = (props: IconProps) => {
+export const Icon: FC<React.PropsWithChildren<IconProps>> = (
+  props: IconProps
+) => {
   return (
     <svg
       viewBox="0 0 100 100"

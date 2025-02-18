@@ -6,7 +6,9 @@ interface ICreditsProps {
   credits?: ICredit[];
 }
 
-export const Credits: FC<ICreditsProps> = ({ credits }) => {
+export const Credits: FC<React.PropsWithChildren<ICreditsProps>> = ({
+  credits
+}) => {
   if (!credits || credits.length === 0) {
     return null;
   }

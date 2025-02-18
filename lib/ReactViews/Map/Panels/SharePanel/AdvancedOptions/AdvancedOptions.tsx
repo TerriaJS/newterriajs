@@ -22,7 +22,9 @@ interface IAdvancedOptionsProps {
   shareUrl: MutableRefObject<IShareUrlRef | null>;
 }
 
-export const AdvancedOptions: FC<IAdvancedOptionsProps> = ({
+export const AdvancedOptions: FC<
+  React.PropsWithChildren<IAdvancedOptionsProps>
+> = ({
   canShortenUrl,
   shouldShorten,
   includeStoryInShare,

@@ -10,17 +10,17 @@ import { useTranslation } from "react-i18next";
 interface IScaleWorkbenchInfoProps {
   item: BaseModel;
 }
-export const ScaleWorkbenchInfo: FC<IScaleWorkbenchInfoProps> = observer(
-  ({ item }: IScaleWorkbenchInfoProps) => {
-    const { i18n } = useTranslation();
-    if (!MinMaxLevelMixin.isMixedInto(item) || !item.scaleWorkbenchInfo) {
-      return null;
-    }
-    return (
-      <>
-        <Spacing bottom={2} />
-        <Text>{applyTranslationIfExists(item.scaleWorkbenchInfo, i18n)}</Text>
-      </>
-    );
+export const ScaleWorkbenchInfo: FC<
+  React.PropsWithChildren<IScaleWorkbenchInfoProps>
+> = observer(({ item }: IScaleWorkbenchInfoProps) => {
+  const { i18n } = useTranslation();
+  if (!MinMaxLevelMixin.isMixedInto(item) || !item.scaleWorkbenchInfo) {
+    return null;
   }
-);
+  return (
+    <>
+      <Spacing bottom={2} />
+      <Text>{applyTranslationIfExists(item.scaleWorkbenchInfo, i18n)}</Text>
+    </>
+  );
+});

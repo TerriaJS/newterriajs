@@ -19,7 +19,9 @@ const StyledCheckboxIcon = styled(StyledIcon).attrs({
   `}
 `;
 
-const CheckboxIcon: FC<CheckboxIconProps> = (props: CheckboxIconProps) => {
+const CheckboxIcon: FC<React.PropsWithChildren<CheckboxIconProps>> = (
+  props: CheckboxIconProps
+) => {
   if (props.isDisabled) {
     return (
       <StyledCheckboxIcon

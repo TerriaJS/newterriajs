@@ -25,7 +25,7 @@ const Control = styled.div`
     margin-bottom: 0;
   }
 `;
-const ExperimentalFeatures: FC<IProps> = (props) => {
+const ExperimentalFeatures: FC<React.PropsWithChildren<IProps>> = (props) => {
   return (
     <ControlsWrapper>
       {(props.experimentalItems || []).map((item, i) => (

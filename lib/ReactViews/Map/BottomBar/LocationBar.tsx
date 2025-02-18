@@ -26,8 +26,8 @@ const setInnerText = (ref: RefObject<HTMLElement>, value: string) => {
   if (ref.current) ref.current.innerText = value;
 };
 
-export const LocationBar: FC<ILocationBarProps> = observer(
-  ({ mouseCoords }) => {
+export const LocationBar: FC<React.PropsWithChildren<ILocationBarProps>> =
+  observer(({ mouseCoords }) => {
     const theme = useTheme();
     const { t } = useTranslation();
 
@@ -109,5 +109,4 @@ export const LocationBar: FC<ILocationBarProps> = observer(
         </RawButton>
       </Box>
     );
-  }
-);
+  });

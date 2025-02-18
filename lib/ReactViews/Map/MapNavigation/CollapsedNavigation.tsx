@@ -80,80 +80,86 @@ const NavigationButton = styled(BoxSpan).attrs({
   `}
 `;
 
-const CollapsedNavigationPanel: FC<PropTypes> = observer((props: PropTypes) => {
-  const viewState = useViewState();
-  const theme = useTheme();
-  const { t, i18n } = useTranslation();
-  const items = props.items;
-  return (
-    <CollapsedNavigationBox column>
-      <CloseButton
-        color={theme.darkWithOverlay}
-        topRight
-        onClick={() => viewState.closeCollapsedNavigation()}
-      />
-      <Text extraExtraLarge bold textDarker>
-        {t("mapNavigation.additionalTools")}
-      </Text>
-      <Spacing bottom={5} />
-      <ButtonsBox>
-        {items.map((item) => (
-          <NavigationButton
-            key={item.id}
-            title={applyTranslationIfExists(item.name, i18n)}
-            onClick={() => {
-              if (!item.controller.disabled) {
-                viewState.closeCollapsedNavigation();
-                item.controller.handleClick();
-              }
-            }}
-            css={`
-              ${item.controller.active &&
-              `border: 2px solid ${theme.colorPrimary};`}
-            `}
-            disabled={item.controller.disabled}
-          >
-            <StyledIcon glyph={item.controller.glyph} styledWidth="22px" dark />
-          </NavigationButton>
-        ))}
-      </ButtonsBox>
-    </CollapsedNavigationBox>
-  );
-});
+const CollapsedNavigationPanel: FC<React.PropsWithChildren<PropTypes>> =
+  observer((props: PropTypes) => {
+    const viewState = useViewState();
+    const theme = useTheme();
+    const { t, i18n } = useTranslation();
+    const items = props.items;
+    return (
+      <CollapsedNavigationBox column>
+        <CloseButton
+          color={theme.darkWithOverlay}
+          topRight
+          onClick={() => viewState.closeCollapsedNavigation()}
+        />
+        <Text extraExtraLarge bold textDarker>
+          {t("mapNavigation.additionalTools")}
+        </Text>
+        <Spacing bottom={5} />
+        <ButtonsBox>
+          {items.map((item) => (
+            <NavigationButton
+              key={item.id}
+              title={applyTranslationIfExists(item.name, i18n)}
+              onClick={() => {
+                if (!item.controller.disabled) {
+                  viewState.closeCollapsedNavigation();
+                  item.controller.handleClick();
+                }
+              }}
+              css={`
+                ${item.controller.active &&
+                `border: 2px solid ${theme.colorPrimary};`}
+              `}
+              disabled={item.controller.disabled}
+            >
+              <StyledIcon
+                glyph={item.controller.glyph}
+                styledWidth="22px"
+                dark
+              />
+            </NavigationButton>
+          ))}
+        </ButtonsBox>
+      </CollapsedNavigationBox>
+    );
+  });
 
 const CollapsedNavigationDisplayName = "CollapsedNavigation";
-export const CollapsedNavigation: FC = observer(() => {
-  const viewState = useViewState();
-  useEffect(() =>
-    autorun(() => {
-      if (
-        viewState.showCollapsedNavigation &&
-        viewState.topElement !== CollapsedNavigationDisplayName
-      ) {
-        viewState.setTopElement(CollapsedNavigationDisplayName);
-      }
-    })
-  );
+export const CollapsedNavigation: FC<React.PropsWithChildren<unknown>> =
+  observer(() => {
+    const viewState = useViewState();
+    useEffect(() =>
+      autorun(() => {
+        if (
+          viewState.showCollapsedNavigation &&
+          viewState.topElement !== CollapsedNavigationDisplayName
+        ) {
+          viewState.setTopElement(CollapsedNavigationDisplayName);
+        }
+      })
+    );
 
-  let items = viewState.terria.mapNavigationModel.items.filter(
-    (item) => item.controller.collapsed
-  );
-  items = items.filter((item) => filterViewerAndScreenSize(item, viewState));
+    let items = viewState.terria.mapNavigationModel.items.filter(
+      (item) => item.controller.collapsed
+    );
+    items = items.filter((item) => filterViewerAndScreenSize(item, viewState));
 
-  if (!viewState.showCollapsedNavigation || items.length === 0) {
-    viewState.closeCollapsedNavigation();
-    return null;
-  }
+    if (!viewState.showCollapsedNavigation || items.length === 0) {
+      viewState.closeCollapsedNavigation();
+      return null;
+    }
 
-  return (
-    <>
-      <PrefaceBox
-        onClick={() => viewState.closeCollapsedNavigation()}
-        role="presentation"
-        aria-hidden="true"
-        pseudoBg
-      />
-      <CollapsedNavigationPanel items={items} />
-    </>
-  );
-});
+    return (
+      <>
+        <PrefaceBox
+          onClick={() => viewState.closeCollapsedNavigation()}
+          role="presentation"
+          aria-hidden="true"
+          pseudoBg
+        />
+        <CollapsedNavigationPanel items={items} />
+      </>
+    );
+  });

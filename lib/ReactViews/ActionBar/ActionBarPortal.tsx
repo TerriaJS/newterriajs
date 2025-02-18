@@ -16,7 +16,7 @@ interface PropsType {
 /**
  * A Portal to show ActionBar UI.
  */
-const ActionBarPortal: FC<PropsType> = ({ show }) => {
+const ActionBarPortal: FC<React.PropsWithChildren<PropsType>> = ({ show }) => {
   return <StyledPortal id={ActionBarPortalId} show={show} />;
 };
 

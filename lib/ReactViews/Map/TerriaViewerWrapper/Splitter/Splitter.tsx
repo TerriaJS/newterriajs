@@ -13,7 +13,7 @@ interface ISplitterProps {
   padding?: number;
 }
 
-export const Splitter: FC<ISplitterProps> = observer(
+export const Splitter: FC<React.PropsWithChildren<ISplitterProps>> = observer(
   ({ thumbSize = 42, padding = 0 }) => {
     const viewState = useViewState();
     const theme = useTheme();

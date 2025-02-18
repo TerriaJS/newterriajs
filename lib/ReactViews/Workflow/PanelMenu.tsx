@@ -13,7 +13,9 @@ export type PanelMenuProps = {
 /**
  * A popup overflow menu for the panel
  */
-export const PanelMenu: FC<PanelMenuProps> = ({ options }) => {
+export const PanelMenu: FC<React.PropsWithChildren<PanelMenuProps>> = ({
+  options
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const hideMenu = () => setIsOpen(false);
 

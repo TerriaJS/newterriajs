@@ -14,7 +14,9 @@ interface IPrintSectionProps {
   viewState: ViewState;
 }
 
-export const PrintSection: FC<IPrintSectionProps> = ({ viewState }) => {
+export const PrintSection: FC<React.PropsWithChildren<IPrintSectionProps>> = ({
+  viewState
+}) => {
   const { t } = useTranslation();
 
   const [isDownloading, setIsDownloading] = useState(false);

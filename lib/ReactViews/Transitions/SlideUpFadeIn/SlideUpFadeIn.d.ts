@@ -7,5 +7,5 @@ interface PropsType {
   transitionProps?: any;
 }
 
-declare const SlideUpFadeIn: React.FC<PropsType>;
+declare const SlideUpFadeIn: React.FC<React.PropsWithChildren<PropsType>>;
 export default SlideUpFadeIn;
