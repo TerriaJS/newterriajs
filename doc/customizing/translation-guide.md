@@ -34,6 +34,7 @@ Language files are translation core. To add an additional language, a separate l
 
 1. translation
 2. languageOverrides
+3. TinyMCE translations
 
 ### Translation language file - `translation.json`
 
@@ -44,6 +45,10 @@ The translation language file contains all translations used throughout the Terr
 The languageOverrides language file is used to override the translation language file's translations without rebuilding the application and specifying the additional translations needed. This file is located in `/wwwroot/languages/{abbreviation}/languageOverrides.json` inside the root folder of TerriaMap (where the abbreviation is a short name of the language specified in the config). A namespace for this translation file is `languageOverrides`.
 
 Note the base URL to overrides language files can be changed by setting `LanguageConfiguration.overridesBaseUrl`. See [config.json documentation](../customizing/client-side-config.md#LanguageConfiguration)
+
+### TinyMCE translations
+
+The TinyMCE translations is used to internationalize story editor which uses external library with its own internationalization support. Those files are located at `wwwroot/languages/tinymce/{abbreviation}.js` inside the root folder of TerriaMap (where the abbreviation is a short name of the language specified in the config and it should be the same under language is registered in tinymce `tinymce.addI18n("{abbreviation}",...`).
 
 ## Best practice
 

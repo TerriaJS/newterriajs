@@ -3,6 +3,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import PropTypes from "prop-types";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import tinymce from "tinymce"; // must import despite being unused
+import type { Editor as TinyMCEEditor } from "tinymce";
 /* Required TinyMCE components */
 import "tinymce/icons/default";
 import "tinymce/themes/silver";
@@ -23,15 +24,29 @@ import "tinymce/plugins/autolink";
 import contentCss from "tinymce/skins/content/default/content.min.css";
 import contentUiCss from "tinymce/skins/ui/oxide/content.min.css";
 
-export default function TinyEditor(props) {
-  const editorRef = useRef(null);
+interface ITinyEditorProps {
+  html: string;
+  onChange: (html: string) => void;
+  language: string;
+  baseUrl: string;
+}
+
+export default function TinyEditor({
+  html,
+  onChange,
+  language
+}: ITinyEditorProps) {
+  const editorRef = useRef<TinyMCEEditor | null>(null);
 
   return (
     <Editor
+      key={language}
       onInit={(_evt, editor) => (editorRef.current = editor)}
-      value={props.html}
-      onEditorChange={props.onChange}
+      value={html}
+      onEditorChange={onChange}
       init={{
+        language: language,
+        language_url: `languages/tinymce/${language}.js`,
         height: 450,
         skin: false,
         menubar: false,
@@ -53,7 +68,5 @@ export default function TinyEditor(props) {
 
 TinyEditor.propTypes = {
   html: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
-  actions: PropTypes.array,
-  terria: PropTypes.object
+  onChange: PropTypes.func.isRequired
 };

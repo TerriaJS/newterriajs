@@ -18,6 +18,7 @@
 - Move `GeojsonSource` to new file `lib/Map/Vector/ProtomapsGeojsonSource.ts`.
 - support URL parameters in a GetLegendGraphic request for a layer without a style configured
 - Enhanced error processing for obtaining user location
+- Add internationalization support to tinymce editor used in story editor
 - [The next improvement]
 
 #### 8.7.11 - 2024-12-18
