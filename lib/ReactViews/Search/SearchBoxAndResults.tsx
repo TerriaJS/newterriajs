@@ -1,19 +1,25 @@
 import { reaction, runInAction } from "mobx";
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
-import { createRef, Component } from "react";
+import { useEffect, useRef, type FC } from "react";
 import { useTranslation } from "react-i18next";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { addMarker, removeMarker } from "../../Models/LocationMarkerUtils";
 import Box from "../../Styled/Box";
 import { RawButton } from "../../Styled/Button";
 import Icon, { StyledIcon } from "../../Styled/Icon";
 import Spacing from "../../Styled/Spacing";
 import Text from "../../Styled/Text";
-import LocationSearchResults from "../Search/LocationSearchResults";
-import SearchBox from "../Search/SearchBox";
+import { useViewState } from "../Context";
+import LocationSearchResults from "./LocationSearchResults";
+import SearchBox from "./SearchBox";
 
-export function SearchInDataCatalog({ viewState, handleClick }) {
+export function SearchInDataCatalog({
+  handleClick
+}: {
+  handleClick: () => void;
+}) {
+  const viewState = useViewState();
   const locationSearchText = viewState.searchState.locationSearchText;
   const { t } = useTranslation();
   return (
@@ -52,7 +58,7 @@ SearchInDataCatalog.propTypes = {
 
 const PresentationBox = styled(Box).attrs({
   fullWidth: true
-})`
+})<{ highlightBottom: boolean }>`
   ${(props) =>
     props.highlightBottom &&
     `
@@ -67,85 +73,67 @@ const PresentationBox = styled(Box).attrs({
 
 export const LOCATION_SEARCH_INPUT_NAME = "LocationSearchInput";
 
-export class SearchBoxAndResultsRaw extends Component {
-  constructor(props) {
-    super(props);
-    this.locationSearchRef = createRef();
-  }
+interface SearchBoxAndResultsProps {
+  placeholder?: string;
+}
 
-  componentDidMount() {
-    this.props.viewState.updateAppRef(
-      LOCATION_SEARCH_INPUT_NAME,
-      this.locationSearchRef
-    );
-    this.subscribeToProps();
-  }
+export const SearchBoxAndResults: FC<SearchBoxAndResultsProps> = observer(
+  ({ placeholder }) => {
+    const locationSearchRef = useRef(null);
 
-  componentDidUpdate() {
-    this.subscribeToProps();
-  }
+    const viewState = useViewState();
+    const theme = useTheme();
 
-  componentWillUnmount() {
-    this.unsubscribeFromProps();
-  }
+    useEffect(() => {
+      viewState.updateAppRef(LOCATION_SEARCH_INPUT_NAME, locationSearchRef);
 
-  subscribeToProps() {
-    this.unsubscribeFromProps();
+      // TODO(wing): why is this a reaction here and not in viewState itself?
+      // Close the search results when the Now Viewing changes (so that it's visible).
+      const disposeReaction = reaction(
+        () => viewState.terria.workbench.items,
+        () => {
+          viewState.searchState.showLocationSearchResults = false;
+        }
+      );
 
-    // TODO(wing): why is this a reaction here and not in viewState itself?
-    // Close the search results when the Now Viewing changes (so that it's visible).
-    this._nowViewingChangeSubscription = reaction(
-      () => this.props.terria.workbench.items,
-      () => {
-        this.props.viewState.searchState.showLocationSearchResults = false;
+      return disposeReaction;
+    }, [viewState]);
+
+    const toggleShowLocationSearchResults = (bool: boolean) => {
+      runInAction(() => {
+        viewState.searchState.showLocationSearchResults = bool;
+      });
+    };
+
+    const changeSearchText = (newText: string) => {
+      runInAction(() => {
+        viewState.searchState.locationSearchText = newText;
+      });
+
+      if (newText.length === 0) {
+        removeMarker(viewState.terria);
+        runInAction(() => {
+          toggleShowLocationSearchResults(false);
+        });
       }
-    );
-  }
+      if (
+        newText.length > 0 &&
+        !viewState.searchState.showLocationSearchResults
+      ) {
+        runInAction(() => {
+          toggleShowLocationSearchResults(true);
+        });
+      }
+    };
 
-  unsubscribeFromProps() {
-    if (this._nowViewingChangeSubscription) {
-      this._nowViewingChangeSubscription();
-      this._nowViewingChangeSubscription = undefined;
-    }
-  }
+    const search = () => {
+      viewState.searchState.searchLocations();
+    };
 
-  changeSearchText(newText) {
-    runInAction(() => {
-      this.props.viewState.searchState.locationSearchText = newText;
-    });
+    const startLocationSearch = () => {
+      toggleShowLocationSearchResults(true);
+    };
 
-    if (newText.length === 0) {
-      removeMarker(this.props.terria);
-      runInAction(() => {
-        this.toggleShowLocationSearchResults(false);
-      });
-    }
-    if (
-      newText.length > 0 &&
-      !this.props.viewState.searchState.showLocationSearchResults
-    ) {
-      runInAction(() => {
-        this.toggleShowLocationSearchResults(true);
-      });
-    }
-  }
-
-  search() {
-    this.props.viewState.searchState.searchLocations();
-  }
-
-  toggleShowLocationSearchResults(bool) {
-    runInAction(() => {
-      this.props.viewState.searchState.showLocationSearchResults = bool;
-    });
-  }
-
-  startLocationSearch() {
-    this.toggleShowLocationSearchResults(true);
-  }
-
-  render() {
-    const { viewState, placeholder } = this.props;
     const searchState = viewState.searchState;
     const locationSearchText = searchState.locationSearchText;
 
@@ -158,10 +146,10 @@ export class SearchBoxAndResultsRaw extends Component {
         <Box fullWidth>
           <PresentationBox highlightBottom={shouldShowResults}>
             <SearchBox
-              ref={this.locationSearchRef}
-              onSearchTextChanged={this.changeSearchText.bind(this)}
-              onDoSearch={this.search.bind(this)}
-              onFocus={this.startLocationSearch.bind(this)}
+              ref={locationSearchRef}
+              onSearchTextChanged={changeSearchText.bind(this)}
+              onDoSearch={search.bind(this)}
+              onFocus={startLocationSearch.bind(this)}
               searchText={searchState.locationSearchText}
               placeholder={placeholder}
             />
@@ -174,22 +162,22 @@ export class SearchBoxAndResultsRaw extends Component {
               column
               css={`
                 top: 100%;
-                background-color: ${(props) => props.theme.greyLightest};
+                background-color: ${theme.greyLightest};
                 max-height: calc(100vh - 120px);
-                border-radius: 0 0 ${(props) => props.theme.radius40Button}px
-                  ${(props) => props.theme.radius40Button}px;
+                border-radius: 0 0 ${theme.radius40Button}px
+                  ${theme.radius40Button}px;
               `}
             >
               {/* search {searchterm} in data catalog */}
               {/* ~TODO: Put this back once we add a MobX DataCatalogSearch Provider~ */}
               {/* TODO2: Implement a more generic MobX DataCatalogSearch */}
-              {this.props.terria.searchBarModel.showSearchInCatalog &&
+              {viewState.terria.searchBarModel.showSearchInCatalog &&
                 searchState.catalogSearchProvider && (
                   <Box column paddedRatio={2}>
                     <SearchInDataCatalog
                       viewState={viewState}
                       handleClick={() => {
-                        this.toggleShowLocationSearchResults(false);
+                        toggleShowLocationSearchResults(false);
                       }}
                     />
                   </Box>
@@ -202,14 +190,19 @@ export class SearchBoxAndResultsRaw extends Component {
               >
                 {searchState.locationSearchResults.map((search) => (
                   <LocationSearchResults
+                    theme={theme}
                     key={search.searchProvider.uniqueId}
-                    terria={this.props.terria}
-                    viewState={this.props.viewState}
+                    terria={viewState.terria}
+                    viewState={viewState}
                     search={search}
                     locationSearchText={locationSearchText}
                     onLocationClick={(result) => {
-                      addMarker(this.props.terria, result);
-                      result.clickAction();
+                      if (!result.location) return;
+                      addMarker(viewState.terria, {
+                        name: result.name,
+                        location: result.location
+                      });
+                      result.clickAction?.();
                       runInAction(() => {
                         searchState.showLocationSearchResults = false;
                       });
@@ -226,12 +219,8 @@ export class SearchBoxAndResultsRaw extends Component {
       </Text>
     );
   }
-}
+);
 
-SearchBoxAndResultsRaw.propTypes = {
-  terria: PropTypes.object.isRequired,
-  viewState: PropTypes.object.isRequired,
-  placeholder: PropTypes.string.isRequired
-};
+SearchBoxAndResults.displayName = "SearchBoxAndResults";
 
-export default observer(SearchBoxAndResultsRaw);
+export default SearchBoxAndResults;
