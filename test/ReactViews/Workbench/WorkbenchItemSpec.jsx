@@ -13,7 +13,7 @@ describe("WorkbenchItem", function () {
 
   beforeEach(function () {
     terria = new Terria({ baseUrl: "./" });
-    viewState = new ViewState({ terria });
+    viewState = new ViewState({ terria, catalogSearchProvider: undefined });
     item = new CatalogItem(terria);
   });
 
