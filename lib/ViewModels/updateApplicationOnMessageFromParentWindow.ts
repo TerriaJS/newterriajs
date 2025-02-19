@@ -1,20 +1,24 @@
+import isDefined from "../Core/isDefined";
 import { TerriaErrorSeverity } from "../Core/TerriaError";
-import defined from "terriajs-cesium/Source/Core/defined";
+import type Terria from "../Models/Terria";
 
-const updateApplicationOnMessageFromParentWindow = function (terria, window) {
-  var allowOrigin;
+export default function updateApplicationOnMessageFromParentWindow(
+  terria: Terria,
+  window: Window
+) {
+  let allowOrigin: string | undefined;
 
   window.addEventListener(
     "message",
-    async function (event) {
-      var origin = event.origin;
-      if (!defined(origin) && defined(event.originalEvent)) {
+    async function (event: MessageEvent<any>) {
+      let origin = event.origin;
+      if (!isDefined(origin) && isDefined((event as any).originalEvent)) {
         // For Chrome, the origin property is in the event.originalEvent object.
-        origin = event.originalEvent.origin;
+        origin = (event as any).originalEvent.origin;
       }
 
       if (
-        (!defined(allowOrigin) || origin !== allowOrigin) && // allowed origin in url hash parameter
+        (!isDefined(allowOrigin) || origin !== allowOrigin) && // allowed origin in url hash parameter
         event.source !== window.parent && // iframe parent
         event.source !== window.opener
       ) {
@@ -54,6 +58,4 @@ const updateApplicationOnMessageFromParentWindow = function (terria, window) {
   if (window.opener) {
     window.opener.postMessage("ready", "*");
   }
-};
-
-export default updateApplicationOnMessageFromParentWindow;
+}
