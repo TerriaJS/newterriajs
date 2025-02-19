@@ -58,7 +58,7 @@ class BottomDock extends Component<PropsType & MeasureElementProps> {
       >
         <div id="TJS-BottomDockFirstPortal" />
         <ChartDisclaimer terria={terria} viewState={this.props.viewState} />
-        <ChartPanel terria={terria} viewState={this.props.viewState} />
+        <ChartPanel />
         {top && (
           <Timeline
             terria={terria}
