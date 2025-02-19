@@ -1,13 +1,19 @@
 import { observer } from "mobx-react";
-import { runInAction } from "mobx";
-import PropTypes from "prop-types";
-import React from "react";
-import { Trans, withTranslation } from "react-i18next";
+import { makeObservable, runInAction } from "mobx";
+import React, {
+  type ChangeEvent,
+  type ComponentType,
+  type MouseEvent
+} from "react";
+import { TFunction, Trans, withTranslation } from "react-i18next";
 import {
   Category,
   DatatabAction
 } from "../../../../Core/AnalyticEvents/analyticEvents";
-import getDataType from "../../../../Core/getDataType";
+import getDataType, {
+  LocalDataType,
+  RemoteDataType
+} from "../../../../Core/getDataType";
 import TimeVarying from "../../../../ModelMixins/TimeVarying";
 import addUserCatalogMember from "../../../../Models/Catalog/addUserCatalogMember";
 import addUserFiles from "../../../../Models/Catalog/addUserFiles";
@@ -15,6 +21,8 @@ import CatalogMemberFactory from "../../../../Models/Catalog/CatalogMemberFactor
 import createCatalogItemFromFileOrUrl from "../../../../Models/Catalog/createCatalogItemFromFileOrUrl";
 import CommonStrata from "../../../../Models/Definition/CommonStrata";
 import upsertModelFromJson from "../../../../Models/Definition/upsertModelFromJson";
+import Terria from "../../../../Models/Terria";
+import ViewState from "../../../../ReactViewModels/ViewState";
 import Icon from "../../../../Styled/Icon";
 import Dropdown from "../../../Generic/Dropdown";
 import Loader from "../../../Loader";
@@ -24,27 +32,36 @@ import { parseCustomMarkdownToReactWithOptions } from "../../../Custom/parseCust
 import loadJson from "../../../../Core/loadJson";
 import TerriaError from "../../../../Core/TerriaError";
 
+interface AddDataProps {
+  terria: Terria;
+  viewState: ViewState;
+  resetTab: () => void;
+  activeTab: string;
+  // localDataTypes & remoteDataTypes specifies the file types to show in
+  // dropdowns for local and remote data uploads.
+  // These default to the lists defined in getDataType.ts
+  // Some external components use these props to customize the types shown.
+  localDataTypes: LocalDataType[];
+  remoteDataTypes: RemoteDataType[];
+  onFileAddFinished: (e: any) => void;
+  onUrlAddFinished: () => void;
+  t: TFunction;
+}
+
+interface AddDataState {
+  remoteDataTypes: RemoteDataType[];
+  localDataTypes: LocalDataType[];
+  localDataType: LocalDataType;
+  remoteUrl: string;
+  isLoading: boolean;
+}
+
 /**
  * Add data panel in modal window -> My data tab
  */
 @observer
-class AddData extends React.Component {
-  static propTypes = {
-    terria: PropTypes.object,
-    viewState: PropTypes.object,
-    resetTab: PropTypes.func,
-    activeTab: PropTypes.string,
-    // localDataTypes & remoteDataTypes specifies the file types to show in dropdowns for local and remote data uploads.
-    // These default to the lists defined in getDataType.ts
-    // Some external components use these props to customize the types shown.
-    localDataTypes: PropTypes.arrayOf(PropTypes.object),
-    remoteDataTypes: PropTypes.arrayOf(PropTypes.object),
-    onFileAddFinished: PropTypes.func.isRequired,
-    onUrlAddFinished: PropTypes.func.isRequired,
-    t: PropTypes.func.isRequired
-  };
-
-  constructor(props) {
+class AddData extends React.Component<AddDataProps, AddDataState> {
+  constructor(props: AddDataProps) {
     super(props);
 
     const remoteDataTypes =
@@ -67,21 +84,23 @@ class AddData extends React.Component {
       remoteUrl: "", // By default there's no remote url
       isLoading: false
     };
+    makeObservable(this);
   }
 
-  selectLocalOption(option) {
+  selectLocalOption(option: LocalDataType) {
     this.setState({
       localDataType: option
     });
   }
 
-  selectRemoteOption(option) {
+  selectRemoteOption(option: RemoteDataType) {
     runInAction(() => {
       this.props.viewState.remoteDataType = option;
     });
   }
 
-  handleUploadFile(e) {
+  handleUploadFile(e: ChangeEvent<HTMLInputElement>) {
+    if (!e.target.files) return Promise.reject();
     this.setState({
       isLoading: true
     });
@@ -102,7 +121,7 @@ class AddData extends React.Component {
     });
   }
 
-  async handleUrl(e) {
+  async handleUrl(e: MouseEvent<HTMLButtonElement>) {
     const url = this.state.remoteUrl;
     e.preventDefault();
     this.props.terria.analytics?.logEvent(
@@ -149,7 +168,7 @@ class AddData extends React.Component {
         });
     } else {
       try {
-        const newItem = upsertModelFromJson(
+        const newItem: any = upsertModelFromJson(
           CatalogMemberFactory,
           this.props.terria,
           "",
@@ -160,7 +179,7 @@ class AddData extends React.Component {
           message: `An error occurred trying to add data from URL: ${url}`
         });
         newItem.setTrait(CommonStrata.user, "url", url);
-        promise = newItem.loadMetadata().then((result) => {
+        promise = newItem.loadMetadata().then((result: { error: any }) => {
           if (result.error) {
             return Promise.reject(result.error);
           }
@@ -188,7 +207,7 @@ class AddData extends React.Component {
     });
   }
 
-  onRemoteUrlChange(event) {
+  onRemoteUrlChange(event: ChangeEvent<HTMLInputElement>) {
     this.setState({
       remoteUrl: event.target.value
     });
@@ -197,19 +216,21 @@ class AddData extends React.Component {
   renderPanels() {
     const { t } = this.props;
     const dropdownTheme = {
+      // @ts-expect-error FIXME: no Styles.dropdown defined.
       dropdown: Styles.dropdown,
       list: Styles.dropdownList,
+      // @ts-expect-error FIXME: no Styles.dropdownListIsOpen defined.
       isOpen: Styles.dropdownListIsOpen,
       icon: <Icon glyph={Icon.GLYPHS.opened} />
     };
 
-    const dataTypes = this.state.localDataTypes.reduce(function (
-      result,
-      currentDataType
-    ) {
+    const dataTypes: string[] = this.state.localDataTypes.reduce(function (
+      result: string[],
+      currentDataType: { extensions?: string[] }
+    ): string[] {
       if (currentDataType.extensions) {
         return result.concat(
-          currentDataType.extensions.map((extension) => "." + extension)
+          currentDataType.extensions.map((extension: string) => "." + extension)
         );
       } else {
         return result;
@@ -287,11 +308,11 @@ class AddData extends React.Component {
     );
   }
 
-  renderCustomComponent(CustomComponent) {
+  renderCustomComponent(CustomComponent: ComponentType) {
     return <CustomComponent />;
   }
 
-  renderDefaultForWebDataType(t) {
+  renderDefaultForWebDataType(t: TFunction) {
     return (
       <>
         <label className={Styles.label}>
@@ -331,7 +352,7 @@ class AddData extends React.Component {
  * @param extensions - string[]
  * @returns Comma separated string of extensions
  */
-function buildExtensionsList(extensions) {
+function buildExtensionsList(extensions: string[]): string {
   return extensions.map((ext) => `.${ext}`).join(", ");
 }
 

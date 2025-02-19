@@ -1,18 +1,27 @@
-import React from "react";
-import PropTypes from "prop-types";
-import createReactClass from "create-react-class";
+import React, { ChangeEvent } from "react";
+import { makeObservable } from "mobx";
 import classNames from "classnames";
-import { withTranslation } from "react-i18next";
+import { type TFunction, withTranslation } from "react-i18next";
 import Styles from "./file-input.scss";
+
+interface FileInputProps {
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  accept: string;
+  t: TFunction;
+}
+
+interface FileInputState {
+  value: string | undefined;
+  hovered: boolean;
+}
 
 // When uploading a file
 // use an button element to have consistent stylying
-const FileInput = createReactClass({
-  propTypes: {
-    onChange: PropTypes.func,
-    accept: PropTypes.string,
-    t: PropTypes.func.isRequired
-  },
+class FileInput extends React.Component<FileInputProps, FileInputState> {
+  constructor(props: FileInputProps) {
+    super(props);
+    makeObservable(this);
+  }
 
   getInitialState() {
     const { t } = this.props;
@@ -20,16 +29,16 @@ const FileInput = createReactClass({
       value: t("addData.browse"),
       hovered: false
     };
-  },
+  }
 
-  handleChange(e) {
+  handleChange(e: ChangeEvent<HTMLInputElement>) {
     this.setState({
       value: e.target.value.split(/(\\|\/)/g).pop()
     });
     if (this.props.onChange) {
       this.props.onChange(e);
     }
-  },
+  }
 
   render() {
     const { t } = this.props;
@@ -55,6 +64,6 @@ const FileInput = createReactClass({
       </form>
     );
   }
-});
+}
 
 export default withTranslation()(FileInput);

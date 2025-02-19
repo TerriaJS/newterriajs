@@ -1,41 +1,49 @@
 import React from "react";
 import { observer } from "mobx-react";
+import { makeObservable } from "mobx";
 import classNames from "classnames";
 import Icon from "../../../../Styled/Icon";
 import Box from "../../../../Styled/Box";
-import PropTypes from "prop-types";
-import DataPreview from "../../../Preview/DataPreview.jsx";
-import AddData from "./AddData.jsx";
-import { withTranslation, Trans } from "react-i18next";
+import DataPreview from "../../../Preview/DataPreview";
+import AddData from "./AddData";
+import { type TFunction, withTranslation, Trans } from "react-i18next";
 import Styles from "./my-data-tab.scss";
 import DataCatalogMember from "../../../DataCatalog/DataCatalogMember";
+import { LocalDataType, RemoteDataType } from "../../../../Core/getDataType";
+import Terria from "../../../../Models/Terria";
+import ViewState from "../../../../ReactViewModels/ViewState";
+
+interface MyDataTabProps {
+  terria: Terria;
+  viewState: ViewState;
+  onFileAddFinished: (e: any) => void;
+  onUrlAddFinished: () => void;
+  localDataTypes: LocalDataType[];
+  remoteDataTypes: RemoteDataType[];
+  className: string;
+  t: TFunction;
+}
+
+interface MyDataTabState {
+  activeTab: string | null;
+}
 
 // My data tab include Add data section and preview section
 @observer
-class MyDataTab extends React.Component {
-  static propTypes = {
-    terria: PropTypes.object,
-    viewState: PropTypes.object,
-    onFileAddFinished: PropTypes.func.isRequired,
-    onUrlAddFinished: PropTypes.func.isRequired,
-    localDataTypes: PropTypes.arrayOf(PropTypes.object),
-    remoteDataTypes: PropTypes.arrayOf(PropTypes.object),
-    className: PropTypes.string,
-    t: PropTypes.func.isRequired
-  };
-
-  constructor(props) {
+class MyDataTab extends React.Component<MyDataTabProps, MyDataTabState> {
+  constructor(props: MyDataTabProps) {
     super(props);
     this.state = {
       activeTab: null
     };
+    makeObservable(this);
   }
 
   hasUserAddedData() {
     return this.props.terria.catalog.userAddedDataGroup.members.length > 0;
   }
 
-  changeTab(active) {
+  changeTab(active: string) {
     this.setState({
       activeTab: active
     });
@@ -49,7 +57,7 @@ class MyDataTab extends React.Component {
 
   renderTabs() {
     const { t } = this.props;
-    const tabs = [
+    const tabs: { id: keyof typeof Icon.GLYPHS; caption: string }[] = [
       {
         id: "local",
         caption: t("addData.localTitle")
@@ -68,16 +76,17 @@ class MyDataTab extends React.Component {
               onClick={() => this.changeTab(tab.id)}
               title={tab.caption}
               className={classNames(Styles.tabListBtn, {
+                // @ts-expect-error FIXME: No isActive defined in CssExports.
                 [Styles.isActive]: this.state.activeTab === tab.id
               })}
               css={`
-                color: ${(p) => p.theme.colorPrimary};
+                color: ${(p: any) => p.theme.colorPrimary};
                 &:hover,
                 &:focus {
-                  color: ${(p) => p.theme.grey};
+                  color: ${(p: any) => p.theme.grey};
                 }
                 svg {
-                  fill: ${(p) => p.theme.colorPrimary};
+                  fill: ${(p: any) => p.theme.colorPrimary};
                 }
               `}
             >
@@ -141,13 +150,13 @@ class MyDataTab extends React.Component {
                 onClick={() => this.resetTab()}
                 className={Styles.btnBackToMyData}
                 css={`
-                  color: ${(p) => p.theme.colorPrimary};
+                  color: ${(p: any) => p.theme.colorPrimary};
                   &:hover,
                   &:focus {
-                    border: 1px solid ${(p) => p.theme.colorPrimary};
+                    border: 1px solid ${(p: any) => p.theme.colorPrimary};
                   }
                   svg {
-                    fill: ${(p) => p.theme.colorPrimary};
+                    fill: ${(p: any) => p.theme.colorPrimary};
                   }
                 `}
               >

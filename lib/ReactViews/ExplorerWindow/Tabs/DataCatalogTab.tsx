@@ -1,30 +1,31 @@
 import { computed, runInAction, makeObservable } from "mobx";
 import { observer } from "mobx-react";
-import PropTypes from "prop-types";
 import React from "react";
-import { withTranslation } from "react-i18next";
-import { withTheme } from "styled-components";
+import { type TFunction, withTranslation } from "react-i18next";
+import { type DefaultTheme, withTheme } from "styled-components";
 import DataCatalog from "../../DataCatalog/DataCatalog";
 import DataPreview from "../../Preview/DataPreview";
 import SearchBox, { DEBOUNCE_INTERVAL } from "../../Search/SearchBox.jsx";
 import Styles from "./data-catalog-tab.scss";
 import Breadcrumbs from "../../Search/Breadcrumbs";
 import Box from "../../../Styled/Box";
+import Terria from "../../../Models/Terria";
+import ViewState from "../../../ReactViewModels/ViewState";
+
+interface DataCatalogTabProps {
+  terria: Terria;
+  viewState: ViewState;
+  items?: object[];
+  searchPlaceholder?: string;
+  onActionButtonClicked?: (e: any) => void;
+  theme: DefaultTheme;
+  t: TFunction;
+}
 
 // The DataCatalog Tab
 @observer
-class DataCatalogTab extends React.Component {
-  static propTypes = {
-    terria: PropTypes.object,
-    viewState: PropTypes.object,
-    items: PropTypes.array,
-    searchPlaceholder: PropTypes.string,
-    onActionButtonClicked: PropTypes.func,
-    theme: PropTypes.object,
-    t: PropTypes.func.isRequired
-  };
-
-  constructor(props) {
+class DataCatalogTab extends React.Component<DataCatalogTabProps> {
+  constructor(props: DataCatalogTabProps) {
     super(props);
     makeObservable(this);
   }
@@ -35,7 +36,7 @@ class DataCatalogTab extends React.Component {
     return this.props.searchPlaceholder || t("addData.searchPlaceholder");
   }
 
-  changeSearchText(newText) {
+  changeSearchText(newText: string) {
     runInAction(() => {
       this.props.viewState.searchState.catalogSearchText = newText;
     });
@@ -47,7 +48,7 @@ class DataCatalogTab extends React.Component {
 
   render() {
     const terria = this.props.terria;
-    const searchState = this.props.viewState.searchState;
+    const state = this.props.viewState.searchState;
     const previewed = this.props.viewState.previewedItem;
     const showBreadcrumbs = this.props.viewState.breadcrumbsShown;
     return (
@@ -57,21 +58,22 @@ class DataCatalogTab extends React.Component {
             <Box className={Styles.dataExplorer} styledWidth="40%">
               {/* ~TODO: Put this back once we add a MobX DataCatalogSearch Provider~ */}
               {/* TODO2: Implement a more generic MobX DataCatalogSearch */}
-              {searchState.catalogSearchProvider && (
+              {state.catalogSearchProvider ? (
                 <SearchBox
-                  searchText={searchState.catalogSearchText}
-                  onSearchTextChanged={(val) => this.changeSearchText(val)}
+                  searchText={state.catalogSearchText}
+                  onSearchTextChanged={(val: string) =>
+                    this.changeSearchText(val)
+                  }
                   onDoSearch={() => this.search()}
                   placeholder={this.searchPlaceholder}
                   debounceDuration={
-                    terria.catalogReferencesLoaded &&
-                    searchState.catalogSearchProvider
-                      ? searchState.catalogSearchProvider
-                          .debounceDurationOnceLoaded
+                    terria.catalogReferencesLoaded
+                      ? // @ts-expect-error Tsc says type is "Instance".
+                        state.catalogSearchProvider.debounceDurationOnceLoaded
                       : DEBOUNCE_INTERVAL
                   }
                 />
-              )}
+              ) : null}
               <DataCatalog
                 terria={this.props.terria}
                 viewState={this.props.viewState}
