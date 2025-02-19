@@ -195,7 +195,6 @@
     "jsdom": "^17.0.0",
     "jsdom-global": "^3.0.2",
     "karma": "^6.4.3",
-    "karma-browserstack-launcher": "^1.4.0",
     "karma-chrome-launcher": "^2.0.0",
     "karma-coverage-istanbul-reporter": "^2.0.5",
     "karma-detect-browsers": "^2.0.2",

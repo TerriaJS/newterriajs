@@ -110,27 +110,8 @@ gulp.task("copy-cesium-source-assets", function () {
     .pipe(gulp.dest("wwwroot/build/Cesium/build/Assets"));
 });
 
-gulp.task("test-browserstack", function (done) {
-  runKarma("./buildprocess/karma-browserstack.conf.js", done);
-});
-
-gulp.task("test-saucelabs", function (done) {
-  runKarma("./buildprocess/karma-saucelabs.conf.js", done);
-});
-
 gulp.task("test-firefox", function (done) {
   runKarma("./buildprocess/karma-firefox.conf.js", done);
-});
-
-gulp.task("test-travis", function (done) {
-  if (process.env.SAUCE_ACCESS_KEY) {
-    runKarma("./buildprocess/karma-saucelabs.conf.js", done);
-  } else {
-    console.log(
-      "SauceLabs testing is not available for pull requests outside the main repo; using local headless Firefox instead."
-    );
-    runKarma("./buildprocess/karma-firefox.conf.js", done);
-  }
 });
 
 gulp.task("test", function (done) {

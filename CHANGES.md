@@ -29,6 +29,9 @@
 - Move release guide from README.md to RELEASE_GUIDE.md
 - Add `clampToGround` to `KmlCatalogItemTraits` (defaults to `true`) - this is now passed to `KmlDataSource.load`. Terria no longer clamps polygon geometries to terrain manually. All clamping logic is now handled by Cesium.
 - Add `dataSourceUri` to `KmlCatalogItemTraits` - Overrides the url to use for resolving relative links and other KML network features
+- Remove BrowserStack and SauceLabs gulp tasks.
+- Remove `test-travis` gulp task.
+- [The next improvement]
 
 #### 8.7.10 - 2024-11-29
 

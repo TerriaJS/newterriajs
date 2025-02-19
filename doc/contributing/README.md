@@ -20,5 +20,4 @@ We're thrilled to have you as a contributor! This section explains how to set up
 
 ## Special cases
 
-- [Setting up Saucelabs](setting-up-saucelabs.md): Creating a local Saucelabs instance for cross-browser testing.
 - [Using a Custom Version of Cesium](using-a-custom-version-of-cesium.md)

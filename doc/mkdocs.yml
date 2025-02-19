@@ -50,7 +50,6 @@ nav:
       - Development Environment: contributing/development-environment.md
       - Architecture: contributing/architecture.md
       - Using a Custom Version of Cesium: contributing/using-a-custom-version-of-cesium.md
-      - Setting up Saucelabs: contributing/setting-up-saucelabs.md
       - Problems and Solutions: contributing/problems-and-solutions.md
       - New model layer documentation: contributing/model-layer.md
       - Traits in depth: contributing/traits-in-depth.md
