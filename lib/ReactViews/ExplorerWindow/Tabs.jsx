@@ -73,8 +73,6 @@ class Tabs extends Component {
             idInCategory: member.uniqueId,
             panel: (
               <DataCatalogTab
-                terria={this.props.terria}
-                viewState={this.props.viewState}
                 items={member.memberModels || [member]}
                 searchPlaceholder={t("addData.searchPlaceholderWhole")}
               />
@@ -90,8 +88,6 @@ class Tabs extends Component {
           category: "data-catalog",
           panel: (
             <DataCatalogTab
-              terria={this.props.terria}
-              viewState={this.props.viewState}
               items={this.props.terria.catalog.group.memberModels}
               searchPlaceholder={t("addData.searchPlaceholder")}
             />
