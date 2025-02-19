@@ -6,7 +6,6 @@ import CommonStrata from "../../../../lib/Models/Definition/CommonStrata";
 import TerriaFeature from "../../../../lib/Models/Feature/Feature";
 import Terria from "../../../../lib/Models/Terria";
 import ViewState from "../../../../lib/ReactViewModels/ViewState";
-import { SpecChart } from "../../../../lib/ReactViews/Custom/Chart/FeatureInfoPanelChart";
 import { ChartAttributes } from "../../../../lib/ReactViews/Custom/ChartCustomComponent";
 import CsvChartCustomComponent from "../../../../lib/ReactViews/Custom/CsvChartCustomComponent";
 import CustomComponent, {
@@ -64,13 +63,13 @@ describe("FeatureInfoPanelChart", function () {
           `<chart src="test/csv_nongeo/x_height.csv" y-column="plant height"></chart>`,
           context
         );
-        await runLater(() => {}); // yield so that the useEffect in FeatureInfoPanelChart gets a chance to load the chart
-        // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
-        const chart = renderer?.root.findByType(SpecChart)!;
-        expect(chart).toBeDefined();
-        expect(
-          chart.findAllByProps({ children: "Plant Height x x" }).length
-        ).toBeGreaterThan(0);
+        await runLater(() => {});
+
+        // Find elements by their props instead of component type
+        const labels = renderer?.root.findAllByProps({
+          children: "Plant Height x x"
+        });
+        expect(labels?.length).toBeGreaterThan(0);
       });
 
       it("renders nothing if the specified y-column does not exist", async function () {
@@ -78,8 +77,12 @@ describe("FeatureInfoPanelChart", function () {
           `<chart src="test/csv_nongeo/x_height.csv" y-column="foo-does-not-exist"></chart>`,
           context
         );
-        await runLater(() => {}); // yield so that the useEffect in FeatureInfoPanelChart gets a chance to load the chart
-        expect(() => renderer?.root.findByType(SpecChart)).toThrow();
+        await runLater(() => {});
+
+        const noDataText = renderer?.root.findAllByProps({
+          children: "chart.noData"
+        });
+        expect(noDataText?.length).toBeGreaterThan(0);
       });
     });
 
@@ -89,13 +92,12 @@ describe("FeatureInfoPanelChart", function () {
           `<chart src="test/csv_nongeo/x_height.csv"></chart>`,
           context
         );
-        await runLater(() => {}); // yield so that the useEffect in FeatureInfoPanelChart gets a chance to load the chart
-        // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
-        const chart = renderer?.root.findByType(SpecChart)!;
-        expect(chart).toBeDefined();
-        expect(
-          chart.findAllByProps({ children: "Z x x" }).length
-        ).toBeGreaterThan(0);
+        await runLater(() => {});
+
+        const labels = renderer?.root.findAllByProps({
+          children: "Z x x"
+        });
+        expect(labels?.length).toBeGreaterThan(0);
       });
     });
   });
@@ -105,13 +107,12 @@ describe("FeatureInfoPanelChart", function () {
       `<chart src="test/csv_nongeo/x_height.csv" preview-x-label="life-time"></chart>`,
       context
     );
-    await runLater(() => {}); // yield so that the useEffect in FeatureInfoPanelChart gets a chance to load the chart
-    // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
-    const chart = renderer?.root.findByType(SpecChart)!;
-    expect(chart).toBeDefined();
-    expect(
-      chart.findAllByProps({ children: "life-time" }).length
-    ).toBeGreaterThan(0);
+    await runLater(() => {});
+
+    const labels = renderer?.root.findAllByProps({
+      children: "life-time"
+    });
+    expect(labels?.length).toBeGreaterThan(0);
   });
 });
 

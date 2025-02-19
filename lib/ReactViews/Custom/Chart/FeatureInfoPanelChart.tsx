@@ -2,9 +2,8 @@ import { AxisBottom, AxisLeft } from "@visx/axis";
 import { Group } from "@visx/group";
 import { useParentSize } from "@visx/responsive";
 import { scaleLinear, scaleTime } from "@visx/scale";
-import { computed, makeObservable } from "mobx";
 import { observer } from "mobx-react";
-import { FC, Component, useEffect, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import ChartableMixin, { ChartItem } from "../../../ModelMixins/ChartableMixin";
@@ -124,63 +123,52 @@ interface ChartPropsType {
 /**
  * Private Chart component that renders the SVG chart
  */
-@observer
-class Chart extends Component<ChartPropsType> {
-  xAxisHeight = 30;
-  yAxisWidth = 10;
+const Chart: FC<ChartPropsType> = observer(
+  ({ width, height, margin, chartItem, baseColor, xAxisLabel }) => {
+    const xAxisHeight = 30;
+    const yAxisWidth = 10;
 
-  constructor(props: ChartPropsType) {
-    super(props);
-    makeObservable(this);
-  }
+    const plot = useMemo(() => {
+      return {
+        width: width - margin.left - margin.right,
+        height: height - margin.top - margin.bottom - xAxisHeight
+      };
+    }, [width, height, margin]);
 
-  @computed
-  get plot() {
-    const { width, height, margin } = this.props;
-    return {
-      width: width - margin.left - margin.right,
-      height: height - margin.top - margin.bottom - this.xAxisHeight
-    };
-  }
+    const scales = useMemo(() => {
+      const xScaleParams = {
+        domain: chartItem.domain.x,
+        range: [margin.left + yAxisWidth, plot.width]
+      };
+      const yScaleParams = {
+        domain: chartItem.domain.y,
+        range: [plot.height, 0]
+      };
+      return {
+        x:
+          chartItem.xAxis.scale === "linear"
+            ? scaleLinear(xScaleParams)
+            : scaleTime(xScaleParams),
+        y: scaleLinear(yScaleParams)
+      };
+    }, [
+      chartItem.domain.x,
+      chartItem.domain.y,
+      chartItem.xAxis.scale,
+      margin.left,
+      plot.height,
+      plot.width
+    ]);
 
-  @computed
-  get scales() {
-    const chartItem = this.props.chartItem;
-    const xScaleParams = {
-      domain: chartItem.domain.x,
-      range: [this.props.margin.left + this.yAxisWidth, this.plot.width]
-    };
-    const yScaleParams = {
-      domain: chartItem.domain.y,
-      range: [this.plot.height, 0]
-    };
-    return {
-      x:
-        chartItem.xAxis.scale === "linear"
-          ? scaleLinear(xScaleParams)
-          : scaleTime(xScaleParams),
-      y: scaleLinear(yScaleParams)
-    };
-  }
-
-  render() {
-    const { width, height, margin, chartItem, baseColor } = this.props;
-
-    // Make sure points are asc sorted by x value
-    chartItem.points = chartItem.points.sort(
-      (a, b) => this.scales.x(a.x) - this.scales.x(b.x)
-    );
-
-    const id = `featureInfoPanelChart-${chartItem.name}`;
     const textStyle = {
       fill: baseColor,
       fontSize: 10,
-      textAnchor: "middle" as const,
+      textAnchor: "middle",
       fontFamily: "Arial"
     };
 
     const chartLabel =
-      this.props.xAxisLabel ??
+      xAxisLabel ??
       defaultChartLabel({
         xName: chartItem.xAxis.name,
         xUnits: chartItem.xAxis.units,
@@ -188,15 +176,21 @@ class Chart extends Component<ChartPropsType> {
         yUnits: chartItem.units
       });
 
+    useEffect(() => {
+      chartItem.points = chartItem.points.sort(
+        (a, b) => scales.x(a.x) - scales.x(b.x)
+      );
+    });
+
     return (
       <svg width={width} height={height}>
         <Group top={margin.top} left={margin.left}>
           <AxisBottom
-            top={this.plot.height}
+            top={plot.height}
             // .nice() rounds the scale so that the aprox beginning and
             // aprox end labels are shown
             // See: https://stackoverflow.com/questions/21753126/d3-js-starting-and-ending-tick
-            scale={this.scales.x.nice()}
+            scale={scales.x.nice()}
             numTicks={4}
             stroke="#a0a0a0"
             tickStroke="#a0a0a0"
@@ -214,10 +208,15 @@ class Chart extends Component<ChartPropsType> {
             }}
             label={chartLabel}
             labelOffset={3}
-            labelProps={textStyle}
+            labelProps={{
+              fill: baseColor,
+              fontSize: 10,
+              textAnchor: "middle",
+              fontFamily: "Arial"
+            }}
           />
           <AxisLeft
-            scale={this.scales.y}
+            scale={scales.y}
             numTicks={4}
             stroke="none"
             tickStroke="none"
@@ -229,16 +228,18 @@ class Chart extends Component<ChartPropsType> {
             })}
           />
           <LineChart
-            id={id}
+            id={`featureInfoPanelChart-${chartItem.name}`}
             chartItem={chartItem}
-            scales={this.scales}
+            scales={scales}
             color={baseColor}
           />
         </Group>
       </svg>
     );
   }
-}
+);
+
+Chart.displayName = "Chart";
 
 export const ChartStatusText = styled.div<{ width: number; height: number }>`
   display: flex;
@@ -261,8 +262,5 @@ const defaultChartLabel = (opts: {
 
 const withUnits = (name: string, units?: string) =>
   units ? `${name} (${units})` : name;
-
-// export Chart for use in specs
-export const SpecChart = Chart;
 
 export default FeatureInfoPanelChart;
