@@ -113,7 +113,7 @@
     "i18next-browser-languagedetector": "^6.1.4",
     "i18next-http-backend": "^1.4.1",
     "inobounce": "^0.1.2",
-    "interactjs": "1.4.0-alpha.17",
+    "interactjs": "^1.10.27",
     "javascript-natural-sort": "^0.7.1",
     "json5": "^2.1.0",
     "leaflet": "^1.8.0",
