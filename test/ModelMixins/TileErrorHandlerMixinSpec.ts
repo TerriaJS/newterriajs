@@ -165,7 +165,7 @@ describe("TileErrorHandlerMixin", function () {
     it("retries fetching the tile using xhr", async function () {
       try {
         const error = newError(randomIntBetween(500, 599));
-        spyOn(Resource, "fetchImage").and.returnValue(
+        spyOn(Resource, "fetchImage").and.callFake(() =>
           Promise.reject(error.error)
         );
         await onTileLoadError(item, error);
@@ -232,7 +232,7 @@ describe("TileErrorHandlerMixin", function () {
     it("it fails after retrying a maximum of specified number of times", async function () {
       try {
         const error = newError(randomIntBetween(500, 599));
-        spyOn(Resource, "fetchImage").and.returnValue(
+        spyOn(Resource, "fetchImage").and.callFake(() =>
           Promise.reject(error.error)
         );
         await onTileLoadError(item, error);
@@ -267,7 +267,7 @@ describe("TileErrorHandlerMixin", function () {
     it("gives up silently if the item is hidden", async function () {
       try {
         const error = newError(randomIntBetween(500, 599));
-        spyOn(Resource, "fetchImage").and.returnValue(
+        spyOn(Resource, "fetchImage").and.callFake(() =>
           Promise.reject(error.error)
         );
         const result = onTileLoadError(item, error);

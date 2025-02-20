@@ -458,7 +458,7 @@ describe("Terria", function () {
       const beforeRestoreAppState = jasmine
         .createSpy("beforeRestoreAppState")
         // It should also handle errors when calling beforeRestoreAppState
-        .and.returnValue(Promise.reject("some error"));
+        .and.callFake(() => Promise.reject("some error"));
 
       expect(terria.mainViewer.viewerMode).toBe(ViewerMode.Cesium);
       await terria.start({
