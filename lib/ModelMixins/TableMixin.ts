@@ -213,7 +213,7 @@ function TableMixin<T extends AbstractConstructor<BaseType>>(Base: T) {
       return isDefined(this.dataColumnMajor);
     }
 
-    protected async _exportData(): Promise<ExportData | undefined> {
+    protected _exportData(): Promise<ExportData | undefined> {
       if (isDefined(this.dataColumnMajor)) {
         // I am assuming all columns have the same length -> so use first column
         const csvString = this.dataColumnMajor[0]
@@ -228,10 +228,10 @@ function TableMixin<T extends AbstractConstructor<BaseType>>(Base: T) {
           name = `${name}.csv`;
         }
 
-        return {
+        return Promise.resolve({
           name: name,
           file: new Blob([csvString])
-        };
+        });
       }
 
       throw new TerriaError({

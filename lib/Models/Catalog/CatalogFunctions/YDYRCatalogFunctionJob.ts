@@ -229,14 +229,14 @@ export default class YDYRCatalogFunctionJob extends CatalogFunctionJobMixin(
     }
   }
 
-  async downloadResults() {
+  downloadResults() {
     if (!isDefined(this.resultId)) {
-      return [];
+      return Promise.resolve([]);
     }
 
     if (!isDefined(this.parameters!["apiUrl"])) {
       console.log("apiUrl parameter is not defined");
-      return [];
+      return Promise.resolve([]);
     }
 
     const csvResult = new CsvCatalogItem(
@@ -258,6 +258,6 @@ export default class YDYRCatalogFunctionJob extends CatalogFunctionJobMixin(
       csvResult.setTrait(CommonStrata.user, "enableManualRegionMapping", true);
     });
 
-    return [csvResult];
+    return Promise.resolve([csvResult]);
   }
 }

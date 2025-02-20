@@ -77,22 +77,22 @@ export default class CsvCatalogItem
     return super.cacheDuration || "1d";
   }
 
-  protected async _exportData() {
+  protected _exportData() {
     if (isDefined(this._csvFile)) {
-      return {
+      return Promise.resolve({
         name: (this.name || this.uniqueId)!,
         file: this._csvFile
-      };
+      });
     }
     if (isDefined(this.csvString)) {
-      return {
+      return Promise.resolve({
         name: (this.name || this.uniqueId)!,
         file: new Blob([this.csvString])
-      };
+      });
     }
 
     if (isDefined(this.url)) {
-      return this.url;
+      return Promise.resolve(this.url);
     }
 
     throw new TerriaError({

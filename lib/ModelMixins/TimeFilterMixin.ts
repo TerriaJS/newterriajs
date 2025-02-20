@@ -57,7 +57,7 @@ function TimeFilterMixin<T extends AbstractConstructor<BaseType>>(Base: T) {
       // feature once to get the list of times.
       const disposeListener = onBecomeObserved(this, "mapItems", () => {
         runLater(
-          action(async () => {
+          action(() => {
             if (!MappableMixin.isMixedInto(this)) {
               disposeListener();
               return;

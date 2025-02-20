@@ -69,8 +69,8 @@ class GtfsStratum extends LoadableStratum(GtfsCatalogItemTraits) {
     return new GtfsStratum(newModel as GtfsCatalogItem) as this;
   }
 
-  static async load(item: GtfsCatalogItem) {
-    return new GtfsStratum(item);
+  static load(item: GtfsCatalogItem) {
+    return Promise.resolve(new GtfsStratum(item));
   }
 
   @computed

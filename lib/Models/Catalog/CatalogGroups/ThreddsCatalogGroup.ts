@@ -59,10 +59,10 @@ export class ThreddsStratum extends LoadableStratum(ThreddsCatalogGroupTraits) {
     return new ThreddsStratum(model as ThreddsCatalogGroup) as this;
   }
 
-  static async load(
+  static load(
     catalogGroup: ThreddsCatalogGroup
   ): Promise<ThreddsStratum | undefined> {
-    return new ThreddsStratum(catalogGroup);
+    return Promise.resolve(new ThreddsStratum(catalogGroup));
   }
 
   @computed

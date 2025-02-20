@@ -194,8 +194,8 @@ export default class YDYRCatalogFunction extends CatalogFunctionMixin(
     return "YourDataYourRegions";
   }
 
-  protected async createJob(id: string) {
-    return new YDYRCatalogFunctionJob(id, this.terria);
+  protected createJob(id: string) {
+    return Promise.resolve(new YDYRCatalogFunctionJob(id, this.terria));
   }
 
   async forceLoadMetadata() {

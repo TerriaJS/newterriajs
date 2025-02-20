@@ -165,7 +165,7 @@ function CatalogFunctionJobMixin<
      *
      * @return true if job has finished, false otherwise
      */
-    async pollForResults(): Promise<boolean> {
+    pollForResults(): Promise<boolean> {
       throw "pollForResults not implemented";
     }
 

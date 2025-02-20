@@ -369,16 +369,16 @@ function GeoJsonMixin<T extends AbstractConstructor<BaseType>>(Base: T) {
       return isDefined(this.readyData);
     }
 
-    protected async _exportData(): Promise<ExportData | undefined> {
+    protected _exportData(): Promise<ExportData | undefined> {
       if (isDefined(this.readyData)) {
         let name = this.name || this.uniqueId || "data.geojson";
         if (!isJson(name)) {
           name = `${name}.geojson`;
         }
-        return {
+        return Promise.resolve({
           name,
           file: new Blob([JSON.stringify(this.readyData)])
-        };
+        });
       }
 
       throw new TerriaError({
@@ -840,8 +840,8 @@ function GeoJsonMixin<T extends AbstractConstructor<BaseType>>(Base: T) {
 
         // Process picked features to add terriaFeatureData (with rowIds)
         // This is used by tableFeatureInfoContext to add time-series chart
-        processPickedFeatures: async (features) => {
-          if (!currentTimeRows) return features;
+        processPickedFeatures: (features) => {
+          if (!currentTimeRows) return Promise.resolve(features);
           const processedFeatures: ImageryLayerFeatureInfo[] = [];
           features.forEach((f) => {
             const rowId = f.properties?.[FEATURE_ID_PROP];
@@ -865,7 +865,7 @@ function GeoJsonMixin<T extends AbstractConstructor<BaseType>>(Base: T) {
               processedFeatures.push(f);
             }
           });
-          return processedFeatures;
+          return Promise.resolve(processedFeatures);
         }
       });
 
@@ -1378,8 +1378,8 @@ function GeoJsonMixin<T extends AbstractConstructor<BaseType>>(Base: T) {
     /** We don't need to use TableMixin forceLoadTableData
      * We implement `get dataColumnMajor()` instead
      */
-    async forceLoadTableData() {
-      return undefined;
+    forceLoadTableData() {
+      return Promise.resolve(undefined);
     }
 
     @override

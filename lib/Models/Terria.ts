@@ -2134,10 +2134,7 @@ export default class Terria {
     });
   }
 
-  async initCorsProxy(
-    config: ConfigParameters,
-    serverConfig: any
-  ): Promise<void> {
+  initCorsProxy(config: ConfigParameters, serverConfig: any): void {
     if (config.proxyableDomainsUrl) {
       console.warn(i18next.t("models.terria.proxyableDomainsDeprecation"));
     }

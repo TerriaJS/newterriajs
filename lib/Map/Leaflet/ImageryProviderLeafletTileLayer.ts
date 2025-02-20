@@ -392,7 +392,7 @@ export default class ImageryProviderLeafletTileLayer extends L.TileLayer {
     this._previousCredits = nextCredits;
   }
 
-  async getFeaturePickingCoords(
+  getFeaturePickingCoords(
     map: L.Map,
     longitudeRadians: number,
     latitudeRadians: number
@@ -406,11 +406,11 @@ export default class ImageryProviderLeafletTileLayer extends L.TileLayer {
 
     const tilingScheme = this.imageryProvider.tilingScheme;
     const coords = tilingScheme.positionToTileXY(ll, level);
-    return {
+    return Promise.resolve({
       x: coords.x,
       y: coords.y,
       level: level
-    };
+    });
   }
 
   async pickFeatures(
