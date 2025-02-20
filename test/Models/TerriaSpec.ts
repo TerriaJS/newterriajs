@@ -1326,15 +1326,15 @@ describe("Terria", function () {
         loadMapItemsArcGisMap = spyOn(
           ArcGisMapServerCatalogItem.prototype,
           "loadMapItems"
-        ).and.returnValue(Result.none());
+        ).and.returnValue(Promise.resolve(Result.none()));
         loadMapItemsArcGisFeature = spyOn(
           ArcGisFeatureServerCatalogItem.prototype,
           "loadMapItems"
-        ).and.returnValue(Result.none());
+        ).and.returnValue(Promise.resolve(Result.none()));
         loadMapItemsWms = spyOn(
           WebMapServiceCatalogItem.prototype,
           "loadMapItems"
-        ).and.returnValue(Result.none());
+        ).and.returnValue(Promise.resolve(Result.none()));
       });
 
       it("when a workbench item is a simple map server group", async function () {
