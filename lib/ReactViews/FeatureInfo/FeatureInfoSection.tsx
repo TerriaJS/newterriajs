@@ -134,10 +134,12 @@ export class FeatureInfoSection extends React.Component<FeatureInfoProps> {
   }
 
   componentDidUpdate(prevProps: FeatureInfoProps) {
-    this.observableFeature = this.props.feature;
-    this.observablePosition = this.props.position;
-    this.observableCatalogItem = this.props.catalogItem;
-    this.observableViewState = this.props.viewState;
+    runInAction(() => {
+      this.observableFeature = this.props.feature;
+      this.observablePosition = this.props.position;
+      this.observableCatalogItem = this.props.catalogItem;
+      this.observableViewState = this.props.viewState;
+    });
 
     if (prevProps.feature !== this.props.feature) {
       this.setFeatureChangedCounter(this.props.feature);
