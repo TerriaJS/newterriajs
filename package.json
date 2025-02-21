@@ -208,7 +208,7 @@
     "klaw-sync": "^4.0.0",
     "minimist": "^1.2.8",
     "node-notifier": "^10.0.1",
-    "plugin-error": "^1.0.1",
+    "plugin-error": "^2.0.1",
     "prettier": "2.7.1",
     "pretty-quick": "^4.0.0",
     "react-shallow-testutils": "^3.0.0",

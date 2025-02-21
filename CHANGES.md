@@ -2,6 +2,7 @@
 
 #### next release (8.8.1)
 
+- Update to plugin-error 2.0.1
 - [The next improvement]
 
 #### 8.8.0 - 2025-02-18
