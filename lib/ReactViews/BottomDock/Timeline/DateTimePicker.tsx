@@ -7,7 +7,6 @@ import {
   makeObservable
 } from "mobx";
 import { observer } from "mobx-react";
-import moment from "moment";
 import { Component } from "react";
 import { withTranslation, WithTranslation } from "react-i18next";
 import styled from "styled-components";
@@ -418,28 +417,13 @@ class DateTimePicker extends Component<PropsType> {
 
     const dayObject =
       datesObject[this.currentDateIndice.year][this.currentDateIndice.month];
-    if (dayObject.dates.length > 31) {
+    if (dayObject.dates.length > 1) {
       // Create one date object per day, using an arbitrary time. This does it via Object.keys and moment().
-      const days =
-        datesObject[this.currentDateIndice.year][this.currentDateIndice.month]
-          .index;
-      const daysToDisplay = days.map((d) =>
-        moment()
-          .date(d)
-          .month(this.currentDateIndice.month!)
-          .year(this.currentDateIndice.year!)
-      );
+      const daysToDisplay = dayObject.dates;
       const selected = isDefined(this.currentDateIndice.day)
-        ? moment()
-            .date(this.currentDateIndice.day!)
-            .month(this.currentDateIndice.month)
-            .year(this.currentDateIndice.year)
+        ? dayObject[this.currentDateIndice.day].dates[0]
         : null;
-      // Aside: You might think this implementation is clearer - use the first date available on each day.
-      // However it fails because react-datepicker actually requires a moment() object for selected, not a Date object.
-      // const monthObject = this.props.datesObject[this.currentDateIndice.year][this.currentDateIndice.month];
-      // const daysToDisplay = Object.keys(monthObject).map(dayNumber => monthObject[dayNumber][0]);
-      // const selected = isDefined(this.currentDateIndice.day) ? this.props.datesObject[this.currentDateIndice.year][this.currentDateIndice.month][this.currentDateIndice.day][0] : null;
+
       return (
         <div
           css={`
@@ -478,9 +462,9 @@ class DateTimePicker extends Component<PropsType> {
           </div>
           <DatePicker
             inline
-            onChange={(momentDateObj: moment.Moment) =>
+            onChange={(date: Date | null, _event: any) =>
               runInAction(() => {
-                this.currentDateIndice.day = momentDateObj.date();
+                this.currentDateIndice.day = date?.getDate();
               })
             }
             includeDates={daysToDisplay}

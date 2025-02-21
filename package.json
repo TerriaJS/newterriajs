@@ -141,7 +141,7 @@
     "react": "^18.3.1",
     "react-anything-sortable": "^1.5.2",
     "react-color": "^2.19.3",
-    "react-datepicker": "0.53.0",
+    "react-datepicker": "7.6.0",
     "react-dom": "^18.3.1",
     "react-ga4": "^2.1.0",
     "react-i18next": "^11.18.0",
