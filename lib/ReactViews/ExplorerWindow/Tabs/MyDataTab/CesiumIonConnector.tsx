@@ -22,7 +22,7 @@ import Terria from "../../../../Models/Terria";
 interface CesiumIonToken {
   id?: string;
   name?: string;
-  uniqueName?: string; // we populate this one ourselves
+  uniqueName: string; // we populate this one ourselves
   token?: string;
   dateAdded?: string;
   dateModified?: string;
@@ -36,7 +36,7 @@ interface CesiumIonToken {
 interface CesiumIonAsset {
   id?: number;
   name?: string;
-  uniqueName?: string; // we populate this one ourselves
+  uniqueName: string; // we populate this one ourselves
   description?: string;
   type?: string;
   bytes?: number;
@@ -578,7 +578,11 @@ function CesiumIonConnector() {
       viewState.terria.configParameters.cesiumIonAllowSharingAddedAssets;
     const assetToken = allowSharing
       ? selectedToken
-      : { token: loginToken, name: `${userProfile.username}'s login token` };
+      : {
+          token: loginToken,
+          name: `${userProfile.username}'s login token`,
+          uniqueName: `${userProfile.username}'s login token`
+        };
     if (!assetToken) return;
 
     const definition = createCatalogItemDefinitionFromAsset(
