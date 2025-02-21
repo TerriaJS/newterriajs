@@ -50,10 +50,6 @@ const ChartPanel: FC<ChartPanelProps> = observer(({ onHeightChange }) => {
   const chartableCatalogItems = chartView.chartableItems;
   const chartItems = chartView.chartItems.filter((c) => c.showInChartPanel);
 
-  if (chartItems.length === 0) {
-    return null;
-  }
-
   const xAxis = chartView.xAxis!; // Guaranteed by non-empty chartItems with showInChartPanel=true
 
   const isLoading = false;
@@ -81,11 +77,15 @@ const ChartPanel: FC<ChartPanelProps> = observer(({ onHeightChange }) => {
       <Chart
         terria={viewState.terria}
         chartItems={chartItems}
-        xAxis={chartView.xAxis}
+        xAxis={xAxis}
         height={height - 34}
       />
     );
-  }, [chartItems, chartView.xAxis, viewState.terria]);
+  }, [chartItems, xAxis, viewState.terria]);
+
+  if (chartItems.length === 0) {
+    return null;
+  }
 
   return (
     <div className={Styles.holder}>
