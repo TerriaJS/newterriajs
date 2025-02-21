@@ -36,10 +36,12 @@ class MapInteractionWindow extends Component<{
   private disposeMapInteractionObserver?: Lambda;
 
   @observable currentInteractionMode?: MapInteractionMode;
+  @observable.ref observableViewState: ViewState;
 
   constructor(props: { viewState: ViewState }) {
     super(props);
     makeObservable(this);
+    this.observableViewState = props.viewState;
   }
 
   componentWillUnmount() {
@@ -56,14 +58,14 @@ class MapInteractionWindow extends Component<{
   componentDidMount() {
     this.disposeMapInteractionObserver = reaction(
       () =>
-        this.props.viewState.terria.mapInteractionModeStack.length > 0 &&
-        this.props.viewState.terria.mapInteractionModeStack[
-          this.props.viewState.terria.mapInteractionModeStack.length - 1
+        this.observableViewState.terria.mapInteractionModeStack.length > 0 &&
+        this.observableViewState.terria.mapInteractionModeStack[
+          this.observableViewState.terria.mapInteractionModeStack.length - 1
         ],
       () => {
         const mapInteractionMode =
-          this.props.viewState.terria.mapInteractionModeStack[
-            this.props.viewState.terria.mapInteractionModeStack.length - 1
+          this.observableViewState.terria.mapInteractionModeStack[
+            this.observableViewState.terria.mapInteractionModeStack.length - 1
           ];
 
         if (mapInteractionMode !== this.currentInteractionMode) {
@@ -75,6 +77,10 @@ class MapInteractionWindow extends Component<{
         }
       }
     );
+  }
+
+  componentDidUpdate(): void {
+    this.observableViewState = this.props.viewState;
   }
 
   // /* eslint-disable-next-line camelcase */
