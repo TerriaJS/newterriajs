@@ -9,6 +9,9 @@
 // calls, may require in `devDependency` modules locally.
 var gulp = require("gulp");
 var terriajsServerGulpTask = require("./buildprocess/terriajsServerGulpTask");
+const path = require("path");
+const { Server, constants } = require("karma");
+const { parseConfig } = require("karma/lib/config");
 
 gulp.task("build-specs", function (done) {
   var runWebpack = require("./buildprocess/runWebpack.js");
@@ -110,45 +113,50 @@ gulp.task("copy-cesium-source-assets", function () {
     .pipe(gulp.dest("wwwroot/build/Cesium/build/Assets"));
 });
 
-gulp.task("test-browserstack", function (done) {
-  runKarma("./buildprocess/karma-browserstack.conf.js", done);
+gulp.task("test-browserstack", async function (done) {
+  await runKarma("./buildprocess/karma-browserstack.conf.js", done);
 });
 
-gulp.task("test-saucelabs", function (done) {
-  runKarma("./buildprocess/karma-saucelabs.conf.js", done);
+gulp.task("test-saucelabs", async function (done) {
+  await runKarma("./buildprocess/karma-saucelabs.conf.js", done);
 });
 
-gulp.task("test-firefox", function (done) {
-  runKarma("./buildprocess/karma-firefox.conf.js", done);
+gulp.task("test-firefox", async function (done) {
+  await runKarma("./buildprocess/karma-firefox.conf.js", done);
 });
 
-gulp.task("test-travis", function (done) {
+gulp.task("test-travis", async function (done) {
   if (process.env.SAUCE_ACCESS_KEY) {
-    runKarma("./buildprocess/karma-saucelabs.conf.js", done);
+    await runKarma("./buildprocess/karma-saucelabs.conf.js", done);
   } else {
     console.log(
       "SauceLabs testing is not available for pull requests outside the main repo; using local headless Firefox instead."
     );
-    runKarma("./buildprocess/karma-firefox.conf.js", done);
+    await runKarma("./buildprocess/karma-firefox.conf.js", done);
   }
 });
 
-gulp.task("test", function (done) {
-  runKarma("./buildprocess/karma-local.conf.js", done);
+gulp.task("test", async function (done) {
+  await runKarma("./buildprocess/karma-local.conf.js", done);
 });
 
-function runKarma(configFile, done) {
-  const { Server } = require("karma");
-  const path = require("path");
-  const server = new Server(
-    {
-      configFile: path.join(__dirname, configFile)
+async function runKarma(configFile, done) {
+  return parseConfig(
+    path.join(__dirname, configFile),
+    { port: constants.DEFAULT_PORT },
+    { promiseConfig: true, throwErrors: true }
+  ).then(
+    async (config) => {
+      const server = new Server(config, function (e) {
+        return done(e);
+      });
+      await server.start();
     },
-    function (e) {
-      return done(e);
+    (rejectReason) => {
+      console.error(rejectReason);
+      process.exit(1);
     }
   );
-  server.start();
 }
 
 gulp.task("code-attribution", function userAttribution(done) {
