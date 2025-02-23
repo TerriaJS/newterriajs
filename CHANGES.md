@@ -3,6 +3,7 @@
 #### next release (8.8.2)
 
 - Remove unused pmtiles dependency.
+- Remove unused d3-array dependency.
 - [The next improvement]
 
 #### 8.8.1 - 2025-02-27
