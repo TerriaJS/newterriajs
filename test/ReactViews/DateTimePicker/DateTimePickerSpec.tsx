@@ -19,7 +19,6 @@ describe("DateTimePicker1", () => {
           onChange={onChange}
           isOpen
           onClose={onClose}
-          onOpen={() => {}}
         />
       );
 
@@ -40,10 +39,9 @@ describe("DateTimePicker1", () => {
           onChange={onChange}
           isOpen
           onClose={onClose}
-          onOpen={() => {}}
         />
       );
-      screen.debug();
+
       expect(screen.getByText("01/01/2000, 00:00:00")).toBeVisible();
       expect(screen.getByText("01/01/2100, 00:00:00")).toBeVisible();
     });
@@ -63,7 +61,6 @@ describe("DateTimePicker1", () => {
           onChange={onChange}
           isOpen
           onClose={onClose}
-          onOpen={() => {}}
         />
       );
 
@@ -84,7 +81,6 @@ describe("DateTimePicker1", () => {
           onChange={onChange}
           isOpen
           onClose={onClose}
-          onOpen={() => {}}
         />
       );
 
@@ -105,7 +101,6 @@ describe("DateTimePicker1", () => {
           onChange={onChange}
           isOpen
           onClose={onClose}
-          onOpen={() => {}}
         />
       );
 
@@ -124,7 +119,6 @@ describe("DateTimePicker1", () => {
           onChange={onChange}
           isOpen
           onClose={onClose}
-          onOpen={() => {}}
         />
       );
 
@@ -147,12 +141,15 @@ describe("DateTimePicker1", () => {
           onChange={onChange}
           isOpen
           onClose={onClose}
-          onOpen={() => {}}
         />
       );
 
-      expect(screen.getByLabelText("day-7")).toBeVisible();
-      expect(screen.getByLabelText("day-12")).toBeVisible();
+      expect(
+        screen.getByLabelText("Choose Tuesday, February 1st, 2000")
+      ).toBeVisible();
+      expect(
+        screen.getByLabelText("Not available Friday, February 4th, 2000")
+      ).toBeVisible();
       expect(screen.getByText("Feb")).toBeVisible();
     });
 
@@ -169,7 +166,6 @@ describe("DateTimePicker1", () => {
           onChange={onChange}
           isOpen
           onClose={onClose}
-          onOpen={() => {}}
         />
       );
 
@@ -192,7 +188,6 @@ describe("DateTimePicker1", () => {
           onChange={onChange}
           isOpen
           onClose={onClose}
-          onOpen={() => {}}
         />
       );
 
@@ -213,7 +208,6 @@ describe("DateTimePicker1", () => {
           onChange={onChange}
           isOpen
           onClose={onClose}
-          onOpen={() => {}}
         />
       );
 
@@ -236,7 +230,6 @@ describe("DateTimePicker1", () => {
           onChange={onChange}
           isOpen
           onClose={onClose}
-          onOpen={() => {}}
           currentDate={new Date(2000, 1, 1, 1, 1, 0)}
         />
       );
@@ -260,12 +253,13 @@ describe("DateTimePicker1", () => {
           onChange={onChange}
           isOpen
           onClose={onClose}
-          onOpen={() => {}}
           currentDate={new Date(2000, 1, 1, 1, 1, 0)}
         />
       );
 
-      expect(screen.getByLabelText("day-5")).toBeVisible();
+      expect(
+        screen.getByLabelText("Choose Tuesday, February 1st, 2000")
+      ).toBeVisible();
     });
   });
 
@@ -283,7 +277,6 @@ describe("DateTimePicker1", () => {
           onChange={onChange}
           isOpen
           onClose={onClose}
-          onOpen={() => {}}
         />
       );
       await userEvent.click(screen.getByText("04/02/2000, 00:00:00"));
@@ -318,7 +311,6 @@ describe("DateTimePicker1", () => {
           onChange={onChange}
           isOpen
           onClose={onClose}
-          onOpen={() => {}}
         />
       );
 
@@ -328,7 +320,9 @@ describe("DateTimePicker1", () => {
 
       await userEvent.click(screen.getByText("Jan"));
 
-      await userEvent.click(screen.getAllByLabelText("day-1")[0]);
+      await userEvent.click(
+        screen.getByLabelText("Choose Monday, January 1st, 2001")
+      );
 
       await userEvent.click(screen.getByText("0 : 00 - 1 : 00"));
 
@@ -369,42 +363,53 @@ describe("DateTimePicker1", () => {
           onChange={onChange}
           isOpen
           onClose={onClose}
-          onOpen={() => {}}
         />
       );
 
       await userEvent.click(screen.getByText("2000"));
+
       await userEvent.click(screen.getByText("2001"));
+
       await userEvent.click(screen.getByText("Jan"));
-      await userEvent.click(screen.getAllByLabelText("day-1")[0]);
+
+      await userEvent.click(
+        screen.getByLabelText("Choose Monday, January 1st, 2001")
+      );
+
       await userEvent.click(screen.getByText("0 : 00 - 1 : 00"));
 
-      screen.debug();
       await userEvent.click(
         screen.getByRole("button", { name: "dateTime.back" })
       );
+
       expect(screen.getByText("Select an hour on 1 Feb 2001")).toBeVisible();
       expect(screen.getByText("0 : 00 - 1 : 00")).toBeVisible();
 
       await userEvent.click(
         screen.getByRole("button", { name: "dateTime.back" })
       );
-      expect(screen.getAllByLabelText("day-1")[0]).toBeVisible();
+
+      expect(
+        screen.getByLabelText("Choose Monday, January 1st, 2001")
+      ).toBeVisible();
 
       await userEvent.click(
         screen.getByRole("button", { name: "dateTime.back" })
       );
+
       expect(screen.getByText("Jan")).toBeVisible();
 
       await userEvent.click(
         screen.getByRole("button", { name: "dateTime.back" })
       );
+
       expect(screen.getByText("Select a year")).toBeVisible();
       expect(screen.getByText("2001")).toBeVisible();
 
       await userEvent.click(
         screen.getByRole("button", { name: "dateTime.back" })
       );
+
       expect(screen.getByText("Select a century")).toBeVisible();
       expect(screen.getByText("2000")).toBeVisible();
 
@@ -413,7 +418,7 @@ describe("DateTimePicker1", () => {
       ).toBeDisabled();
     });
 
-    it("should go back to month view when back button is click on from time list when it is first upper granular view", async () => {
+    it("should not go back to month view when there is no multiple months data", async () => {
       const dates = new Array(25)
         .fill(0)
         .map((_, i) => new Date(2000, 1, i + 1));
@@ -426,15 +431,55 @@ describe("DateTimePicker1", () => {
           onChange={onChange}
           isOpen
           onClose={onClose}
-          onOpen={() => {}}
         />
       );
 
-      await userEvent.click(screen.getByText("04/02/2000, 00:00:00"));
-      await userEvent.click(
+      expect(
         screen.getByRole("button", { name: "dateTime.back" })
+      ).toBeDisabled();
+    });
+
+    it("should not go back to centuries data when there is no multiple centuries", () => {
+      const dates = new Array(25)
+        .fill(0)
+        .map((_, i) => new Date(2000 + i, 1, 1));
+      const onChange = jasmine.createSpy("onChange");
+      const onClose = jasmine.createSpy("onClose");
+
+      render(
+        <DateTimePicker
+          dates={objectifyDates(dates)}
+          onChange={onChange}
+          isOpen
+          onClose={onClose}
+        />
       );
-      expect(screen.getByText("Feb")).toBeVisible();
+
+      expect(
+        screen.getByRole("button", { name: "dateTime.back" })
+      ).toBeDisabled();
+    });
+
+    it("should not go back to year view data when there is no multiple years data", () => {
+      const dates = new Array(25)
+        .fill(0)
+        .map((_, i) => new Date(2000, 1, i - 5));
+      const onChange = jasmine.createSpy("onChange");
+      const onClose = jasmine.createSpy("onClose");
+
+      render(
+        <DateTimePicker
+          dates={objectifyDates(dates)}
+          onChange={onChange}
+          isOpen
+          onClose={onClose}
+        />
+      );
+
+      expect(screen.getByText("Jan")).toBeVisible();
+      expect(
+        screen.getByRole("button", { name: "dateTime.back" })
+      ).toBeDisabled();
     });
   });
 });

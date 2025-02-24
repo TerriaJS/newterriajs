@@ -170,9 +170,8 @@ class DatePicker extends React.Component<PropsType> {
             currentDate={this.currentDate}
             dates={this.props.item.objectifiedDates}
             onChange={this.changeCurrentDate}
-            openDirection="none"
+            openDirection="down"
             isOpen={this.isOpen}
-            onOpen={() => this.setIsOpen(true)}
             onClose={() => this.setIsOpen(false)}
           />
         </div>

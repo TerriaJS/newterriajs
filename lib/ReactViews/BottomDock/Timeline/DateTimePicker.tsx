@@ -1,115 +1,24 @@
-import {
-  action,
-  IReactionDisposer,
-  observable,
-  reaction,
-  runInAction,
-  makeObservable
-} from "mobx";
-import { observer } from "mobx-react";
-import { Component } from "react";
-import { withTranslation, WithTranslation } from "react-i18next";
+import { runInAction } from "mobx";
+import { observer, useLocalObservable } from "mobx-react";
+import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import isDefined from "../../../Core/isDefined";
 import {
   ObjectifiedDates,
-  ObjectifiedYears
+  ObjectifiedYears,
+  type ObjectifiedDays,
+  type ObjectifiedHours,
+  type ObjectifiedMonths
 } from "../../../ModelMixins/DiscretelyTimeVaryingMixin";
 import Button, { RawButton } from "../../../Styled/Button";
-import { scrollBars } from "../../../Styled/mixins";
-import Spacing from "../../../Styled/Spacing";
 import Icon from "../../../Styled/Icon";
-import { formatDateTime } from "./DateFormats";
-import dateFormat from "dateformat";
-import DatePicker from "react-datepicker";
-
-function daysInMonth(month: number, year: number) {
-  const n = new Date(year, month, 0).getDate();
-  return (Array.apply as any)(null, { length: n }).map(
-    Number.call,
-    Number
-  ) as number[];
-}
-
-const monthNames = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec"
-];
-
-const GridItem = styled.span<{ active: boolean }>`
-  background: ${(p) => p.theme.overlay};
-  ${(p) =>
-    p.active &&
-    `
-    & {
-      background: ${p.theme.colorPrimary};
-    }
-    opacity: 0.9;
-   `}
-`;
-
-const GridRowInner = styled.span<{ marginRight: string }>`
-  display: table-row;
-  padding: 3px;
-  border-radius: 3px;
-
-  span {
-    display: inline-block;
-    height: 10px;
-    width: 2px;
-    margin-top: 1px;
-    margin-right: ${(p) => p.marginRight}px;
-  }
-`;
-
-const Grid = styled.div`
-  display: block;
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-  color: ${(p: any) => p.theme.textLight};
-  padding: 0px 5px;
-  border-radius: 3px;
-  margin-top: -20px;
-`;
-
-const GridHeading = styled.div`
-  text-align: center;
-  color: ${(p: any) => p.theme.textLight};
-  font-size: 12px;
-  margin-bottom: 10px;
-`;
-
-export const GridRow = styled.div`
-  :hover {
-    background: ${(p) => p.theme.overlay};
-    cursor: pointer;
-  }
-`;
-
-const GridLabel = styled.span`
-  float: left;
-  display: inline-block;
-  width: 35px;
-  font-size: 10px;
-  padding-left: 3px;
-`;
-
-const GridBody = styled.div`
-  height: calc(100% - 30px);
-  overflow: auto;
-  ${scrollBars()}
-`;
+import { CenturyView } from "./DatePicker/CenturyView";
+import { DayView } from "./DatePicker/DayView";
+import { HourView } from "./DatePicker/HourView";
+import { MonthView } from "./DatePicker/MonthView";
+import { TimeListView } from "./DatePicker/TimeListView";
+import { YearView } from "./DatePicker/YearView";
 
 const BackButton = styled(RawButton)`
   display: inline-block;
@@ -139,582 +48,392 @@ export const DateButton = styled(Button).attrs({
   border-radius: 4px;
 `;
 
-interface PropsType extends WithTranslation {
+interface PropsType {
   dates: ObjectifiedDates;
   currentDate?: Date; // JS Date object - must be an element of props.dates, or null/undefined.
   onChange: (date: Date) => void;
   openDirection?: string;
   isOpen: boolean;
-  onOpen: () => void;
   onClose: () => void;
   dateFormat?: string;
 }
 
-type Granularity = "century" | "year" | "month" | "day" | "time" | "hour";
+enum GranularityEnum {
+  century,
+  year,
+  month,
+  day,
+  hour,
+  minutes
+}
 
-@observer
-class DateTimePicker extends Component<PropsType> {
-  public static defaultProps = {
-    openDirection: "down"
+type DateTimeView =
+  | "time"
+  | "century"
+  | "year"
+  | "month"
+  | "day"
+  | "hour"
+  | "minutes";
+
+interface DateTimePickerStore {
+  century?: number;
+  year?: number;
+  month?: number;
+  day?: number;
+  hour?: number;
+  selectedDate?: Date;
+
+  // Computed values
+  get currentView(): {
+    view: DateTimeView;
+    dates:
+      | ObjectifiedDates
+      | ObjectifiedYears
+      | ObjectifiedMonths
+      | ObjectifiedDays
+      | ObjectifiedHours
+      | Date[];
   };
+  get granularity(): GranularityEnum;
+  get canGoBack(): boolean;
 
-  @observable
-  currentDateIndice: {
-    century?: number;
-    year?: number;
-    month?: number;
-    day?: number;
-    time?: Date;
-    hour?: number;
-    granularity: Granularity;
-  } = { granularity: "century" };
+  // Actions
+  setDate(date: Date | undefined): void;
+  clearSelection(): void;
+  goBack(): void;
+  selectCentury(century: number): void;
+  selectYear(year: number): void;
+  selectMonth(month: number): void;
+  selectDay(day: number | undefined): void;
+  selectHour(hour: number): void;
+}
 
-  private currentDateAutorunDisposer: IReactionDisposer | undefined;
+const DateTimePicker: React.FC<PropsType> = ({
+  dates,
+  currentDate,
+  onChange,
+  openDirection = "down",
+  isOpen,
+  onClose,
+  dateFormat
+}) => {
+  const { t } = useTranslation();
 
-  constructor(props: PropsType) {
-    super(props);
-    makeObservable(this);
-  }
-
-  UNSAFE_componentWillMount() {
-    const datesObject = this.props.dates;
+  const store = useLocalObservable<DateTimePickerStore>(() => {
     let defaultCentury: number | undefined;
     let defaultYear: number | undefined;
     let defaultMonth: number | undefined;
     let defaultDay: number | undefined;
-    let defaultGranularity: Granularity = "century";
+    let defaultGranularity: GranularityEnum = GranularityEnum.century;
 
-    if (datesObject.index.length === 1) {
-      // only one century
-      const soleCentury = datesObject.index[0];
-      const dataFromThisCentury = datesObject[soleCentury];
-      defaultCentury = soleCentury;
+    if (dates) {
+      if (dates.index.length === 1) {
+        // only one century
+        const soleCentury = dates.index[0];
+        const dataFromThisCentury = dates[soleCentury];
+        defaultCentury = soleCentury;
+        defaultGranularity = GranularityEnum.year;
 
-      if (dataFromThisCentury.index.length === 1) {
-        // only one year, check if this year has only one month
-        const soleYear = dataFromThisCentury.index[0];
-        const dataFromThisYear = dataFromThisCentury[soleYear];
-        defaultYear = soleYear;
-        defaultGranularity = "year";
+        if (dataFromThisCentury.index.length === 1) {
+          // only one year, check if this year has only one month
+          const soleYear = dataFromThisCentury.index[0];
+          const dataFromThisYear = dataFromThisCentury[soleYear];
+          defaultYear = soleYear;
+          defaultGranularity = GranularityEnum.month;
 
-        if (dataFromThisYear.index.length === 1) {
-          // only one month data from this one year, need to check day then
-          const soleMonth = dataFromThisYear.index[0];
-          const dataFromThisMonth = dataFromThisYear[soleMonth];
-          defaultMonth = soleMonth;
-          defaultGranularity = "month";
+          if (dataFromThisYear.index.length === 1) {
+            // only one month data from this one year, need to check day then
+            const soleMonth = dataFromThisYear.index[0];
+            const dataFromThisMonth = dataFromThisYear[soleMonth];
+            defaultMonth = soleMonth;
+            defaultGranularity = GranularityEnum.day;
 
-          if (dataFromThisMonth.index.length === 1) {
-            // only one day has data
-            defaultDay = dataFromThisMonth.index[0];
+            if (dataFromThisMonth.index.length === 1) {
+              // only one day has data
+              defaultDay = dataFromThisMonth.index[0];
+              defaultGranularity = GranularityEnum.hour;
+            }
           }
         }
       }
     }
-    this.currentDateIndice = {
+    return {
       century: defaultCentury,
       year: defaultYear,
       month: defaultMonth,
       day: defaultDay,
-      granularity: defaultGranularity
-    };
+      hour: undefined as number | undefined,
+      time: undefined as Date | undefined,
+      get currentView(): DateTimePickerStore["currentView"] {
+        const { century, year, month, day, hour } = this;
 
-    window.addEventListener("click", this.closePickerEventHandler);
-
-    // Update currentDateIndice when currentDate changes
-    this.currentDateAutorunDisposer = reaction(
-      () => this.props.currentDate,
-      () => {
-        // The current date must be one of the available item.dates, or null/undefined.
-        const currentDate = this.props.currentDate;
-        if (isDefined(currentDate)) {
-          Object.assign(this.currentDateIndice, {
-            day: isDefined(this.currentDateIndice.day)
-              ? currentDate.getDate()
-              : undefined,
-            month: isDefined(this.currentDateIndice.month)
-              ? currentDate.getMonth()
-              : undefined,
-            year: isDefined(this.currentDateIndice.year)
-              ? currentDate.getFullYear()
-              : undefined,
-            century: isDefined(this.currentDateIndice.century)
-              ? Math.floor(currentDate.getFullYear() / 100)
-              : undefined,
-            time: currentDate
-          });
+        if (!isDefined(century)) {
+          return dates.dates.length >= 12
+            ? { view: "century", dates }
+            : { view: "time", dates: dates.dates };
         }
+
+        const centuryData = dates[century];
+        if (!isDefined(year)) {
+          return centuryData.dates.length > 12
+            ? { view: "year", dates: centuryData }
+            : { view: "time", dates: centuryData.dates };
+        }
+
+        const yearData = centuryData[year];
+        if (!isDefined(month)) {
+          return yearData.dates.length > 12
+            ? { view: "month", dates: yearData }
+            : { view: "time", dates: yearData.dates };
+        }
+
+        const monthData = yearData[month];
+        if (!isDefined(day)) {
+          return monthData.dates.length > 31
+            ? { view: "day", dates: monthData }
+            : { view: "time", dates: monthData.dates };
+        }
+
+        const dayData = monthData[day];
+        if (!isDefined(hour)) {
+          return dayData.dates.length > 24
+            ? { view: "hour", dates: dayData }
+            : { view: "time", dates: dayData.dates };
+        }
+
+        return {
+          view: "time",
+          dates: dayData[hour]
+        };
       },
-      { fireImmediately: true }
-    );
-  }
 
-  componentWillUnmount() {
-    if (this.currentDateAutorunDisposer) {
-      this.currentDateAutorunDisposer();
+      get granularity() {
+        if (!isDefined(this.century)) return GranularityEnum.century;
+        if (!isDefined(this.year)) return GranularityEnum.year;
+        if (!isDefined(this.month)) return GranularityEnum.month;
+        if (!isDefined(this.day)) return GranularityEnum.day;
+        if (!isDefined(this.hour)) return GranularityEnum.hour;
+        return GranularityEnum.minutes;
+      },
+
+      get canGoBack() {
+        return this.granularity > defaultGranularity;
+      },
+
+      goBack() {
+        if (this.selectedDate) {
+          if (!isDefined(this.month)) {
+            this.year = undefined;
+            this.day = undefined;
+          }
+          if (!isDefined(this.hour)) {
+            this.day = undefined;
+          }
+          if (!isDefined(this.day)) {
+            this.month = undefined;
+          }
+          this.hour = undefined;
+          this.selectedDate = undefined;
+        } else if (isDefined(this.hour)) this.hour = undefined;
+        else if (isDefined(this.day)) this.day = undefined;
+        else if (isDefined(this.month)) this.month = undefined;
+        else if (isDefined(this.year)) this.year = undefined;
+        else if (isDefined(this.century)) this.century = undefined;
+        this.selectedDate = undefined;
+      },
+
+      clearSelection() {
+        this.century = undefined;
+        this.year = undefined;
+        this.month = undefined;
+        this.day = undefined;
+        this.hour = undefined;
+        this.selectedDate = undefined;
+      },
+
+      setDate(date: Date | undefined) {
+        if (!date) {
+          this.clearSelection();
+          return;
+        }
+
+        this.selectedDate = date;
+      },
+
+      selectCentury(century: number) {
+        this.century = century;
+        this.year = undefined;
+        this.month = undefined;
+        this.day = undefined;
+        this.hour = undefined;
+        this.selectedDate = undefined;
+      },
+
+      selectYear(year: number) {
+        this.year = year;
+        this.month = undefined;
+        this.day = undefined;
+        this.hour = undefined;
+        this.selectedDate = undefined;
+      },
+
+      selectMonth(month: number) {
+        this.month = month;
+        this.day = undefined;
+        this.hour = undefined;
+        this.selectedDate = undefined;
+      },
+
+      selectDay(day: number | undefined) {
+        this.day = day;
+        this.hour = undefined;
+        this.selectedDate = undefined;
+      },
+
+      selectHour(hour: number) {
+        this.hour = hour;
+        this.selectedDate = undefined;
+      }
+    };
+  });
+
+  useEffect(() => {
+    window.addEventListener("click", onClose);
+    return () => {
+      window.removeEventListener("click", onClose);
+    };
+  }, [onClose]);
+
+  useEffect(() => {
+    if (isDefined(currentDate)) {
+      runInAction(() => {
+        store.day = isDefined(store.day) ? currentDate.getDate() : undefined;
+        store.month = isDefined(store.month)
+          ? currentDate.getMonth()
+          : undefined;
+        store.year = isDefined(store.year)
+          ? currentDate.getFullYear()
+          : undefined;
+        store.century = isDefined(store.century)
+          ? Math.floor(currentDate.getFullYear() / 100)
+          : undefined;
+        store.selectedDate = currentDate;
+      });
     }
-    window.removeEventListener("click", this.closePickerEventHandler);
-  }
+  }, [currentDate, store]);
 
-  @action.bound
-  closePickerEventHandler() {
-    this.closePicker();
-  }
+  if (!dates || !isOpen) return null;
 
-  closePicker(newTime?: Date) {
-    if (newTime !== undefined) {
-      runInAction(() => (this.currentDateIndice.time = newTime));
-    }
+  return (
+    <div
+      css={`
+        color: ${(p: any) => p.theme.textLight};
+        display: table-cell;
+        width: 30px;
+        height: 30px;
+      `}
+      onClick={(event) => {
+        event.stopPropagation();
+      }}
+    >
+      <div
+        css={`
+          background: ${(p: any) => p.theme.dark};
+          width: 260px;
+          height: 300px;
+          border: 1px solid ${(p: any) => p.theme.grey};
+          border-radius: 5px;
+          padding: 5px;
+          position: relative;
+          top: -170px;
+          left: 0;
+          z-index: 100;
 
-    if (this.props.onClose) {
-      this.props.onClose();
-    }
-  }
-
-  renderCenturyGrid(datesObject: ObjectifiedDates) {
-    const centuries = datesObject.index;
-    if (datesObject.dates && datesObject.dates.length >= 12) {
-      return (
-        <Grid>
-          <GridHeading>Select a century</GridHeading>
-          {centuries.map((c) => (
-            <DateButton
-              key={c}
-              css={`
-                display: inline-block;
-                width: 40%;
-              `}
-              onClick={() =>
-                runInAction(() => (this.currentDateIndice.century = c))
-              }
-            >
-              {c}00
-            </DateButton>
-          ))}
-        </Grid>
-      );
-    } else {
-      return this.renderList(datesObject.dates);
-    }
-  }
-
-  renderYearGrid(datesObject: ObjectifiedYears) {
-    if (datesObject.dates && datesObject.dates.length > 12) {
-      const years = datesObject.index;
-      const monthOfYear = (Array.apply as any)(null, { length: 12 }).map(
-        Number.call,
-        Number
-      ) as number[];
-      return (
-        <Grid>
-          <GridHeading>Select a year</GridHeading>
-          <GridBody>
-            {years.map((y) => (
-              <GridRow
-                key={y}
-                onClick={() =>
-                  runInAction(() => {
-                    this.currentDateIndice.year = y;
-                    this.currentDateIndice.month = undefined;
-                    this.currentDateIndice.day = undefined;
-                    this.currentDateIndice.time = undefined;
-                  })
-                }
-              >
-                <GridLabel>{y}</GridLabel>
-                <GridRowInner marginRight="11">
-                  {monthOfYear.map((m) => (
-                    <GridItem
-                      // className={datesObject[y][m] ? Styles.activeGrid : ""}
-                      active={isDefined(datesObject[y][m])}
-                      key={m}
-                    />
-                  ))}
-                </GridRowInner>
-              </GridRow>
-            ))}
-          </GridBody>
-        </Grid>
-      );
-    } else {
-      return this.renderList(datesObject.dates);
-    }
-  }
-
-  renderMonthGrid(datesObject: ObjectifiedYears) {
-    const year = this.currentDateIndice.year;
-    if (!isDefined(year)) {
-      return null;
-    }
-    if (datesObject[year].dates && datesObject[year].dates.length > 12) {
-      return (
-        <Grid>
-          <GridHeading>
-            <BackButton
-              title={this.props.t("dateTime.back")}
-              onClick={() => {
-                runInAction(() => {
-                  this.currentDateIndice.year = undefined;
-                  this.currentDateIndice.month = undefined;
-                  this.currentDateIndice.day = undefined;
-                  this.currentDateIndice.time = undefined;
-                });
-              }}
-            >
-              {year}
-            </BackButton>
-          </GridHeading>
-          <GridBody>
-            {monthNames.map((m, i) => (
-              <GridRow
-                css={`
-                  ${!isDefined(datesObject[year][i])
-                    ? `:hover {
-                  background: transparent;
-                  cursor: default;
-                }`
-                    : ""}
-                `}
-                key={m}
-                onClick={() =>
-                  isDefined(datesObject[year][i]) &&
-                  runInAction(() => {
-                    this.currentDateIndice.month = i;
-                    this.currentDateIndice.day = undefined;
-                    this.currentDateIndice.time = undefined;
-                  })
-                }
-              >
-                <GridLabel>{m}</GridLabel>
-                <GridRowInner marginRight="3">
-                  {daysInMonth(i + 1, year).map((d) => (
-                    <GridItem
-                      active={
-                        isDefined(datesObject[year][i]) &&
-                        isDefined(datesObject[year][i][d + 1])
-                      }
-                      key={d}
-                    />
-                  ))}
-                </GridRowInner>
-              </GridRow>
-            ))}
-          </GridBody>
-        </Grid>
-      );
-    } else {
-      return this.renderList(datesObject[year].dates);
-    }
-  }
-
-  renderDayView(datesObject: ObjectifiedYears) {
-    if (
-      !isDefined(this.currentDateIndice.year) ||
-      !isDefined(this.currentDateIndice.month)
-    ) {
-      return null;
-    }
-
-    const dayObject =
-      datesObject[this.currentDateIndice.year][this.currentDateIndice.month];
-    if (dayObject.dates.length > 1) {
-      // Create one date object per day, using an arbitrary time. This does it via Object.keys and moment().
-      const daysToDisplay = dayObject.dates;
-      const selected = isDefined(this.currentDateIndice.day)
-        ? dayObject[this.currentDateIndice.day].dates[0]
-        : null;
-
-      return (
+          ${openDirection === "down"
+            ? `
+          top: 40px;
+          left: -190px;
+        `
+            : ""}
+        `}
+        className={"scrollbars"}
+      >
         <div
           css={`
-            text-align: center;
-            margin-top: -10px;
+            padding-bottom: 5px;
+            padding-right: 5px;
           `}
         >
-          <div>
-            <BackButton
-              title={this.props.t("dateTime.back")}
-              onClick={() =>
-                runInAction(() => {
-                  this.currentDateIndice.year = undefined;
-                  this.currentDateIndice.month = undefined;
-                  this.currentDateIndice.day = undefined;
-                  this.currentDateIndice.time = undefined;
-                })
-              }
-            >
-              {this.currentDateIndice.year}
-            </BackButton>
-            &nbsp;
-            <BackButton
-              title={this.props.t("dateTime.back")}
-              onClick={() =>
-                runInAction(() => {
-                  this.currentDateIndice.month = undefined;
-                  this.currentDateIndice.day = undefined;
-                  this.currentDateIndice.time = undefined;
-                })
-              }
-            >
-              {monthNames[this.currentDateIndice.month]}
-            </BackButton>
-            <Spacing bottom={1} />
-          </div>
-          <DatePicker
-            inline
-            onChange={(date: Date | null, _event: any) =>
-              runInAction(() => {
-                this.currentDateIndice.day = date?.getDate();
-              })
-            }
-            includeDates={daysToDisplay}
-            selected={selected}
+          <BackButton
+            title={t("dateTime.back")}
+            disabled={!store.canGoBack}
+            type="button"
+            onClick={store.goBack}
+          >
+            <Icon glyph={Icon.GLYPHS.left} />
+          </BackButton>
+        </div>
+
+        {(store.currentView.view === "time" ||
+          store.currentView.view === "minutes") && (
+          <TimeListView
+            items={store.currentView.dates as Date[]}
+            dateFormatString={dateFormat}
+            onTimeSelected={(time) => {
+              store.setDate(time);
+              onChange(time);
+              onClose();
+            }}
           />
-        </div>
-      );
-    } else {
-      return this.renderList(
-        datesObject[this.currentDateIndice.year][this.currentDateIndice.month]
-          .dates
-      );
-    }
-  }
+        )}
+        {store.currentView.view === "century" && (
+          <CenturyView
+            datesObject={store.currentView.dates as ObjectifiedDates}
+            onSelectCentury={store.selectCentury}
+          />
+        )}
+        {store.currentView.view === "year" && (
+          <YearView
+            datesObject={store.currentView.dates as ObjectifiedYears}
+            onSelectYear={store.selectYear}
+          />
+        )}
+        {store.currentView.view === "month" && (
+          <MonthView
+            year={store.year!}
+            datesObject={store.currentView.dates as ObjectifiedMonths}
+            onSelectMonth={store.selectMonth}
+            onBack={store.goBack}
+          />
+        )}
+        {store.currentView.view === "day" && (
+          <DayView
+            year={store.year!}
+            month={store.month!}
+            datesObject={store.currentView.dates as ObjectifiedDays}
+            selectedDay={store.day}
+            onSelectDay={(date) => store.selectDay(date?.getDate())}
+            onBackToYear={() => {
+              store.selectYear(store.year!);
+            }}
+            onBackToMonth={() => {
+              store.selectMonth(store.month!);
+            }}
+          />
+        )}
+        {store.currentView.view === "hour" && (
+          <HourView
+            year={store.year!}
+            month={store.month!}
+            day={store.day!}
+            datesObject={store.currentView.dates as ObjectifiedHours}
+            onSelectHour={store.selectHour}
+          />
+        )}
+      </div>
+    </div>
+  );
+};
 
-  renderList(items: Date[]) {
-    if (isDefined(items)) {
-      return (
-        <Grid>
-          <GridHeading>Select a time</GridHeading>
-          <GridBody>
-            {items.map((item) => (
-              <DateButton
-                key={formatDateTime(item)}
-                onClick={() => {
-                  this.closePicker(item);
-                  this.props.onChange(item);
-                }}
-              >
-                {isDefined(this.props.dateFormat)
-                  ? dateFormat(item, this.props.dateFormat)
-                  : formatDateTime(item)}
-              </DateButton>
-            ))}
-          </GridBody>
-        </Grid>
-      );
-    }
-  }
-
-  renderHourView(datesObject: ObjectifiedYears) {
-    if (
-      !isDefined(this.currentDateIndice.year) ||
-      !isDefined(this.currentDateIndice.month) ||
-      !isDefined(this.currentDateIndice.day)
-    ) {
-      return null;
-    }
-    const timeOptions = datesObject[this.currentDateIndice.year][
-      this.currentDateIndice.month
-    ][this.currentDateIndice.day].dates.map((m) => ({
-      value: m,
-      label: formatDateTime(m)
-    }));
-
-    if (timeOptions.length > 24) {
-      return (
-        <Grid>
-          <GridHeading>
-            {`Select an hour on ${this.currentDateIndice.day} ${
-              monthNames[this.currentDateIndice.month + 1]
-            } ${this.currentDateIndice.year}`}{" "}
-          </GridHeading>
-          <GridBody>
-            {datesObject[this.currentDateIndice.year][
-              this.currentDateIndice.month
-            ][this.currentDateIndice.day].index.map((item) => (
-              <DateButton
-                key={item}
-                onClick={() =>
-                  runInAction(() => {
-                    this.currentDateIndice.hour = item;
-                  })
-                }
-              >
-                <span>
-                  {item} : 00 - {item + 1} : 00
-                </span>{" "}
-                <span>
-                  (
-                  {
-                    datesObject[this.currentDateIndice.year!][
-                      this.currentDateIndice.month!
-                    ][this.currentDateIndice.day!][item].length
-                  }{" "}
-                  options)
-                </span>
-              </DateButton>
-            ))}
-          </GridBody>
-        </Grid>
-      );
-    } else {
-      return this.renderList(
-        datesObject[this.currentDateIndice.year][this.currentDateIndice.month][
-          this.currentDateIndice.day
-        ].dates
-      );
-    }
-  }
-
-  renderMinutesView(datesObject: ObjectifiedYears) {
-    if (
-      !isDefined(this.currentDateIndice.year) ||
-      !isDefined(this.currentDateIndice.month) ||
-      !isDefined(this.currentDateIndice.day) ||
-      !isDefined(this.currentDateIndice.hour)
-    ) {
-      return null;
-    }
-    const options =
-      datesObject[this.currentDateIndice.year][this.currentDateIndice.month][
-        this.currentDateIndice.day
-      ][this.currentDateIndice.hour];
-    return this.renderList(options);
-  }
-
-  @action
-  goBack() {
-    if (isDefined(this.currentDateIndice.time)) {
-      if (!isDefined(this.currentDateIndice.month)) {
-        this.currentDateIndice.year = undefined;
-        this.currentDateIndice.day = undefined;
-      }
-
-      if (!isDefined(this.currentDateIndice.hour)) {
-        this.currentDateIndice.day = undefined;
-      }
-
-      if (!isDefined(this.currentDateIndice.day)) {
-        this.currentDateIndice.month = undefined;
-      }
-
-      this.currentDateIndice.hour = undefined;
-      this.currentDateIndice.time = undefined;
-    } else if (isDefined(this.currentDateIndice.hour)) {
-      this.currentDateIndice.hour = undefined;
-    } else if (isDefined(this.currentDateIndice.day)) {
-      this.currentDateIndice.day = undefined;
-    } else if (isDefined(this.currentDateIndice.month)) {
-      this.currentDateIndice.month = undefined;
-    } else if (isDefined(this.currentDateIndice.year)) {
-      this.currentDateIndice.year = undefined;
-    } else if (isDefined(this.currentDateIndice.century)) {
-      this.currentDateIndice.century = undefined;
-    }
-  }
-
-  toggleDatePicker() {
-    if (!this.props.isOpen) {
-      this.props.onOpen();
-    } else {
-      this.props.onClose();
-    }
-  }
-
-  render() {
-    if (this.props.dates) {
-      const datesObject = this.props.dates;
-      return (
-        <div
-          css={`
-            color: ${(p: any) => p.theme.textLight};
-            display: table-cell;
-            width: 30px;
-            height: 30px;
-          `}
-          onClick={(event) => {
-            event.stopPropagation();
-          }}
-        >
-          {this.props.isOpen && (
-            <div
-              css={`
-                background: ${(p: any) => p.theme.dark};
-                width: 260px;
-                height: 300px;
-                border: 1px solid ${(p: any) => p.theme.grey};
-                border-radius: 5px;
-                padding: 5px;
-                position: relative;
-                top: -170px;
-                left: 0;
-                z-index: 100;
-
-                ${this.props.openDirection === "down"
-                  ? `
-                  top: 40px;
-                  left: -190px;
-                `
-                  : ""}
-              `}
-              className={"scrollbars"}
-            >
-              <BackButton
-                title={this.props.t("dateTime.back")}
-                css={`
-                  padding-bottom: 5px;
-                  padding-right: 5px;
-                `}
-                disabled={
-                  !isDefined(
-                    this.currentDateIndice[this.currentDateIndice.granularity]
-                  )
-                }
-                type="button"
-                onClick={() => this.goBack()}
-              >
-                <Icon glyph={Icon.GLYPHS.left} />
-              </BackButton>
-              {!isDefined(this.currentDateIndice.century) &&
-                this.renderCenturyGrid(datesObject)}
-              {isDefined(this.currentDateIndice.century) &&
-                !isDefined(this.currentDateIndice.year) &&
-                this.renderYearGrid(
-                  datesObject[this.currentDateIndice.century!]
-                )}
-              {isDefined(this.currentDateIndice.year) &&
-                !isDefined(this.currentDateIndice.month) &&
-                this.renderMonthGrid(
-                  datesObject[this.currentDateIndice.century!]
-                )}
-              {isDefined(this.currentDateIndice.year) &&
-                isDefined(this.currentDateIndice.month) &&
-                !isDefined(this.currentDateIndice.day) &&
-                this.renderDayView(
-                  datesObject[this.currentDateIndice.century!]
-                )}
-              {isDefined(this.currentDateIndice.year) &&
-                isDefined(this.currentDateIndice.month) &&
-                isDefined(this.currentDateIndice.day) &&
-                !isDefined(this.currentDateIndice.hour) &&
-                this.renderHourView(
-                  datesObject[this.currentDateIndice.century!]
-                )}
-              {isDefined(this.currentDateIndice.year) &&
-                isDefined(this.currentDateIndice.month) &&
-                isDefined(this.currentDateIndice.day) &&
-                isDefined(this.currentDateIndice.hour) &&
-                this.renderMinutesView(
-                  datesObject[this.currentDateIndice.century!]
-                )}
-            </div>
-          )}
-        </div>
-      );
-    } else {
-      return null;
-    }
-  }
-}
-
-export default withTranslation()(DateTimePicker);
+export default observer(DateTimePicker);
