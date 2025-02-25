@@ -131,7 +131,12 @@ export default class WebMapTileServiceCapabilities {
     createTransformer((url: string) => {
       return Promise.resolve(loadXML(url)).then(function (capabilitiesXml) {
         const json = xml2json(capabilitiesXml);
-        if (!capabilitiesXml || !defined(json.ServiceIdentification)) {
+        if (
+          !capabilitiesXml ||
+          !json ||
+          typeof json === "string" ||
+          !defined(json.ServiceIdentification)
+        ) {
           throw networkRequestError({
             title: i18next.t(
               "models.webMapTileServiceCatalogGroup.invalidCapabilitiesTitle"
@@ -145,7 +150,10 @@ export default class WebMapTileServiceCapabilities {
           });
         }
 
-        return new WebMapTileServiceCapabilities(capabilitiesXml, json);
+        return new WebMapTileServiceCapabilities(
+          capabilitiesXml,
+          json as CapabilitiesJson
+        );
       });
     });
 

@@ -205,8 +205,9 @@ class CswStratum extends LoadableStratum(CswCatalogGroupTraits) {
         ) {
           throw `Invalid XML response`;
         }
-
-        domainResponse = xml2json(xml) as GetDomainResponseType;
+        const json = xml2json(xml);
+        if (!json || typeof json === "string") throw `Invalid XML response`;
+        domainResponse = json as unknown as GetDomainResponseType;
       } catch (error) {
         console.log(error);
         throw networkRequestError({
@@ -283,13 +284,16 @@ class CswStratum extends LoadableStratum(CswCatalogGroupTraits) {
         });
       }
 
-      const json = xml2json(xml) as GetRecordsResponse;
-
-      if (json.Exception) {
+      const jsonOut = xml2json(xml);
+      if (!jsonOut || typeof jsonOut === "string" || jsonOut.Exception) {
         let errorMessage = i18next.t("models.csw.unknownError");
-        if (json.Exception.ExceptionText) {
+        if (
+          jsonOut &&
+          typeof jsonOut !== "string" &&
+          jsonOut.Exception?.ExceptionText
+        ) {
           errorMessage = i18next.t("models.csw.exceptionMessage", {
-            exceptionText: json.Exception.ExceptionText
+            exceptionText: jsonOut.Exception.ExceptionText
           });
         }
         throw new TerriaError({
@@ -298,6 +302,7 @@ class CswStratum extends LoadableStratum(CswCatalogGroupTraits) {
           message: errorMessage
         });
       }
+      const json = jsonOut as unknown as GetRecordsResponse;
 
       records.push(...(json?.SearchResults?.Record ?? []));
 

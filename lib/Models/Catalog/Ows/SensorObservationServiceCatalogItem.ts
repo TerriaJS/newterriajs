@@ -662,11 +662,11 @@ async function loadSoapBody(
   }
 
   const json = xml2json(responseXml);
-  if (json.Exception) {
+  if (!json || typeof json === "string" || json.Exception) {
     let errorMessage = i18next.t(
       "models.sensorObservationService.unknownError"
     );
-    if (json.Exception.ExceptionText) {
+    if (json && typeof json !== "string" && json.Exception?.ExceptionText) {
       errorMessage = i18next.t(
         "models.sensorObservationService.exceptionMessage",
         { exceptionText: json.Exception.ExceptionText }

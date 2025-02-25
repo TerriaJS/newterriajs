@@ -232,13 +232,19 @@ export default class WebProcessingServiceCatalogFunctionJob extends XmlRequestMi
     // Check if finished
     if (this.checkStatus(json)) {
       // set result
-      runInAction(() => this.setTrait(CommonStrata.user, "wpsResponse", json));
+      runInAction(() =>
+        this.setTrait(CommonStrata.user, "wpsResponse", json as JsonObject)
+      );
       return true;
     }
 
     // If not finished, set response URL for polling
     runInAction(() =>
-      this.setTrait(CommonStrata.user, "wpsResponseUrl", json.statusLocation)
+      this.setTrait(
+        CommonStrata.user,
+        "wpsResponseUrl",
+        (json as unknown as JsonObject).statusLocation as string | undefined
+      )
     );
 
     return false;
@@ -249,7 +255,7 @@ export default class WebProcessingServiceCatalogFunctionJob extends XmlRequestMi
    */
   @action
   checkStatus(json: any) {
-    const status = json.Status;
+    const status = json && typeof json !== "string" ? json.Status : undefined;
     if (!isDefined(status)) {
       throw new TerriaError({
         sender: this,
@@ -296,7 +302,13 @@ export default class WebProcessingServiceCatalogFunctionJob extends XmlRequestMi
       const url = proxyCatalogItemUrl(this, this.wpsResponseUrl, "0d");
       const wpsResponse = xml2json(await this.getXml(url));
       runInAction(() => {
-        this.setTrait(CommonStrata.user, "wpsResponse", wpsResponse);
+        this.setTrait(
+          CommonStrata.user,
+          "wpsResponse",
+          !wpsResponse || typeof wpsResponse === "string"
+            ? undefined
+            : wpsResponse
+        );
       });
     }
 
