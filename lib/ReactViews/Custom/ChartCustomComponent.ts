@@ -153,11 +153,12 @@ export default abstract class ChartCustomComponent<
   abstract get name(): string;
 
   shouldProcessNode(_context: ProcessNodeContext, node: DomElement): boolean {
-    return (
+    const a =
       this.isChart(node) ||
       this.isFirstColumnOfChartRow(node) ||
-      this.isSecondColumnOfChartRow(node)
-    );
+      this.isSecondColumnOfChartRow(node);
+    console.log(a);
+    return a;
   }
 
   processNode(

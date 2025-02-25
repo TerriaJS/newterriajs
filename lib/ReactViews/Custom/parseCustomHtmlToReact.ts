@@ -15,13 +15,13 @@ import CustomComponent, {
   ProcessNodeContext
 } from "./CustomComponent";
 import { ExternalLinkIcon, ExternalLinkWithWarning } from "./ExternalLink";
-import HtmlToReact from "html-to-react";
+import { Parser, ProcessNodeDefinitions } from "html-to-react";
 import utils from "html-to-react/lib/utils";
 
-const htmlToReactParser = new HtmlToReact.Parser({
+const htmlToReactParser = Parser({
   decodeEntities: true
 });
-const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
+const processNodeDefinitions = ProcessNodeDefinitions();
 
 const isValidNode = function () {
   return true;
