@@ -125,10 +125,7 @@ class MobileMenu extends Component {
             </div>
           ))}
           <div onClick={() => this.hideMenu()}>
-            <SettingPanel
-              terria={this.props.terria}
-              viewState={this.props.viewState}
-            />
+            <SettingPanel />
           </div>
           <div onClick={() => this.hideMenu()}>
             <SharePanel

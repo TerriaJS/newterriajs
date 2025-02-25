@@ -66,7 +66,7 @@ const MenuBar = observer((props) => {
       <section className={classNames(Styles.flex)}>
         <ul className={classNames(Styles.menu)}>
           <li className={Styles.menuItem}>
-            <SettingPanel terria={terria} viewState={viewState} />
+            <SettingPanel />
           </li>
           <li className={Styles.menuItem}>
             <HelpButton viewState={viewState} />
