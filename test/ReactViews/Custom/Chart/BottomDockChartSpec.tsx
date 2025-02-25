@@ -1,17 +1,26 @@
-import TestRenderer, { act, ReactTestRenderer } from "react-test-renderer";
+import { act, ReactTestRenderer } from "react-test-renderer";
 import { ChartItem } from "../../../../lib/ModelMixins/ChartableMixin";
 import Terria from "../../../../lib/Models/Terria";
-import BottomDockChart from "../../../../lib/ReactViews/Custom/Chart/BottomDockChart";
-import PointOnMap from "../../../../lib/ReactViews/Custom/Chart/PointOnMap";
+import ViewState from "../../../../lib/ReactViewModels/ViewState";
+import { BottomDockChart } from "../../../../lib/ReactViews/Custom/Chart/BottomDockChart";
+import { PointOnMap } from "../../../../lib/ReactViews/Custom/Chart/PointOnMap";
+import { createWithContexts } from "../../withContext";
+import timeout from "../../../../lib/Core/timeout";
+import GeoJsonCatalogItem from "../../../../lib/Models/Catalog/CatalogItems/GeoJsonCatalogItem";
 
 describe("BottomDockChart", function () {
   let terria: Terria;
+  let viewState: ViewState;
   let testRenderer: ReactTestRenderer;
   let chartItems: ChartItem[];
 
   beforeEach(function () {
     terria = new Terria({
       baseUrl: "./"
+    });
+    viewState = new ViewState({
+      terria,
+      catalogSearchProvider: undefined
     });
     chartItems = [
       {
@@ -51,19 +60,23 @@ describe("BottomDockChart", function () {
     ];
   });
 
-  it("renders all points on map for active chart items", function () {
+  it("renders all points on map for active chart items", async function () {
     act(() => {
-      testRenderer = TestRenderer.create(
+      testRenderer = createWithContexts(
+        viewState,
         <BottomDockChart
-          terria={terria}
+          height={100}
           initialHeight={100}
           initialWidth={100}
-          xAxis={{ scale: "time" }}
+          xAxis={{ scale: "time" } as never}
           chartItems={chartItems}
         />
       );
     });
-    const pointsOnMap = testRenderer.root.findAllByType(PointOnMap);
+
+    const pointsOnMap = terria.overlays.items.filter(
+      (item) => item instanceof GeoJsonCatalogItem
+    );
     expect(pointsOnMap.length).toBe(2);
   });
 });

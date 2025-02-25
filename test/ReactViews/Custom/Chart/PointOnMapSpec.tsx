@@ -1,24 +1,32 @@
 import { act } from "react-dom/test-utils";
-import TestRenderer, { ReactTestRenderer } from "react-test-renderer";
+import { ReactTestRenderer } from "react-test-renderer";
 import GeoJsonCatalogItem from "../../../../lib/Models/Catalog/CatalogItems/GeoJsonCatalogItem";
 import Terria from "../../../../lib/Models/Terria";
+import ViewState from "../../../../lib/ReactViewModels/ViewState";
 import PointOnMap from "../../../../lib/ReactViews/Custom/Chart/PointOnMap";
+import { createWithContexts } from "../../withContext";
+import timeout from "../../../../lib/Core/timeout";
 
 describe("PointOnMap", function () {
   let terria: Terria;
+  let viewState: ViewState;
   let testRenderer: ReactTestRenderer;
 
   beforeEach(function () {
     terria = new Terria({
       baseUrl: "./"
     });
+    viewState = new ViewState({
+      terria,
+      catalogSearchProvider: undefined
+    });
   });
 
   it("adds the point as an overlay on mount", async function () {
     act(() => {
-      testRenderer = TestRenderer.create(
+      testRenderer = createWithContexts(
+        viewState,
         <PointOnMap
-          terria={terria}
           color="red"
           point={{ latitude: -37.814, longitude: 144.96332 }}
         />
@@ -37,11 +45,11 @@ describe("PointOnMap", function () {
     }
   });
 
-  it("it removes the point from overlay on umount", function () {
+  it("it removes the point from overlay on umount", async function () {
     act(() => {
-      testRenderer = TestRenderer.create(
+      testRenderer = createWithContexts(
+        viewState,
         <PointOnMap
-          terria={terria}
           color="red"
           point={{ latitude: -37.814, longitude: 144.96332 }}
         />
@@ -49,6 +57,8 @@ describe("PointOnMap", function () {
     });
     expect(terria.overlays.items.length).toBe(1);
     testRenderer.unmount();
+
+    await timeout(1);
     expect(terria.overlays.items.length).toBe(0);
   });
 });
