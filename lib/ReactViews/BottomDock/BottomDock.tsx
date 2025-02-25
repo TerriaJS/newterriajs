@@ -57,6 +57,7 @@ class BottomDock extends React.Component<PropsType & MeasureElementProps> {
           z-index: 10;
           bottom: 0;
           right: 0;
+          position: relative;
         `}
       >
         <div id="TJS-BottomDockFirstPortal" />
