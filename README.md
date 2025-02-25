@@ -6,16 +6,6 @@
 
 TerriaJS is a library for building rich, web-based geospatial data explorers, used to drive [National Map](https://nationalmap.gov.au), [Digital Earth Australia Map](https://maps.dea.ga.gov.au/), [NSW Spatial Digital Twin](https://nsw.digitaltwin.terria.io/) and [NEII Viewer](https://neii.gov.au/viewer/) (and many others). It uses [Cesium](https://cesiumjs.org) and WebGL for a full 3D globe in the browser with no plugins. It gracefully falls back to 2D with [Leaflet](https://leafletjs.com/) on systems that can't run Cesium. It can handle catalogs of tens of thousands of layers, with dozens of geospatial file and web service types supported. It is almost entirely JavaScript in the browser, meaning it can even be deployed as a static website, making it simple and cheap to host.
 
----
-
-**We have just released a brand new version of Terria &mdash; verson 8!**
-
-We've put together a list of things we've removed from version 8 and some steps to help you migrate to the new version in our [migration guide](https://docs.terria.io/guide/contributing/migration-guide/)
-
-**Not ready to move to version 8 yet? You can find terriajs version 7 here:** https://github.com/TerriaJS/terriajs/tree/terriajs7
-
----
-
 ### Features
 
 - Nested catalog of layers which can be independently enabled to create mashups of many layers.
