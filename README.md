@@ -1,6 +1,8 @@
 # TerriaJS
 
-[![Build Status](https://github.com/TerriaJS/terriajs/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/TerriaJS/terriajs/actions/workflows/ci.yml) [![Docs](https://img.shields.io/badge/docs-online-blue.svg)](https://docs.terria.io/)
+[![Build Status](https://github.com/TerriaJS/terriajs/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/TerriaJS/terriajs/actions/workflows/ci.yml)
+[![NPM Version](https://img.shields.io/npm/v/terriajs)](https://www.npmjs.com/package/terriajs)
+[![Docs](https://img.shields.io/badge/docs-online-blue.svg)](https://docs.terria.io/)
 
 ![Terria logo](terria-logo.png "Terria logo")
 
