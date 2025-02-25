@@ -1,4 +1,4 @@
-import { ReactNode, FC } from "react";
+import { forwardRef, ReactNode } from "react";
 import styled from "styled-components";
 
 export type ToastProps = {
@@ -8,9 +8,12 @@ export type ToastProps = {
 /**
  * A toast component that positions its children bottom center of the map
  */
-const Toast: FC<React.PropsWithChildren<ToastProps>> = ({ children }) => {
-  return <Container>{children}</Container>;
-};
+const Toast = forwardRef<HTMLDivElement, ToastProps>(
+  ({ children }, forwardRef) => {
+    return <Container ref={forwardRef}>{children}</Container>;
+  }
+);
+Toast.displayName = "Toast";
 
 const Container = styled.div`
   position: fixed;

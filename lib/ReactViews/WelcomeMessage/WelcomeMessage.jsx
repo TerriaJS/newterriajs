@@ -1,7 +1,7 @@
 import { runInAction } from "mobx";
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
-import { Component, useState } from "react";
+import { Component, useState, useRef } from "react";
 import { Trans, useTranslation, withTranslation } from "react-i18next";
 import styled, { withTheme } from "styled-components";
 import Box from "../../Styled/Box";
@@ -95,6 +95,8 @@ export const WelcomeMessagePure = (props) => {
   const [shouldExploreData, setShouldExploreData] = useState(false);
   const [shouldOpenHelp, setShouldOpenHelp] = useState(false);
   const [shouldOpenSearch, setShouldOpenSearch] = useState(false);
+  const modalRef = useRef(null);
+  const welcomeMessageRef = useRef(null);
   // const {
   //   WelcomeMessagePrimaryBtnClick,
   //   WelcomeMessageSecondaryBtnClick
@@ -118,6 +120,7 @@ export const WelcomeMessagePure = (props) => {
     <FadeIn
       isVisible={showWelcomeMessage}
       onEnter={() => setWelcomeVisible(true)}
+      nodeRef={modalRef}
       transitionProps={{
         onExiting: () => setWelcomeVisible(false),
         onExited: () => {
@@ -178,8 +181,9 @@ export const WelcomeMessagePure = (props) => {
             }
             videoName={WELCOME_MESSAGE_VIDEO}
           />
-          <SlideUpFadeIn isVisible={welcomeVisible}>
+          <SlideUpFadeIn isVisible={welcomeVisible} nodeRef={welcomeMessageRef}>
             <Box
+              ref={welcomeMessageRef}
               styledWidth={"667px"}
               styledMinHeight={"504px"}
               displayInlineBlock
