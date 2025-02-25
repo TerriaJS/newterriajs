@@ -1,7 +1,7 @@
 import * as geoJsonMerge from "@mapbox/geojson-merge";
 import i18next from "i18next";
 import { computed, makeObservable } from "mobx";
-import * as shp from "shpjs";
+import { parseZip } from "shpjs";
 import isDefined from "../../../Core/isDefined";
 import JsonValue, { isJsonObject, JsonArray } from "../../../Core/Json";
 import loadBlob, { isZip } from "../../../Core/loadBlob";
@@ -86,7 +86,7 @@ class ShapefileCatalogItem
 async function parseShapefile(blob: Blob): Promise<FeatureCollectionWithCrs> {
   let json: any;
   const asAb = await blob.arrayBuffer();
-  json = await shp.parseZip(asAb);
+  json = await parseZip(asAb);
   if (isJsonArrayOrDeepArrayOfObjects(json)) {
     // There were multiple shapefiles in this zip file. Merge them.
     json = geoJsonMerge.merge(json);
