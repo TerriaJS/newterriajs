@@ -1,7 +1,7 @@
 import { observer } from "mobx-react";
 import React, { FC } from "react";
 import { useTranslation } from "react-i18next";
-import styled, { useTheme } from "styled-components";
+import styled from "styled-components";
 import defined from "terriajs-cesium/Source/Core/defined";
 import type Cesium3DTilesCatalogItem from "../../../Models/Catalog/CatalogItems/Cesium3DTilesCatalogItem";
 import ViewerMode from "../../../Models/ViewerMode";
@@ -32,7 +32,6 @@ const shouldShowPlayStoryButton = (viewState: ViewState) =>
 
 const BottomLeftBar: FC = observer(() => {
   const { t } = useTranslation();
-  const theme = useTheme();
   const viewState = useViewState();
 
   const screenDataAttributions =
@@ -53,7 +52,7 @@ const BottomLeftBar: FC = observer(() => {
       );
 
   return (
-    <Box theme={theme} padded>
+    <Box padded>
       {shouldShowPlayStoryButton(viewState) ? (
         <Box paddedHorizontally={2}>
           <MapIconButton

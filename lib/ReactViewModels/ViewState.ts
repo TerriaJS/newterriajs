@@ -285,7 +285,9 @@ export default class ViewState {
       // Ensure workbench is shown
       this.setIsMapFullScreen(false);
       setTimeout(() => {
-        this.showTour = bool;
+        runInAction(() => {
+          this.showTour = bool;
+        });
       }, animationDuration || 1);
     } else {
       this.showTour = bool;

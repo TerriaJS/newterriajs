@@ -7,7 +7,7 @@ import Tabs from "./Tabs";
 import Text from "../../Styled/Text";
 import Box from "../../Styled/Box";
 import { useTheme } from "styled-components";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 export const ExplorerWindowElementName = "AddData";
 
@@ -31,6 +31,8 @@ export default observer<React.FC>(function ExplorerWindow() {
     !viewState.useSmallScreenInterface &&
     !viewState.hideMapUi &&
     viewState.explorerPanelIsVisible;
+
+  const { t } = useTranslation();
 
   return (
     <ModalPopup
