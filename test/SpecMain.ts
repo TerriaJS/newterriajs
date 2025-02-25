@@ -4,6 +4,7 @@ import "jasmine-ajax";
 import { configure, spy } from "mobx";
 import i18next from "i18next";
 import registerCatalogMembers from "../lib/Models/Catalog/registerCatalogMembers";
+import JasmineDOM from "@testing-library/jasmine-dom";
 
 configure({
   enforceActions: "always",
@@ -24,6 +25,7 @@ spy((event) => {
 });
 
 beforeAll(async function () {
+  jasmine.addMatchers(JasmineDOM);
   await i18next.init({
     lng: "cimode",
     debug: false,

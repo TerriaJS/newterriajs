@@ -24,7 +24,7 @@
       "../../../node_modules/",
       "../../../node_modules/@types/"
     ],
-    "types": ["terriajs-cesium"]
+    "types": ["terriajs-cesium", "@testing-library/jasmine-dom"]
   },
   "include": [
     "./lib/**/*",

@@ -444,7 +444,7 @@ export type ObjectifiedHours = DatesObject<Date[]>;
  * @return {Object} Returns an object whose keys are years, whose values are objects whose keys are months (0=Jan),
  *   whose values are objects whose keys are days, whose values are arrays of all the datetimes on that day.
  */
-function objectifyDates(dates: Date[]): ObjectifiedDates {
+export function objectifyDates(dates: Date[]): ObjectifiedDates {
   const result: ObjectifiedDates = { index: [], dates };
 
   for (let i = 0; i < dates.length; i++) {
