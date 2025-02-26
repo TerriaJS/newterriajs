@@ -33,6 +33,7 @@ import Styles from "./guide.scss";
 // // import knockout from "terriajs-cesium/Source/ThirdParty/knockout";
 
 import Spacing from "../../Styled/Spacing";
+// eslint-disable-next-line no-redeclare
 import Text from "../../Styled/Text";
 import { useTranslation } from "react-i18next";
 import Button from "../../Styled/Button";

@@ -19,6 +19,7 @@ GyroscopeGuidance.propTypes = {
   onClose: PropTypes.func.isRequired
 };
 
+// eslint-disable-next-line no-redeclare
 const Text = styled(TextSpan).attrs({
   textAlignLeft: true,
   noFontSize: true

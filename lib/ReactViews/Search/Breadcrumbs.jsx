@@ -5,6 +5,7 @@ import { withTranslation } from "react-i18next";
 import { withTheme } from "styled-components";
 import Box from "../../Styled/Box";
 import { getParentGroups } from "../../Core/getPath";
+// eslint-disable-next-line no-redeclare
 import Text, { TextSpan } from "../../Styled/Text";
 import Icon, { StyledIcon } from "../../Styled/Icon";
 import Spacing from "../../Styled/Spacing";

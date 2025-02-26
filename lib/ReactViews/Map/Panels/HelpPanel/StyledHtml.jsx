@@ -4,6 +4,7 @@ import React from "react";
 import { withTranslation } from "react-i18next";
 import { withTheme } from "styled-components";
 import Spacing from "../../../../Styled/Spacing";
+// eslint-disable-next-line no-redeclare
 import Text from "../../../../Styled/Text";
 import Box from "../../../../Styled/Box";
 import styled from "styled-components";

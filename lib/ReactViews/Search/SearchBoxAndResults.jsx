@@ -9,6 +9,7 @@ import Box from "../../Styled/Box";
 import { RawButton } from "../../Styled/Button";
 import Icon, { StyledIcon } from "../../Styled/Icon";
 import Spacing from "../../Styled/Spacing";
+// eslint-disable-next-line no-redeclare
 import Text from "../../Styled/Text";
 import LocationSearchResults from "../Search/LocationSearchResults";
 import SearchBox from "../Search/SearchBox";

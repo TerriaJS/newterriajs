@@ -18,6 +18,7 @@ import { useTheme, withTheme } from "styled-components";
 import Box from "../../Styled/Box";
 import Button from "../../Styled/Button";
 import Spacing from "../../Styled/Spacing";
+// eslint-disable-next-line no-redeclare
 import Text from "../../Styled/Text";
 import { parseCustomMarkdownToReactWithOptions } from "../Custom/parseCustomMarkdownToReact";
 import Caret from "../Generic/Caret";

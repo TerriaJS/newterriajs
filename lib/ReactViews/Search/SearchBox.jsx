@@ -6,6 +6,7 @@ import styled, { withTheme } from "styled-components";
 import Box, { BoxSpan } from "../../Styled/Box";
 import { RawButton } from "../../Styled/Button";
 import Icon, { StyledIcon } from "../../Styled/Icon";
+// eslint-disable-next-line no-redeclare
 import Text from "../../Styled/Text";
 
 const SearchInput = styled.input`

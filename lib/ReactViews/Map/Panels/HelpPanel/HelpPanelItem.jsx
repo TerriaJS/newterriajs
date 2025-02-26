@@ -9,6 +9,7 @@ import {
 } from "../../../../Core/AnalyticEvents/analyticEvents";
 import { isJsonString } from "../../../../Core/Json";
 import Icon, { StyledIcon } from "../../../../Styled/Icon";
+// eslint-disable-next-line no-redeclare
 import Text from "../../../../Styled/Text";
 import { applyTranslationIfExists } from "../../../../Language/languageHelpers";
 import HelpVideoPanel from "./HelpVideoPanel";
