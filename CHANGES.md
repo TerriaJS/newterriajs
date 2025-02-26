@@ -5,6 +5,7 @@
 - Remove unused klaw-sync dependency.
 - Remove unused hammerjs dependency.
 - Remove unused turf/meta dependency.
+- Update to shpjs 6.1.0.
 - [The next improvement]
 
 #### 8.8.0 - 2025-02-18
