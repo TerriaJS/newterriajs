@@ -21,7 +21,7 @@ export default class CorsProxy {
    *  Domains that should be proxied for, as set by config files. Stored as an array of hosts - if a TLD is specified,
    * subdomains will also be proxied.
    */
-  proxyDomains: string[] | undefined = undefined;
+  proxyDomains: string[] = [];
 
   /**
    * True if we expect that the proxy will proxy any URL - note that if the server isn't set up to do this, having
@@ -75,7 +75,7 @@ export default class CorsProxy {
     }
     this.baseProxyUrl = baseProxyUrl;
 
-    if (this.proxyDomains === null || this.proxyDomains === undefined) {
+    if (this.proxyDomains === null || this.proxyDomains.length === 0) {
       this.proxyDomains = proxyDomains;
     }
   }

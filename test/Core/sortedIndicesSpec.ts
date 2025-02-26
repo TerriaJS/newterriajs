@@ -1,11 +1,9 @@
-"use strict";
-
 import sortedIndices from "../../lib/Core/sortedIndices";
 
 describe("sortedIndices", function () {
   it("works", function () {
-    var data = ["c", "a", "b", "d"];
-    var indices = sortedIndices(data);
+    const data = ["c", "a", "b", "d"];
+    const indices = sortedIndices(data);
     expect(indices).toEqual([1, 2, 0, 3]);
   });
 });

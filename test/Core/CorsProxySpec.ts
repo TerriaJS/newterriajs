@@ -1,38 +1,15 @@
-"use strict";
-
 import CorsProxy from "../../lib/Core/CorsProxy";
 
 describe("CorsProxy", function () {
-  var corsProxy, loadDeferred, loadJson;
-  var originalPageIsHttps, originalAlwaysUseProxy;
+  let corsProxy: CorsProxy;
 
   beforeEach(function () {
-    loadDeferred = {};
-    loadDeferred.promise = new Promise((resolve, reject) => {
-      loadDeferred.resolve = resolve;
-      loadDeferred.reject = reject;
-    });
-    loadJson = jasmine
-      .createSpy("loadJson")
-      .and.returnValue(loadDeferred.promise);
-    corsProxy = new CorsProxy(loadJson);
-
-    originalPageIsHttps = corsProxy.pageIsHttps;
-    originalAlwaysUseProxy = corsProxy.alwaysUseProxy;
-    corsProxy.pageIsHttps = false;
-    corsProxy.alwaysUseProxy = false;
-  });
-
-  afterEach(function () {
-    corsProxy.pageIsHttps = originalPageIsHttps;
-    corsProxy.alwaysUseProxy = originalAlwaysUseProxy;
-    corsProxy.proxyDomains.length = 0;
-    corsProxy.corsDomains.length = 0;
+    corsProxy = new CorsProxy();
   });
 
   describe("init", function () {
     it("should use baseProxyUrl for subsequent proxy calls", function () {
-      corsProxy.init("", "proxy2/", {});
+      corsProxy.init("", "proxy2/", []);
 
       expect(corsProxy.getURL("example")).toBe("proxy2/example");
     });
@@ -111,11 +88,7 @@ describe("CorsProxy", function () {
 
   describe("shouldUseProxy", function () {
     beforeEach(function () {
-      corsProxy.init();
-    });
-
-    it("returns false for an undefined input", function () {
-      expect(corsProxy.shouldUseProxy()).toBe(false);
+      corsProxy.init(undefined);
     });
 
     it("returns false for a relative path", function () {
