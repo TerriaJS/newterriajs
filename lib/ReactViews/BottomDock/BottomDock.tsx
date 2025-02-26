@@ -54,7 +54,6 @@ class BottomDock extends React.Component<PropsType & MeasureElementProps> {
         tabIndex={0}
         onClick={this.handleClick.bind(this)}
         css={`
-          z-index: 10;
           bottom: 0;
           right: 0;
           position: relative;

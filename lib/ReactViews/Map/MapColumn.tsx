@@ -112,7 +112,6 @@ export const MapColumn: FC<IMapColumnProps> = observer(
                     : `${theme.workbenchMargin}px`};
                   left: 0;
                   right: 0;
-                  z-index: 10;
                 `}
               >
                 <BottomLeftBar />
