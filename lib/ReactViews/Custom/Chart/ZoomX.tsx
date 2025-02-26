@@ -1,4 +1,4 @@
-import { select as d3Select, type BaseType } from "d3-selection";
+import { select as d3Select } from "d3-selection";
 import { zoom as d3Zoom } from "d3-zoom";
 import { useEffect, type ReactNode } from "react";
 

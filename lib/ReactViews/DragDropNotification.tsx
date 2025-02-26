@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { reaction } from "mobx";
 import { observer } from "mobx-react";
-import { FC, useEffect, useState, useCallback, useRef } from "react";
+import { FC, useEffect, useState, useRef } from "react";
 import Icon from "../Styled/Icon";
 import Styles from "./drag-drop-notification.scss";
 import { useViewState } from "./Context";

@@ -1,7 +1,7 @@
 import { sortBy, uniqBy } from "lodash";
-import { action, runInAction } from "mobx";
+import { runInAction } from "mobx";
 import { observer } from "mobx-react";
-import { useCallback, useEffect, useState, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import createGuid from "terriajs-cesium/Source/Core/createGuid";

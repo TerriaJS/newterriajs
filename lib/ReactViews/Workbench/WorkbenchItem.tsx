@@ -1,8 +1,8 @@
 import { action } from "mobx";
 import { observer } from "mobx-react";
-import { useCallback } from "react";
 import { sortable } from "react-anything-sortable";
 import { useTranslation } from "react-i18next";
+import type { DefaultTheme } from "styled-components";
 import styled, { useTheme } from "styled-components";
 import getPath from "../../Core/getPath";
 import CatalogMemberMixin, {
@@ -23,7 +23,6 @@ import { TextSpan } from "../../Styled/Text";
 import Loader from "../Loader";
 import PrivateIndicator from "../PrivateIndicator/PrivateIndicator";
 import WorkbenchItemControls from "./Controls/WorkbenchItemControls";
-import type { DefaultTheme } from "styled-components";
 
 interface IProps {
   item: BaseModel;

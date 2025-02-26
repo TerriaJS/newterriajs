@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { action, runInAction } from "mobx";
 import { observer } from "mobx-react";
 import { DragEvent, MouseEvent, FC, useRef } from "react";
-import { Trans, useTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
 import {
   Category,
   DataSourceAction
