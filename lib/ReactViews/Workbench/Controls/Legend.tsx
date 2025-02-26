@@ -189,7 +189,9 @@ export default class Legend extends React.Component<{
 
     // Override the boxStyle border if we have outlineColor and outlineWidth defined for this legend item
     if (!imageUrl && legendItem.outlineColor && legendItem.outlineWidth) {
-      boxStyle.border = `${legendItem.outlineWidth}px solid ${legendItem.outlineColor}`;
+      boxStyle.border = `${legendItem.outlineWidth}px ${
+        legendItem.outlineStyle ?? "solid"
+      } ${legendItem.outlineColor}`;
     }
 
     let boxContents;

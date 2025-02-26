@@ -1,0 +1,84 @@
+{
+  "currentVersion": 10.81,
+  "serviceItemId": "aa08e455b4ff499cabca7a0e46525428",
+  "serviceDescription": "Forest Management Zones",
+  "hasVersionedData": false,
+  "supportsDisconnectedEditing": false,
+  "hasStaticData": false,
+  "hasSharedDomains": false,
+  "maxRecordCount": 2000,
+  "supportedQueryFormats": "JSON",
+  "supportsVCSProjection": false,
+  "supportedExportFormats": "csv,shapefile,sqlite,gpkg,filegdb,featureCollection,geojson,excel",
+  "capabilities": "Query,Extract",
+  "description": "<DIV STYLE=\"text-align:Left;font-size:12pt\"><P><SPAN>Forest Management Zones</SPAN></P></DIV>",
+  "copyrightText": "FCNSW's Forest Information and Planning",
+  "spatialReference": {
+    "wkid": 102100,
+    "latestWkid": 3857
+  },
+  "initialExtent": {
+    "xmin": 15641888.926476456,
+    "ymin": -4961590.956884165,
+    "xmax": 17132869.46212785,
+    "ymax": -2695578.5810223734,
+    "spatialReference": {
+      "wkid": 102100,
+      "latestWkid": 3857
+    }
+  },
+  "fullExtent": {
+    "xmin": 15670198.00908386,
+    "ymin": -4503826.814712303,
+    "xmax": 17131788.197879203,
+    "ymax": -3277389.698642495,
+    "spatialReference": {
+      "wkid": 102100,
+      "latestWkid": 3857
+    }
+  },
+  "allowGeometryUpdates": true,
+  "units": "esriMeters",
+  "supportsAppend": true,
+  "supportsSharedDomains": true,
+  "supportsWebHooks": true,
+  "supportsTemporalLayers": true,
+  "layerOverridesEnabled": true,
+  "size": 194781184,
+  "syncEnabled": false,
+  "supportsApplyEditsWithGlobalIds": false,
+  "supportsReturnDeleteResults": true,
+  "supportsLayerOverrides": true,
+  "supportsTilesAndBasicQueriesMode": true,
+  "supportsQueryContingentValues": true,
+  "supportedContingentValuesFormats": "JSON, PBF",
+  "supportsContingentValuesJson": 2,
+  "editorTrackingInfo": {
+    "enableEditorTracking": false,
+    "enableOwnershipAccessControl": false,
+    "allowOthersToQuery": true,
+    "allowOthersToUpdate": true,
+    "allowOthersToDelete": false,
+    "allowAnonymousToQuery": true,
+    "allowAnonymousToUpdate": true,
+    "allowAnonymousToDelete": true
+  },
+  "xssPreventionInfo": {
+    "xssPreventionEnabled": true,
+    "xssPreventionRule": "InputOnly",
+    "xssInputRule": "rejectInvalid"
+  },
+  "layers": [
+    {
+      "id": 0,
+      "name": "Forest_Management_Zones",
+      "parentLayerId": -1,
+      "defaultVisibility": true,
+      "subLayerIds": null,
+      "minScale": 20000000,
+      "maxScale": 5000,
+      "geometryType": "esriGeometryPolygon"
+    }
+  ],
+  "tables": []
+}

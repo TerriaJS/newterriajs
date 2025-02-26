@@ -1,12 +1,12 @@
 import { reaction, runInAction } from "mobx";
 import { GeomType, LineSymbolizer, PolygonSymbolizer } from "protomaps-leaflet";
-import CustomDataSource from "terriajs-cesium/Source/DataSources/CustomDataSource";
 import Cartesian2 from "terriajs-cesium/Source/Core/Cartesian2";
 import Cartesian3 from "terriajs-cesium/Source/Core/Cartesian3";
 import Color from "terriajs-cesium/Source/Core/Color";
 import Iso8601 from "terriajs-cesium/Source/Core/Iso8601";
 import JulianDate from "terriajs-cesium/Source/Core/JulianDate";
 import createGuid from "terriajs-cesium/Source/Core/createGuid";
+import CustomDataSource from "terriajs-cesium/Source/DataSources/CustomDataSource";
 import Entity from "terriajs-cesium/Source/DataSources/Entity";
 import GeoJsonDataSource from "terriajs-cesium/Source/DataSources/GeoJsonDataSource";
 import HeightReference from "terriajs-cesium/Source/Scene/HeightReference";
@@ -16,7 +16,10 @@ import loadJson from "../../../../lib/Core/loadJson";
 import loadText from "../../../../lib/Core/loadText";
 import ContinuousColorMap from "../../../../lib/Map/ColorMap/ContinuousColorMap";
 import ProtomapsImageryProvider from "../../../../lib/Map/ImageryProvider/ProtomapsImageryProvider";
-import { GEOJSON_SOURCE_LAYER_NAME } from "../../../../lib/Map/Vector/ProtomapsGeojsonSource";
+import {
+  GEOJSON_SOURCE_LAYER_NAME,
+  ProtomapsGeojsonSource
+} from "../../../../lib/Map/Vector/Protomaps/ProtomapsGeojsonSource";
 import {
   FEATURE_ID_PROP,
   getColor
@@ -1182,6 +1185,182 @@ describe("GeoJsonCatalogItemSpec", () => {
       expect(points).toBeDefined();
       expect(isDataSource(points)).toBeTruthy();
       expect(points.entities.values.length).toEqual(5);
+    });
+  });
+
+  describe("handling MultiPolygon features", function () {
+    let terria: Terria;
+    let geojson: GeoJsonCatalogItem;
+
+    beforeEach(function () {
+      terria = new Terria({
+        baseUrl: "./"
+      });
+      geojson = new GeoJsonCatalogItem("test-geojson", terria);
+      geojson.setTrait(
+        CommonStrata.user,
+        "url",
+        "test/GeoJSON/multipolygon.geojson"
+      );
+    });
+
+    it("creates multi-polygon cesium primitives features", async function () {
+      runInAction(() =>
+        geojson.setTrait(CommonStrata.user, "forceCesiumPrimitives", true)
+      );
+
+      await geojson.loadMapItems();
+      const features = geojson.mapItems[0] as CustomDataSource;
+      expect(features).toBeDefined();
+      expect(isDataSource(features)).toBeTruthy();
+      expect(features.entities.values.length).toEqual(5);
+
+      expect(features.entities.values[0].polygon).toBeDefined();
+      expect(features.entities.values[1].polygon).toBeDefined();
+      expect(features.entities.values[2].polygon).toBeDefined();
+      expect(features.entities.values[3].polyline).toBeDefined();
+      expect(features.entities.values[4].polyline).toBeDefined();
+    });
+  });
+
+  describe("ProtomapsGeojsonSource", function () {
+    let terria: Terria;
+    let geojson: GeoJsonCatalogItem;
+
+    beforeEach(function () {
+      terria = new Terria({
+        baseUrl: "./"
+      });
+      geojson = new GeoJsonCatalogItem("test-geojson", terria);
+    });
+
+    it("creates polygon protomaps features", async function () {
+      geojson.setTrait(
+        CommonStrata.user,
+        "url",
+        "test/GeoJSON/polygon.geojson"
+      );
+
+      await geojson.loadMapItems();
+
+      const imageryParts = geojson.mapItems[0] as ImageryParts;
+      expect(imageryParts).toBeDefined();
+      expect(ImageryParts.is(imageryParts)).toBeTruthy();
+
+      const imageryProvider =
+        imageryParts.imageryProvider as ProtomapsImageryProvider;
+      expect(imageryProvider instanceof ProtomapsImageryProvider).toBeTruthy();
+
+      const source = imageryProvider.source as ProtomapsGeojsonSource;
+      expect(source instanceof ProtomapsGeojsonSource).toBeTruthy();
+
+      const features = await source.get(
+        {
+          x: 798,
+          y: 510,
+          z: 10
+        },
+        256
+      );
+
+      expect(features.get(GEOJSON_SOURCE_LAYER_NAME)?.length).toEqual(1);
+      const feature = features.get(GEOJSON_SOURCE_LAYER_NAME)?.[0];
+      expect(feature?.geom.length).toEqual(2);
+      expect(feature?.geom?.[0].length).toEqual(5);
+      expect(feature?.geom?.[1].length).toEqual(5);
+
+      expect(feature?.bbox).toEqual({
+        maxX: 288,
+        maxY: 288,
+        minX: -32,
+        minY: -32
+      });
+
+      expect(feature?.props?.bar).toEqual("bye");
+    });
+
+    it("creates polyline protomaps features", async function () {
+      geojson.setTrait(
+        CommonStrata.user,
+        "url",
+        "test/GeoJSON/polyline.geojson"
+      );
+      geojson.setTrait(CommonStrata.user, "forceCesiumPrimitives", false);
+
+      await geojson.loadMapItems();
+
+      const imageryParts = geojson.mapItems[0] as ImageryParts;
+      expect(imageryParts).toBeDefined();
+      expect(ImageryParts.is(imageryParts)).toBeTruthy();
+
+      const imageryProvider =
+        imageryParts.imageryProvider as ProtomapsImageryProvider;
+      expect(imageryProvider instanceof ProtomapsImageryProvider).toBeTruthy();
+
+      const source = imageryProvider.source as ProtomapsGeojsonSource;
+      expect(source instanceof ProtomapsGeojsonSource).toBeTruthy();
+
+      const features = await source.get(
+        {
+          x: 798,
+          y: 510,
+          z: 10
+        },
+        256
+      );
+
+      expect(features.get(GEOJSON_SOURCE_LAYER_NAME)?.length).toEqual(1);
+      const feature = features.get(GEOJSON_SOURCE_LAYER_NAME)?.[0];
+      expect(feature?.geom.length).toEqual(1);
+      expect(feature?.geom?.[0].length).toEqual(2);
+
+      expect(feature?.bbox).toEqual({
+        maxX: 145.75,
+        maxY: 145.75,
+        minX: -32,
+        minY: -32
+      });
+    });
+
+    it("creates multi-polygon protomaps features", async function () {
+      geojson.setTrait(
+        CommonStrata.user,
+        "url",
+        "test/GeoJSON/multipolygon.geojson"
+      );
+
+      await geojson.loadMapItems();
+
+      const imageryParts = geojson.mapItems[0] as ImageryParts;
+      expect(imageryParts).toBeDefined();
+      expect(ImageryParts.is(imageryParts)).toBeTruthy();
+
+      const imageryProvider =
+        imageryParts.imageryProvider as ProtomapsImageryProvider;
+      expect(imageryProvider instanceof ProtomapsImageryProvider).toBeTruthy();
+
+      const source = imageryProvider.source as ProtomapsGeojsonSource;
+      expect(source instanceof ProtomapsGeojsonSource).toBeTruthy();
+
+      const features = await source.get(
+        {
+          x: 23,
+          y: 35,
+          z: 6
+        },
+        256
+      );
+
+      expect(features.get(GEOJSON_SOURCE_LAYER_NAME)?.length).toEqual(1);
+      const feature = features.get(GEOJSON_SOURCE_LAYER_NAME)?.[0];
+      expect(feature?.geom.length).toEqual(4);
+
+      expect(feature?.bbox).toEqual({
+        maxX: 288,
+        maxY: 204.3125,
+        minX: -32,
+        minY: -32
+      });
     });
   });
 

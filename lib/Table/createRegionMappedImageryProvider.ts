@@ -81,7 +81,7 @@ export default function createRegionMappedImageryProvider(
     return (
       (isConstantStyleMap(outlineStyleMap)
         ? outlineStyleMap.style.color
-        : outlineStyleMap.mapValueToStyle(rowNumber ?? -1).color) ??
+        : outlineStyleMap.mapRowIdToStyle(rowNumber ?? -1).color) ??
       defaultOutlineColor
     );
   };
@@ -93,7 +93,7 @@ export default function createRegionMappedImageryProvider(
     return (
       (isConstantStyleMap(outlineStyleMap)
         ? outlineStyleMap.style.width
-        : outlineStyleMap.mapValueToStyle(rowNumber ?? -1).width) ?? 1
+        : outlineStyleMap.mapRowIdToStyle(rowNumber ?? -1).width) ?? 1
     );
   };
 

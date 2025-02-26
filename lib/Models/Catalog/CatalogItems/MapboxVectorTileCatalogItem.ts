@@ -11,7 +11,7 @@ import { JsonObject } from "../../../Core/Json";
 import loadJson from "../../../Core/loadJson";
 import TerriaError from "../../../Core/TerriaError";
 import ProtomapsImageryProvider from "../../../Map/ImageryProvider/ProtomapsImageryProvider";
-import { mapboxStyleJsonToProtomaps } from "../../../Map/Vector/mapboxStyleJsonToProtomaps";
+import { mapboxStyleJsonToProtomaps } from "../../../Map/Vector/Protomaps/mapboxStyleJsonToProtomaps";
 import CatalogMemberMixin from "../../../ModelMixins/CatalogMemberMixin";
 import MappableMixin, { MapItem } from "../../../ModelMixins/MappableMixin";
 import UrlMixin from "../../../ModelMixins/UrlMixin";
@@ -179,6 +179,7 @@ class MapboxVectorTileCatalogItem extends MappableMixin(
       minimumZoom: this.minimumZoom,
       maximumNativeZoom: this.maximumNativeZoom,
       maximumZoom: this.maximumZoom,
+      rectangle: this.cesiumRectangle,
       credit: this.attribution,
       paintRules: this.paintRules,
       labelRules: this.labelRules,

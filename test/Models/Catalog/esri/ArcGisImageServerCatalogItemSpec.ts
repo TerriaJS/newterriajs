@@ -2,6 +2,7 @@ import { reaction, runInAction } from "mobx";
 import GeographicTilingScheme from "terriajs-cesium/Source/Core/GeographicTilingScheme";
 import JulianDate from "terriajs-cesium/Source/Core/JulianDate";
 import Rectangle from "terriajs-cesium/Source/Core/Rectangle";
+import Request from "terriajs-cesium/Source/Core/Request";
 import WebMercatorTilingScheme from "terriajs-cesium/Source/Core/WebMercatorTilingScheme";
 import loadWithXhr from "../../../../lib/Core/loadWithXhr";
 import ArcGisImageServerImageryProvider from "../../../../lib/Map/ImageryProvider/ArcGisImageServerImageryProvider";
@@ -610,6 +611,27 @@ describe("ArcGisImageServerImageryProvider", function () {
       expect(testResource.url).toBe(
         "http://example.com/agsimage/rest/services/time/ImageServer/exportImage?bbox=-20037508.342789244%2C10018754.171394622%2C-10018754.171394622%2C20037508.342789244&size=256%2C256&format=png32&transparent=true&f=image&bboxSR=3857&imageSR=3857&token=fakeToken&foo=bar"
       );
+
+      expect(testResource.request).toEqual(
+        imageryProvider.baseResource.request
+      );
+    });
+
+    it("passes request parameter through to image resource", function () {
+      expect(imageryProvider.usePreCachedTiles).toBe(false);
+
+      const testRequest = new Request();
+      const testResource = imageryProvider.buildImageResource(
+        0,
+        0,
+        2,
+        testRequest
+      );
+      expect(testResource.url).toBe(
+        "http://example.com/agsimage/rest/services/time/ImageServer/exportImage?bbox=-20037508.342789244%2C10018754.171394622%2C-10018754.171394622%2C20037508.342789244&size=256%2C256&format=png32&transparent=true&f=image&bboxSR=3857&imageSR=3857&token=fakeToken&foo=bar"
+      );
+
+      expect(testResource.request).toEqual(testRequest);
     });
   });
 

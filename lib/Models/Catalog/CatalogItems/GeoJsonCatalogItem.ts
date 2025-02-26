@@ -1,27 +1,29 @@
+import { featureCollection, FeatureCollection } from "@turf/helpers";
 import i18next from "i18next";
 import { get as _get, set as _set } from "lodash";
-import { computed, toJS, makeObservable } from "mobx";
+import { computed, makeObservable, toJS } from "mobx";
+import filterOutUndefined from "../../../Core/filterOutUndefined";
+import {
+  FeatureCollectionWithCrs,
+  toFeatureCollection
+} from "../../../Core/GeoJson";
 import isDefined from "../../../Core/isDefined";
 import JsonValue, { isJsonObject } from "../../../Core/Json";
 import loadBlob, { isZip, parseZipJsonBlob } from "../../../Core/loadBlob";
 import loadJson from "../../../Core/loadJson";
 import readJson from "../../../Core/readJson";
 import TerriaError from "../../../Core/TerriaError";
+import CesiumIonMixin from "../../../ModelMixins/CesiumIonMixin";
 import GeoJsonMixin, {
-  FeatureCollectionWithCrs,
-  reprojectToGeographic,
-  toFeatureCollection
+  reprojectToGeographic
 } from "../../../ModelMixins/GeojsonMixin";
+import ApiRequestTraits from "../../../Traits/TraitsClasses/ApiRequestTraits";
 import GeoJsonCatalogItemTraits from "../../../Traits/TraitsClasses/GeoJsonCatalogItemTraits";
 import CreateModel from "../../Definition/CreateModel";
+import Model, { ModelConstructorParameters } from "../../Definition/Model";
 import HasLocalData from "../../HasLocalData";
 import Terria from "../../Terria";
-import Model, { ModelConstructorParameters } from "../../Definition/Model";
 import proxyCatalogItemUrl from "../proxyCatalogItemUrl";
-import ApiRequestTraits from "../../../Traits/TraitsClasses/ApiRequestTraits";
-import filterOutUndefined from "../../../Core/filterOutUndefined";
-import { featureCollection, FeatureCollection } from "@turf/helpers";
-import CesiumIonMixin from "../../../ModelMixins/CesiumIonMixin";
 
 class GeoJsonCatalogItem
   extends CesiumIonMixin(GeoJsonMixin(CreateModel(GeoJsonCatalogItemTraits)))

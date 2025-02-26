@@ -1,9 +1,8 @@
-import { computed, runInAction, makeObservable } from "mobx";
+import { computed, makeObservable, runInAction } from "mobx";
+import { toFeatureCollection } from "../../../Core/GeoJson";
 import loadJson from "../../../Core/loadJson";
 import TerriaError from "../../../Core/TerriaError";
-import GeoJsonMixin, {
-  toFeatureCollection
-} from "../../../ModelMixins/GeojsonMixin";
+import GeoJsonMixin from "../../../ModelMixins/GeojsonMixin";
 import SocrataMapViewCatalogItemTraits from "../../../Traits/TraitsClasses/SocrataMapViewCatalogItemTraits";
 import CreateModel from "../../Definition/CreateModel";
 import LoadableStratum from "../../Definition/LoadableStratum";

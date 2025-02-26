@@ -67,6 +67,14 @@ export class LegendItemTraits extends ModelTraits {
   })
   outlineWidth?: number;
 
+  @primitiveTrait({
+    name: "Outline Style",
+    description:
+      "The style of outline using CSS outline-style values. Eg 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset'",
+    type: "string"
+  })
+  outlineStyle?: string;
+
   @primitiveArrayTrait({
     name: "Multiple Colors",
     description:

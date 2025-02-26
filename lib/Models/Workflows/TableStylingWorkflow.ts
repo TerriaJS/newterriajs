@@ -1,12 +1,13 @@
+import i18next from "i18next";
 import {
   action,
   computed,
   IReactionDisposer,
+  makeObservable,
   observable,
   ObservableMap,
   reaction,
-  runInAction,
-  makeObservable
+  runInAction
 } from "mobx";
 import filterOutUndefined from "../../Core/filterOutUndefined";
 import isDefined from "../../Core/isDefined";
@@ -16,8 +17,9 @@ import ContinuousColorMap from "../../Map/ColorMap/ContinuousColorMap";
 import DiscreteColorMap from "../../Map/ColorMap/DiscreteColorMap";
 import EnumColorMap from "../../Map/ColorMap/EnumColorMap";
 import { allIcons, getMakiIcon } from "../../Map/Icons/Maki/MakiIcons";
+import ProtomapsImageryProvider from "../../Map/ImageryProvider/ProtomapsImageryProvider";
 import { getName } from "../../ModelMixins/CatalogMemberMixin";
-import { isDataSource } from "../../ModelMixins/MappableMixin";
+import { ImageryParts, isDataSource } from "../../ModelMixins/MappableMixin";
 import TableMixin from "../../ModelMixins/TableMixin";
 import {
   QualitativeColorSchemeOptionRenderer,
@@ -54,7 +56,6 @@ import ViewingControls from "../ViewingControls";
 import SelectableDimensionWorkflow, {
   SelectableDimensionWorkflowGroup
 } from "../Workflows/SelectableDimensionWorkflow";
-import i18next from "i18next";
 
 /** The ColorSchemeType is used to change which SelectableDimensions are shown.
  * It is basically the "mode" of the TableStylingWorkflow
@@ -444,29 +445,42 @@ export default class TableStylingWorkflow
    * - Show "Data type (advanced)" select. This allow user to change column type */
   @observable showAdvancedOptions: boolean = false;
 
+  @computed get hasCesiumDataSource() {
+    return !!this.item.mapItems.find(
+      (d) => isDataSource(d) && d.entities.values.length > 0
+    );
+  }
+
+  @computed get hasProtomapsImageryProvider() {
+    return !!this.item.mapItems.find(
+      (d) =>
+        ImageryParts.is(d) &&
+        d.imageryProvider instanceof ProtomapsImageryProvider
+    );
+  }
+
   /** Table Style dimensions:
    * - Dataset (Table models in workbench)
    * - Variable (Table style in model)
    * - TableColumn type (advanced only)
    */
   @computed get tableStyleSelectableDim(): SelectableDimensionWorkflowGroup {
-    // Show point style options if current catalog item has any points showing
-    const showPointStyles = !!this.item.mapItems.find(
-      (d) => isDataSource(d) && d.entities.values.length > 0
-    );
+    // Show point style options if current catalog item has any points showing (or uses ProtomapsImageryProvider)
+    const showPointStyles =
+      this.hasCesiumDataSource || this.hasProtomapsImageryProvider;
 
     // Show point size options if current catalog item has points and any scalar columns
     const showPointSize =
-      showPointStyles &&
+      this.hasCesiumDataSource &&
       (this.tableStyle.pointSizeColumn ||
         this.item.tableColumns.find((t) => t.type === TableColumnType.scalar));
 
     // Show label style options if current catalog item has points
-    const showLabelStyles = showPointStyles;
+    const showLabelStyles = this.hasCesiumDataSource;
 
     // Show trail style options if current catalog item has time-series points
     const showTrailStyles =
-      showPointStyles && this.tableStyle.isTimeVaryingPointsWithId();
+      this.hasCesiumDataSource && this.tableStyle.isTimeVaryingPointsWithId();
 
     return {
       type: "group",
@@ -2198,37 +2212,45 @@ export default class TableStylingWorkflow
       this.tableStyle.pointStyleMap,
       (id, pointTraits, nullValues) =>
         filterOutUndefined([
-          {
-            type: "select",
-            id: `${id}-marker`,
-            name: `<terriatooltip title="${i18next.t(
-              "models.tableStyling.point.selectableDimensions.marker.name"
-            )}">${i18next.t(
-              "models.tableStyling.point.selectableDimensions.marker.tooltip"
-            )}</terriatooltip>`,
-            selectedId: (pointTraits.marker ?? nullValues.marker) || "point",
-            allowUndefined: true,
-            allowCustomInput: true,
-            options: [...allIcons, "point"].map((icon) => ({
-              id: icon
-            })),
-            optionRenderer: MarkerOptionRenderer,
-            setDimensionValue: (stratumId, value) => {
-              pointTraits.setTrait(stratumId, "marker", value || "point");
-            }
-          },
-          {
-            type: "numeric",
-            id: `${id}-rotation`,
+          // Only show marker selection if we have a Cesium data source
+          this.hasCesiumDataSource
+            ? {
+                type: "select",
+                id: `${id}-marker`,
+                name: `<terriatooltip title="${i18next.t(
+                  "models.tableStyling.point.selectableDimensions.marker.name"
+                )}">${i18next.t(
+                  "models.tableStyling.point.selectableDimensions.marker.tooltip"
+                )}</terriatooltip>`,
+                selectedId:
+                  (pointTraits.marker ?? nullValues.marker) || "point",
+                allowUndefined: true,
+                allowCustomInput: true,
+                options: [...allIcons, "point"].map((icon) => ({
+                  id: icon
+                })),
+                optionRenderer: MarkerOptionRenderer,
+                setDimensionValue: (stratumId, value) => {
+                  pointTraits.setTrait(stratumId, "marker", value || "point");
+                }
+              }
+            : undefined,
 
-            name: i18next.t(
-              "models.tableStyling.point.selectableDimensions.rotation.name"
-            ),
-            value: pointTraits.rotation ?? nullValues.rotation,
-            setDimensionValue: (stratumId, value) => {
-              pointTraits.setTrait(stratumId, "rotation", value);
-            }
-          },
+          // Only show rotation if we have a Cesium data source
+          this.hasCesiumDataSource
+            ? {
+                type: "numeric",
+                id: `${id}-rotation`,
+
+                name: i18next.t(
+                  "models.tableStyling.point.selectableDimensions.rotation.name"
+                ),
+                value: pointTraits.rotation ?? nullValues.rotation,
+                setDimensionValue: (stratumId, value) => {
+                  pointTraits.setTrait(stratumId, "rotation", value);
+                }
+              }
+            : undefined,
           !this.tableStyle.pointSizeColumn
             ? {
                 type: "numeric",

@@ -18,7 +18,7 @@ import PolylineDashMaterialProperty from "terriajs-cesium/Source/DataSources/Pol
 import PolylineGlowMaterialProperty from "terriajs-cesium/Source/DataSources/PolylineGlowMaterialProperty";
 import Property from "terriajs-cesium/Source/DataSources/Property";
 import isDefined from "../../Core/isDefined";
-import { getLineStyleLeaflet } from "../../Models/Catalog/Esri/esriLineStyle";
+import { convertCesiumDashNumberToDashArray } from "../../Models/Catalog/Esri/esriStyleToTableStyle";
 import LeafletScene from "./LeafletScene";
 
 interface PointDetails {
@@ -1107,7 +1107,7 @@ function getDashArray(
     ? material.dashPattern.getValue(time)
     : undefined;
 
-  return getLineStyleLeaflet(dashPattern);
+  return convertCesiumDashNumberToDashArray(dashPattern);
 }
 
 function cleanEntity(

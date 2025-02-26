@@ -1,10 +1,5 @@
 import Point from "@mapbox/point-geometry";
-import bbox from "@turf/bbox";
-import booleanIntersects from "@turf/boolean-intersects";
-import circle from "@turf/circle";
-import { Feature } from "@turf/helpers";
-import i18next from "i18next";
-import { cloneDeep, isEmpty } from "lodash-es";
+import { isEmpty } from "lodash-es";
 import { action, makeObservable } from "mobx";
 import {
   LabelRule,
@@ -20,26 +15,25 @@ import {
 } from "protomaps-leaflet";
 import Cartographic from "terriajs-cesium/Source/Core/Cartographic";
 import Credit from "terriajs-cesium/Source/Core/Credit";
-import DeveloperError from "terriajs-cesium/Source/Core/DeveloperError";
 import CesiumEvent from "terriajs-cesium/Source/Core/Event";
 import CesiumMath from "terriajs-cesium/Source/Core/Math";
 import Rectangle from "terriajs-cesium/Source/Core/Rectangle";
+import Request from "terriajs-cesium/Source/Core/Request";
 import WebMercatorTilingScheme from "terriajs-cesium/Source/Core/WebMercatorTilingScheme";
 import defaultValue from "terriajs-cesium/Source/Core/defaultValue";
 import ImageryLayerFeatureInfo from "terriajs-cesium/Source/Scene/ImageryLayerFeatureInfo";
+import { FeatureCollectionWithCrs } from "../../Core/GeoJson";
 import TerriaError from "../../Core/TerriaError";
 import isDefined from "../../Core/isDefined";
-import {
-  FeatureCollectionWithCrs,
-  FEATURE_ID_PROP as GEOJSON_FEATURE_ID_PROP
-} from "../../ModelMixins/GeojsonMixin";
+import { FEATURE_ID_PROP as GEOJSON_FEATURE_ID_PROP } from "../../ModelMixins/GeojsonMixin";
 import { default as TerriaFeature } from "../../Models/Feature/Feature";
 import Terria from "../../Models/Terria";
 import { ImageryProviderWithGridLayerSupport } from "../Leaflet/ImageryProviderLeafletGridLayer";
+import { ProtomapsArcGisPbfSource } from "../Vector/Protomaps/ProtomapsArcGisPbfSource";
 import {
   GEOJSON_SOURCE_LAYER_NAME,
   ProtomapsGeojsonSource
-} from "../Vector/ProtomapsGeojsonSource";
+} from "../Vector/Protomaps/ProtomapsGeojsonSource";
 
 export const LAYER_NAME_PROP = "__LAYERNAME";
 
@@ -78,13 +72,17 @@ interface Options {
   ) => Promise<ImageryLayerFeatureInfo[]>;
 }
 
-type Source = PmtilesSource | ZxySource | ProtomapsGeojsonSource;
+type Source =
+  | PmtilesSource
+  | ZxySource
+  | ProtomapsGeojsonSource
+  | ProtomapsArcGisPbfSource;
 
 /** Tile size in pixels (for canvas and geojson-vt) */
 export const PROTOMAPS_DEFAULT_TILE_SIZE = 256;
 
 /** Buffer (in pixels) used when rendering (and generating - through geojson-vt) vector tiles */
-export const PROTOMAPS_TILE_BUFFER = 64;
+export const PROTOMAPS_TILE_BUFFER = 32;
 
 export default class ProtomapsImageryProvider
   implements ImageryProviderWithGridLayerSupport
@@ -96,6 +94,9 @@ export default class ProtomapsImageryProvider
   readonly tileWidth: number;
   readonly tileHeight: number;
   readonly minimumLevel: number;
+  /** This is used to fail requests for levels below softMinimumLevel, as setting minimumLevel to higher than 0 (with no rectangle provided), will result in many tiles being requested.
+   */
+  readonly softMinimumLevel?: number;
   readonly maximumLevel: number;
   readonly rectangle: Rectangle;
   readonly errorEvent = new CesiumEvent();
@@ -145,8 +146,9 @@ export default class ProtomapsImageryProvider
 
     this.tileWidth = PROTOMAPS_DEFAULT_TILE_SIZE;
     this.tileHeight = PROTOMAPS_DEFAULT_TILE_SIZE;
-
-    this.minimumLevel = defaultValue(options.minimumZoom, 0);
+    // Note we leave minimumLevel at 0, and then we fail requests for levels below softMinimumLevel (see softMinimumLevel)
+    this.minimumLevel = 0;
+    this.softMinimumLevel = options.minimumZoom;
     this.maximumLevel = defaultValue(options.maximumZoom, 24);
     this.maximumNativeZoom = defaultValue(
       options.maximumNativeZoom,
@@ -159,27 +161,6 @@ export default class ProtomapsImageryProvider
           this.tilingScheme.rectangle
         ) || this.tilingScheme.rectangle
       : this.tilingScheme.rectangle;
-
-    // Check the number of tiles at the minimum level.  If it's more than four,
-    // throw an exception, because starting at the higher minimum
-    // level will cause too many tiles to be downloaded and rendered.
-    const swTile = this.tilingScheme.positionToTileXY(
-      Rectangle.southwest(this.rectangle),
-      this.minimumLevel
-    );
-    const neTile = this.tilingScheme.positionToTileXY(
-      Rectangle.northeast(this.rectangle),
-      this.minimumLevel
-    );
-    const tileCount =
-      (Math.abs(neTile.x - swTile.x) + 1) * (Math.abs(neTile.y - swTile.y) + 1);
-    if (tileCount > 4) {
-      throw new DeveloperError(
-        i18next.t("map.mapboxVectorTileImageryProvider.moreThanFourTiles", {
-          tileCount: tileCount
-        })
-      );
-    }
 
     this.errorEvent = new CesiumEvent();
     this.url = options.id;
@@ -201,7 +182,7 @@ export default class ProtomapsImageryProvider
     if (typeof this.data === "string") {
       if (this.data.endsWith(".pmtiles")) {
         this.source = new PmtilesSource(this.data, false);
-        const cache = new TileCache(this.source, 1024);
+        const cache = new TileCache(this.source, PROTOMAPS_DEFAULT_TILE_SIZE);
         this.view = new View(cache, this.maximumNativeZoom, 2);
       } else if (
         this.data.endsWith(".json") ||
@@ -210,7 +191,7 @@ export default class ProtomapsImageryProvider
         this.source = new ProtomapsGeojsonSource(this.data);
       } else {
         this.source = new ZxySource(this.data, false);
-        const cache = new TileCache(this.source, 1024);
+        const cache = new TileCache(this.source, PROTOMAPS_DEFAULT_TILE_SIZE);
         this.view = new View(cache, this.maximumNativeZoom, 2);
       }
     }
@@ -218,7 +199,8 @@ export default class ProtomapsImageryProvider
     else if (
       this.data instanceof ProtomapsGeojsonSource ||
       this.data instanceof PmtilesSource ||
-      this.data instanceof ZxySource
+      this.data instanceof ZxySource ||
+      this.data instanceof ProtomapsArcGisPbfSource
     ) {
       this.source = this.data;
     }
@@ -248,50 +230,56 @@ export default class ProtomapsImageryProvider
     return [];
   }
 
-  async requestImage(x: number, y: number, level: number) {
+  async requestImage(x: number, y: number, level: number, request?: Request) {
     const canvas = document.createElement("canvas");
     canvas.width = this.tileWidth;
     canvas.height = this.tileHeight;
-    return await this.requestImageForCanvas(x, y, level, canvas);
+    return await this.requestImageForCanvas(x, y, level, canvas, request);
   }
 
   async requestImageForCanvas(
     x: number,
     y: number,
     level: number,
-    canvas: HTMLCanvasElement
+    canvas: HTMLCanvasElement,
+    request?: Request
   ) {
-    try {
-      await this.renderTile({ x, y, z: level }, canvas);
-    } catch (e) {
-      console.log(e);
-    }
+    if (isDefined(this.softMinimumLevel) && level < this.softMinimumLevel)
+      throw TerriaError.from(
+        `Level: ${level} is below softMinimumLevel (=${this.softMinimumLevel})`
+      );
 
-    return canvas;
-  }
+    const coords: Coords = { z: level, x, y };
 
-  public async renderTile(coords: Coords, canvas: HTMLCanvasElement) {
     // Adapted from https://github.com/protomaps/protomaps.js/blob/master/src/frontends/leaflet.ts
-    let tile: PreparedTile | undefined = undefined;
+    let tile: PreparedTile;
 
     // Get PreparedTile from source or view
     // Here we need a little bit of extra logic for the ProtomapsGeojsonSource
-    if (this.source instanceof ProtomapsGeojsonSource) {
-      const data = await this.source.get(coords, this.tileHeight);
+    if (
+      this.source instanceof ProtomapsGeojsonSource ||
+      this.source instanceof ProtomapsArcGisPbfSource
+    ) {
+      const data = await this.source.get(coords, this.tileHeight, request);
 
       tile = {
         data: data,
         z: coords.z,
         dataTile: coords,
         scale: 1,
-        origin: new Point(coords.x * 256, coords.y * 256),
+        origin: new Point(
+          coords.x * PROTOMAPS_DEFAULT_TILE_SIZE,
+          coords.y * PROTOMAPS_DEFAULT_TILE_SIZE
+        ),
         dim: this.tileWidth
       };
     } else if (this.view) {
       tile = await this.view.getDisplayTile(coords);
+    } else {
+      throw TerriaError.from(
+        `Failed to get tile - no view or appropriate source in ProtomapsImageryProvider`
+      );
     }
-
-    if (!tile) return;
 
     const tileMap = new Map<string, PreparedTile[]>().set("", [tile]);
 
@@ -300,17 +288,33 @@ export default class ProtomapsImageryProvider
     const labelData = this.labelers.getIndex(tile.z);
 
     const bbox = {
-      minX: 256 * coords.x - PROTOMAPS_TILE_BUFFER,
-      minY: 256 * coords.y - PROTOMAPS_TILE_BUFFER,
-      maxX: 256 * (coords.x + 1) + PROTOMAPS_TILE_BUFFER,
-      maxY: 256 * (coords.y + 1) + PROTOMAPS_TILE_BUFFER
+      minX: PROTOMAPS_DEFAULT_TILE_SIZE * coords.x - PROTOMAPS_TILE_BUFFER,
+      minY: PROTOMAPS_DEFAULT_TILE_SIZE * coords.y - PROTOMAPS_TILE_BUFFER,
+      maxX:
+        PROTOMAPS_DEFAULT_TILE_SIZE * (coords.x + 1) + PROTOMAPS_TILE_BUFFER,
+      maxY: PROTOMAPS_DEFAULT_TILE_SIZE * (coords.y + 1) + PROTOMAPS_TILE_BUFFER
     };
-    const origin = new Point(256 * coords.x, 256 * coords.y);
+    const origin = new Point(
+      PROTOMAPS_DEFAULT_TILE_SIZE * coords.x,
+      PROTOMAPS_DEFAULT_TILE_SIZE * coords.y
+    );
 
     const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-    ctx.setTransform(this.tileWidth / 256, 0, 0, this.tileHeight / 256, 0, 0);
-    ctx.clearRect(0, 0, 256, 256);
+    if (!ctx) throw TerriaError.from("Failed to get canvas context");
+    ctx.setTransform(
+      this.tileWidth / PROTOMAPS_DEFAULT_TILE_SIZE,
+      0,
+      0,
+      this.tileHeight / PROTOMAPS_DEFAULT_TILE_SIZE,
+      0,
+      0
+    );
+    ctx.clearRect(
+      0,
+      0,
+      PROTOMAPS_DEFAULT_TILE_SIZE,
+      PROTOMAPS_DEFAULT_TILE_SIZE
+    );
 
     if (labelData)
       paint(
@@ -324,6 +328,8 @@ export default class ProtomapsImageryProvider
         false,
         ""
       );
+
+    return canvas;
   }
 
   async pickFeatures(
@@ -384,89 +390,12 @@ export default class ProtomapsImageryProvider
       // No view is set and we have geoJSON object
       // So we pick features manually
     } else if (
-      this.source instanceof ProtomapsGeojsonSource &&
-      this.source.geojsonObject
+      this.source instanceof ProtomapsGeojsonSource ||
+      this.source instanceof ProtomapsArcGisPbfSource
     ) {
-      // Get rough meters per pixel (at equator) for given zoom level
-      const zoomMeters = 156543 / Math.pow(2, level);
-      // Create circle with 10 pixel radius to pick features
-      const buffer = circle(
-        [CesiumMath.toDegrees(longitude), CesiumMath.toDegrees(latitude)],
-        10 * zoomMeters,
-        {
-          steps: 10,
-          units: "meters"
-        }
+      featureInfos.push(
+        ...(await this.source.pickFeatures(x, y, level, longitude, latitude))
       );
-
-      // Create wrappedBuffer with only positive coordinates - this is needed for features which overlap antemeridian
-      const wrappedBuffer = cloneDeep(buffer);
-      wrappedBuffer.geometry.coordinates.forEach((ring) =>
-        ring.forEach((point) => {
-          point[0] = point[0] < 0 ? point[0] + 360 : point[0];
-        })
-      );
-
-      const bufferBbox = bbox(buffer);
-
-      // Get array of all features
-      const geojsonFeatures: Feature[] = this.source.geojsonObject.features;
-
-      const pickedFeatures: Feature[] = [];
-
-      for (let index = 0; index < geojsonFeatures.length; index++) {
-        const feature = geojsonFeatures[index];
-        if (!feature.bbox) {
-          feature.bbox = bbox(feature);
-        }
-
-        // Filter by bounding box and then intersection with buffer (to minimize calls to booleanIntersects)
-        if (
-          Math.max(
-            feature.bbox[0],
-            // Wrap buffer bbox if necessary
-            feature.bbox[0] > 180 ? bufferBbox[0] + 360 : bufferBbox[0]
-          ) <=
-            Math.min(
-              feature.bbox[2],
-              // Wrap buffer bbox if necessary
-              feature.bbox[2] > 180 ? bufferBbox[2] + 360 : bufferBbox[2]
-            ) &&
-          Math.max(feature.bbox[1], bufferBbox[1]) <=
-            Math.min(feature.bbox[3], bufferBbox[3])
-        ) {
-          // If we have longitudes greater than 180 - used wrappedBuffer
-          if (feature.bbox[0] > 180 || feature.bbox[2] > 180) {
-            if (booleanIntersects(feature, wrappedBuffer))
-              pickedFeatures.push(feature);
-          } else if (booleanIntersects(feature, buffer))
-            pickedFeatures.push(feature);
-        }
-      }
-
-      // Convert pickedFeatures to ImageryLayerFeatureInfos
-      pickedFeatures.forEach((f) => {
-        const featureInfo = new ImageryLayerFeatureInfo();
-
-        featureInfo.data = f;
-        featureInfo.properties = f.properties;
-
-        if (
-          f.geometry.type === "Point" &&
-          typeof f.geometry.coordinates[0] === "number" &&
-          typeof f.geometry.coordinates[1] === "number"
-        ) {
-          featureInfo.position = Cartographic.fromDegrees(
-            f.geometry.coordinates[0],
-            f.geometry.coordinates[1]
-          );
-        }
-
-        featureInfo.configureDescriptionFromProperties(f.properties);
-        featureInfo.configureNameFromProperties(f.properties);
-
-        featureInfos.push(featureInfo);
-      });
     }
 
     if (this.processPickedFeatures) {
@@ -482,7 +411,11 @@ export default class ProtomapsImageryProvider
     // To clone data/source, we want to minimize any unnecessary processing
     if (!data) {
       // These can be passed straight in without processing
-      if (typeof this.data === "string" || this.data instanceof PmtilesSource) {
+      if (
+        typeof this.data === "string" ||
+        this.data instanceof PmtilesSource ||
+        this.data instanceof ProtomapsArcGisPbfSource
+      ) {
         data = this.data;
         // We can't just clone ZxySource objects, so just pass in URL
       } else if (this.data instanceof ZxySource) {
@@ -509,7 +442,8 @@ export default class ProtomapsImageryProvider
       terria: options?.terria ?? this.terria,
       id: options?.id ?? this.url,
       data,
-      minimumZoom: options?.minimumZoom ?? this.minimumLevel,
+      // Note we use softMinimumLevel here, the imagery provider minimum level is always 0
+      minimumZoom: options?.minimumZoom ?? this.softMinimumLevel,
       maximumZoom: options?.maximumZoom ?? this.maximumLevel,
       maximumNativeZoom: options?.maximumNativeZoom ?? this.maximumNativeZoom,
       rectangle: options?.rectangle ?? this.rectangle,
@@ -533,6 +467,9 @@ export default class ProtomapsImageryProvider
 
     if (this.source instanceof ProtomapsGeojsonSource) {
       featureProp = GEOJSON_FEATURE_ID_PROP;
+      layerName = GEOJSON_SOURCE_LAYER_NAME;
+    } else if (this.source instanceof ProtomapsArcGisPbfSource) {
+      featureProp = this.source.objectIdField;
       layerName = GEOJSON_SOURCE_LAYER_NAME;
     } else {
       featureProp = this.idProperty;

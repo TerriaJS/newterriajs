@@ -79,6 +79,7 @@
     "@visx/scale": "^3.5.0",
     "@visx/shape": "^3.5.0",
     "@visx/tooltip": "^3.3.0",
+    "arcgis-pbf-parser": "^0.0.4",
     "assimpjs": "^0.0.7",
     "babel-loader": "^9.2.1",
     "bottleneck": "^2.19.5",

@@ -120,7 +120,10 @@ export default class TableColorMap {
   /**
    * Gets an object used to map values in {@link #colorColumn} to colors
    * for this style.
+   *
    * Will try to create most appropriate colorMap given colorColumn:
+   * TODO: Move all of these default values/behaviours to TableAutomaticStylesStratum - ideally no use of colorColumn is needed here
+   * - `TableAutomaticStylesStratum should also set default values for colorTraits.mapType, colors, etc
    *
    * - If column type is `scalar`
    *   - and we have binMaximums - use DiscreteColorMap
@@ -139,11 +142,11 @@ export default class TableColorMap {
 
     // If column type is `scalar` - use DiscreteColorMap or ContinuousColorMap
     if (
-      (!colorTraits.mapType ||
-        colorTraits.mapType === "continuous" ||
-        colorTraits.mapType === "bin") &&
-      colorColumn &&
-      colorColumn.type === TableColumnType.scalar
+      (colorColumn &&
+        !colorTraits.mapType &&
+        colorColumn.type === TableColumnType.scalar) ||
+      colorTraits.mapType === "continuous" ||
+      colorTraits.mapType === "bin"
     ) {
       // If column type is `scalar` and we have binMaximums - use DiscreteColorMap
       if (colorTraits.mapType !== "continuous" && this.binMaximums.length > 0) {
@@ -199,12 +202,12 @@ export default class TableColorMap {
 
     // If column type is `enum` or `region` - use EnumColorMap
     else if (
-      colorColumn &&
-      ((!colorTraits.mapType &&
+      (colorColumn &&
+        !colorTraits.mapType &&
         (colorColumn.type === TableColumnType.enum ||
           colorColumn.type === TableColumnType.region) &&
         this.enumColors.length > 0) ||
-        colorTraits.mapType === "enum")
+      colorTraits.mapType === "enum"
     ) {
       return new EnumColorMap({
         enumColors: filterOutUndefined(
@@ -215,7 +218,7 @@ export default class TableColorMap {
             return {
               value: e.value,
               color:
-                colorColumn.type !== TableColumnType.region
+                colorColumn?.type !== TableColumnType.region
                   ? Color.fromCssColorString(e.color) ?? Color.TRANSPARENT
                   : this.regionColor
             };

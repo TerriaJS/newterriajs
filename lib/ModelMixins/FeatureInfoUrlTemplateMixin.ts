@@ -104,7 +104,22 @@ function FeatureInfoUrlTemplateMixin<T extends AbstractConstructor<BaseType>>(
 
     wrapImageryPickFeatures<T extends ImageryProvider>(imageryProvider: T) {
       const realPickFeatures = imageryProvider.pickFeatures;
-      const catalogItem = this;
+
+      // Get CatalogItem properties, so we aren't reading them outside of a reaction
+      const featureInfoUrlTemplate = this.featureInfoUrlTemplate;
+      const proxiedFeatureInfoUrl = proxyCatalogItemUrl(
+        this,
+        featureInfoUrlTemplate ?? "",
+        "0d"
+      );
+      const showStringIfPropertyValueIsNull = MappableMixin.isMixedInto(this)
+        ? this.showStringIfPropertyValueIsNull
+        : undefined;
+      const maxRequests = this.maxRequests;
+      const currentTime = TimeVarying.is(this)
+        ? this.currentTimeAsJulianDate
+        : undefined;
+
       imageryProvider.pickFeatures = async (
         x: number,
         y: number,
@@ -121,18 +136,14 @@ function FeatureInfoUrlTemplateMixin<T extends AbstractConstructor<BaseType>>(
           latitude
         );
         if (
-          isDefined(catalogItem.featureInfoUrlTemplate) &&
+          isDefined(featureInfoUrlTemplate) &&
           isDefined(features) &&
-          features.length < catalogItem.maxRequests
+          features.length < maxRequests
         ) {
           for (let i = 0; i < features.length; i++) {
             const feature = features[i];
             const resource = new Resource({
-              url: proxyCatalogItemUrl(
-                catalogItem,
-                catalogItem.featureInfoUrlTemplate,
-                "0d"
-              ),
+              url: proxiedFeatureInfoUrl,
               templateValues: feature.properties
                 ? feature.properties
                 : undefined
@@ -156,12 +167,8 @@ function FeatureInfoUrlTemplateMixin<T extends AbstractConstructor<BaseType>>(
               // feature info template url
               feature.description = generateCesiumInfoHTMLFromProperties(
                 feature.properties,
-                (TimeVarying.is(catalogItem)
-                  ? catalogItem.currentTimeAsJulianDate
-                  : undefined) ?? JulianDate.now(),
-                MappableMixin.isMixedInto(catalogItem)
-                  ? catalogItem.showStringIfPropertyValueIsNull
-                  : undefined
+                currentTime ?? JulianDate.now(),
+                showStringIfPropertyValueIsNull
               );
             } catch (_e) {
               if (!feature.properties) {

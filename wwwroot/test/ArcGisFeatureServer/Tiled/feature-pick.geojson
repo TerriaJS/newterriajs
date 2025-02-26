@@ -1,0 +1,41 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": 994364,
+      "geometry": null,
+      "properties": {
+        "OBJECTID": 994364,
+        "topoid": 501753766,
+        "createdate": 954867406000,
+        "objectmoddate": 1638519653000,
+        "featuremoddate": 1638519653000,
+        "classsubtype": 1,
+        "featurereliabilitydate": 1379894400000,
+        "attributereliabilitydate": 1379894400000,
+        "capturesourcecode": 4,
+        "capturemethodcode": 2,
+        "planimetricaccuracy": 10,
+        "verticalaccuracy": null,
+        "hydronameoid": null,
+        "hydroname": null,
+        "hydronametype": null,
+        "perenniality": 1,
+        "hydrotype": 2,
+        "relevance": 10,
+        "startdate": 1638521682000,
+        "enddate": 32503680000000,
+        "lastupdate": 1638522028000,
+        "msoid": 65503,
+        "centroidid": null,
+        "shapeuuid": "0c28d4c1-5b56-3698-8a39-c7b02b238a55",
+        "changetype": "M",
+        "processstate": null,
+        "urbanity": "S",
+        "Shape__Length": 0.0014130436037996935,
+        "Shape__Area": 1.3128299451905401e-7
+      }
+    }
+  ]
+}

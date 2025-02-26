@@ -1,5 +1,6 @@
 import { computed, makeObservable } from "mobx";
 import { PickProperties } from "ts-essentials";
+import JsonValue from "../Core/Json";
 import { NotUndefined } from "../Core/TypeModifiers";
 import TableMixin from "../ModelMixins/TableMixin";
 import Model from "../Models/Definition/Model";
@@ -10,7 +11,6 @@ import {
   TableStyleMapTraits
 } from "../Traits/TraitsClasses/Table/StyleMapTraits";
 import TableStyleTraits from "../Traits/TraitsClasses/Table/StyleTraits";
-import TableColumnType from "./TableColumnType";
 
 export interface TableStyleMapModel<T extends TableStyleMapSymbolTraits> {
   enabled?: boolean;
@@ -31,14 +31,18 @@ export interface EnumStyle {
 
 export type StyleMapType = "continuous" | "enum" | "bin" | "constant";
 
+type MapValueToStyle<T> = (value: JsonValue | undefined) => T;
+
 export interface EnumStyleMap<T> {
   type: "enum";
-  mapValueToStyle: (rowId: number) => T;
+  mapRowIdToStyle: (rowId: number) => T;
+  mapValueToStyle: MapValueToStyle<T>;
 }
 
 export interface BinStyleMap<T> {
   type: "bin";
-  mapValueToStyle: (rowId: number) => T;
+  mapRowIdToStyle: (rowId: number) => T;
+  mapValueToStyle: MapValueToStyle<T>;
 }
 
 export interface ConstantStyleMap<T> {
@@ -97,52 +101,53 @@ export default class TableStyleMap<T extends TableStyleMapSymbolTraits> {
     // If column type is `scalar` and binStyles
     if (
       (this.traitValues.mapType === "bin" || !this.traitValues.mapType) &&
-      this.column?.type === TableColumnType.scalar &&
       this.traitValues.bin &&
       this.traitValues.bin.length > 0
     ) {
+      const mapValueToStyle: MapValueToStyle<T> = (value) => {
+        if (typeof value !== "number") {
+          return this.traitValues.null;
+        }
+
+        const binStyles = this.traitValues.bin ?? [];
+        let i;
+        for (
+          i = 0;
+          i < binStyles.length - 1 &&
+          value > (binStyles[i].maxValue ?? Infinity);
+          ++i
+        ) {
+          continue;
+        }
+
+        return {
+          ...this.traitValues.null,
+          ...(this.traitValues.bin?.[i] ?? {})
+        };
+      };
+
       return {
         type: "bin",
-        mapValueToStyle: (rowId) => {
-          const value = this.column?.valuesForType[rowId];
-          if (typeof value !== "number") {
-            return this.traitValues.null;
-          }
-
-          const binStyles = this.traitValues.bin ?? [];
-          let i;
-          for (
-            i = 0;
-            i < binStyles.length - 1 &&
-            value > (binStyles[i].maxValue ?? Infinity);
-            ++i
-          ) {
-            continue;
-          }
-
-          return {
-            ...this.traitValues.null,
-            ...(this.traitValues.bin?.[i] ?? {})
-          };
-        }
+        mapRowIdToStyle: (rowId) =>
+          mapValueToStyle(this.column?.valuesForType[rowId]),
+        mapValueToStyle
       };
     } else if (
       (this.traitValues.mapType === "enum" || !this.traitValues.mapType) &&
-      this.column &&
       this.traitValues.enum &&
       this.traitValues.enum.length > 0
     ) {
+      const mapValueToStyle: MapValueToStyle<T> = (value) => {
+        const style = this.traitValues.enum!.find(
+          (enumStyle) => enumStyle.value !== null && enumStyle.value === value
+        );
+
+        return { ...this.traitValues.null, ...(style ?? {}) };
+      };
       return {
         type: "enum",
-        mapValueToStyle: (rowId) => {
-          const style = this.traitValues.enum!.find(
-            (enumStyle) =>
-              enumStyle.value !== null &&
-              enumStyle.value === this.column?.values[rowId]
-          );
-
-          return { ...this.traitValues.null, ...(style ?? {}) };
-        }
+        mapRowIdToStyle: (rowId) => mapValueToStyle(this.column?.values[rowId]),
+        mapValueToStyle
       };
     }
 

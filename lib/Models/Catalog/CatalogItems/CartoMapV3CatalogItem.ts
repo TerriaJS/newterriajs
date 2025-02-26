@@ -1,8 +1,9 @@
 import { featureCollection, Geometry, GeometryCollection } from "@turf/helpers";
 import i18next from "i18next";
-import { computed, observable, runInAction, makeObservable } from "mobx";
+import { computed, makeObservable, observable, runInAction } from "mobx";
 import RequestErrorEvent from "terriajs-cesium/Source/Core/RequestErrorEvent";
 import URI from "urijs";
+import { toFeatureCollection } from "../../../Core/GeoJson";
 import JsonValue, {
   isJsonNumber,
   isJsonObject,
@@ -13,9 +14,7 @@ import JsonValue, {
 import loadJson from "../../../Core/loadJson";
 import Result from "../../../Core/Result";
 import TerriaError, { networkRequestError } from "../../../Core/TerriaError";
-import GeoJsonMixin, {
-  toFeatureCollection
-} from "../../../ModelMixins/GeojsonMixin";
+import GeoJsonMixin from "../../../ModelMixins/GeojsonMixin";
 import CartoMapV3CatalogItemTraits from "../../../Traits/TraitsClasses/CartoMapV3CatalogItemTraits";
 import { GeoJsonTraits } from "../../../Traits/TraitsClasses/GeoJsonTraits";
 import TableStyleTraits from "../../../Traits/TraitsClasses/Table/StyleTraits";

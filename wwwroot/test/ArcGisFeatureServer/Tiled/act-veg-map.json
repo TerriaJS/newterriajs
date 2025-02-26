@@ -1,0 +1,1198 @@
+{
+  "currentVersion": 11.2,
+  "id": 0,
+  "name": "ACT Vegetation Map 2023",
+  "type": "Feature Layer",
+  "serviceItemId": "abfd3a8744ad4019b139ada2028f2a64",
+  "cacheMaxAge": 30,
+  "sourceSchemaChangesAllowed": true,
+  "hasViews": true,
+  "displayField": "vegCommunity",
+  "description": "Some description",
+  "copyrightText": "© Australian Capital Territory",
+  "defaultVisibility": true,
+  "editingInfo": {
+    "lastEditDate": 1724214859574,
+    "schemaLastEditDate": 1724214856222,
+    "dataLastEditDate": 1721608500483
+  },
+  "relationships": [],
+  "isDataVersioned": false,
+  "hasContingentValuesDefinition": false,
+  "supportsAppend": true,
+  "supportsCalculate": true,
+  "supportsASyncCalculate": true,
+  "supportsTruncate": true,
+  "supportsAttachmentsByUploadId": true,
+  "supportsAttachmentsResizing": true,
+  "supportsRollbackOnFailureParameter": true,
+  "supportsStatistics": true,
+  "supportsExceedsLimitStatistics": true,
+  "supportsAdvancedQueries": true,
+  "supportsValidateSql": true,
+  "supportsCoordinatesQuantization": true,
+  "supportsLayerOverrides": true,
+  "supportsTilesAndBasicQueriesMode": true,
+  "supportsFieldDescriptionProperty": true,
+  "supportsQuantizationEditMode": true,
+  "supportsApplyEditsWithGlobalIds": true,
+  "supportsMultiScaleGeometry": true,
+  "supportsReturningQueryGeometry": true,
+  "hasGeometryProperties": true,
+  "geometryProperties": {
+    "shapeAreaFieldName": "Shape__Area",
+    "shapeLengthFieldName": "Shape__Length",
+    "units": "esriMeters"
+  },
+  "advancedQueryCapabilities": {
+    "supportsPagination": true,
+    "supportsQueryAttachmentsCountOnly": true,
+    "supportsPaginationOnAggregatedQueries": true,
+    "supportsQueryRelatedPagination": true,
+    "supportsQueryWithDistance": true,
+    "supportsReturningQueryExtent": true,
+    "supportsStatistics": true,
+    "supportsOrderBy": true,
+    "supportsDistinct": true,
+    "supportsQueryWithResultType": true,
+    "supportsSqlExpression": true,
+    "supportsTimeRelation": true,
+    "supportsAdvancedQueryRelated": true,
+    "supportsCountDistinct": true,
+    "supportsPercentileStatistics": true,
+    "supportsApproxPercentileStatistics": true,
+    "supportsSpatialAggregationStatistics": true,
+    "supportsTrueCurve": true,
+    "supportedSpatialAggregationStatistics": [
+      "EnvelopeAggregate",
+      "CentroidAggregate",
+      "ConvexHullAggregate"
+    ],
+    "supportsLod": true,
+    "supportsQueryWithLodSR": false,
+    "supportedLodTypes": ["geohash"],
+    "supportsReturningGeometryCentroid": true,
+    "supportsReturningGeometryEnvelope": true,
+    "supportsReturningGeometryProperties": true,
+    "supportsQueryWithDatumTransformation": true,
+    "supportsCurrentUserQueries": true,
+    "supportsHavingClause": true,
+    "supportsOutFieldSQLExpression": true,
+    "supportsMaxRecordCountFactor": true,
+    "supportsTopFeaturesQuery": true,
+    "supportsDisjointSpatialRel": true,
+    "supportsQueryWithCacheHint": true,
+    "supportedOperationsWithCacheHint": [
+      "query",
+      "queryTopFilter",
+      "queryAnalytics",
+      "queryAttachments",
+      "queryRelated",
+      "queryBins"
+    ],
+    "supportsQueryAnalytic": true,
+    "supportsQueryBins": true,
+    "supportsDefaultSR": true,
+    "supportsFullTextSearch": true,
+    "supportsFullTextAccentSensitivity": true,
+    "supportsFullTextStopWords": true
+  },
+  "advancedQueryAnalyticCapabilities": {
+    "supportsLinearRegression": true,
+    "supportsAsync": true,
+    "supportsPercentileAnalytic": true
+  },
+  "queryBinsCapabilities": {
+    "supportsAsync": true,
+    "supportsAutoIntervalBin": true,
+    "supportsFixedIntervalBin": true,
+    "supportsFixedBoundariesBin": true,
+    "supportsDateBin": true,
+    "supportedStatisticTypes": [
+      "COUNT",
+      "SUM",
+      "AVG",
+      "VAR",
+      "STDDEV",
+      "MIN",
+      "MAX",
+      "PERCENTILE_CONT",
+      "PERCENTILE_DISC",
+      "APPROX_PERCENTILE_CONT",
+      "APPROX_PERCENTILE_DISC",
+      "CentroidAggregate",
+      "EnvelopeAggregate",
+      "ConvexHullAggregate"
+    ]
+  },
+  "advancedEditingCapabilities": {
+    "supportedSqlFormatsInCalculate": ["standard"],
+    "supportsAsyncApplyEdits": true,
+    "supportsReturnEditResults": true,
+    "supportsApplyEditsbyUploadID": true,
+    "supportedApplyEditsUploadIDFormats": "JSON"
+  },
+  "infoInEstimates": ["extent", "count"],
+  "useStandardizedQueries": true,
+  "geometryType": "esriGeometryPolygon",
+  "minScale": 2311163,
+  "maxScale": 1128,
+  "extent": {
+    "xmin": 659889.86149999965,
+    "ymin": 6022932.3491,
+    "xmax": 718107.4052,
+    "ymax": 6111102.9419,
+    "spatialReference": {
+      "wkid": 7855,
+      "latestWkid": 7855
+    }
+  },
+  "drawingInfo": {
+    "renderer": {
+      "type": "uniqueValue",
+      "field1": "class",
+      "defaultSymbol": {
+        "type": "esriSFS",
+        "style": "esriSFSSolid",
+        "color": [170, 170, 170, 255],
+        "outline": {
+          "type": "esriSLS",
+          "style": "esriSLSSolid",
+          "color": [153, 153, 153, 64],
+          "width": 0.75
+        }
+      },
+      "defaultLabel": "Other",
+      "uniqueValueInfos": [
+        {
+          "symbol": {
+            "type": "esriSFS",
+            "style": "esriSFSSolid",
+            "color": [20, 158, 206, 255],
+            "outline": {
+              "type": "esriSLS",
+              "style": "esriSLSSolid",
+              "color": [153, 153, 153, 64],
+              "width": 0.75
+            }
+          },
+          "value": "Southern Tableland Dry Sclerophyll Forests",
+          "label": "Southern Tableland Dry Sclerophyll Forests"
+        },
+        {
+          "symbol": {
+            "type": "esriSFS",
+            "style": "esriSFSSolid",
+            "color": [167, 198, 54, 255],
+            "outline": {
+              "type": "esriSLS",
+              "style": "esriSLSSolid",
+              "color": [153, 153, 153, 64],
+              "width": 0.75
+            }
+          },
+          "value": "Southern Tableland Grassy Woodlands",
+          "label": "Southern Tableland Grassy Woodlands"
+        },
+        {
+          "symbol": {
+            "type": "esriSFS",
+            "style": "esriSFSSolid",
+            "color": [158, 85, 156, 255],
+            "outline": {
+              "type": "esriSLS",
+              "style": "esriSLSSolid",
+              "color": [153, 153, 153, 64],
+              "width": 0.75
+            }
+          },
+          "value": "Subalpine Woodlands",
+          "label": "Subalpine Woodlands"
+        },
+        {
+          "symbol": {
+            "type": "esriSFS",
+            "style": "esriSFSSolid",
+            "color": [252, 146, 31, 255],
+            "outline": {
+              "type": "esriSLS",
+              "style": "esriSLSSolid",
+              "color": [153, 153, 153, 64],
+              "width": 0.75
+            }
+          },
+          "value": "Temperate Montane Grasslands",
+          "label": "Temperate Montane Grasslands"
+        },
+        {
+          "symbol": {
+            "type": "esriSFS",
+            "style": "esriSFSSolid",
+            "color": [255, 222, 62, 255],
+            "outline": {
+              "type": "esriSLS",
+              "style": "esriSLSSolid",
+              "color": [153, 153, 153, 64],
+              "width": 0.75
+            }
+          },
+          "value": "Southern Tableland Wet Sclerophyll Forests",
+          "label": "Southern Tableland Wet Sclerophyll Forests"
+        },
+        {
+          "symbol": {
+            "type": "esriSFS",
+            "style": "esriSFSSolid",
+            "color": [247, 137, 216, 255],
+            "outline": {
+              "type": "esriSLS",
+              "style": "esriSLSSolid",
+              "color": [153, 153, 153, 64],
+              "width": 0.75
+            }
+          },
+          "value": "Upper Riverina Dry Sclerophyll Forests",
+          "label": "Upper Riverina Dry Sclerophyll Forests"
+        },
+        {
+          "symbol": {
+            "type": "esriSFS",
+            "style": "esriSFSSolid",
+            "color": [183, 129, 74, 255],
+            "outline": {
+              "type": "esriSLS",
+              "style": "esriSLSSolid",
+              "color": [153, 153, 153, 64],
+              "width": 0.75
+            }
+          },
+          "value": "Montane Bogs and Fens",
+          "label": "Montane Bogs and Fens"
+        },
+        {
+          "symbol": {
+            "type": "esriSFS",
+            "style": "esriSFSSolid",
+            "color": [60, 175, 153, 255],
+            "outline": {
+              "type": "esriSLS",
+              "style": "esriSLSSolid",
+              "color": [153, 153, 153, 64],
+              "width": 0.75
+            }
+          },
+          "value": "Alpine Heaths",
+          "label": "Alpine Heaths"
+        },
+        {
+          "symbol": {
+            "type": "esriSFS",
+            "style": "esriSFSSolid",
+            "color": [107, 107, 214, 255],
+            "outline": {
+              "type": "esriSLS",
+              "style": "esriSLSSolid",
+              "color": [153, 153, 153, 64],
+              "width": 0.75
+            }
+          },
+          "value": "Montane Wet Sclerophyll Forests",
+          "label": "Montane Wet Sclerophyll Forests"
+        }
+      ],
+      "fieldDelimiter": ",",
+      "visualVariables": [
+        {
+          "type": "sizeInfo",
+          "valueExpressionTitle": "Custom",
+          "valueExpression": "$view.scale",
+          "stops": [
+            { "size": 2, "value": 10363 },
+            { "size": 1, "value": 32384 },
+            { "size": 0.5, "value": 129536 },
+            { "size": 0, "value": 259072 }
+          ],
+          "target": "outline",
+          "axis": "height",
+          "valueUnit": ""
+        }
+      ]
+    },
+    "scaleSymbols": true,
+    "transparency": 0,
+    "labelingInfo": null
+  },
+  "allowGeometryUpdates": true,
+  "supportedCurveTypes": ["esriGeometryCircularArc"],
+  "allowTrueCurvesUpdates": true,
+  "onlyAllowTrueCurveUpdatesByTrueCurveClients": true,
+  "hasAttachments": false,
+  "htmlPopupType": "esriServerHTMLPopupTypeAsHTMLText",
+  "hasMetadata": true,
+  "hasM": false,
+  "hasZ": false,
+  "objectIdField": "OBJECTID",
+  "uniqueIdField": {
+    "name": "OBJECTID",
+    "isSystemMaintained": true
+  },
+  "globalIdField": "GlobalID",
+  "typeIdField": "class",
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID",
+      "sqlType": "sqlTypeOther",
+      "nullable": false,
+      "editable": false,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "GlobalID",
+      "type": "esriFieldTypeGlobalID",
+      "alias": "GlobalID",
+      "sqlType": "sqlTypeOther",
+      "length": 38,
+      "nullable": false,
+      "editable": false,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "actGUID",
+      "type": "esriFieldTypeGUID",
+      "alias": "actGUID",
+      "sqlType": "sqlTypeOther",
+      "length": 38,
+      "nullable": true,
+      "editable": true,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "vegCommunity",
+      "type": "esriFieldTypeString",
+      "alias": "vegCommunity",
+      "sqlType": "sqlTypeOther",
+      "length": 150,
+      "nullable": true,
+      "editable": true,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "umcID",
+      "type": "esriFieldTypeString",
+      "alias": "umcID",
+      "sqlType": "sqlTypeOther",
+      "length": 10,
+      "nullable": true,
+      "editable": true,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "tecACT",
+      "type": "esriFieldTypeString",
+      "alias": "tecACT",
+      "sqlType": "sqlTypeOther",
+      "length": 150,
+      "nullable": true,
+      "editable": true,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "tecEPBC",
+      "type": "esriFieldTypeString",
+      "alias": "tecEPBC",
+      "sqlType": "sqlTypeOther",
+      "length": 150,
+      "nullable": true,
+      "editable": true,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "tecID",
+      "type": "esriFieldTypeSmallInteger",
+      "alias": "tecID",
+      "sqlType": "sqlTypeOther",
+      "nullable": true,
+      "editable": true,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "actConservationStatus",
+      "type": "esriFieldTypeString",
+      "alias": "actConservationStatus",
+      "sqlType": "sqlTypeOther",
+      "length": 150,
+      "nullable": true,
+      "editable": true,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "nationalConservationStatus",
+      "type": "esriFieldTypeString",
+      "alias": "nationalConservationStatus",
+      "sqlType": "sqlTypeOther",
+      "length": 150,
+      "nullable": true,
+      "editable": true,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "treesp1",
+      "type": "esriFieldTypeString",
+      "alias": "treesp1",
+      "sqlType": "sqlTypeOther",
+      "length": 100,
+      "nullable": true,
+      "editable": true,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "treesp2",
+      "type": "esriFieldTypeString",
+      "alias": "treesp2",
+      "sqlType": "sqlTypeOther",
+      "length": 100,
+      "nullable": true,
+      "editable": true,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "treesp3",
+      "type": "esriFieldTypeString",
+      "alias": "treesp3",
+      "sqlType": "sqlTypeOther",
+      "length": 100,
+      "nullable": true,
+      "editable": true,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "shrubsp1",
+      "type": "esriFieldTypeString",
+      "alias": "shrubsp1",
+      "sqlType": "sqlTypeOther",
+      "length": 100,
+      "nullable": true,
+      "editable": true,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "shrubsp2",
+      "type": "esriFieldTypeString",
+      "alias": "shrubsp2",
+      "sqlType": "sqlTypeOther",
+      "length": 100,
+      "nullable": true,
+      "editable": true,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "shrubsp3",
+      "type": "esriFieldTypeString",
+      "alias": "shrubsp3",
+      "sqlType": "sqlTypeOther",
+      "length": 100,
+      "nullable": true,
+      "editable": true,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "groundsp1",
+      "type": "esriFieldTypeString",
+      "alias": "groundsp1",
+      "sqlType": "sqlTypeOther",
+      "length": 100,
+      "nullable": true,
+      "editable": true,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "groundsp2",
+      "type": "esriFieldTypeString",
+      "alias": "groundsp2",
+      "sqlType": "sqlTypeOther",
+      "length": 100,
+      "nullable": true,
+      "editable": true,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "groundsp3",
+      "type": "esriFieldTypeString",
+      "alias": "groundsp3",
+      "sqlType": "sqlTypeOther",
+      "length": 100,
+      "nullable": true,
+      "editable": true,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "hectares",
+      "type": "esriFieldTypeDouble",
+      "alias": "hectares",
+      "sqlType": "sqlTypeOther",
+      "nullable": true,
+      "editable": true,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "height_mean",
+      "type": "esriFieldTypeDouble",
+      "alias": "height_mean",
+      "sqlType": "sqlTypeOther",
+      "nullable": true,
+      "editable": true,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "height_stdev",
+      "type": "esriFieldTypeDouble",
+      "alias": "height_stdev",
+      "sqlType": "sqlTypeOther",
+      "nullable": true,
+      "editable": true,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "canopyCover",
+      "type": "esriFieldTypeDouble",
+      "alias": "canopyCover",
+      "sqlType": "sqlTypeOther",
+      "nullable": true,
+      "editable": true,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "underCover",
+      "type": "esriFieldTypeDouble",
+      "alias": "underCover",
+      "sqlType": "sqlTypeOther",
+      "nullable": true,
+      "editable": true,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "structure",
+      "type": "esriFieldTypeString",
+      "alias": "structure",
+      "sqlType": "sqlTypeOther",
+      "length": 100,
+      "nullable": true,
+      "editable": true,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "formation",
+      "type": "esriFieldTypeString",
+      "alias": "formation",
+      "sqlType": "sqlTypeOther",
+      "length": 100,
+      "nullable": true,
+      "editable": true,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "class",
+      "type": "esriFieldTypeString",
+      "alias": "keith class",
+      "sqlType": "sqlTypeOther",
+      "length": 100,
+      "nullable": true,
+      "editable": true,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "grassyStructure",
+      "type": "esriFieldTypeString",
+      "alias": "grassyStructure",
+      "sqlType": "sqlTypeOther",
+      "length": 50,
+      "nullable": true,
+      "editable": true,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "lastVegCommunity",
+      "type": "esriFieldTypeString",
+      "alias": "lastVegCommunity",
+      "sqlType": "sqlTypeOther",
+      "length": 150,
+      "nullable": true,
+      "editable": true,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "landscape",
+      "type": "esriFieldTypeString",
+      "alias": "landscape",
+      "sqlType": "sqlTypeOther",
+      "length": 50,
+      "nullable": true,
+      "editable": true,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "lossReason",
+      "type": "esriFieldTypeString",
+      "alias": "lossReason",
+      "sqlType": "sqlTypeOther",
+      "length": 255,
+      "nullable": true,
+      "editable": true,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "lossYear",
+      "type": "esriFieldTypeSmallInteger",
+      "alias": "lossYear",
+      "sqlType": "sqlTypeOther",
+      "nullable": true,
+      "editable": true,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Shape__Area",
+      "type": "esriFieldTypeDouble",
+      "alias": "Shape__Area",
+      "sqlType": "sqlTypeDouble",
+      "nullable": true,
+      "editable": false,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Shape__Length",
+      "type": "esriFieldTypeDouble",
+      "alias": "Shape__Length",
+      "sqlType": "sqlTypeDouble",
+      "nullable": true,
+      "editable": false,
+      "domain": null,
+      "defaultValue": null
+    }
+  ],
+  "indexes": [
+    {
+      "name": "PK__ACTGOV_V__F4B70D85BD372E11",
+      "fields": "OBJECTID",
+      "isAscending": true,
+      "isUnique": true,
+      "description": "",
+      "indexType": "Attribute"
+    },
+    {
+      "name": "user_8033.ACTGOV_VEGETATION_MAP_2023_ACT_VEGETATION_MAP_20232_Shape_sidx",
+      "fields": "SHAPE",
+      "isAscending": true,
+      "isUnique": false,
+      "description": "",
+      "indexType": "Spatial"
+    },
+    {
+      "name": "FDO_GlobalID",
+      "fields": "GlobalID",
+      "isAscending": true,
+      "isUnique": true,
+      "description": "",
+      "indexType": "Attribute"
+    },
+    {
+      "name": "Shape__Area_Index",
+      "fields": "Shape__Area",
+      "isAscending": true,
+      "isUnique": false,
+      "description": "",
+      "indexType": "Attribute"
+    },
+    {
+      "name": "Shape__Length_Index",
+      "fields": "Shape__Length",
+      "isAscending": true,
+      "isUnique": false,
+      "description": "",
+      "indexType": "Attribute"
+    }
+  ],
+  "dateFieldsTimeReference": {
+    "timeZone": "UTC",
+    "respectsDaylightSaving": false
+  },
+  "preferredTimeReference": null,
+  "types": [
+    {
+      "id": "Southern Tableland Dry Sclerophyll Forests",
+      "name": "Southern Tableland Dry Sclerophyll Forests",
+      "domains": {},
+      "templates": [
+        {
+          "name": "Southern Tableland Dry Sclerophyll Forests",
+          "description": "",
+          "drawingTool": "esriFeatureEditToolPolygon",
+          "prototype": {
+            "attributes": {
+              "lossReason": null,
+              "lossYear": null,
+              "landscape": null,
+              "actGUID": null,
+              "vegCommunity": null,
+              "umcID": null,
+              "tecACT": null,
+              "tecEPBC": null,
+              "tecID": null,
+              "actConservationStatus": null,
+              "nationalConservationStatus": null,
+              "treesp1": null,
+              "treesp2": null,
+              "treesp3": null,
+              "shrubsp1": null,
+              "shrubsp2": null,
+              "shrubsp3": null,
+              "groundsp1": null,
+              "groundsp2": null,
+              "groundsp3": null,
+              "hectares": null,
+              "height_mean": null,
+              "height_stdev": null,
+              "canopyCover": null,
+              "underCover": null,
+              "structure": null,
+              "formation": null,
+              "class": "Southern Tableland Dry Sclerophyll Forests",
+              "grassyStructure": null,
+              "lastVegCommunity": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "Southern Tableland Grassy Woodlands",
+      "name": "Southern Tableland Grassy Woodlands",
+      "domains": {},
+      "templates": [
+        {
+          "name": "Southern Tableland Grassy Woodlands",
+          "description": "",
+          "drawingTool": "esriFeatureEditToolPolygon",
+          "prototype": {
+            "attributes": {
+              "lossReason": null,
+              "lossYear": null,
+              "landscape": null,
+              "actGUID": null,
+              "vegCommunity": null,
+              "umcID": null,
+              "tecACT": null,
+              "tecEPBC": null,
+              "tecID": null,
+              "actConservationStatus": null,
+              "nationalConservationStatus": null,
+              "treesp1": null,
+              "treesp2": null,
+              "treesp3": null,
+              "shrubsp1": null,
+              "shrubsp2": null,
+              "shrubsp3": null,
+              "groundsp1": null,
+              "groundsp2": null,
+              "groundsp3": null,
+              "hectares": null,
+              "height_mean": null,
+              "height_stdev": null,
+              "canopyCover": null,
+              "underCover": null,
+              "structure": null,
+              "formation": null,
+              "class": "Southern Tableland Grassy Woodlands",
+              "grassyStructure": null,
+              "lastVegCommunity": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "Subalpine Woodlands",
+      "name": "Subalpine Woodlands",
+      "domains": {},
+      "templates": [
+        {
+          "name": "Subalpine Woodlands",
+          "description": "",
+          "drawingTool": "esriFeatureEditToolPolygon",
+          "prototype": {
+            "attributes": {
+              "lossReason": null,
+              "lossYear": null,
+              "landscape": null,
+              "actGUID": null,
+              "vegCommunity": null,
+              "umcID": null,
+              "tecACT": null,
+              "tecEPBC": null,
+              "tecID": null,
+              "actConservationStatus": null,
+              "nationalConservationStatus": null,
+              "treesp1": null,
+              "treesp2": null,
+              "treesp3": null,
+              "shrubsp1": null,
+              "shrubsp2": null,
+              "shrubsp3": null,
+              "groundsp1": null,
+              "groundsp2": null,
+              "groundsp3": null,
+              "hectares": null,
+              "height_mean": null,
+              "height_stdev": null,
+              "canopyCover": null,
+              "underCover": null,
+              "structure": null,
+              "formation": null,
+              "class": "Subalpine Woodlands",
+              "grassyStructure": null,
+              "lastVegCommunity": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "Temperate Montane Grasslands",
+      "name": "Temperate Montane Grasslands",
+      "domains": {},
+      "templates": [
+        {
+          "name": "Temperate Montane Grasslands",
+          "description": "",
+          "drawingTool": "esriFeatureEditToolPolygon",
+          "prototype": {
+            "attributes": {
+              "lossReason": null,
+              "lossYear": null,
+              "landscape": null,
+              "actGUID": null,
+              "vegCommunity": null,
+              "umcID": null,
+              "tecACT": null,
+              "tecEPBC": null,
+              "tecID": null,
+              "actConservationStatus": null,
+              "nationalConservationStatus": null,
+              "treesp1": null,
+              "treesp2": null,
+              "treesp3": null,
+              "shrubsp1": null,
+              "shrubsp2": null,
+              "shrubsp3": null,
+              "groundsp1": null,
+              "groundsp2": null,
+              "groundsp3": null,
+              "hectares": null,
+              "height_mean": null,
+              "height_stdev": null,
+              "canopyCover": null,
+              "underCover": null,
+              "structure": null,
+              "formation": null,
+              "class": "Temperate Montane Grasslands",
+              "grassyStructure": null,
+              "lastVegCommunity": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "Southern Tableland Wet Sclerophyll Forests",
+      "name": "Southern Tableland Wet Sclerophyll Forests",
+      "domains": {},
+      "templates": [
+        {
+          "name": "Southern Tableland Wet Sclerophyll Forests",
+          "description": "",
+          "drawingTool": "esriFeatureEditToolPolygon",
+          "prototype": {
+            "attributes": {
+              "lossReason": null,
+              "lossYear": null,
+              "landscape": null,
+              "actGUID": null,
+              "vegCommunity": null,
+              "umcID": null,
+              "tecACT": null,
+              "tecEPBC": null,
+              "tecID": null,
+              "actConservationStatus": null,
+              "nationalConservationStatus": null,
+              "treesp1": null,
+              "treesp2": null,
+              "treesp3": null,
+              "shrubsp1": null,
+              "shrubsp2": null,
+              "shrubsp3": null,
+              "groundsp1": null,
+              "groundsp2": null,
+              "groundsp3": null,
+              "hectares": null,
+              "height_mean": null,
+              "height_stdev": null,
+              "canopyCover": null,
+              "underCover": null,
+              "structure": null,
+              "formation": null,
+              "class": "Southern Tableland Wet Sclerophyll Forests",
+              "grassyStructure": null,
+              "lastVegCommunity": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "Upper Riverina Dry Sclerophyll Forests",
+      "name": "Upper Riverina Dry Sclerophyll Forests",
+      "domains": {},
+      "templates": [
+        {
+          "name": "Upper Riverina Dry Sclerophyll Forests",
+          "description": "",
+          "drawingTool": "esriFeatureEditToolPolygon",
+          "prototype": {
+            "attributes": {
+              "lossReason": null,
+              "lossYear": null,
+              "landscape": null,
+              "actGUID": null,
+              "vegCommunity": null,
+              "umcID": null,
+              "tecACT": null,
+              "tecEPBC": null,
+              "tecID": null,
+              "actConservationStatus": null,
+              "nationalConservationStatus": null,
+              "treesp1": null,
+              "treesp2": null,
+              "treesp3": null,
+              "shrubsp1": null,
+              "shrubsp2": null,
+              "shrubsp3": null,
+              "groundsp1": null,
+              "groundsp2": null,
+              "groundsp3": null,
+              "hectares": null,
+              "height_mean": null,
+              "height_stdev": null,
+              "canopyCover": null,
+              "underCover": null,
+              "structure": null,
+              "formation": null,
+              "class": "Upper Riverina Dry Sclerophyll Forests",
+              "grassyStructure": null,
+              "lastVegCommunity": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "Montane Bogs and Fens",
+      "name": "Montane Bogs and Fens",
+      "domains": {},
+      "templates": [
+        {
+          "name": "Montane Bogs and Fens",
+          "description": "",
+          "drawingTool": "esriFeatureEditToolPolygon",
+          "prototype": {
+            "attributes": {
+              "lossReason": null,
+              "lossYear": null,
+              "landscape": null,
+              "actGUID": null,
+              "vegCommunity": null,
+              "umcID": null,
+              "tecACT": null,
+              "tecEPBC": null,
+              "tecID": null,
+              "actConservationStatus": null,
+              "nationalConservationStatus": null,
+              "treesp1": null,
+              "treesp2": null,
+              "treesp3": null,
+              "shrubsp1": null,
+              "shrubsp2": null,
+              "shrubsp3": null,
+              "groundsp1": null,
+              "groundsp2": null,
+              "groundsp3": null,
+              "hectares": null,
+              "height_mean": null,
+              "height_stdev": null,
+              "canopyCover": null,
+              "underCover": null,
+              "structure": null,
+              "formation": null,
+              "class": "Montane Bogs and Fens",
+              "grassyStructure": null,
+              "lastVegCommunity": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "Alpine Heaths",
+      "name": "Alpine Heaths",
+      "domains": {},
+      "templates": [
+        {
+          "name": "Alpine Heaths",
+          "description": "",
+          "drawingTool": "esriFeatureEditToolPolygon",
+          "prototype": {
+            "attributes": {
+              "lossReason": null,
+              "lossYear": null,
+              "landscape": null,
+              "actGUID": null,
+              "vegCommunity": null,
+              "umcID": null,
+              "tecACT": null,
+              "tecEPBC": null,
+              "tecID": null,
+              "actConservationStatus": null,
+              "nationalConservationStatus": null,
+              "treesp1": null,
+              "treesp2": null,
+              "treesp3": null,
+              "shrubsp1": null,
+              "shrubsp2": null,
+              "shrubsp3": null,
+              "groundsp1": null,
+              "groundsp2": null,
+              "groundsp3": null,
+              "hectares": null,
+              "height_mean": null,
+              "height_stdev": null,
+              "canopyCover": null,
+              "underCover": null,
+              "structure": null,
+              "formation": null,
+              "class": "Alpine Heaths",
+              "grassyStructure": null,
+              "lastVegCommunity": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "Montane Wet Sclerophyll Forests",
+      "name": "Montane Wet Sclerophyll Forests",
+      "domains": {},
+      "templates": [
+        {
+          "name": "Montane Wet Sclerophyll Forests",
+          "description": "",
+          "drawingTool": "esriFeatureEditToolPolygon",
+          "prototype": {
+            "attributes": {
+              "lossReason": null,
+              "lossYear": null,
+              "landscape": null,
+              "actGUID": null,
+              "vegCommunity": null,
+              "umcID": null,
+              "tecACT": null,
+              "tecEPBC": null,
+              "tecID": null,
+              "actConservationStatus": null,
+              "nationalConservationStatus": null,
+              "treesp1": null,
+              "treesp2": null,
+              "treesp3": null,
+              "shrubsp1": null,
+              "shrubsp2": null,
+              "shrubsp3": null,
+              "groundsp1": null,
+              "groundsp2": null,
+              "groundsp3": null,
+              "hectares": null,
+              "height_mean": null,
+              "height_stdev": null,
+              "canopyCover": null,
+              "underCover": null,
+              "structure": null,
+              "formation": null,
+              "class": "Montane Wet Sclerophyll Forests",
+              "grassyStructure": null,
+              "lastVegCommunity": null
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "templates": [],
+  "supportedQueryFormats": "JSON, geoJSON, PBF",
+  "supportedAppendFormats": "sqlite,geoPackage,shapefile,filegdb,featureCollection,geojson,csv,excel,jsonl,featureService,pbf",
+  "supportedAppendSourceFilterFormats": "sqlite,geoPackage,shapefile,filegdb,featureService",
+  "supportedExportFormats": "csv,shapefile,sqlite,geoPackage,filegdb,featureCollection,geojson,kml,excel",
+  "supportedConvertFileFormats": "JSON,PBF",
+  "supportedConvertContentFormats": "LayerEditCollection,FeatureCollection",
+  "supportedSpatialRelationships": [
+    "esriSpatialRelIntersects",
+    "esriSpatialRelContains",
+    "esriSpatialRelCrosses",
+    "esriSpatialRelEnvelopeIntersects",
+    "esriSpatialRelIndexIntersects",
+    "esriSpatialRelOverlaps",
+    "esriSpatialRelTouches",
+    "esriSpatialRelWithin",
+    "esriSpatialRelDisjoint",
+    "esriSpatialRelRelation"
+  ],
+  "supportedContingentValuesFormats": "JSON, PBF",
+  "supportedSyncDataOptions": 260,
+  "hasStaticData": true,
+  "maxRecordCount": 2000,
+  "standardMaxRecordCount": 4000,
+  "standardMaxRecordCountNoGeometry": 32000,
+  "tileMaxRecordCount": 4000,
+  "maxRecordCountFactor": 1,
+  "capabilities": "Query"
+}

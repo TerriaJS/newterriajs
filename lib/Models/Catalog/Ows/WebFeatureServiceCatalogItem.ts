@@ -1,6 +1,10 @@
 import i18next from "i18next";
 import { computed, makeObservable, override, runInAction } from "mobx";
 import combine from "terriajs-cesium/Source/Core/combine";
+import {
+  FeatureCollectionWithCrs,
+  toFeatureCollection
+} from "../../../Core/GeoJson";
 import TerriaError from "../../../Core/TerriaError";
 import containsAny from "../../../Core/containsAny";
 import isDefined from "../../../Core/isDefined";
@@ -8,10 +12,7 @@ import isReadOnlyArray from "../../../Core/isReadOnlyArray";
 import loadText from "../../../Core/loadText";
 import gmlToGeoJson from "../../../Map/Vector/gmlToGeoJson";
 import { getName } from "../../../ModelMixins/CatalogMemberMixin";
-import GeoJsonMixin, {
-  FeatureCollectionWithCrs,
-  toFeatureCollection
-} from "../../../ModelMixins/GeojsonMixin";
+import GeoJsonMixin from "../../../ModelMixins/GeojsonMixin";
 import GetCapabilitiesMixin from "../../../ModelMixins/GetCapabilitiesMixin";
 import xml2json from "../../../ThirdParty/xml2json";
 import { InfoSectionTraits } from "../../../Traits/TraitsClasses/CatalogMemberTraits";

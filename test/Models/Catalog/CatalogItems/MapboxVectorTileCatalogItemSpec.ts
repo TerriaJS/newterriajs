@@ -11,7 +11,7 @@ import {
   getFont,
   numberFn,
   numberOrFn
-} from "../../../../lib/Map/Vector/mapboxStyleJsonToProtomaps";
+} from "../../../../lib/Map/Vector/Protomaps/mapboxStyleJsonToProtomaps";
 import { ImageryParts } from "../../../../lib/ModelMixins/MappableMixin";
 import MapboxVectorTileCatalogItem from "../../../../lib/Models/Catalog/CatalogItems/MapboxVectorTileCatalogItem";
 import CommonStrata from "../../../../lib/Models/Definition/CommonStrata";
@@ -61,7 +61,9 @@ describe("MapboxVectorTileCatalogItem", function () {
       imageryProvider = mvt.mapItems[0]
         .imageryProvider as ProtomapsImageryProvider;
 
-      expect(imageryProvider.minimumLevel).toBe(1);
+      // Note: ProtomapsImageryProvider uses softMinimumLevel instead of minimumLevel
+      expect(imageryProvider.minimumLevel).toBe(0);
+      expect(imageryProvider.softMinimumLevel).toBe(1);
       expect(imageryProvider.maximumLevel).toBe(20);
       expect(imageryProvider.maximumNativeZoom).toBe(10);
     });

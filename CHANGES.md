@@ -1,7 +1,25 @@
 # Change Log
 
-#### next release (8.8.1)
+#### next release (8.9.0)
 
+- **Breaking changes**
+  - Add tiling support to `ArcGisFeatureServerCatalogItem` - this will be enabled by default if the server supports tiling and unsupported marker/point styles aren't used. See `ArcGisFeatureServerCatalogTraits` `tileRequests`. When enabled, `pbf` tiles will be fetched and drawn using `ProtomapsImageryProvider`
+    - This can be disabled by setting `tileRequests` to `false`
+    - For point features, only the following `PointSymbolTraits` are available - fill, stroke, height (which sets circle radius). Custom markers (markers other than `point` or `circle`) are not supported.
+- Add `request` parameter to `ArcGisImageServerImageryProvider.buildImageResource` - this enables Cesium to manage requests
+- Decrease protomaps tile buffer to 32 pixels (from 64) to increase performance
+- Change `ProtomapsImageryProvider` to use a "soft" minimum level, so no tiles will be created below the `minimumZoom` provided.
+- Move `ProtomapsImageryProvider.pickFeatures` GeoJSON logic to inside `ProtomapsGeojsonSource.pickFeatures`.
+- Fix `FeatureInfoUrlTemplateMixin` reactivity warnings
+- Move `GeojsonMixin` protomaps paint/label rules to `tableStyleToProtomaps`.
+  - Also create `getStyleReactiveDependencies` that can be used to track (and react to) table styling traits
+- Add `dash` to `OutlineStyleTraits` (only supported by line features), and `outlineStyle` to `LegendTraits`.
+- Add `MinMaxLevelMixin` to `ArcGisFeatureServerCatalogItem` - only applied when tiling requests
+- Tweaked `TableStyleMap` and `TableColorMap` conditions to handle empty `TableColumns` (to support styling `ArcGisFeatureServerCatalogItem` when tiling requests)
+- Fix bug with expanding "Developer Details" in the error modal
+- Fix regression bug from https://github.com/TerriaJS/terriajs/pull/7144, GeoJson `MultiPolygon`, `Polygon` and `Line` features were being dropped
+- Move GeoJSON helper functions (`isFeatureCollection` etc) to `lib/Core/GeoJson.ts`
+- Split up `ArcGisFeatureServerCatalogItem` into `ArcGisFeatureServerStratum` and `esriStyleToTableStyle`
 - [The next improvement]
 
 #### 8.8.0 - 2025-02-18

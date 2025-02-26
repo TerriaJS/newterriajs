@@ -1,18 +1,17 @@
+import toGeoJSON from "@mapbox/togeojson";
 import i18next from "i18next";
 import { computed, makeObservable, override } from "mobx";
 import getFilenameFromUri from "terriajs-cesium/Source/Core/getFilenameFromUri";
+import { FeatureCollectionWithCrs } from "../../../Core/GeoJson";
 import isDefined from "../../../Core/isDefined";
 import loadText from "../../../Core/loadText";
 import readText from "../../../Core/readText";
 import { networkRequestError } from "../../../Core/TerriaError";
-import GeoJsonMixin, {
-  FeatureCollectionWithCrs
-} from "../../../ModelMixins/GeojsonMixin";
+import GeoJsonMixin from "../../../ModelMixins/GeojsonMixin";
 import GpxCatalogItemTraits from "../../../Traits/TraitsClasses/GpxCatalogItemTraits";
 import CreateModel from "../../Definition/CreateModel";
 import { ModelConstructorParameters } from "../../Definition/Model";
 import proxyCatalogItemUrl from "../proxyCatalogItemUrl";
-import toGeoJSON from "@mapbox/togeojson";
 
 class GpxCatalogItem extends GeoJsonMixin(CreateModel(GpxCatalogItemTraits)) {
   static readonly type = "gpx";

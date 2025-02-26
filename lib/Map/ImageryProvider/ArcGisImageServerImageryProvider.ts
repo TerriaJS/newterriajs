@@ -8,6 +8,7 @@ import GeographicProjection from "terriajs-cesium/Source/Core/GeographicProjecti
 import GeographicTilingScheme from "terriajs-cesium/Source/Core/GeographicTilingScheme";
 import Math from "terriajs-cesium/Source/Core/Math";
 import Rectangle from "terriajs-cesium/Source/Core/Rectangle";
+import Request from "terriajs-cesium/Source/Core/Request";
 import Resource from "terriajs-cesium/Source/Core/Resource";
 import TilingScheme from "terriajs-cesium/Source/Core/TilingScheme";
 import DiscardMissingTileImagePolicy from "terriajs-cesium/Source/Scene/DiscardMissingTileImagePolicy";
@@ -123,10 +124,11 @@ export default class ArcGisImageServerImageryProvider {
     return this.baseResource.proxy;
   }
 
-  buildImageResource(x: number, y: number, level: number) {
+  buildImageResource(x: number, y: number, level: number, request?: Request) {
     if (this.usePreCachedTiles) {
       return this.baseResource.getDerivedResource({
-        url: `tile/${level}/${y}/${x}`
+        url: `tile/${level}/${y}/${x}`,
+        request: request
       });
     } else {
       const nativeRectangle = this.tilingScheme.tileXYToNativeRectangle(
@@ -154,7 +156,8 @@ export default class ArcGisImageServerImageryProvider {
 
       return this.baseResource.getDerivedResource({
         url: "exportImage",
-        queryParameters: query
+        queryParameters: query,
+        request: request
       });
     }
   }
@@ -163,10 +166,10 @@ export default class ArcGisImageServerImageryProvider {
     return [];
   }
 
-  requestImage(x: number, y: number, level: number): any {
+  requestImage(x: number, y: number, level: number, request: Request): any {
     return ImageryProvider.loadImage(
       this,
-      this.buildImageResource(x, y, level)
+      this.buildImageResource(x, y, level, request)
     );
   }
 
