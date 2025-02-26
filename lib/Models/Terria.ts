@@ -128,8 +128,6 @@ import { isViewerMode, setViewerMode } from "./ViewerMode";
 import Workbench from "./Workbench";
 import SelectableDimensionWorkflow from "./Workflows/SelectableDimensionWorkflow";
 
-// import overrides from "../Overrides/defaults.jsx";
-
 export interface ConfigParameters {
   /**
    * TerriaJS uses this name whenever it needs to display the name of the application.
