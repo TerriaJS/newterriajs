@@ -5,6 +5,7 @@
 - Remove unused klaw-sync dependency.
 - Remove unused hammerjs dependency.
 - Remove unused turf/meta dependency.
+- Remove unused `arraysAreEqual`, `autoUpdate`, `flattenNested`, `freezeInDebug`, `isPromise`, `loadJsonp`, `OrUndefined`, and `superGet` files from lib/Core.
 - [The next improvement]
 
 #### 8.8.0 - 2025-02-18
