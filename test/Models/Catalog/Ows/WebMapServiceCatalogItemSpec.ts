@@ -617,6 +617,22 @@ describe("WebMapServiceCatalogItem", function () {
     expect(wms.validLayers).toEqual(["single_period"]);
   });
 
+  it("enforces the layer limit", async function () {
+    const terria = new Terria();
+    const wms = new WebMapServiceCatalogItem("test", terria);
+    runInAction(() => {
+      wms.setTrait(
+        "definition",
+        "url",
+        "test/WMS/wms_nested_groups_layer_limited.xml"
+      );
+    });
+
+    await wms.loadMetadata();
+
+    expect(wms.validLayers).toEqual(["ls8_nbart_geomedian_annual"]);
+  });
+
   it("uses GetFeatureInfo from GetCapabilities", async function () {
     expect().nothing();
     const terria = new Terria();

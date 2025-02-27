@@ -18,7 +18,6 @@
         </ContactInformation>
         <Fees>none</Fees>
         <AccessConstraints>none</AccessConstraints>
-        <LayerLimit>1</LayerLimit>
         <MaxWidth>1024</MaxWidth>
         <MaxHeight>1024</MaxHeight>
     </Service>

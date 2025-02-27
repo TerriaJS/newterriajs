@@ -42,6 +42,7 @@ http://schemas.opengis.net/wms/1.3.0/capabilities_1_3_0.xsd">
     </ContactInformation>
     <Fees>none</Fees>
     <AccessConstraints>© Commonwealth of Australia (Geoscience Australia) 2018. This product is released under the Creative Commons Attribution 4.0 International Licence. http://creativecommons.org/licenses/by/4.0/legalcode</AccessConstraints>
+    <LayerLimit>1</LayerLimit>
     <MaxWidth>512</MaxWidth>
     <MaxHeight>512</MaxHeight>
   </Service>
@@ -86,13 +87,19 @@ http://schemas.opengis.net/wms/1.3.0/capabilities_1_3_0.xsd">
       <Abstract>
             Digital Earth Australia OGC Web Services
       </Abstract>
+      <CRS>EPSG:3857</CRS>
       <CRS>EPSG:4326</CRS>
       <CRS>EPSG:3577</CRS>
       <CRS>EPSG:3111</CRS>
+      <EX_GeographicBoundingBox>
+        <westBoundLongitude>100</westBoundLongitude>
+        <eastBoundLongitude>160</eastBoundLongitude>
+        <southBoundLatitude>-50</southBoundLatitude>
+        <northBoundLatitude>-10</northBoundLatitude>
+      </EX_GeographicBoundingBox>
       <Layer>
         <Title>Surface Reflectance</Title>
-        <Abstract>
-        </Abstract>
+        <Abstract></Abstract>
         <Layer queryable="1">
           <Name>ls8_nbart_geomedian_annual</Name>
           <Title>Surface Reflectance 25m Annual Geomedian (Landsat 8)</Title>
@@ -101,10 +108,7 @@ Data is only visible at higher resolutions; when zoomed-out the available area w
 as a shaded region. The surface reflectance geometric median (geomedian) is a pixel composite
 mosaic of a time series of earth observations. The value of a pixel in a an annual geomedian
 image is the statistical median of all observations for that pixel from a calendar year.
-Annual mosaics are available for the following years:
-Landsat 8: 2013 to 2017;
-For more information, see http://pid.geoscience.gov.au/dataset/ga/120374
-For service status information, see https://status.dea.ga.gov.au
+Annual mosaics are available for the following years:Landsat 8: 2013 to 2017;For more information, see http://pid.geoscience.gov.au/dataset/ga/120374For service status information, see https://status.dea.ga.gov.au
           </Abstract>
           <KeywordList>
             <Keyword>WOfS</Keyword>
@@ -207,10 +211,7 @@ Data is only visible at higher resolutions; when zoomed-out the available area w
 as a shaded region. The surface reflectance geometric median (geomedian) is a pixel composite
 mosaic of a time series of earth observations. The value of a pixel in a an annual geomedian
 image is the statistical median of all observations for that pixel from a calendar year.
-Annual mosaics are available for the following years:
-Landsat 7: 2000 to 2017;
-For more information, see http://pid.geoscience.gov.au/dataset/ga/120374
-For service status information, see https://status.dea.ga.gov.au
+Annual mosaics are available for the following years:Landsat 7: 2000 to 2017;For more information, see http://pid.geoscience.gov.au/dataset/ga/120374For service status information, see https://status.dea.ga.gov.au
           </Abstract>
           <KeywordList>
             <Keyword>WOfS</Keyword>
@@ -313,10 +314,7 @@ Data is only visible at higher resolutions; when zoomed-out the available area w
 as a shaded region. The surface reflectance geometric median (geomedian) is a pixel composite
 mosaic of a time series of earth observations. The value of a pixel in a an annual geomedian
 image is the statistical median of all observations for that pixel from a calendar year.
-Annual mosaics are available for the following years:
-Landsat 5: 1988 to 1999, 2004 to 2007, 2009 to 2011;
-For more information, see http://pid.geoscience.gov.au/dataset/ga/120374
-For service status information, see https://status.dea.ga.gov.au
+Annual mosaics are available for the following years:Landsat 5: 1988 to 1999, 2004 to 2007, 2009 to 2011;For more information, see http://pid.geoscience.gov.au/dataset/ga/120374For service status information, see https://status.dea.ga.gov.au
           </Abstract>
           <KeywordList>
             <Keyword>WOfS</Keyword>
@@ -415,22 +413,17 @@ For service status information, see https://status.dea.ga.gov.au
       <Layer>
         <Title>Landsat-8 Barest Earth</Title>
         <Abstract>
-A `weighted geometric median’ approach has been used to estimate the median surface reflectance of the barest state (i.e., least vegetation) observed through Landsat-8 OLI observations from 2013 to September 2018 to generate a six-band Landsat-8 Barest Earth pixel composite mosaic over the Australian continent.
-The bands include BLUE (0.452 - 0.512), GREEN (0.533 - 0.590), RED, (0.636 - 0.673) NIR (0.851 - 0.879), SWIR1 (1.566 - 1.651) and SWIR2 (2.107 - 2.294) wavelength regions. The weighted median approach is robust to outliers (such as cloud, shadows, saturation, corrupted pixels) and also maintains the relationship between all the spectral wavelengths in the spectra observed through time. The product reduces the influence of vegetation and allows for more direct mapping of soil and rock mineralogy.
-Reference: Dale Roberts, John Wilford, and Omar Ghattas (2018). Revealing the Australian Continent at its Barest, submitted.
-Mosaics are available for the following years:
+
+A `weighted geometric median’ approach has been used to estimate the median surface reflectance of the barest state (i.e., least vegetation) observed through Landsat-8 OLI observations from 2013 to September 2018 to generate a six-band Landsat-8 Barest Earth pixel composite mosaic over the Australian continent.The bands include BLUE (0.452 - 0.512), GREEN (0.533 - 0.590), RED, (0.636 - 0.673) NIR (0.851 - 0.879), SWIR1 (1.566 - 1.651) and SWIR2 (2.107 - 2.294) wavelength regions. The weighted median approach is robust to outliers (such as cloud, shadows, saturation, corrupted pixels) and also maintains the relationship between all the spectral wavelengths in the spectra observed through time. The product reduces the influence of vegetation and allows for more direct mapping of soil and rock mineralogy.Reference: Dale Roberts, John Wilford, and Omar Ghattas (2018). Revealing the Australian Continent at its Barest, submitted.Mosaics are available for the following years:
     Landsat 8: 2013 to 2017;
+
         </Abstract>
         <Layer queryable="1">
           <Name>ls8_barest_earth_mosaic</Name>
           <Title>Landsat-8 Barest Earth 25m albers (Landsat-8)</Title>
           <Abstract>
-A `weighted geometric median’ approach has been used to estimate the median surface reflectance of the barest state (i.e., least vegetation) observed through Landsat-8 OLI observations from 2013 to September 2018 to generate a six-band Landsat-8 Barest Earth pixel composite mosaic over the Australian continent.
-The bands include BLUE (0.452 - 0.512), GREEN (0.533 - 0.590), RED, (0.636 - 0.673) NIR (0.851 - 0.879), SWIR1 (1.566 - 1.651) and SWIR2 (2.107 - 2.294) wavelength regions. The weighted median approach is robust to outliers (such as cloud, shadows, saturation, corrupted pixels) and also maintains the relationship between all the spectral wavelengths in the spectra observed through time. The product reduces the influence of vegetation and allows for more direct mapping of soil and rock mineralogy.
-Reference: Dale Roberts, John Wilford, and Omar Ghattas (2018). Revealing the Australian Continent at its Barest, submitted.
-Mosaics are available for the following years:
-    Landsat 8: 2013 to 2017;
-For service status information, see https://status.dea.ga.gov.au
+A `weighted geometric median’ approach has been used to estimate the median surface reflectance of the barest state (i.e., least vegetation) observed through Landsat-8 OLI observations from 2013 to September 2018 to generate a six-band Landsat-8 Barest Earth pixel composite mosaic over the Australian continent.The bands include BLUE (0.452 - 0.512), GREEN (0.533 - 0.590), RED, (0.636 - 0.673) NIR (0.851 - 0.879), SWIR1 (1.566 - 1.651) and SWIR2 (2.107 - 2.294) wavelength regions. The weighted median approach is robust to outliers (such as cloud, shadows, saturation, corrupted pixels) and also maintains the relationship between all the spectral wavelengths in the spectra observed through time. The product reduces the influence of vegetation and allows for more direct mapping of soil and rock mineralogy.Reference: Dale Roberts, John Wilford, and Omar Ghattas (2018). Revealing the Australian Continent at its Barest, submitted.Mosaics are available for the following years:
+    Landsat 8: 2013 to 2017;For service status information, see https://status.dea.ga.gov.au
           </Abstract>
           <KeywordList>
             <Keyword>WOfS</Keyword>
@@ -508,16 +501,14 @@ For service status information, see https://status.dea.ga.gov.au
       <Layer>
         <Title>Landsat 30+ Barest Earth</Title>
         <Abstract>
+
 An estimate of the spectra of the barest state (i.e., least vegetation) observed from imagery of the Australian continent collected by the Landsat 5, 7, and 8 satellites over a period of more than 30 years (1983 - 2018). The bands include BLUE (0.452 - 0.512), GREEN (0.533 - 0.590), RED, (0.636 - 0.673) NIR (0.851 - 0.879), SWIR1 (1.566 - 1.651) and SWIR2 (2.107 - 2.294) wavelength regions. The approach is robust to outliers (such as cloud, shadows, saturation, corrupted pixels) and also maintains the relationship between all the spectral wavelengths in the spectra observed through time. The product reduces the influence of vegetation and allows for more direct mapping of soil and rock mineralogy. This product complements the Landsat-8 Barest Earth which is based on the same algorithm but just uses Landsat8 satellite imagery from 2013-2108. Landsat-8&#39;s OLI sensor provides improved signal-to-noise radiometric (SNR) performance quantised over a 12-bit dynamic range compared to the 8-bit dynamic range of Landsat-5 and Landsat-7 data. However the Landsat 30+ Barest Earth has a greater capacity to find the barest ground due to the greater temporal depth. Reference: Roberts, D., Wilford, J., Ghattas, O. (2019). Exposed Soil and Mineral Map of the Australian Continent Revealing the Land at its Barest. Nature Communications. Mosaics are available for the following years: Landsat 5 / Landsat 7 / Landsat 8 - 1983 to 2018;
         </Abstract>
         <Layer queryable="1">
           <Name>landsat_barest_earth</Name>
           <Title>Landsat 30+ Barest Earth 25m albers (Combined Landsat)</Title>
           <Abstract>
-An estimate of the spectra of the barest state (i.e., least vegetation) observed from imagery of the Australian continent collected by the Landsat 5, 7, and 8 satellites over a period of more than 30 years (1983 - 2018).
-The bands include BLUE (0.452 - 0.512), GREEN (0.533 - 0.590), RED, (0.636 - 0.673) NIR (0.851 - 0.879), SWIR1 (1.566 - 1.651) and SWIR2 (2.107 - 2.294) wavelength regions. The approach is robust to outliers (such as cloud, shadows, saturation, corrupted pixels) and also maintains the relationship between all the spectral wavelengths in the spectra observed through time. The product reduces the influence of vegetation and allows for more direct mapping of soil and rock mineralogy.
-This product complements the Landsat-8 Barest Earth which is based on the same algorithm but just uses Landsat8 satellite imagery from 2013-2108. Landsat-8&#39;s OLI sensor provides improved signal-to-noise radiometric (SNR) performance quantised over a 12-bit dynamic range compared to the 8-bit dynamic range of Landsat-5 and Landsat-7 data. However the Landsat 30+ Barest Earth has a greater capacity to find the barest ground due to the greater temporal depth.
-Reference: Roberts, D., Wilford, J., Ghattas, O. (2019). Exposed Soil and Mineral Map of the Australian Continent Revealing the Land at its Barest. Nature Communications. Mosaics are available for the following years: Landsat 5 / Landsat 7 / Landsat 8 - 1983 to 2018; For service status information, see https://status.dea.ga.gov.au
+NOTE this layer has no EX_GeographicBoundingBox
           </Abstract>
           <KeywordList>
             <Keyword>WOfS</Keyword>
@@ -531,16 +522,6 @@ Reference: Roberts, D., Wilford, J., Ghattas, O. (2019). Exposed Soil and Minera
             <Keyword>NIDEM</Keyword>
             <Keyword>fractional-cover</Keyword>
           </KeywordList>
-          <EX_GeographicBoundingBox>
-            <westBoundLongitude>109.989859933428</westBoundLongitude>
-            <eastBoundLongitude>156.101505058599</eastBoundLongitude>
-            <southBoundLatitude>-45.2413329418709</southBoundLatitude>
-            <northBoundLatitude>-9.02727104242042</northBoundLatitude>
-          </EX_GeographicBoundingBox>
-          <BoundingBox CRS="EPSG:3111" minx="-1605846.2384071546" maxx="3829602.9024653286" miny="1191340.9360146995" maxy="5782960.629469741" />
-          <BoundingBox CRS="EPSG:3577" minx="-2379632.91177491" maxx="2696689.9814184457" miny="-5035973.152982588" maxy="-886856.0545368894" />
-          <BoundingBox CRS="EPSG:3857" minx="12360213.386852946" maxx="17342527.079881962" miny="-5531998.060761959" maxy="-949091.0158087222" />
-          <BoundingBox CRS="EPSG:4326" minx="-44.42852102810618" maxx="-8.49453875182811" miny="111.03368600388714" maxy="155.79057141114657" />
           <Style>
             <Name>simple_rgb</Name>
             <Title>Simple RGB</Title>
@@ -616,6 +597,53 @@ Reference: Roberts, D., Wilford, J., Ghattas, O. (2019). Exposed Soil and Minera
               <Format>image/png</Format>
               <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://ows.services.dea.ga.gov.au/legend/landsat_barest_earth/nd_clay_mica/legend.png"/>
             </LegendURL>
+          </Style>
+        </Layer>
+      </Layer>
+    </Layer>
+    <Layer>
+      <Title>Some other catalog</Title>
+      <Abstract>
+            Some other catalog
+      </Abstract>
+      <CRS>EPSG:3857</CRS>
+      <CRS>EPSG:4326</CRS>
+      <CRS>EPSG:3577</CRS>
+      <CRS>EPSG:3111</CRS>
+      <EX_GeographicBoundingBox>
+        <westBoundLongitude>100</westBoundLongitude>
+        <eastBoundLongitude>160</eastBoundLongitude>
+        <southBoundLatitude>-50</southBoundLatitude>
+        <northBoundLatitude>-10</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <Layer>
+        <Title>Surface Reflectance</Title>
+        <Abstract>This is another layer called Surface Reflectance</Abstract>
+        <Layer queryable="1">
+          <Name>some_layer</Name>
+          <Title>Some layer</Title>
+          <Abstract>Some layer
+          </Abstract>
+          <KeywordList>
+            <Keyword>WOfS</Keyword>
+          </KeywordList>
+          <EX_GeographicBoundingBox>
+            <westBoundLongitude>109.989859933428</westBoundLongitude>
+            <eastBoundLongitude>156.101505058599</eastBoundLongitude>
+            <southBoundLatitude>-45.2413329418709</southBoundLatitude>
+            <northBoundLatitude>-9.02727104242042</northBoundLatitude>
+          </EX_GeographicBoundingBox>
+          <BoundingBox CRS="EPSG:3111" minx="-1623290.9363679164" maxx="3983581.4498637905" miny="1042109.9920098714" maxy="5725855.407866031" />
+          <BoundingBox CRS="EPSG:3577" minx="-2407984.8524649167" maxx="2834259.110253389" miny="-5195512.771063175" maxy="-936228.5063655999" />
+          <BoundingBox CRS="EPSG:3857" minx="12324052.57369671" maxx="17488921.644948885" miny="-5742240.963567747" maxy="-1001009.9542990683" />
+          <BoundingBox CRS="EPSG:4326" minx="-45.76168492731699" maxx="-8.955535935066568" miny="110.70884789244278" maxy="157.10565616426302" />
+          <Dimension name="time" units="ISO8601">
+            2013-01-01,2014-01-01,2015-01-01,2016-01-01,2017-01-01,2018-01-01
+          </Dimension>
+          <Style>
+            <Name>simple_rgb</Name>
+            <Title>Simple RGB</Title>
+            <Abstract>Simple true-colour image, using the red, green and blue bands</Abstract>
           </Style>
         </Layer>
       </Layer>

@@ -25,7 +25,6 @@
     </ContactInformation>
     <Fees>none</Fees>
     <AccessConstraints>none</AccessConstraints>
-    <LayerLimit>1</LayerLimit>
     <MaxWidth>2048</MaxWidth>
     <MaxHeight>2048</MaxHeight>
   </Service>

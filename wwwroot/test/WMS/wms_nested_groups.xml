@@ -42,7 +42,6 @@ http://schemas.opengis.net/wms/1.3.0/capabilities_1_3_0.xsd">
     </ContactInformation>
     <Fees>none</Fees>
     <AccessConstraints>© Commonwealth of Australia (Geoscience Australia) 2018. This product is released under the Creative Commons Attribution 4.0 International Licence. http://creativecommons.org/licenses/by/4.0/legalcode</AccessConstraints>
-    <LayerLimit>1</LayerLimit>
     <MaxWidth>512</MaxWidth>
     <MaxHeight>512</MaxHeight>
   </Service>

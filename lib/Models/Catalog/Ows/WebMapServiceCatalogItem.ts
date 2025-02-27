@@ -246,14 +246,30 @@ class WebMapServiceCatalogItem
   }
 
   @computed
+  get layerLimit() {
+    const gcStratum: WebMapServiceCapabilitiesStratum | undefined =
+      this.strata.get(
+        GetCapabilitiesMixin.getCapabilitiesStratumName
+      ) as WebMapServiceCapabilitiesStratum;
+
+    return gcStratum?.layerLimit;
+  }
+
+  @computed
   get layersArray(): ReadonlyArray<string> {
+    if (!this.layers) return [];
+
+    let layers: string[];
+
     if (Array.isArray(this.layers)) {
-      return this.layers;
-    } else if (this.layers) {
-      return this.layers.split(",");
+      layers = this.layers;
     } else {
-      return [];
+      layers = this.layers.split(",");
     }
+
+    if (this.layerLimit) layers = layers.slice(0, this.layerLimit);
+
+    return layers;
   }
 
   /** LAYERS which are valid (i.e. exist in GetCapabilities).
