@@ -38,13 +38,9 @@ jobs:
           registry-url: "https://registry.npmjs.org"
           node-version-file: ".nvmrc"
 
-      - name: Install yarn
-        if: steps.detect.outputs.previous-version != steps.detect.outputs.current-version
-        run: npm install -g yarn@^1.19.0
-
       - name: Install dependencies
         if: steps.detect.outputs.previous-version != steps.detect.outputs.current-version
-        run: yarn install --ignore-engines
+        run: yarn install --ignore-engines --frozen-lockfile
         env:
           NODE_OPTIONS: "--max_old_space_size=8192"
 
