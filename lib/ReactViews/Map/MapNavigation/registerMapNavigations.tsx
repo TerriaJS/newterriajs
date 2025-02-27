@@ -198,7 +198,7 @@ export const registerMapNavigations = (viewState: ViewState) => {
     id: FEEDBACK_TOOL_ID,
     name: "translate#feedback.feedbackBtnText",
     title: "translate#feedback.feedbackBtnText",
-    location: "TOP",
+    location: "BOTTOM",
     screenSize: "medium",
     controller: feedbackController,
     order: 8
