@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
     "target": "es2019",
+    // Use ES2024.collection, otherwise mobx 6.13 fails with:
+    // Cannot find name 'ReadonlySetLike'. Did you mean 'ReadonlySet'?
+    "lib": ["ES2024.collection", "DOM.Iterable", "ES2019"],
     "experimentalDecorators": true,
     "module": "esNext",
     "moduleResolution": "node",

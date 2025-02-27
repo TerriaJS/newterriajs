@@ -2,6 +2,7 @@
 
 #### next release (8.8.2)
 
+- Update mobx to 6.13.6
 - [The next improvement]
 
 #### 8.8.1 - 2025-02-27
