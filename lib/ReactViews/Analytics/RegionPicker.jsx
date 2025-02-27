@@ -18,10 +18,10 @@ import Styles from "./parameter-editors.scss";
 import CommonStrata from "../../Models/Definition/CommonStrata";
 
 const knockout = {
-  defineProperty() {
+  defineProperty(_cls, _name, _fn) {
     throw new Error("This component needs to be fixed to not use Knockout.");
   },
-  getObservable() {
+  getObservable(_cls, _name) {
     throw new Error("This component needs to be fixed to not use Knockout.");
   }
 };
@@ -133,6 +133,7 @@ const RegionPicker = createReactClass({
 
     if (defined(feature.data) && feature.data.type === "Feature") {
       this._selectedRegionCatalogItem = new GeoJsonCatalogItem(
+        undefined,
         this.props.previewed.terria
       );
       this._selectedRegionCatalogItem.name = "Selected Polygon";
@@ -176,6 +177,7 @@ const RegionPicker = createReactClass({
       }
 
       that._regionsCatalogItem = new WebMapServiceCatalogItem(
+        undefined,
         that.props.previewed.terria
       );
       that._regionsCatalogItem.name = "Available Regions";
@@ -219,6 +221,7 @@ const RegionPicker = createReactClass({
 
         if (defined(feature) && feature.type === "Feature") {
           that._selectedRegionCatalogItem = new GeoJsonCatalogItem(
+            undefined,
             that.props.previewed.terria
           );
           that._selectedRegionCatalogItem.name = t("analytics.selectedPolygon");
