@@ -112,16 +112,14 @@ class Disclaimer extends React.Component {
             <Text
               styledLineHeight={"18px"}
               textLight
-              css={(props) =>
-                `
+              css={`
                 // not sure of the ideal way to deal with this
                 a {
                   font-weight: 600;
-                  color: ${props.theme.colorPrimary};
+                  color: ${this.props.theme.colorPrimary};
                   text-decoration: none;
                 }
-              `
-              }
+              `}
             >
               {parseCustomMarkdownToReact(disclaimerMessage)}
             </Text>
