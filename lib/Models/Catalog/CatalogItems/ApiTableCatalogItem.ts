@@ -1,5 +1,5 @@
 import dateFormat from "dateformat";
-import { get as _get, map as _map } from "lodash";
+import { get as _get, map as _map } from "lodash-es";
 import { computed, observable, runInAction, makeObservable } from "mobx";
 import URI from "urijs";
 import isDefined from "../../../Core/isDefined";

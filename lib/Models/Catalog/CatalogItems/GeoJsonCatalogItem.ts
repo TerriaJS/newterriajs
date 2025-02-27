@@ -1,5 +1,5 @@
 import i18next from "i18next";
-import { get as _get, set as _set } from "lodash";
+import { get as _get, set as _set } from "lodash-es";
 import { computed, toJS, makeObservable } from "mobx";
 import isDefined from "../../../Core/isDefined";
 import JsonValue, { isJsonObject } from "../../../Core/Json";
