@@ -15,7 +15,7 @@ configure({
 
 interface ExtendedLoadWithXhr {
   (): any;
-  load: { (...args: any[]): any; calls: any };
+  load: { (...args: any[]): any; calls?: any };
 }
 
 const loadWithXhr: ExtendedLoadWithXhr = _loadWithXhr as any;

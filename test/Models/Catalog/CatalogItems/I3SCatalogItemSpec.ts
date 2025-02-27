@@ -35,12 +35,14 @@ describe("I3SCatalogItemSpec", function () {
     spyOn(Resource.prototype, "fetchJson").and.callFake(function fetch() {
       return Promise.resolve(mockProviderData);
     });
-    spyOn(Cesium3DTileset, "fromUrl").and.callFake(() => {
-      const tileset = new Cesium3DTileset({});
-      /* @ts-expect-error Mock the root tile so that i3s property can be appended */
-      tileset._root = {};
-      return tileset;
-    });
+    spyOn(Cesium3DTileset, "fromUrl").and.callFake(
+      (_url: string, _options?: any) => {
+        const tileset = new Cesium3DTileset({});
+        /* @ts-expect-error Mock the root tile so that i3s property can be appended */
+        tileset._root = {};
+        return Promise.resolve(tileset);
+      }
+    );
   });
 
   beforeEach(function () {
