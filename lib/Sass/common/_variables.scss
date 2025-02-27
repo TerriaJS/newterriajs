@@ -20,14 +20,13 @@ $color-secondary: #f59e0b;
 
 $animation-fast: 0.1s;
 
-$transparent-dark: #111827bf;
-
 $blur: blur(5px);
 
 $dark: #111827;
 $dark-with-overlay: #111827;
 $dark-mid: #1f2937;
 $dark-lighter: #374151;
+$transparent-dark: rgb(from $dark r g b / 0.75);
 $grey: #9ca3af;
 $grey-lighter: #d1d5db;
 // todo: Fix during overhaul
