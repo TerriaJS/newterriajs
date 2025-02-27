@@ -2,6 +2,7 @@
 
 #### next release (8.8.2)
 
+- Move types/jasmine and types/jasmine-ajax to devDependencies.
 - [The next improvement]
 
 #### 8.8.1 - 2025-02-27
