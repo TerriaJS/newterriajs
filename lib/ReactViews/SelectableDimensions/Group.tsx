@@ -53,7 +53,7 @@ export const SelectableDimensionGroup: React.FC<{
                   CommonStrata.user,
                   isOpen ? "true" : "false"
                 );
-                return true;
+                return false;
               }
         }
         btnStyle={dim.type === "checkbox-group" ? "checkbox" : undefined}
