@@ -1,4 +1,5 @@
 import defined from "terriajs-cesium/Source/Core/defined";
+import { type ServerConfigOptions } from "./ServerConfig";
 import URI from "urijs";
 
 /**
@@ -62,7 +63,7 @@ export default class CorsProxy {
    * @returns A promise that resolves when initialisation is complete.
    */
   init(
-    serverConfig: any,
+    serverConfig: ServerConfigOptions | undefined,
     baseProxyUrl: string = CorsProxy.DEFAULT_BASE_PROXY_PATH,
     proxyDomains: string[] = []
   ): void {

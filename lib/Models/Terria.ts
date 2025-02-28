@@ -42,7 +42,7 @@ import {
 } from "../Core/Json";
 import { isLatLonHeight } from "../Core/LatLonHeight";
 import Result from "../Core/Result";
-import ServerConfig from "../Core/ServerConfig";
+import ServerConfig, { type ServerConfigOptions } from "../Core/ServerConfig";
 import TerriaError, {
   TerriaErrorOverrides,
   TerriaErrorSeverity
@@ -650,7 +650,7 @@ export default class Terria {
     this.forceLoadInitSources.bind(this)
   );
 
-  @observable serverConfig: any; // TODO
+  @observable serverConfig?: ServerConfig; // TODO
   @observable shareDataService: ShareDataService | undefined;
 
   /* Splitter controls */
@@ -2136,7 +2136,7 @@ export default class Terria {
 
   async initCorsProxy(
     config: ConfigParameters,
-    serverConfig: any
+    serverConfig: ServerConfigOptions | undefined
   ): Promise<void> {
     if (config.proxyableDomainsUrl) {
       console.warn(i18next.t("models.terria.proxyableDomainsDeprecation"));
