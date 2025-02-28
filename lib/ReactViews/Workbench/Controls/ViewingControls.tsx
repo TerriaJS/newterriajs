@@ -1,4 +1,4 @@
-import { sortBy, uniqBy } from "lodash";
+import { sortBy, uniqBy } from "lodash-es";
 import { action, computed, runInAction, makeObservable } from "mobx";
 import { observer } from "mobx-react";
 import React from "react";
