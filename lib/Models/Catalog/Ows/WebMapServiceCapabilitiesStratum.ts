@@ -10,7 +10,7 @@ import createDiscreteTimesFromIsoSegments from "../../../Core/createDiscreteTime
 import filterOutUndefined from "../../../Core/filterOutUndefined";
 import isDefined from "../../../Core/isDefined";
 import isReadOnlyArray from "../../../Core/isReadOnlyArray";
-import { terriaTheme } from "../../../ReactViews/StandardUserInterface/StandardTheme";
+import { terriaTheme } from "../../../ReactViews/StandardUserInterface";
 import {
   InfoSectionTraits,
   MetadataUrlTraits

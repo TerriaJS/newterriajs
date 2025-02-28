@@ -3,7 +3,7 @@
 
 // import your custom theme
 import { CSSProp } from "styled-components";
-import { terriaTheme } from "../../ReactViews/StandardUserInterface/StandardTheme";
+import { terriaTheme } from "../../ReactViews/StandardUserInterface";
 
 type Theme = typeof terriaTheme;
 
