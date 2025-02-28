@@ -2211,6 +2211,10 @@ async function interpretHash(
   if (isDefined(hashProperties.clean)) {
     runInAction(() => {
       terria.initSources.splice(0, terria.initSources.length);
+      // Clear out catalogue
+      for (let key of terria.catalog.group.strata.keys()) {
+        terria.catalog.group.setTrait(key, "members", []);
+      }
     });
   }
 
