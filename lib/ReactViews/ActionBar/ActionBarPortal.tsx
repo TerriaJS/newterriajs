@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import styled from "styled-components";
 import { Portal } from "../StandardUserInterface/Portal";
 
@@ -16,7 +16,7 @@ interface PropsType {
 /**
  * A Portal to show ActionBar UI.
  */
-const ActionBarPortal: React.FC<PropsType> = ({ show }) => {
+const ActionBarPortal: FC<PropsType> = ({ show }) => {
   return <StyledPortal id={ActionBarPortalId} show={show} />;
 };
 

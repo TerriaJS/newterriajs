@@ -1,6 +1,5 @@
 import i18next from "i18next";
 import { runInAction } from "mobx";
-import React from "react";
 import isDefined from "../../Core/isDefined";
 import ViewState from "../../ReactViewModels/ViewState";
 import Collapsible from "../Custom/Collapsible/Collapsible";

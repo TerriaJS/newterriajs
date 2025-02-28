@@ -3,7 +3,7 @@ import { runInAction } from "mobx";
 import { observer } from "mobx-react";
 import Mustache from "mustache";
 import PropTypes from "prop-types";
-import React from "react";
+import { Component } from "react";
 import { withTranslation } from "react-i18next";
 import isDefined from "../../Core/isDefined";
 import CommonStrata from "../../Models/Definition/CommonStrata";
@@ -23,7 +23,7 @@ Mustache.escape = function (string) {
  * order if available.
  */
 @observer
-class DataPreviewSections extends React.Component {
+class DataPreviewSections extends Component {
   static propTypes = {
     metadataItem: PropTypes.object.isRequired,
     t: PropTypes.func.isRequired

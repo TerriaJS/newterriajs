@@ -1,4 +1,3 @@
-import React from "react";
 import { act, create, ReactTestRenderer } from "react-test-renderer";
 import timeout from "../../../../lib/Core/timeout";
 import ItemSearchProvider, {

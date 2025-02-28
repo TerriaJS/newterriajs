@@ -1,6 +1,6 @@
 import { autorun } from "mobx";
 import { observer } from "mobx-react";
-import React, { useEffect } from "react";
+import { FC, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import styled, { useTheme } from "styled-components";
 import { applyTranslationIfExists } from "../../../Language/languageHelpers";
@@ -80,55 +80,49 @@ const NavigationButton = styled(BoxSpan).attrs({
   `}
 `;
 
-const CollapsedNavigationPanel: React.FC<PropTypes> = observer(
-  (props: PropTypes) => {
-    const viewState = useViewState();
-    const theme = useTheme();
-    const { t, i18n } = useTranslation();
-    const items = props.items;
-    return (
-      <CollapsedNavigationBox column>
-        <CloseButton
-          color={theme.darkWithOverlay}
-          topRight
-          onClick={() => viewState.closeCollapsedNavigation()}
-        />
-        <Text extraExtraLarge bold textDarker>
-          {t("mapNavigation.additionalTools")}
-        </Text>
-        <Spacing bottom={5} />
-        <ButtonsBox>
-          {items.map((item) => (
-            <NavigationButton
-              key={item.id}
-              title={applyTranslationIfExists(item.name, i18n)}
-              onClick={() => {
-                if (!item.controller.disabled) {
-                  viewState.closeCollapsedNavigation();
-                  item.controller.handleClick();
-                }
-              }}
-              css={`
-                ${item.controller.active &&
-                `border: 2px solid ${theme.colorPrimary};`}
-              `}
-              disabled={item.controller.disabled}
-            >
-              <StyledIcon
-                glyph={item.controller.glyph}
-                styledWidth="22px"
-                dark
-              />
-            </NavigationButton>
-          ))}
-        </ButtonsBox>
-      </CollapsedNavigationBox>
-    );
-  }
-);
+const CollapsedNavigationPanel: FC<PropTypes> = observer((props: PropTypes) => {
+  const viewState = useViewState();
+  const theme = useTheme();
+  const { t, i18n } = useTranslation();
+  const items = props.items;
+  return (
+    <CollapsedNavigationBox column>
+      <CloseButton
+        color={theme.darkWithOverlay}
+        topRight
+        onClick={() => viewState.closeCollapsedNavigation()}
+      />
+      <Text extraExtraLarge bold textDarker>
+        {t("mapNavigation.additionalTools")}
+      </Text>
+      <Spacing bottom={5} />
+      <ButtonsBox>
+        {items.map((item) => (
+          <NavigationButton
+            key={item.id}
+            title={applyTranslationIfExists(item.name, i18n)}
+            onClick={() => {
+              if (!item.controller.disabled) {
+                viewState.closeCollapsedNavigation();
+                item.controller.handleClick();
+              }
+            }}
+            css={`
+              ${item.controller.active &&
+              `border: 2px solid ${theme.colorPrimary};`}
+            `}
+            disabled={item.controller.disabled}
+          >
+            <StyledIcon glyph={item.controller.glyph} styledWidth="22px" dark />
+          </NavigationButton>
+        ))}
+      </ButtonsBox>
+    </CollapsedNavigationBox>
+  );
+});
 
 const CollapsedNavigationDisplayName = "CollapsedNavigation";
-export const CollapsedNavigation: React.FC = observer(() => {
+export const CollapsedNavigation: FC = observer(() => {
   const viewState = useViewState();
   useEffect(() =>
     autorun(() => {

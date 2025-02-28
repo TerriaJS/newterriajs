@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import React from "react";
+import { FC } from "react";
 import TerriaError from "../../../Core/TerriaError";
 import { Complete } from "../../../Core/TypeModifiers";
 import DiscretelyTimeVaryingMixin from "../../../ModelMixins/DiscretelyTimeVaryingMixin";
@@ -81,7 +81,7 @@ export const hideAllControls: Complete<WorkbenchControls> = {
   legend: false
 };
 
-const WorkbenchItemControls: React.FC<WorkbenchItemControlsProps> = observer(
+const WorkbenchItemControls: FC<WorkbenchItemControlsProps> = observer(
   ({ item, viewState, controls: controlsWithoutDefaults }) => {
     // Apply controls from props on top of defaultControls
     const controls = { ...defaultControls, ...controlsWithoutDefaults };

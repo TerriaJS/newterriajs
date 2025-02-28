@@ -1,6 +1,6 @@
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
-import React from "react";
+import { Component } from "react";
 import { withTranslation } from "react-i18next";
 import parseCustomMarkdownToReact from "../Custom/parseCustomMarkdownToReact";
 import {
@@ -18,7 +18,7 @@ import WarningBox from "./WarningBox";
  * A "preview" for CatalogGroup.
  */
 @observer
-class GroupPreview extends React.Component {
+class GroupPreview extends Component {
   static propTypes = {
     previewed: PropTypes.object.isRequired,
     terria: PropTypes.object.isRequired,

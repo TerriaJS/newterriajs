@@ -1,4 +1,4 @@
-import React from "react";
+import { ChangeEvent, ReactChild } from "react";
 import { ITextProps } from "../Text";
 
 export type ICheckboxProps = {
@@ -28,7 +28,7 @@ export type ICheckboxProps = {
    * be called with an object containing the react synthetic event. Use
    * currentTarget to get value, name and checked
    */
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => any;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => any;
   /** The value to be used in the checkbox input. This is the value that will be
    * returned on form submission. */
   value?: number | string;
@@ -38,7 +38,7 @@ export type ICheckboxProps = {
    * style `font-size: inherit` and props `isDisabled` and `isChecked` will be
    * applied to all child elements.
    */
-  children?: React.ReactChild;
+  children?: ReactChild;
 
   textProps?: ITextProps;
 

@@ -1,7 +1,7 @@
 import i18next from "i18next";
 import { runInAction } from "mobx";
 import { observer } from "mobx-react";
-import React from "react";
+import { FC } from "react";
 import ReactSelect from "react-select";
 import ReactSelectCreatable from "react-select/creatable";
 import { useTheme } from "styled-components";
@@ -12,7 +12,7 @@ import {
   SelectableDimensionMultiEnum as SelectableDimensionEnumMultiModel
 } from "../../Models/SelectableDimensions/SelectableDimensions";
 
-export const SelectableDimensionEnum: React.FC<{
+export const SelectableDimensionEnum: FC<{
   id: string;
   dim: SelectableDimensionEnumModel;
 }> = observer(({ dim }) => {
@@ -93,7 +93,7 @@ export const SelectableDimensionEnum: React.FC<{
 });
 
 /** Similar to SelectableDimensionEnum, but allows multiple values to be selected */
-export const SelectableDimensionEnumMulti: React.FC<{
+export const SelectableDimensionEnumMulti: FC<{
   id: string;
   dim: SelectableDimensionEnumMultiModel;
 }> = observer(({ dim }) => {

@@ -1,6 +1,6 @@
 import { action } from "mobx";
 import { observer } from "mobx-react";
-import React, { useEffect, useRef } from "react";
+import { FC, Ref, useEffect, useRef } from "react";
 import styled from "styled-components";
 import Cartesian2 from "terriajs-cesium/Source/Core/Cartesian2";
 import Cartesian3 from "terriajs-cesium/Source/Core/Cartesian3";
@@ -33,153 +33,151 @@ const pickScratch = new Cartesian3();
  * It moves the clipping box to follow the mouse and places it where the user has clicked.
  * Action can be cancelled by pressing Escape button.
  */
-const RepositionClippingBox: React.FC<PropsType> = observer(
-  ({ cesium, item }) => {
-    const promptRef: React.Ref<HTMLDivElement> = useRef(null);
+const RepositionClippingBox: FC<PropsType> = observer(({ cesium, item }) => {
+  const promptRef: Ref<HTMLDivElement> = useRef(null);
 
-    // End repositioning
-    const endRepositioning = action((item: ItemType) => {
-      item.repositionClippingBoxTrigger = false;
+  // End repositioning
+  const endRepositioning = action((item: ItemType) => {
+    item.repositionClippingBoxTrigger = false;
 
-      // A hacky way to re-compute the boxDrawing so that it gets reset to the
-      // saved trait position.
-      item.clippingBox.setTrait(CommonStrata.user, "showClippingBox", false);
-      window.setTimeout(
-        action(() =>
-          item.clippingBox.setTrait(CommonStrata.user, "showClippingBox", true)
-        ),
-        100
-      );
+    // A hacky way to re-compute the boxDrawing so that it gets reset to the
+    // saved trait position.
+    item.clippingBox.setTrait(CommonStrata.user, "showClippingBox", false);
+    window.setTimeout(
+      action(() =>
+        item.clippingBox.setTrait(CommonStrata.user, "showClippingBox", true)
+      ),
+      100
+    );
+  });
+
+  // Move the clipping box and cursor prompt to follow the mouse
+  const moveItem = (
+    item: ItemType,
+    canvasCursorPos: Cartesian2,
+    cesium: Cesium
+  ) => {
+    const prompt = promptRef.current;
+    if (prompt === null) {
+      return;
+    }
+
+    const pickPosition = pickGlobePosition(
+      canvasCursorPos,
+      cesium.scene,
+      pickScratch
+    );
+    if (!pickPosition) {
+      return;
+    }
+
+    const rect = cesium.scene.canvas.getBoundingClientRect();
+    const offset = 10; // 10px away from the cursor
+    const left = canvasCursorPos.x + rect.left + offset;
+    const top = canvasCursorPos.y + rect.top + offset;
+
+    if (left <= rect.left) {
+      return;
+    }
+
+    prompt.style.left = `${left}px`;
+    prompt.style.top = `${top}px`;
+
+    const boxDrawing = item.clippingBoxDrawing;
+    // A hacky way to set boxDrawing position without setting the traits and
+    // consequently triggering expensive recomputation
+    boxDrawing.setPosition(pickPosition);
+    boxDrawing.onChange?.({
+      isFinished: false,
+      modelMatrix: (boxDrawing as any).modelMatrix,
+      translationRotationScale: (boxDrawing as any).trs
     });
+  };
 
-    // Move the clipping box and cursor prompt to follow the mouse
-    const moveItem = (
-      item: ItemType,
-      canvasCursorPos: Cartesian2,
-      cesium: Cesium
-    ) => {
-      const prompt = promptRef.current;
-      if (prompt === null) {
-        return;
-      }
+  // Place the clipping box at the screen position
+  const placeItem = (
+    item: ItemType,
+    screenPosition: Cartesian2,
+    cesium: Cesium
+  ) => {
+    const position = pickGlobePosition(
+      screenPosition,
+      cesium.scene,
+      pickScratch
+    );
+    if (!position) {
+      return false;
+    }
 
-      const pickPosition = pickGlobePosition(
-        canvasCursorPos,
-        cesium.scene,
-        pickScratch
-      );
-      if (!pickPosition) {
-        return;
-      }
+    LatLonHeightTraits.setFromCartesian(
+      item.clippingBox.position,
+      CommonStrata.user,
+      position
+    );
+    return true;
+  };
 
-      const rect = cesium.scene.canvas.getBoundingClientRect();
-      const offset = 10; // 10px away from the cursor
-      const left = canvasCursorPos.x + rect.left + offset;
-      const top = canvasCursorPos.y + rect.top + offset;
-
-      if (left <= rect.left) {
-        return;
-      }
-
-      prompt.style.left = `${left}px`;
-      prompt.style.top = `${top}px`;
+  // Init effect that sets up the event handlers etc.
+  /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  useEffect(
+    action(function init() {
+      const canvas = cesium.scene.canvas;
 
       const boxDrawing = item.clippingBoxDrawing;
-      // A hacky way to set boxDrawing position without setting the traits and
-      // consequently triggering expensive recomputation
-      boxDrawing.setPosition(pickPosition);
-      boxDrawing.onChange?.({
-        isFinished: false,
-        modelMatrix: (boxDrawing as any).modelMatrix,
-        translationRotationScale: (boxDrawing as any).trs
-      });
-    };
+      (boxDrawing as any).stopInteractions();
+      boxDrawing.enableScaling = false;
+      boxDrawing.enableRotation = false;
 
-    // Place the clipping box at the screen position
-    const placeItem = (
-      item: ItemType,
-      screenPosition: Cartesian2,
-      cesium: Cesium
-    ) => {
-      const position = pickGlobePosition(
-        screenPosition,
-        cesium.scene,
-        pickScratch
+      setCursor(canvas, "crosshair");
+      cesium.isFeaturePickingPaused = true;
+      if (promptRef.current) setCursor(promptRef.current, "grabbing");
+
+      const inputHandler = new ScreenSpaceEventHandler(canvas);
+      inputHandler.setInputAction(
+        ({ endPosition }: ScreenSpaceEventHandler.MotionEvent) => {
+          moveItem(item, endPosition, cesium);
+        },
+        ScreenSpaceEventType.MOUSE_MOVE
       );
-      if (!position) {
-        return false;
-      }
 
-      LatLonHeightTraits.setFromCartesian(
-        item.clippingBox.position,
-        CommonStrata.user,
-        position
+      inputHandler.setInputAction(
+        ({ position }: ScreenSpaceEventHandler.PositionedEvent) =>
+          placeItem(item, position, cesium) && endRepositioning(item),
+        ScreenSpaceEventType.LEFT_CLICK
       );
-      return true;
-    };
 
-    // Init effect that sets up the event handlers etc.
-    /* eslint-disable-next-line react-hooks/exhaustive-deps */
-    useEffect(
-      action(function init() {
-        const canvas = cesium.scene.canvas;
+      const escapeKeyHandler = (ev: KeyboardEvent) =>
+        ev.key === "Escape" && endRepositioning(item);
+      document.addEventListener("keydown", escapeKeyHandler);
 
-        const boxDrawing = item.clippingBoxDrawing;
-        (boxDrawing as any).stopInteractions();
-        boxDrawing.enableScaling = false;
-        boxDrawing.enableRotation = false;
+      return function destroy() {
+        inputHandler.destroy();
+        setCursor(canvas, "auto");
+        if (promptRef.current) setCursor(promptRef.current, "auto");
+        if (item.clippingBoxDrawing?.dataSource?.show) {
+          (item.clippingBoxDrawing as any).startInteractions();
+        }
+        document.removeEventListener("keydown", escapeKeyHandler);
+        cesium.isFeaturePickingPaused = false;
+        endRepositioning(item);
+      };
+    }),
+    [item, cesium]
+  );
 
-        setCursor(canvas, "crosshair");
-        cesium.isFeaturePickingPaused = true;
-        if (promptRef.current) setCursor(promptRef.current, "grabbing");
-
-        const inputHandler = new ScreenSpaceEventHandler(canvas);
-        inputHandler.setInputAction(
-          ({ endPosition }: ScreenSpaceEventHandler.MotionEvent) => {
-            moveItem(item, endPosition, cesium);
-          },
-          ScreenSpaceEventType.MOUSE_MOVE
-        );
-
-        inputHandler.setInputAction(
-          ({ position }: ScreenSpaceEventHandler.PositionedEvent) =>
-            placeItem(item, position, cesium) && endRepositioning(item),
-          ScreenSpaceEventType.LEFT_CLICK
-        );
-
-        const escapeKeyHandler = (ev: KeyboardEvent) =>
-          ev.key === "Escape" && endRepositioning(item);
-        document.addEventListener("keydown", escapeKeyHandler);
-
-        return function destroy() {
-          inputHandler.destroy();
-          setCursor(canvas, "auto");
-          if (promptRef.current) setCursor(promptRef.current, "auto");
-          if (item.clippingBoxDrawing?.dataSource?.show) {
-            (item.clippingBoxDrawing as any).startInteractions();
-          }
-          document.removeEventListener("keydown", escapeKeyHandler);
-          cesium.isFeaturePickingPaused = false;
-          endRepositioning(item);
-        };
-      }),
-      [item, cesium]
-    );
-
-    const initialX = window.innerWidth / 2;
-    const initualY = window.innerHeight / 2;
-    return (
-      <CursorPrompt ref={promptRef} x={initialX} y={initualY}>
-        <Text medium bold style={{ marginBottom: "5px" }}>
-          Click on map to position clipping box
-        </Text>
-        <Text small textAlignCenter>
-          Press ESC to cancel
-        </Text>
-      </CursorPrompt>
-    );
-  }
-);
+  const initialX = window.innerWidth / 2;
+  const initualY = window.innerHeight / 2;
+  return (
+    <CursorPrompt ref={promptRef} x={initialX} y={initualY}>
+      <Text medium bold style={{ marginBottom: "5px" }}>
+        Click on map to position clipping box
+      </Text>
+      <Text small textAlignCenter>
+        Press ESC to cancel
+      </Text>
+    </CursorPrompt>
+  );
+});
 
 interface CursorPromptProps {
   x: number;

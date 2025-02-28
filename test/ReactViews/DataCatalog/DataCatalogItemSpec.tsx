@@ -1,5 +1,4 @@
 import { runInAction } from "mobx";
-import React from "react";
 import { findAllWithType } from "react-shallow-testutils";
 import CatalogMemberMixin from "../../../lib/ModelMixins/CatalogMemberMixin";
 import WebMapServiceCatalogItem from "../../../lib/Models/Catalog/Ows/WebMapServiceCatalogItem";

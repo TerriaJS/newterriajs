@@ -1,5 +1,4 @@
 import { create } from "react-test-renderer";
-import React from "react";
 import { act } from "react-dom/test-utils";
 import { ThemeProvider } from "styled-components";
 import { terriaTheme } from "../../lib/ReactViews/StandardUserInterface";

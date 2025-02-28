@@ -1,6 +1,6 @@
 import { runInAction } from "mobx";
 import { observer } from "mobx-react";
-import React from "react";
+import { Component } from "react";
 import Terria from "../../Models/Terria";
 import ViewState from "../../ReactViewModels/ViewState";
 import ChartPanel from "../Custom/Chart/ChartPanel";
@@ -16,7 +16,7 @@ interface PropsType {
 }
 
 @observer
-class BottomDock extends React.Component<PropsType & MeasureElementProps> {
+class BottomDock extends Component<PropsType & MeasureElementProps> {
   refToMeasure: HTMLDivElement | null = null;
 
   handleClick() {

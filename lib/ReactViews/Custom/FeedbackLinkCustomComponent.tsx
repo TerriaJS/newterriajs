@@ -1,6 +1,6 @@
 import i18next from "i18next";
 import { runInAction } from "mobx";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import ViewState from "../../ReactViewModels/ViewState";
 import { RawButton } from "../../Styled/Button";
 import Text from "../../Styled/Text";

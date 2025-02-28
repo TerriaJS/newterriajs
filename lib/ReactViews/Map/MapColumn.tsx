@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import React, { FC } from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import Box from "../../Styled/Box";
 import ActionBarPortal from "../ActionBar/ActionBarPortal";

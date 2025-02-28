@@ -1,4 +1,3 @@
-import React from "react";
 import { useTranslation } from "react-i18next";
 import Terria from "../../../../Models/Terria";
 import Box from "../../../../Styled/Box";

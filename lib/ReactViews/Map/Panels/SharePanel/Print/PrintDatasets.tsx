@@ -1,4 +1,3 @@
-import React from "react";
 import { getName } from "../../../../../ModelMixins/CatalogMemberMixin";
 import { BaseModel } from "../../../../../Models/Definition/Model";
 import Description from "../../../../Preview/Description";

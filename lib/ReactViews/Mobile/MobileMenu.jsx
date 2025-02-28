@@ -1,4 +1,4 @@
-import React from "react";
+import { Component } from "react";
 import defined from "terriajs-cesium/Source/Core/defined";
 import { observer } from "mobx-react";
 
@@ -17,7 +17,7 @@ import { applyTranslationIfExists } from "../../Language/languageHelpers";
 import { Category, HelpAction } from "../../Core/AnalyticEvents/analyticEvents";
 
 @observer
-class MobileMenu extends React.Component {
+class MobileMenu extends Component {
   static propTypes = {
     menuItems: PropTypes.arrayOf(PropTypes.element),
     menuLeftItems: PropTypes.arrayOf(PropTypes.element),

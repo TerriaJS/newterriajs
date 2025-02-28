@@ -1,5 +1,4 @@
 import "../../../SpecMain";
-import React from "react";
 import {
   act,
   create,

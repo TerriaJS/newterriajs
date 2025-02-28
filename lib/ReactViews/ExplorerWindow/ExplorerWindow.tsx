@@ -1,6 +1,5 @@
 import { action } from "mobx";
 import { observer } from "mobx-react";
-import React from "react";
 import { useViewState } from "../Context";
 import ModalPopup from "./ModalPopup";
 import Tabs from "./Tabs";

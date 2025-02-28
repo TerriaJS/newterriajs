@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { ReactNode, FC, useEffect, useState } from "react";
 import styled from "styled-components";
 import isDefined from "../../Core/isDefined";
 import { IButtonProps, RawButton } from "../../Styled/Button";
@@ -9,8 +9,8 @@ import { CollapseIcon } from "../Custom/Collapsible/Collapsible";
 export type PanelProps = {
   title?: string;
   icon?: IconProps["glyph"];
-  menuComponent?: React.ReactNode;
-  children?: React.ReactNode;
+  menuComponent?: ReactNode;
+  children?: ReactNode;
   className?: string;
   /** Collapsible will replace menuComponent. Title must be defined */
   collapsible?: boolean;
@@ -24,7 +24,7 @@ export type PanelProps = {
 /**
  * A generic panel component for left, right, context items etc.
  */
-export const Panel: React.FC<PanelProps> = (props) => {
+export const Panel: FC<PanelProps> = (props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   useEffect(() => {
     if (isDefined(props.isOpen)) {
@@ -68,7 +68,7 @@ export const Panel: React.FC<PanelProps> = (props) => {
 };
 
 /** Simple PanelButton - this mimics style of CollapsibleTitleBar */
-export const PanelButton: React.FC<{ onClick: () => void; title: string }> = ({
+export const PanelButton: FC<{ onClick: () => void; title: string }> = ({
   onClick,
   title
 }) => (

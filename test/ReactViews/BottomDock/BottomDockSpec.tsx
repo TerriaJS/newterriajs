@@ -1,4 +1,3 @@
-import React from "react";
 import { act, create, ReactTestRenderer } from "react-test-renderer";
 import Terria from "../../../lib/Models/Terria";
 import ViewState from "../../../lib/ReactViewModels/ViewState";

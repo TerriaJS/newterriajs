@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import React, { useState } from "react";
+import { FC, useState } from "react";
 import { useTranslation, TFunction } from "react-i18next";
 import styled, { useTheme } from "styled-components";
 import ViewState from "../../ReactViewModels/ViewState";
@@ -14,7 +14,7 @@ export interface FrameProps {
   viewState: ViewState;
 }
 
-export const Frame: React.FC<FrameProps> = observer((props) => {
+export const Frame: FC<FrameProps> = observer((props) => {
   const theme = useTheme();
   const [t] = useTranslation();
   const [showChildren, setShowChildren] = useState(true);
@@ -91,7 +91,7 @@ interface ToolCloseButtonProps {
   t: TFunction;
 }
 
-const ToolCloseButton: React.FC<ToolCloseButtonProps> = (props) => {
+const ToolCloseButton: FC<ToolCloseButtonProps> = (props) => {
   return (
     <RawButton onClick={() => props.viewState.closeTool()}>
       <Text textLight small semiBold uppercase>
@@ -106,7 +106,7 @@ interface TitleProps {
   icon?: { id: string };
 }
 
-const Title: React.FC<TitleProps> = (props) => {
+const Title: FC<TitleProps> = (props) => {
   return (
     <Box centered>
       <Box>

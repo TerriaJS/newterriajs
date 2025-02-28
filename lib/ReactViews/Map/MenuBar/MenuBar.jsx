@@ -2,7 +2,6 @@ import classNames from "classnames";
 import { runInAction } from "mobx";
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
-import React from "react";
 import styled from "styled-components";
 import withControlledVisibility from "../../HOCs/withControlledVisibility";
 import { useViewState } from "../../Context";

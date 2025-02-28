@@ -3,7 +3,6 @@ import createReactClass from "create-react-class";
 import dateFormat from "dateformat";
 import { autorun, runInAction } from "mobx";
 import PropTypes from "prop-types";
-import React from "react";
 import defined from "terriajs-cesium/Source/Core/defined";
 import JulianDate from "terriajs-cesium/Source/Core/JulianDate";
 import WrappedTimeline from "terriajs-cesium-widgets/Source/Timeline/Timeline";

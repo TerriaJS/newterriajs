@@ -1,4 +1,3 @@
-import React from "react";
 import createReactClass from "create-react-class";
 import { isObservableArray } from "mobx";
 import PropTypes from "prop-types";

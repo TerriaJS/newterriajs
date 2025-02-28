@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import React from "react";
+import { FC } from "react";
 import { BaseModel } from "../../../Models/Definition/Model";
 import Text from "../../../Styled/Text";
 import { applyTranslationIfExists } from "../../../Language/languageHelpers";
@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 interface IScaleWorkbenchInfoProps {
   item: BaseModel;
 }
-export const ScaleWorkbenchInfo: React.FC<IScaleWorkbenchInfoProps> = observer(
+export const ScaleWorkbenchInfo: FC<IScaleWorkbenchInfoProps> = observer(
   ({ item }: IScaleWorkbenchInfoProps) => {
     const { i18n } = useTranslation();
     if (!MinMaxLevelMixin.isMixedInto(item) || !item.scaleWorkbenchInfo) {

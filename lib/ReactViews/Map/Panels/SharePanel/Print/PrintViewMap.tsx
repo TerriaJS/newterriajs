@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 interface Props {
   screenshot: Promise<string>;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 const PrintViewMap = (props: Props) => {

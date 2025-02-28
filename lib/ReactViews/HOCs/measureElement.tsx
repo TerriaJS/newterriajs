@@ -1,8 +1,14 @@
-import React from "react";
+import {
+  ComponentClass,
+  ComponentProps,
+  Component,
+  RefObject,
+  createRef
+} from "react";
 import debounce from "lodash-es/debounce";
 
-const getDisplayName = <P extends React.ComponentProps<any>>(
-  WrappedComponent: React.ComponentClass<P>
+const getDisplayName = <P extends ComponentProps<any>>(
+  WrappedComponent: ComponentClass<P>
 ) => {
   return WrappedComponent.displayName || WrappedComponent.name || "Component";
 };
@@ -13,8 +19,8 @@ export interface MeasureElementProps {
 }
 
 interface MeasureElementComponent<P>
-  extends React.Component<P & MeasureElementProps> {
-  refToMeasure: React.RefObject<HTMLElement> | HTMLElement | null;
+  extends Component<P & MeasureElementProps> {
+  refToMeasure: RefObject<HTMLElement> | HTMLElement | null;
 }
 
 interface MeasureElementClass<P> {
@@ -48,12 +54,12 @@ interface IState {
     ref={this.refToMeasure}>
     ```
 */
-const measureElement = <P extends React.ComponentProps<any>>(
+const measureElement = <P extends ComponentProps<any>>(
   WrappedComponent: MeasureElementClass<P>,
   verbose = true
 ) => {
-  class MeasureElement extends React.Component<P, IState> {
-    wrappedComponent = React.createRef<InstanceType<typeof WrappedComponent>>();
+  class MeasureElement extends Component<P, IState> {
+    wrappedComponent = createRef<InstanceType<typeof WrappedComponent>>();
     checkAndUpdateSizingWithDebounce: () => void;
     static displayName = `MeasureElement(${getDisplayName(WrappedComponent)})`;
     constructor(props: P) {

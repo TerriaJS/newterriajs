@@ -1,7 +1,7 @@
 import { comparer, reaction } from "mobx";
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
-import React from "react";
+import { Component } from "react";
 import { withTranslation } from "react-i18next";
 import addedByUser from "../../Core/addedByUser";
 import getPath from "../../Core/getPath";
@@ -14,7 +14,7 @@ import {
 } from "./DisplayGroupHelper";
 
 @observer
-class DataCatalogGroup extends React.Component {
+class DataCatalogGroup extends Component {
   static propTypes = {
     group: PropTypes.object.isRequired,
     viewState: PropTypes.object.isRequired,

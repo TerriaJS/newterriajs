@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import React from "react";
+import { FC, Fragment } from "react";
 import ChartView from "../../Charts/ChartView";
 import filterOutUndefined from "../../Core/filterOutUndefined";
 import hasTraits from "../../Models/Definition/hasTraits";
@@ -16,7 +16,7 @@ interface ChartDisclaimerProps {
   viewState: ViewState;
 }
 
-const ChartDisclaimer: React.FC<ChartDisclaimerProps> = ({ terria }) => {
+const ChartDisclaimer: FC<ChartDisclaimerProps> = ({ terria }) => {
   const chartView = new ChartView(terria);
 
   const uniqueChartDisclaimers: string[] = [
@@ -52,10 +52,10 @@ const ChartDisclaimer: React.FC<ChartDisclaimerProps> = ({ terria }) => {
     >
       <Spacing bottom={2} />
       {uniqueChartDisclaimers.map((chartDisclaimer) => (
-        <React.Fragment key={chartDisclaimer}>
+        <Fragment key={chartDisclaimer}>
           <Text textLight>{parseCustomHtmlToReact(chartDisclaimer!)}</Text>
           <Spacing bottom={2} />
-        </React.Fragment>
+        </Fragment>
       ))}
     </Box>
   );

@@ -9,7 +9,7 @@ import {
   makeObservable
 } from "mobx";
 import { observer } from "mobx-react";
-import React from "react";
+import { createRef, Component } from "react";
 import { WithTranslation, withTranslation, TFunction } from "react-i18next";
 import styled, { DefaultTheme, withTheme } from "styled-components";
 import ViewState from "../../../ReactViewModels/ViewState";
@@ -86,9 +86,9 @@ enum Orientation {
 }
 
 @observer
-class MapNavigationBase extends React.Component<PropTypes> {
+class MapNavigationBase extends Component<PropTypes> {
   static displayName = "MapNavigation";
-  private navigationRef = React.createRef<HTMLDivElement>();
+  private navigationRef = createRef<HTMLDivElement>();
   private readonly resizeListener: () => any;
   private readonly viewState: ViewState;
   private itemSizeInBar: Map<string, number>;

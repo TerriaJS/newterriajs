@@ -1,6 +1,14 @@
 import i18next, { WithT } from "i18next";
 import { computed, makeObservable } from "mobx";
-import React, { Suspense, useEffect, useState } from "react";
+import {
+  ComponentType,
+  FC,
+  lazy,
+  Component,
+  Suspense,
+  useEffect,
+  useState
+} from "react";
 import { useTranslation } from "react-i18next";
 import TerriaError from "../../Core/TerriaError";
 import {
@@ -15,7 +23,7 @@ import { useViewState } from "../Context";
 
 interface ToolProps {
   toolName: string;
-  getToolComponent: () => React.ComponentType | Promise<React.ComponentType>;
+  getToolComponent: () => ComponentType | Promise<ComponentType>;
   params?: any;
 }
 
@@ -27,7 +35,7 @@ interface ToolProps {
  * module that exports a default React Component. The promise is useful for
  * lazy-loading the tool.
  */
-const Tool: React.FC<ToolProps> = (props) => {
+const Tool: FC<ToolProps> = (props) => {
   const { getToolComponent, params, toolName } = props;
   const viewState = useViewState();
   const [t] = useTranslation();
@@ -37,7 +45,7 @@ const Tool: React.FC<ToolProps> = (props) => {
   const [toolAndProps, setToolAndProps] = useState<any>(undefined);
   useEffect(() => {
     setToolAndProps([
-      React.lazy(() =>
+      lazy(() =>
         Promise.resolve(getToolComponent()).then((c) => ({ default: c }))
       ),
       params
@@ -125,7 +133,7 @@ interface ToolErrorBoundaryProps extends WithT {
   children: any;
 }
 
-class ToolErrorBoundary extends React.Component<
+class ToolErrorBoundary extends Component<
   ToolErrorBoundaryProps,
   { hasError: boolean }
 > {

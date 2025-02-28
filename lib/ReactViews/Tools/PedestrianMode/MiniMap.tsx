@@ -1,5 +1,5 @@
 import { action, autorun, computed } from "mobx";
-import React, { useEffect, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Cartesian3 from "terriajs-cesium/Source/Core/Cartesian3";
 import Rectangle from "terriajs-cesium/Source/Core/Rectangle";
@@ -26,7 +26,7 @@ export type MiniMapView = {
   rotation: number;
 };
 
-const MiniMap: React.FC<MiniMapProps> = (props) => {
+const MiniMap: FC<MiniMapProps> = (props) => {
   const { terria, baseMap, view } = props;
   const container = useRef<HTMLDivElement>(null);
   const [miniMapViewer, setMiniMapViewer] = useState<

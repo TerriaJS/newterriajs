@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import React, { FC } from "react";
+import { FC } from "react";
 import ReactDOM from "react-dom";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";

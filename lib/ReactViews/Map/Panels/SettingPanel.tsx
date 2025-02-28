@@ -7,7 +7,7 @@ import {
 } from "mobx";
 import { observer } from "mobx-react";
 import Slider from "rc-slider";
-import React, { ChangeEvent, ComponentProps, MouseEvent } from "react";
+import { Ref, Component, ChangeEvent, ComponentProps, MouseEvent } from "react";
 import { withTranslation, WithTranslation, TFunction } from "react-i18next";
 import styled, { DefaultTheme, withTheme } from "styled-components";
 import SplitDirection from "terriajs-cesium/Source/Scene/SplitDirection";
@@ -39,13 +39,13 @@ const sides = {
 type PropTypes = WithTranslation & {
   terria: Terria;
   viewState: ViewState;
-  refFromHOC?: React.Ref<HTMLDivElement>;
+  refFromHOC?: Ref<HTMLDivElement>;
   theme: DefaultTheme;
   t: TFunction;
 };
 
 @observer
-class SettingPanel extends React.Component<PropTypes> {
+class SettingPanel extends Component<PropTypes> {
   /**
    * @param {Props} props
    */

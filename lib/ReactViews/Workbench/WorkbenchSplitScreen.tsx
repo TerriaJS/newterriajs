@@ -2,7 +2,7 @@
 // import styled from "styled-components";
 import { runInAction } from "mobx";
 import { observer } from "mobx-react";
-import React from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 import Terria from "../../Models/Terria";
@@ -16,7 +16,7 @@ import TerrainSide from "./TerrainSide";
 interface IWorkbenchSplitScreenProps {
   terria: Terria;
 }
-const WorkbenchSplitScreen: React.FC<IWorkbenchSplitScreenProps> = observer(
+const WorkbenchSplitScreen: FC<IWorkbenchSplitScreenProps> = observer(
   (props: IWorkbenchSplitScreenProps) => {
     const { t } = useTranslation();
     const theme = useTheme();

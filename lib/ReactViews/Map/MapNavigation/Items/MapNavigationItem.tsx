@@ -1,6 +1,6 @@
 import { i18n } from "i18next";
 import { observer } from "mobx-react";
-import React from "react";
+import { Component } from "react";
 import { withTranslation } from "react-i18next";
 import styled from "styled-components";
 import { applyTranslationIfExists } from "../../../../Language/languageHelpers";
@@ -19,7 +19,7 @@ interface PropTypes {
 }
 
 @observer
-class MapNavigationItemBase extends React.Component<PropTypes> {
+class MapNavigationItemBase extends Component<PropTypes> {
   render() {
     const { closeTool = true, item, expandInPlace, i18n } = this.props;
     if (item.render)

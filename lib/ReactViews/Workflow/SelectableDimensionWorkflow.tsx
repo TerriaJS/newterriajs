@@ -1,6 +1,6 @@
 import { action } from "mobx";
 import { observer } from "mobx-react";
-import React from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { getName } from "../../ModelMixins/CatalogMemberMixin";
 import { filterSelectableDimensions } from "../../Models/SelectableDimensions/SelectableDimensions";
@@ -17,7 +17,7 @@ import WorkflowPanel from "./WorkflowPanel";
  * - Title panel with `title`, item `WorkbenchItemControls` and menu
  * - Panel for each top-level selectable dimension
  */
-const SelectableDimensionWorkflow: React.FC = observer(() => {
+const SelectableDimensionWorkflow: FC = observer(() => {
   const viewState = useViewState();
   const terria = viewState.terria;
   const [t] = useTranslation();

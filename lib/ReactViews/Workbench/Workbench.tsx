@@ -1,6 +1,6 @@
 import { action, runInAction, makeObservable } from "mobx";
 import { observer } from "mobx-react";
-import React from "react";
+import { Component } from "react";
 import { withTranslation, WithTranslation, TFunction } from "react-i18next";
 import getPath from "../../Core/getPath";
 import Terria from "../../Models/Terria";
@@ -23,7 +23,7 @@ interface IProps extends WithTranslation {
 }
 
 @observer
-class Workbench extends React.Component<IProps> {
+class Workbench extends Component<IProps> {
   constructor(props: IProps) {
     super(props);
     makeObservable(this);

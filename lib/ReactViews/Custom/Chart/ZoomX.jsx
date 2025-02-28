@@ -2,10 +2,10 @@ import { observer } from "mobx-react";
 import { zoom as d3Zoom } from "d3-zoom";
 import { select as d3Select } from "d3-selection";
 import PropTypes from "prop-types";
-import React from "react";
+import { Component } from "react";
 
 @observer
-class ZoomX extends React.Component {
+class ZoomX extends Component {
   static propTypes = {
     initialScale: PropTypes.func.isRequired,
     scaleExtent: PropTypes.array.isRequired,

@@ -1,7 +1,7 @@
 import { sortBy, uniqBy } from "lodash";
 import { action, computed, runInAction, makeObservable } from "mobx";
 import { observer } from "mobx-react";
-import React from "react";
+import { Component } from "react";
 import { withTranslation, WithTranslation } from "react-i18next";
 import styled from "styled-components";
 import createGuid from "terriajs-cesium/Source/Core/createGuid";
@@ -94,7 +94,7 @@ interface PropsType extends WithTranslation {
 }
 
 @observer
-class ViewingControls extends React.Component<
+class ViewingControls extends Component<
   PropsType,
   { isMapZoomingToCatalogItem: boolean }
 > {

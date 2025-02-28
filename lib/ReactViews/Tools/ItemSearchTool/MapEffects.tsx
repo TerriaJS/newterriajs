@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { FC, useEffect } from "react";
 import SearchableItemMixin from "../../../ModelMixins/SearchableItemMixin";
 import { ItemSearchResult } from "../../../Models/ItemSearchProviders/ItemSearchProvider";
 
@@ -18,7 +18,7 @@ export type MapEffectsProps = {
  * A component that applies some effect on the map.
  *
  */
-const MapEffects: React.FC<MapEffectsProps> = ({ item, results, effect }) => {
+const MapEffects: FC<MapEffectsProps> = ({ item, results, effect }) => {
   switch (effect.is) {
     case "highlightAll":
       return <HighlightResults item={item} results={results} />;
@@ -38,7 +38,7 @@ export type HideAllResultsProps = {
   results: ItemSearchResult[];
 };
 
-export const HideAllResults: React.FC<HideAllResultsProps> = (props) => {
+export const HideAllResults: FC<HideAllResultsProps> = (props) => {
   const { item, results } = props;
   useEffect(() => {
     const disposer = item.hideFeaturesNotInItemSearchResults(results);
@@ -52,7 +52,7 @@ export type HighlightResultsProps = {
   results: ItemSearchResult | ItemSearchResult[];
 };
 
-export const HighlightResults: React.FC<HighlightResultsProps> = (props) => {
+export const HighlightResults: FC<HighlightResultsProps> = (props) => {
   useEffect(() => {
     const item = props.item;
     const results = Array.isArray(props.results)

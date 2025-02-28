@@ -1,5 +1,5 @@
 import { action, computed, makeObservable } from "mobx";
-import React from "react";
+import { ComponentType } from "react";
 import createGuid from "terriajs-cesium/Source/Core/createGuid";
 import TerriaError from "../../Core/TerriaError";
 import ViewerMode from "../../Models/ViewerMode";
@@ -32,7 +32,7 @@ export interface ToolConfig {
    *  }
    * ```
    */
-  toolComponentLoader: () => Promise<{ default: React.ComponentType<any> }>;
+  toolComponentLoader: () => Promise<{ default: ComponentType<any> }>;
 
   /**
    * The tool button configuration

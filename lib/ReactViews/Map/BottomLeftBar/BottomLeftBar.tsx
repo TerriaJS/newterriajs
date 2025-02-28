@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import React, { FC } from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styled, { useTheme } from "styled-components";
 import defined from "terriajs-cesium/Source/Core/defined";

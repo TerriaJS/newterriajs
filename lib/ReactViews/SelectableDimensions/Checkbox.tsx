@@ -1,12 +1,12 @@
 import { runInAction } from "mobx";
-import React from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import CommonStrata from "../../Models/Definition/CommonStrata";
 import { SelectableDimensionCheckbox as SelectableDimensionCheckboxModel } from "../../Models/SelectableDimensions/SelectableDimensions";
 import Checkbox from "../../Styled/Checkbox";
 import Text from "../../Styled/Text";
 
-export const SelectableDimensionCheckbox: React.FC<{
+export const SelectableDimensionCheckbox: FC<{
   id: string;
   dim: SelectableDimensionCheckboxModel;
 }> = ({ id, dim }) => {

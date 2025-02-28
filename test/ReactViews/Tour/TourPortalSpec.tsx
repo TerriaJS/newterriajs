@@ -1,5 +1,5 @@
 import { runInAction } from "mobx";
-import React from "react";
+import { createRef } from "react";
 import { act } from "react-dom/test-utils";
 import Terria from "../../../lib/Models/Terria";
 import ViewState from "../../../lib/ReactViewModels/ViewState";
@@ -56,9 +56,9 @@ describe("TourPortal", function () {
         expect(() => testRenderer.root.findByType(TourExplanation)).toThrow();
       });
       it("renders something using the TourGrouping path under showPortal conditions", function () {
-        const testRef: any = React.createRef();
-        const testRef2: any = React.createRef();
-        const testRef3: any = React.createRef();
+        const testRef: any = createRef();
+        const testRef2: any = createRef();
+        const testRef3: any = createRef();
         act(() => {
           testRenderer = createWithContexts(
             viewState,

@@ -1,4 +1,3 @@
-import React from "react";
 import CatalogGroup from "../../../lib/ReactViews/DataCatalog/CatalogGroup";
 import Loader from "../../../lib/ReactViews/Loader";
 import { ThemeProvider } from "styled-components";

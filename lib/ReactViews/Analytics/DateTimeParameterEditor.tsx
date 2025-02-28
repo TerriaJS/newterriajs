@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import React from "react";
+import { FC } from "react";
 import CommonStrata from "../../Models/Definition/CommonStrata";
 import DateTimeParameter from "../../Models/FunctionParameters/DateTimeParameter";
 import Styles from "./parameter-editors.scss";
@@ -8,8 +8,8 @@ interface DateTimeParameterEditorProps {
   parameter: DateTimeParameter;
 }
 
-const DateTimeParameterEditor: React.FC<DateTimeParameterEditorProps> =
-  observer(({ parameter }) => {
+const DateTimeParameterEditor: FC<DateTimeParameterEditorProps> = observer(
+  ({ parameter }) => {
     const style =
       parameter?.value !== undefined
         ? Styles.field
@@ -27,6 +27,7 @@ const DateTimeParameterEditor: React.FC<DateTimeParameterEditorProps> =
         />
       </div>
     );
-  });
+  }
+);
 
 export default DateTimeParameterEditor;

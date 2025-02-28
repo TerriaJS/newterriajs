@@ -1,4 +1,4 @@
-import React from "react";
+import { PureComponent } from "react";
 import PropTypes from "prop-types";
 import createGuid from "terriajs-cesium/Source/Core/createGuid";
 import { createTimer, startTimer as startTimerAnimation } from "./drawTimer";
@@ -19,7 +19,7 @@ if (typeof document.hidden !== "undefined") {
   visibilityChange = "webkitvisibilitychange";
 }
 
-class Timer extends React.PureComponent {
+class Timer extends PureComponent {
   constructor(_props) {
     super();
 

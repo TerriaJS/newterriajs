@@ -1,7 +1,7 @@
 import { makeObservable, observable, runInAction } from "mobx";
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
-import React from "react";
+import { Component } from "react";
 import { withTranslation } from "react-i18next";
 import defined from "terriajs-cesium/Source/Core/defined";
 import parseCustomMarkdownToReact from "../Custom/parseCustomMarkdownToReact";
@@ -44,7 +44,7 @@ class ParameterViewModel {
 }
 
 @observer
-class InvokeFunction extends React.Component {
+class InvokeFunction extends Component {
   static propTypes = {
     terria: PropTypes.object,
     previewed: PropTypes.object,

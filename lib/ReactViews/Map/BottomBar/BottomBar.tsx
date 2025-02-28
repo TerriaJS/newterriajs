@@ -4,7 +4,6 @@ import { useViewState } from "../../Context";
 import { MapCredits } from "./Credits";
 import { DistanceLegend } from "./DistanceLegend";
 import { LocationBar } from "./LocationBar";
-import React from "react";
 
 export const BottomBar: VFC = () => {
   const viewState = useViewState();

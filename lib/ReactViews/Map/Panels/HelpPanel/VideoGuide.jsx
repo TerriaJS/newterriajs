@@ -1,6 +1,6 @@
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
-import React from "react";
+import { Component } from "react";
 import { withTranslation } from "react-i18next";
 import { withTheme } from "styled-components";
 import Box from "../../../../Styled/Box";
@@ -55,7 +55,7 @@ VideoWrapperBox.propTypes = {
 };
 
 @observer
-class VideoGuide extends React.Component {
+class VideoGuide extends Component {
   static displayName = "VideoGuide";
 
   static propTypes = {
