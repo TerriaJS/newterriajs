@@ -59,7 +59,10 @@
     "myLocation": "La meva posició",
     "location": "Posició",
     "originError": "El vostre navegador només pot proporcionar la vostra ubicació quan feu servir HTTPS. És possible que pugueu utilitzar {{secureUrl}}.",
-    "centreMap": "Centreu el mapa a la vostra ubicació actual"
+    "centreMap": "Centreu el mapa a la vostra ubicació actual",
+    "permissionDenied": "S'ha denegat el permís per obtenir la vostra ubicació. Comproveu la configuració del vostre navegador.",
+    "positionUnavailable": "La vostra informació d'ubicació no està disponible.",
+    "timeout": "L'obtenció de la informació d'ubicació triga massa temps. Si us plau, torneu-ho a provar més tard."
   },
   "splitterTool": {
     "toggleSplitterToolTitle": "Comparar",

@@ -75,7 +75,8 @@
     "toggleSplitterTool": "在两组不同的数据之间进行并排比较",
     "toggleSplitterToolDisabled": "请禁用其他并排比较功能以启用标准比较",
     "title": "按下并拖动左键或者右键调整视角",
-    "errorTitle": "未能比较catalog项目."
+    "errorTitle": "未能比较catalog项目.",
+    "modelNotFoundErrorMessage": "模型字段 ID `\"{{id}}\"`没有被定义"
   },
   "concept": {
     "inactive": {
@@ -299,7 +300,7 @@
     "downloadMap": "下载地图(png图片)",
     "creatingPrintView": "正在创建打印视图...",
     "btnAdvanced": "高级选项",
-    "embedTitle": "要嵌入，请复制此代码以将此地图嵌入 HTML 页面：",
+    "embedTitle": "嵌入地图",
     "shortenUsingService": "使用 Web 服务缩短共享 URL地址",
     "btnCatalogShareText": "分享",
     "convertNotificationTitle": "注意：分享链接已更新",
@@ -307,7 +308,9 @@
     "convertNotificationFeedback": "如有问题或反馈，请单击此处。",
     "convertNotificationWarningsTitle": "技术细节",
     "convertErrorTitle": "无法将共享链接升级到 V8版本",
-    "convertErrorMessage": "此共享链接基于旧版本的 TerriaJS - 支持此网络地图的软件。 尝试升级共享数据时发生错误。"
+    "convertErrorMessage": "此共享链接基于旧版本的 TerriaJS - 支持此网络地图的软件。 尝试升级共享数据时发生错误。",
+    "embedDescription": "要嵌入，请复制此代码以将此地图嵌入 HTML 页面：",
+    "getShareSaveHelpMessage": "如何收藏分享链接"
   },
   "feedback": {
     "close": "关闭反馈",
@@ -351,7 +354,7 @@
     "baseMap": "底图",
     "imageOptimisation": "图像优化",
     "nativeResolutionHeader": "使用本机设备分辨率",
-    "mapQuality": "栅格地图质量：",
+    "mapQuality": "地图质量：",
     "qualityLabel": "质量",
     "performanceLabel": "性能",
     "timeline": {
@@ -602,19 +605,23 @@
       "geojson": "GeoJSON格式",
       "geoRss": "GeoRSS格式",
       "gpx": "GPX格式",
-      "carto": "Carto格式",
-      "shp": "Shapefile 文件(zip)",
+      "carto": "Carto V1 格式",
+      "shp": "Shapefile 文件",
       "other": "其它格式(使用转换服务)",
       "sdmx-group": "SDMX-JSON数据组",
-      "json": "JSON格式",
+      "json": "Terria目录",
       "czml": "CZML格式",
-      "gltf": "GLTF格式",
+      "gltf": "glTF格式",
       "kml": "KML或者KMZ",
       "csv": "CSV格式",
       "assimp-remote": "3D文件转换器(实验性功能)",
       "assimp-local": "3D文件转换器(zip格式)(实验性功能)",
       "assimp-local-description": "**Warning:** 3D文件转换器功能目前处于实验阶段。  \n请参阅[支持的格式列表](https://github.com/assimp/assimp/blob/master/doc/Fileformats.md).  \n文件必须压缩为zip格式。",
-      "socrata-group": "Socrata服务器"
+      "socrata-group": "Socrata服务器",
+      "ifc": "IFC",
+      "carto-v3": "Carto V3 格式",
+      "esri-imageServer": "Esri ArcGIS ImageServer (单图层)",
+      "assimp-remote-description": "**Warning:** 3D文件转换器功能目前处于实验阶段。\n请参阅[支持的格式列表](https://github.com/assimp/assimp/blob/master/doc/Fileformats.md)。\n文件必须压缩为zip格式。"
     },
     "printWindow": {
       "onafterprint": "打印之后",
@@ -637,7 +644,9 @@
     },
     "unverifiedExternalLink": {
       "confirmText": "在新标签页中打开",
-      "denyText": "取消"
+      "denyText": "取消",
+      "title": "警告：未经验证的链接",
+      "message": "您即将打开：\n\n`{{url}}`\n\n该链接未经验证可能不安全。"
     }
   },
   "terriaViewer": {
@@ -799,6 +808,11 @@
       "asyncResultDescription": "这是根据以下输入参数从 {{name}} 服务导出数据的结果，操作时间为 {{timestamp}}。",
       "asyncPendingDescription": "WCS 加载中:\n来自 {{name}} 服务的数据，时间戳为 {{timestamp}}.\n\n*正在下载覆盖图层*",
       "exportFailedTitle": "数据导出失败"
+    },
+    "arcGisImageServerCatalogItem": {
+      "name": "Esri ArcGIS ImageServer",
+      "invalidServiceTitle": "无效的 ArcGIS Image Service",
+      "invalidUrlTitle": "不能加载ImageServer服务"
     }
   },
   "addData": {
@@ -812,7 +826,7 @@
     "searchPlaceholderWhole": "搜索整个目录",
     "searchPlaceholder": "搜索目录",
     "localAdd": "添加本地文件",
-    "localFileType": "<0>步骤 1：</0> 选择文件类型（可选）",
+    "localFileType": "<0>步骤 1：</0> 选择文件类型",
     "localFile": "<0>步骤 2：</0> 选择文件",
     "webAdd": "添加网络数据",
     "browse": "浏览...",
@@ -824,7 +838,7 @@
     "webTitle": "添加网络数据",
     "done": "完成",
     "infoText": "<0>将文件拖放到此处以在地图上本地查看</0><1>（不会保存或上传到互联网）</1>",
-    "webFileType": "<0>步骤 1：</0> 选择文件类型（可选）"
+    "webFileType": "<0>步骤 1：</0> 选择文件类型或web服务类型"
   },
   "description": {
     "dataLocal": "该文件仅存在于您的浏览器中。 要共享它，您必须将其加载到公共 Web 服务器上。",
@@ -929,7 +943,7 @@
     "searchCatalogue": "搜索目录",
     "resultsLabel": "搜索结果",
     "viewLess": "查看较少的 {{name}} 个结果",
-    "searchInDataCatalog": "在数据目录中搜索 <1>'{{locationSearchText}}'</1>",
+    "searchInDataCatalog": "在数据目录中搜索'{{locationSearchText}}'",
     "done": "完成"
   },
   "mobile": {
