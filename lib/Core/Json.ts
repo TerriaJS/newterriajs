@@ -13,10 +13,7 @@ export interface JsonArray<T = JsonValue> extends Array<T> {}
 
 export default JsonValue;
 
-export function isJsonObject(
-  value: unknown | undefined,
-  deep = true
-): value is JsonObject {
+export function isJsonObject(value: unknown, deep = true): value is JsonObject {
   return (
     value !== undefined &&
     typeof value === "object" &&
@@ -26,15 +23,15 @@ export function isJsonObject(
   );
 }
 
-export function isJsonBoolean(value: unknown | undefined): value is boolean {
+export function isJsonBoolean(value: unknown): value is boolean {
   return typeof value === "boolean";
 }
 
-export function isJsonNumber(value: unknown | undefined): value is number {
+export function isJsonNumber(value: unknown): value is number {
   return typeof value === "number";
 }
 
-export function isJsonString(value: unknown | undefined): value is string {
+export function isJsonString(value: unknown): value is string {
   return typeof value === "string";
 }
 
@@ -50,10 +47,7 @@ export function isJsonValue(value: unknown, deep = true): value is JsonValue {
   );
 }
 
-export function isJsonArray(
-  value: unknown | undefined,
-  deep = true
-): value is JsonArray {
+export function isJsonArray(value: unknown, deep = true): value is JsonArray {
   return (
     Array.isArray(value) &&
     (!deep || value.every((child) => isJsonValue(child, true)))
@@ -61,7 +55,7 @@ export function isJsonArray(
 }
 
 export function isJsonObjectArray(
-  value: unknown | undefined,
+  value: unknown,
   deep = true
 ): value is JsonArray<JsonObject> {
   return (
@@ -69,15 +63,11 @@ export function isJsonObjectArray(
   );
 }
 
-export function isJsonStringArray(
-  value: unknown | undefined
-): value is JsonArray<string> {
+export function isJsonStringArray(value: unknown): value is JsonArray<string> {
   return Array.isArray(value) && value.every((child) => isJsonString(child));
 }
 
-export function isJsonNumberArray(
-  value: unknown | undefined
-): value is JsonArray<number> {
+export function isJsonNumberArray(value: unknown): value is JsonArray<number> {
   return Array.isArray(value) && value.every((child) => isJsonNumber(child));
 }
 

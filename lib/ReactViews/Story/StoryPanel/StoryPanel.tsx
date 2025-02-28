@@ -179,7 +179,7 @@ class StoryPanel extends React.Component<Props, State> {
   }
 
   // This is in StoryPanel and StoryBuilder
-  activateStory(_story: Story | any) {
+  activateStory(_story: Story) {
     const story = _story ? _story : this.props.viewState.terria.stories[0];
     activateStory(story, this.props.viewState.terria);
   }

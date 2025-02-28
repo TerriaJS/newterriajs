@@ -20,7 +20,7 @@ export interface AccessorSparseIndices {
   /**
    * The indices data type.
    */
-  componentType: number | number | number | number;
+  componentType: number;
   extensions?: any;
   extras?: any;
   [k: string]: any;
@@ -76,7 +76,7 @@ export interface Accessor {
   /**
    * The datatype of the accessor's components.
    */
-  componentType: number | number | number | number | number | number | number;
+  componentType: number;
   /**
    * Specifies whether integer data values are normalized before usage.
    */
@@ -88,7 +88,7 @@ export interface Accessor {
   /**
    * Specifies if the accessor's elements are scalars, vectors, or matrices.
    */
-  type: any | any | any | any | any | any | any | string;
+  type: any | string;
   /**
    * Maximum value of each component in this accessor.
    */
@@ -117,7 +117,7 @@ export interface AnimationChannelTarget {
   /**
    * The name of the node's TRS property to animate, or the `"weights"` of the Morph Targets it instantiates. For the `"translation"` property, the values that are provided by the sampler are the translation along the X, Y, and Z axes. For the `"rotation"` property, the values are a quaternion in the order (x, y, z, w), where w is the scalar. For the `"scale"` property, the values are the scaling factors along the X, Y, and Z axes.
    */
-  path: any | any | any | any | string;
+  path: any | string;
   extensions?: any;
   extras?: any;
   [k: string]: any;
@@ -149,7 +149,7 @@ export interface AnimationSampler {
   /**
    * Interpolation algorithm.
    */
-  interpolation?: any | any | any | string;
+  interpolation?: any | string;
   /**
    * The index of an accessor, containing keyframe output values.
    */
@@ -239,7 +239,7 @@ export interface BufferView {
   /**
    * The hint representing the intended GPU buffer type to use with this buffer view.
    */
-  target?: number | number | number;
+  target?: number;
   name?: any;
   extensions?: any;
   extras?: any;
@@ -308,7 +308,7 @@ export interface Camera {
   /**
    * Specifies if the camera uses a perspective or orthographic projection.
    */
-  type: any | any | string;
+  type: any | string;
   name?: any;
   extensions?: any;
   extras?: any;
@@ -325,7 +325,7 @@ export interface Image {
   /**
    * The image's media type. This field **MUST** be defined when `bufferView` is defined.
    */
-  mimeType?: any | any | string;
+  mimeType?: any | string;
   /**
    * The index of the bufferView that contains the image. This field **MUST NOT** be defined when `uri` is defined.
    */
@@ -431,7 +431,7 @@ export interface Material {
   /**
    * The alpha rendering mode of the material.
    */
-  alphaMode?: any | any | any | string;
+  alphaMode?: any | string;
   /**
    * The alpha cutoff value of the material.
    */
@@ -463,7 +463,7 @@ export interface MeshPrimitive {
   /**
    * The topology type of primitives to render.
    */
-  mode?: number | number | number | number | number | number | number | number;
+  mode?: number;
   /**
    * An array of morph targets.
    */
@@ -543,19 +543,19 @@ export interface Sampler {
   /**
    * Magnification filter.
    */
-  magFilter?: number | number | number;
+  magFilter?: number;
   /**
    * Minification filter.
    */
-  minFilter?: number | number | number | number | number | number | number;
+  minFilter?: number;
   /**
    * S (U) wrapping mode.
    */
-  wrapS?: number | number | number | number;
+  wrapS?: number;
   /**
    * T (V) wrapping mode.
    */
-  wrapT?: number | number | number | number;
+  wrapT?: number;
   name?: any;
   extensions?: any;
   extras?: any;
