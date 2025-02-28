@@ -39,6 +39,7 @@ export const SelectableDimensionGroup: React.FC<{
                 ? t("selectableDimensions.enabled")
                 : t("selectableDimensions.disabled"))
         }
+        titleTextProps={{ bold: false }}
         bodyBoxProps={{
           displayInlineBlock: true,
           fullWidth: true

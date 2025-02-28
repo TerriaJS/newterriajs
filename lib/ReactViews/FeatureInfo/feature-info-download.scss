@@ -16,6 +16,7 @@
 .icon--download {
   // the default icon styling for a dropdown is for a btn--primary, so we have to make some adjustments
   padding-right: 10px;
+
   svg {
     position: absolute;
     top: 6px;
@@ -29,24 +30,27 @@
 .dropdown__list {
   display: flex;
   flex-direction: column;
+
   li a {
     // this makes sure the hover highlight fills the full width of the item
     display: block;
     padding-top: 0;
     padding-bottom: 0;
     width: 100%;
+
     @if meta.variable-exists(text-link) {
-      color: $text-link;
+      color: variables.$text-link;
     }
+
     // Outside of a dropdown menu, links are normally shown with the same color on hover.
     // So, to provide some highlighting on hover in a dropdown menu, use the visited link color,
     // if it exists and is different from the unvisited link color.
     &:hover {
       @if meta.variable-exists(text-visited-link) and
         meta.variable-exists(text-link) and
-        ($text-visited-link != $text-link)
+        ($text-visited-link !=$text-link)
       {
-        color: $text-visited-link;
+        color: variables.$text-visited-link;
         text-decoration: variables.$link-text-decoration;
       }
     }

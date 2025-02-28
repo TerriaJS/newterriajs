@@ -1,5 +1,6 @@
 @use "../../Sass/common/_variables";
 @use "../../Sass/common/mixins";
+
 .story-panel {
   font-family: variables.$font-base;
   flex-basis: 400px;
@@ -10,14 +11,17 @@
   display: block;
   transition: all 0.25s;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
   &.isVisible {
     visibility: visible;
     margin-right: 0;
   }
+
   &.isHidden {
     visibility: hidden;
     margin-right: -400px;
   }
+
   & .actions {
     padding: variables.$padding;
   }
@@ -36,11 +40,13 @@
   height: variables.$story-title-height;
   line-height: variables.$story-title-height;
   border-bottom: 1px solid variables.$overlay;
+
   li {
     display: inline-block;
     float: left;
     font-size: variables.$font-size-mid-small;
     font-weight: variables.$font-weight-bold;
+
     &:last-child {
       float: right;
     }
@@ -55,16 +61,19 @@
   padding: variables.$padding variables.$padding variables.$padding 5 *
     variables.$padding;
   border: 0;
+
   svg {
     height: variables.$font-size-mid-small;
     width: variables.$font-size-mid-small;
     // fill: $text-light;
     vertical-align: middle;
     display: inline-block;
+
     use {
       pointer-events: none;
     }
   }
+
   &:hover,
   &:focus {
     svg {
@@ -88,6 +97,7 @@
 
   height: calc(100vh - 121px - 51px);
   overflow: auto;
+
   &.isActive {
     opacity: 0.7;
   }
@@ -96,10 +106,11 @@
 .story {
   padding: variables.$padding-small;
   margin: variables.$padding-small;
-  background: #667080;
+  background: variables.$dark;
   color: #ffffff;
   margin: variables.$padding;
   border: 1px solid rgba(255, 255, 255, 0.15);
+
   h3 {
     font-weight: normal;
     margin: 0;
@@ -114,6 +125,7 @@
   background: #9ca1aa;
   border-radius: 4px;
   padding: variables.$padding-small variables.$padding;
+
   svg {
     height: 25px;
     width: 25px;
@@ -136,6 +148,7 @@
   height: inherit;
   composes: btn from "../../Sass/common/_buttons.scss";
   composes: btn-primary from "../../Sass/common/_buttons.scss";
+
   svg {
     width: 25px;
     height: 25px;
@@ -158,10 +171,12 @@
   border-radius: 4px;
   text-align: center;
   padding: 30px 10px;
+
   // color: $text-light-dimmed;
   strong {
     // color: $text-light;
   }
+
   svg {
     width: 70px;
     height: 70px;
@@ -169,11 +184,13 @@
     margin: 20px auto;
   }
 }
+
 .remove-button {
   composes: btn from "../../Sass/common/_buttons.scss";
   color: variables.$text-light;
   font-size: variables.$font-size-mid-mini;
   padding: 0;
+
   svg {
     height: 12px;
     width: 12px;
@@ -207,14 +224,17 @@
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
 }
+
 @include mixins.keyframes(story-fade-out) {
   0% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
   }
@@ -224,18 +244,22 @@
   0% {
     @include mixins.transform(translate(-50%, 0%));
   }
+
   100% {
     @include mixins.transform(translate(-50%, -50%));
   }
 }
+
 @include mixins.keyframes(story-slide-down) {
   0% {
     @include mixins.transform(translate(-50%, -50%));
   }
+
   100% {
     @include mixins.transform(translate(-50%, 0%));
   }
 }
+
 .VideoGuideWrapper {
   position: fixed;
   z-index: 99999;
@@ -247,8 +271,10 @@
   opacity: 1;
   @include mixins.animation("story-fade-in 0.3s");
 }
+
 .VideoGuideWrapper--closing {
   @include mixins.animation("story-fade-out 0.3s");
+
   & > div {
     @include mixins.animation("story-slide-down 0.3s");
   }
@@ -269,14 +295,17 @@
   @include mixins.transform(translate(-50%, -50%));
   @include mixins.animation("story-slide-up 0.3s");
 }
+
 .videoGuideRatio {
   padding-bottom: 58.5%;
   padding-top: 25px;
 }
+
 .videoGuideLoading {
   position: absolute;
   top: 50%;
   left: 50%;
+
   svg {
     fill: white;
     width: 60px;

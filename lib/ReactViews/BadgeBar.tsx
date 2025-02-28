@@ -12,24 +12,30 @@ const BadgeBar: React.FC<IProps> = (props: IProps) => {
   const theme = useTheme();
   return (
     <Box
-      paddedHorizontally={3}
+      flex
+      column
+      styledMargin="0 15px"
       justifySpaceBetween
       whiteSpace="nowrap"
-      styledMinHeight="40px"
+      styledMinHeight="70px"
       verticalCenter
       css={`
-        border-top: 1px solid ${theme.darkWithOverlay};
-        border-bottom: 1px solid ${theme.darkWithOverlay};
+        border-top: 1px solid ${theme.darkLighter};
+        border-bottom: 1px solid ${theme.darkLighter};
+        justify-content: space-evenly;
+        align-items: center;
       `}
     >
-      <TextSpan textLight uppercase overflowHide overflowEllipsis>
-        {props.label} {props.badge ? `(${props.badge})` : null}
-      </TextSpan>
-
+      <Box>
+        <TextSpan textLight uppercase overflowHide overflowEllipsis>
+          {props.label} {props.badge !== undefined ? `(${props.badge})` : null}
+        </TextSpan>
+      </Box>
       <Box
-        styledMaxWidth="60%"
+        flex
+        styledWidth="100%"
         css={`
-          gap: 15px;
+          justify-content: space-between;
         `}
       >
         {props.children}

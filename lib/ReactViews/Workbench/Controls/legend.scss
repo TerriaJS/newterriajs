@@ -23,7 +23,8 @@
 }
 
 .legend__inner {
-  padding: variables.$padding 0 0 0;
+  padding: 0;
+
   a {
     // Only the actual legend should be clickable rather than the whole area
     display: inline-block;
@@ -42,12 +43,15 @@
   text {
     fill: #fff;
   }
+
   :global .tick-mark {
     stroke: #fff;
   }
+
   svg {
     width: 100%;
     display: block;
+
     :global rect.background {
       width: 100%;
       fill: rgba(#fff, 0.15);
@@ -57,6 +61,7 @@
 
 .loader {
   font-family: variables.$font-base;
+
   svg {
     fill: #fff;
   }
@@ -77,7 +82,7 @@
 }
 
 .legendTitles {
-  font-size: 12px;
+  font-size: 14px;
   line-height: variables.$legend-item-height;
   padding-left: 5px;
 }

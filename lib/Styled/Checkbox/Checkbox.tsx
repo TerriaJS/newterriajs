@@ -21,6 +21,7 @@ const Checkbox = forwardRef(function Checkbox(
   const {
     isChecked: isCheckedProp,
     isDisabled = false,
+    isSwitch = false,
     defaultChecked = false,
     isIndeterminate = false,
     onChange: onChangeProps,
@@ -82,6 +83,7 @@ const Checkbox = forwardRef(function Checkbox(
       css={`
         display: flex;
         flex-shrink: 0;
+        ${isSwitch && `gap: 5px;`}
         align-items: center;
         &:focus-within {
           //copy the global focus
@@ -111,6 +113,7 @@ const Checkbox = forwardRef(function Checkbox(
         ref={ref}
       />
       <CheckboxIcon
+        isSwitch={isSwitch}
         isIndeterminate={isIndeterminate}
         isChecked={isChecked}
         isDisabled={isDisabled}

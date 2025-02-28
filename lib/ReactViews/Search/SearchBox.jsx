@@ -13,7 +13,7 @@ const SearchInput = styled.input`
   margin-top: 0;
   margin-bottom: 0;
   border: none;
-  border-radius: 20px;
+  border-radius: 4px;
   height: 40px;
   width: 100%;
   display: block;

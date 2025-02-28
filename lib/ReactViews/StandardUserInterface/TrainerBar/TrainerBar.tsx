@@ -28,7 +28,10 @@ import CloseButton from "../../Generic/CloseButton";
 
 const TrainerBarWrapper = styled(Box)<{ isMapFullScreen: boolean }>`
   top: 0;
-  left: ${(p) => (p.isMapFullScreen ? 0 : Number(p.theme.workbenchWidth))}px;
+  left: ${(p) =>
+    p.isMapFullScreen
+      ? 0
+      : Number(p.theme.workbenchWidth) + Number(p.theme.workbenchMargin) * 2}px;
   z-index: ${(p) => Number(p.theme.frontComponentZIndex) + 100};
 `;
 
@@ -205,7 +208,7 @@ class StepAccordionRaw extends React.Component<
               // the relative width in its clone
               padding-right: 60px;
             `}
-            backgroundColor={theme.textBlack}
+            backgroundColor={theme.darkMid}
             ref={(component: any) => (this.refToMeasure = component)}
           >
             {renderStep(
@@ -265,7 +268,7 @@ class StepAccordionRaw extends React.Component<
           <BoxTrainerExpandedSteps
             column
             position="absolute"
-            backgroundColor={theme.textBlack}
+            backgroundColor={theme.darkMid}
             fullWidth
             paddedRatio={4}
             overflowY={"auto"}
@@ -346,7 +349,9 @@ export const TrainerBar = observer((props: TrainerBarProps) => {
       styledWidth={
         isMapFullScreen
           ? "100%"
-          : `calc(100% - ${Number(theme.workbenchWidth)}px)`
+          : `calc(100% - ${Number(
+              Number(theme.workbenchWidth) + Number(theme.workbenchMargin) * 2
+            )}px)`
       }
       isMapFullScreen={isMapFullScreen}
       onClick={() => viewState.setTopElement("TrainerBar")}
@@ -356,7 +361,7 @@ export const TrainerBar = observer((props: TrainerBarProps) => {
         fullHeight
         centered
         justifySpaceBetween
-        backgroundColor={theme.textBlack}
+        backgroundColor={theme.darkMid}
       >
         {/* Trainer Items Dropdown */}
         <Box css={"min-height: 64px;"}>

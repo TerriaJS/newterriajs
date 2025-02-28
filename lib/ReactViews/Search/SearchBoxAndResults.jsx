@@ -176,8 +176,8 @@ export class SearchBoxAndResultsRaw extends React.Component {
                 top: 100%;
                 background-color: ${(props) => props.theme.greyLightest};
                 max-height: calc(100vh - 120px);
-                border-radius: 0 0 ${(props) => props.theme.radius40Button}px
-                  ${(props) => props.theme.radius40Button}px;
+                border-radius: 0 0 ${(props) => props.theme.radiusLarge}
+                  ${(props) => props.theme.radiusLarge};
               `}
             >
               {/* search {searchterm} in data catalog */}

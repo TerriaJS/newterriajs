@@ -6,13 +6,14 @@ import ViewState from "../../ReactViewModels/ViewState";
 import ChartPanel from "../Custom/Chart/ChartPanel";
 import measureElement, { MeasureElementProps } from "../HOCs/measureElement";
 import withControlledVisibility from "../HOCs/withControlledVisibility";
-import Styles from "./bottom-dock.scss";
 import ChartDisclaimer from "./ChartDisclaimer";
 import Timeline from "./Timeline/Timeline";
+import { DefaultTheme, withTheme } from "styled-components";
 
 interface PropsType {
   terria: Terria;
   viewState: ViewState;
+  theme: DefaultTheme;
 }
 
 @observer
@@ -42,7 +43,7 @@ class BottomDock extends React.Component<PropsType & MeasureElementProps> {
 
     return (
       <div
-        className={`${Styles.bottomDock} ${
+        className={`${
           this.props.viewState.topElement === "BottomDock" ? "top-element" : ""
         }`}
         ref={(element) => {
@@ -53,12 +54,18 @@ class BottomDock extends React.Component<PropsType & MeasureElementProps> {
         tabIndex={0}
         onClick={this.handleClick.bind(this)}
         css={`
-          background: ${(p: any) => p.theme.dark};
+          bottom: 0;
+          right: 0;
+          position: relative;
         `}
       >
         <div id="TJS-BottomDockFirstPortal" />
-        <ChartDisclaimer terria={terria} viewState={this.props.viewState} />
-        <ChartPanel terria={terria} viewState={this.props.viewState} />
+        {!this.props.viewState.useSmallScreenInterface && (
+          <>
+            <ChartDisclaimer terria={terria} viewState={this.props.viewState} />
+            <ChartPanel terria={terria} viewState={this.props.viewState} />
+          </>
+        )}
         {top && (
           <Timeline
             terria={terria}
@@ -72,4 +79,6 @@ class BottomDock extends React.Component<PropsType & MeasureElementProps> {
   }
 }
 
-export default withControlledVisibility(measureElement(BottomDock, false));
+export default withControlledVisibility(
+  withTheme(measureElement(BottomDock, false))
+);

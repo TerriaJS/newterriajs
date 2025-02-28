@@ -109,7 +109,7 @@ const GridLabel = styled.span`
 const GridBody = styled.div`
   height: calc(100% - 30px);
   overflow: auto;
-  ${scrollBars()}
+  ${(p) => scrollBars(p)}
 `;
 
 const BackButton = styled(RawButton)`

@@ -8,6 +8,7 @@ import { RawButton } from "../../Styled/Button";
 import Spacing from "../../Styled/Spacing";
 import Text from "../../Styled/Text";
 import { GLYPHS, StyledIcon } from "../../Styled/Icon";
+import { scrollBars } from "../../Styled/mixins";
 
 export interface FrameProps {
   title: string;
@@ -59,7 +60,8 @@ export const Main = styled(Text)`
   flex-direction: column;
   padding: 15px;
   overflow-y: auto;
-  ${({ theme }) => theme.borderRadiusBottom(theme.radius40Button)}
+  ${({ theme }) => scrollBars({ theme })}
+  border-radius: ${({ theme }) => `0 0 ${theme.radiusXL} ${theme.radiusXL}`};
   background-color: ${(p) => p.theme.darkWithOverlay};
   min-height: 350px;
 `;
@@ -83,7 +85,7 @@ const Wrapper = styled(Box).attrs({
 `;
 
 const Toggle = styled(Box)`
-  ${({ theme }) => theme.borderRadiusTop(theme.radius40Button)}
+  border-radius: ${({ theme }) => `${theme.radiusXL} ${theme.radiusXL} 0 0`};
 `;
 
 interface ToolCloseButtonProps {

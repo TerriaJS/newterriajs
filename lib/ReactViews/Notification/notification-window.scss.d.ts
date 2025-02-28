@@ -1,7 +1,6 @@
 declare namespace NotificationWindowScssNamespace {
   export interface INotificationWindowScss {
     body: string;
-    btn: string;
     footer: string;
     inner: string;
     notification: string;

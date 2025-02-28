@@ -228,16 +228,18 @@ export const Box = styled.div<IBoxProps>`
     -webkit-overflow-scrolling: touch;
 
     &::-webkit-scrollbar {
-      width: 10px; /* for vertical scrollbars */
+      width: 5px; /* for vertical scrollbars */
       height: 8px; /* for horizontal scrollbars */
     }
 
     &::-webkit-scrollbar-track {
-      background: rgba(136,136,136,0.1);
+      background: ${props.theme.scrollbarTrackColor};
+      border-radius: ${props.theme.radiusLarge};
     }
 
     &::-webkit-scrollbar-thumb {
-      background: rgba(136,136,136,0.6);
+      background: ${props.theme.scrollbarColor};
+      border-radius: ${props.theme.radiusLarge}
     }
   `}
 `;

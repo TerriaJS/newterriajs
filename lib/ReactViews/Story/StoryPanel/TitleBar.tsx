@@ -11,10 +11,11 @@ const TitleContainer = styled(Box).attrs({
   verticalCenter: true
 })``;
 
-const ClampedTitle = styled(Text).attrs({ as: "h3", bold: true })`
+const ClampedTitle = styled(Text).attrs({ as: "h3" })`
   /* clamp fallback */
   white-space: nowrap;
   text-overflow: ellipsis;
+  font-weight: 500;
 
   overflow: hidden;
   padding: 0;

@@ -4,6 +4,7 @@
 .workBench {
   // position: relative;
 }
+
 .workbenchEmpty {
   color: variables.$text-light;
   font-size: variables.$font-size-mid-small;
@@ -20,6 +21,7 @@
     vertical-align: bottom;
   }
 }
+
 .header {
   padding: 0 variables.$padding-small;
   background: variables.$dark;
@@ -32,6 +34,7 @@
 .addData {
   margin: variables.$padding-small 0;
   display: flex;
+
   button {
     height: 42px;
   }

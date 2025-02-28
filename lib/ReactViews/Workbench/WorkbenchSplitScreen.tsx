@@ -37,6 +37,7 @@ const WorkbenchSplitScreen: React.FC<IWorkbenchSplitScreenProps> = observer(
             background: ${theme.darkWithOverlay};
             color: ${theme.textLight};
             border-radius: 2px;
+            flex-basis: 145px;
           `}
         >
           <Box
@@ -67,13 +68,17 @@ const WorkbenchSplitScreen: React.FC<IWorkbenchSplitScreenProps> = observer(
             </RawButton>
           </Box>
 
-          <Box fullWidth paddedHorizontally>
+          <Box fullWidth paddedRatio={3}>
             <TerrainSide
               terria={terria}
               spaced={false}
               buttonProps={{
                 css: `border: 0;
                 padding: 8px 0;
+                border-radius: 3px;
+                &:nth-of-type(even) {
+                  border-radius: 0;
+                }
               `
               }}
               activeColor={theme.colorSecondary}

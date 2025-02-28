@@ -5,6 +5,7 @@ import WebMapServiceCatalogItem from "../../../../lib/Models/Catalog/Ows/WebMapS
 import Terria from "../../../../lib/Models/Terria";
 import { formatDateTime } from "../../../../lib/ReactViews/BottomDock/Timeline/DateFormats";
 import DateTimeSelectorSection from "../../../../lib/ReactViews/Workbench/Controls/DateTimeSelectorSection";
+import { terriaTheme } from "../../../../lib/ReactViews/StandardUserInterface";
 
 describe("DateTimeSelectorSection", function () {
   let terria: Terria;
@@ -24,7 +25,7 @@ describe("DateTimeSelectorSection", function () {
     await wmsItem.loadMapItems();
     act(() => {
       testRenderer = TestRenderer.create(
-        <DateTimeSelectorSection item={wmsItem} />
+        <DateTimeSelectorSection theme={terriaTheme} item={wmsItem} />
       );
     });
     buttons = testRenderer.root.findAllByType("button");

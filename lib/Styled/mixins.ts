@@ -6,21 +6,24 @@ interface MixinProps {
   theme: typeof cssExports;
 }
 
-export const scrollBars = () => `
--webkit-overflow-scrolling: touch;
+export const scrollBars = (props: MixinProps) => ` 
 
-::-webkit-scrollbar {
-  width: 10px; /* for vertical scrollbars */
-  height: 8px; /* for horizontal scrollbars */
-}
+    -webkit-overflow-scrolling: touch;
 
-::-webkit-scrollbar-track {
-  background: rgba(136, 136, 136, 0.1);
-}
+    &::-webkit-scrollbar {
+      width: 5px; /* for vertical scrollbars */
+      height: 8px; /* for horizontal scrollbars */
+    }
 
-::-webkit-scrollbar-thumb {
-  background: rgba(136, 136, 136, 0.6);
-}`;
+    &::-webkit-scrollbar-track {
+      background: ${props.theme.scrollbarTrackColor};
+      border-radius: ${props.theme.radiusLarge};
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: ${props.theme.scrollbarColor};
+      border-radius: ${props.theme.radiusLarge}
+    }`;
 
 export const verticalAlign = (position = "relative") => `
   position: ${position};
@@ -141,23 +144,6 @@ export const addTerriaLightBtnStyles = (props: MixinProps) => `
   }
 `;
 
-export const addTerriaScrollbarStyles = () => `
-    -webkit-overflow-scrolling: touch;
-
-    &::-webkit-scrollbar {
-      width: 10px; /* for vertical scrollbars */
-      height: 8px; /* for horizontal scrollbars */
-    }
-
-    &::-webkit-scrollbar-track {
-      background-color: rgba(136, 136, 136, 0.1);
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: rgba(136, 136, 136, 0.6);
-    }
-`;
-
 export default {
   verticalAlign,
   centerWithoutFlex,
@@ -172,6 +158,5 @@ export default {
   addTerriaSecondaryBtnStyles,
   addTerriaTertiaryBtnStyles,
   addTerriaMapBtnStyles,
-  addTerriaLightBtnStyles,
-  addTerriaScrollbarStyles
+  addTerriaLightBtnStyles
 };

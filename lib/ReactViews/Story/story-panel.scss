@@ -10,11 +10,17 @@
   width: 100%;
   min-height: 2em;
   max-width: 1200px;
-  background-color: #ffffff;
   color: variables.$text-dark;
   text-align: left;
   box-sizing: border-box;
-  box-shadow: 0 0 15px 6px rgba(100, 100, 100, 0.3);
+  box-shadow: 0px 1px 0px 0px #1f2937 inset;
+  border-radius: 6px;
+
+  a,
+  a:visited,
+  a:focus {
+    color: variables.$color-primary;
+  }
 
   &.is-mounted {
     opacity: 1;
@@ -24,6 +30,7 @@
   .left {
     border-right: 1px solid variables.$field-border;
   }
+
   .right {
     border-left: 1px solid variables.$field-border;
   }
@@ -35,23 +42,11 @@
     @media (min-width: variables.$md) {
       left: variables.$work-bench-width;
     }
+
     .tjs-notification-window__notification {
-      // background-color: $color-primary;
       color: #ffffff;
       border: 1px solid rgba(#ffffff, 0.1);
       text-align: center;
-    }
-    .tjs-notification-window__footer {
-      display: flex;
-      border-top: 1px solid rgba(#ffffff, 0.8);
-      button {
-        color: #ffffff;
-        background-color: transparent;
-        font-weight: bold;
-        &:first-of-type {
-          border-right: 1px solid rgba(#ffffff, 0.8);
-        }
-      }
     }
   }
 }

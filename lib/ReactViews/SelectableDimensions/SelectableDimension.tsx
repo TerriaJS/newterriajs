@@ -31,12 +31,12 @@ const SelectableDimension: React.FC<{
   dim: SelectableDimensionModel;
 }> = ({ id, dim }) => {
   return (
-    <Box displayInlineBlock fullWidth styledPadding="5px 0">
+    <Box displayInlineBlock fullWidth styledMargin="0 0 5px 0">
       {/* Render label for all SelectableDimensions except for groups */}
       {dim.name && dim.type !== "group" ? (
         <>
           <label htmlFor={id}>
-            <Text textLight medium as="span">
+            <Text textGreyLighter medium as="span">
               {parseCustomMarkdownToReactWithOptions(dim.name, {
                 inline: true
               })}

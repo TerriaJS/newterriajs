@@ -3,7 +3,7 @@ import { runInAction } from "mobx";
 import { observer } from "mobx-react";
 import React from "react";
 import { WithTranslation, withTranslation, TFunction } from "react-i18next";
-import styled from "styled-components";
+import styled, { DefaultTheme, withTheme } from "styled-components";
 import JulianDate from "terriajs-cesium/Source/Core/JulianDate";
 import isDefined from "../../../Core/isDefined";
 import DiscretelyTimeVaryingMixin from "../../../ModelMixins/DiscretelyTimeVaryingMixin";
@@ -23,6 +23,7 @@ interface IState {
 interface IProps extends WithTranslation {
   item: DiscretelyTimeVaryingMixin.Instance;
   t: TFunction;
+  theme: DefaultTheme;
 }
 
 @observer
@@ -160,9 +161,9 @@ class DateTimeSelectorSection extends React.Component<IProps, IState> {
           {item.timeLabel ?? t("dateTime.selectorLabel")}
         </Text>
         <Spacing bottom={1} />
-        <Box fullWidth justifySpaceBetween styledHeight={"30px"} gap>
+        <Box fullWidth justifySpaceBetween styledHeight={"40px"} gap>
           <Box
-            backgroundColor="rgba(250, 250, 250, 0.2)"
+            backgroundColor={this.props.theme.darkLighter}
             css={`
               border-radius: 2px;
               flex-grow: 1;
@@ -177,7 +178,11 @@ class DateTimeSelectorSection extends React.Component<IProps, IState> {
                 border-radius: 2px 0 0 2px;
               `}
             >
-              <StyledIcon glyph={GLYPHS.previous} styledWidth={"8px"} />
+              <StyledIcon
+                fillColor={this.props.theme.grey}
+                glyph={GLYPHS.previous}
+                styledWidth={"8px"}
+              />
             </StyledButton>
             <StyledButton
               onClick={this.toggleOpen}
@@ -188,7 +193,7 @@ class DateTimeSelectorSection extends React.Component<IProps, IState> {
                 padding: 0 10px;
               `}
             >
-              <TextSpan large textLight id="current-date">
+              <TextSpan textLight id="current-date">
                 {isDefined(discreteTime)
                   ? discreteTime
                   : t("dateTime.outOfRange")}
@@ -281,4 +286,4 @@ const TimelineButton = styled(RawButton)<{ active: boolean }>`
   `}
 `;
 
-export default withTranslation()(DateTimeSelectorSection);
+export default withTranslation()(withTheme(DateTimeSelectorSection));

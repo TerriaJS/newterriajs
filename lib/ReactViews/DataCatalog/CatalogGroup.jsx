@@ -96,7 +96,7 @@ function CatalogGroup(props) {
           )}
           <Box justifySpaceBetween>
             <Box>{props.text}</Box>
-            <Box centered>
+            <Box alignItemsFlexStart>
               {props.isPrivate && <PrivateIndicator />}
               <span
                 className={classNames(Styles.caret, {

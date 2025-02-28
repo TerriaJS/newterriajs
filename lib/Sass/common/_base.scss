@@ -469,16 +469,20 @@
   -webkit-overflow-scrolling: touch;
 
   &::-webkit-scrollbar {
-    width: 10px; /* for vertical scrollbars */
-    height: 8px; /* for horizontal scrollbars */
+    width: 5px;
+    /* for vertical scrollbars */
+    height: 8px;
+    /* for horizontal scrollbars */
   }
 
   &::-webkit-scrollbar-track {
-    background: rgba(#888, 0.1);
+    background: variables.$scrollbar-track-color;
+    border-radius: variables.$radius-large;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: rgba(#888, 0.6);
+    background: variables.$scrollbar-color;
+    border-radius: variables.$radius-large;
   }
 }
 

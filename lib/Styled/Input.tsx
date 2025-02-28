@@ -112,11 +112,13 @@ export const StyledTextArea = styled.textarea<TextAreaProps>`
   }
 
   &::-webkit-scrollbar-track {
-    background: rgba(136, 136, 136, 0.1);
+    background: ${(props) => props.theme.scrollbarTrackColor};
+    border-radius: ${(props) => props.theme.radiusLarge};
   }
 
   &::-webkit-scrollbar-thumb {
-    background: rgba(136, 136, 136, 0.6);
+    background: ${(props) => props.theme.scrollbarColor};
+    border-radius: ${(props) => props.theme.radiusLarge};
   }
 `;
 

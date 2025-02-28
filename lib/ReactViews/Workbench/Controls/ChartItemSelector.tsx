@@ -79,7 +79,7 @@ const ChartItemSelector: React.FC<IChartItemSelector> = observer(
         rounded
         backgroundColor={theme?.overlay}
         css={`
-          margin: 10px 0;
+          margin: 10px 5px;
         `}
       >
         {chartItems.map((chartItem) => (
