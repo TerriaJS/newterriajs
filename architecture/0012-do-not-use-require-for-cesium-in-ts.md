@@ -1,4 +1,4 @@
-# 2. Using `imports` instead of `require` + type casting statements
+# 12. Using `imports` instead of `require` + type casting statements
 
 Date: 2024-09-28
 
