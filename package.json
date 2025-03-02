@@ -171,7 +171,6 @@
     "worker-loader": "^3.0.8"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.23.3",
     "@types/node": "^22.13.1",
     "@types/proj4": "^2.5.5",
     "@typescript-eslint/eslint-plugin": "^8.24.0",
