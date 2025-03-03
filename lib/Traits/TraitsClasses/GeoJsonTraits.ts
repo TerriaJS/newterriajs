@@ -5,6 +5,7 @@ import objectTrait from "../Decorators/objectTrait";
 import primitiveTrait from "../Decorators/primitiveTrait";
 import mixTraits from "../mixTraits";
 import ModelTraits from "../ModelTraits";
+import ClusteringTraits from "./ClusteringTraits";
 import FeatureInfoUrlTemplateTraits from "./FeatureInfoTraits";
 import LegendOwnerTraits from "./LegendOwnerTraits";
 import StyleTraits from "./StyleTraits";
@@ -163,4 +164,12 @@ export class GeoJsonTraits extends mixTraits(
       "Replaces `MultiPoint` features with its equivalent `Point` features when `true`. This is useful for example when using Table mode which does not support `MultiPoint` features currently."
   })
   explodeMultiPoints = true;
+
+  @objectTrait({
+    type: ClusteringTraits,
+    name: "clustering",
+    description:
+      "Allows to activate the clustering of entities, works only with Cesium as a viewer."
+  })
+  clustering?: ClusteringTraits;
 }
