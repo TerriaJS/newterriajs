@@ -106,7 +106,7 @@ export const MapColumn: FC<IMapColumnProps> = observer(
                     : `calc(${theme.workbenchWidth}px + 2 * ${theme.workbenchMargin}px)`};
                   margin-right: ${viewState.useSmallScreenInterface
                     ? `0px`
-                    : `${theme.workbenchMargin}px`};
+                    : `calc(34px + 2 *${theme.workbenchMargin}px)`};
                   bottom: ${viewState.useSmallScreenInterface
                     ? `0px`
                     : `${theme.workbenchMargin}px`};
