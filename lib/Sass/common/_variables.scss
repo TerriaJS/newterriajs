@@ -26,7 +26,10 @@ $dark: #111827;
 $dark-with-overlay: #111827;
 $dark-mid: #1f2937;
 $dark-lighter: #374151;
-$transparent-dark: rgb(from $dark r g b / 0.75);
+// See GobalTerriaStyles.ts on how these are derived
+$dark-alpha: 0.75;
+$transparent-dark: var(--theme-transparent-dark);
+
 $grey: #9ca3af;
 $grey-lighter: #d1d5db;
 // todo: Fix during overhaul
