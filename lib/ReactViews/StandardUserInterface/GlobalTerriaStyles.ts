@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import Color from "terriajs-cesium/Source/Core/Color";
 
 export const GlobalTerriaStyles = createGlobalStyle`
 body {
@@ -81,5 +82,15 @@ button {
   width: 100%;
   height: 100%;
   touch-action: none;
+}
+
+// Global theme variables 
+:root {
+
+  // Derive transparent dark from dark theme color and alpha
+  --theme-transparent-dark: ${(p) =>
+    Color.fromCssColorString(p.theme.dark)
+      ?.withAlpha(parseFloat(p.theme.darkAlpha))
+      .toCssHexString() ?? p.theme.dark}
 }
 `;

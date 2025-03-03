@@ -6,7 +6,7 @@
     <g id="Page-1" stroke="none" stroke-width="1" fill-rule="evenodd">
         <g id="inner-circle-focus" fill-rule="nonzero">
             <circle id="Oval-5" cx="13" cy="13" r="13"></circle>
-            <polygon id="Combined-Shape" fill="#FFFFFF" points="8 16 4 13 8 10 8 11.999 12 11.999 12 8 10 8 13 4 16 8 14 8 14 11.999 18 11.999 18 10 22 13 18 16 18 13.999 14 13.999 14 18 16 18 13 22 10 18 12 18 12 13.999 7.999 13.999"></polygon>
+            <polygon fill="#9CA3AF" id="Combined-Shape" points="8 16 4 13 8 10 8 11.999 12 11.999 12 8 10 8 13 4 16 8 14 8 14 11.999 18 11.999 18 10 22 13 18 16 18 13.999 14 13.999 14 18 16 18 13 22 10 18 12 18 12 13.999 7.999 13.999"></polygon>
         </g>
     </g>
 </svg>

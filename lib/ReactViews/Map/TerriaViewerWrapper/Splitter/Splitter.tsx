@@ -14,7 +14,7 @@ interface ISplitterProps {
 }
 
 export const Splitter: FC<ISplitterProps> = observer(
-  ({ thumbSize = 42, padding = 0 }) => {
+  ({ thumbSize = 48, padding = 0 }) => {
     const viewState = useViewState();
     const theme = useTheme();
     const { t } = useTranslation();
@@ -78,14 +78,22 @@ export const Splitter: FC<ISplitterProps> = observer(
             padding: "8px",
             zIndex: 999,
             cursor: "ew-resize",
-            backgroundColor: "white"
+            backgroundColor: theme.colorSecondary,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
           }}
           onClick={(e) => e.preventDefault()}
           onMouseDown={startDrag}
           onTouchStart={startDrag}
           title={t("splitterTool.title")}
         >
-          <StyledIcon glyph={GLYPHS.splitter} fillColor="black" />
+          <StyledIcon
+            glyph={GLYPHS.splitter}
+            fillColor="white"
+            styledWidth="20px"
+            styledHeight="20px"
+          />
         </button>
       </div>
     );

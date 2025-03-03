@@ -44,7 +44,10 @@ class MappablePreview extends React.Component {
       runInAction(() => (this.props.viewState.storyShown = false));
     }
 
-    const keepCatalogOpen = event.shiftKey || event.ctrlKey;
+    const keepCatalogOpen =
+      this.props.viewState.terria.configParameters.keepCatalogOpen ||
+      event.shiftKey ||
+      event.ctrlKey;
 
     await toggleItemOnMapFromCatalog(
       this.props.viewState,

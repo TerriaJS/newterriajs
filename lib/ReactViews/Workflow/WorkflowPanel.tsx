@@ -5,7 +5,7 @@ import styled from "styled-components";
 import ViewState from "../../ReactViewModels/ViewState";
 import Button from "../../Styled/Button";
 import { IconProps, StyledIcon } from "../../Styled/Icon";
-import { addTerriaScrollbarStyles } from "../../Styled/mixins";
+import { scrollBars } from "../../Styled/mixins";
 import Text from "../../Styled/Text";
 import { PortalChild } from "../StandardUserInterface/Portal";
 import { PanelButton } from "./Panel";
@@ -62,6 +62,7 @@ const WorkflowPanel: React.FC<PropsType> = observer((props) => {
         </Content>
         {props.footer ? (
           <PanelButton
+            css={{ marginBottom: "15px" }}
             onClick={props.footer.onClick}
             title={props.footer.buttonText}
           />
@@ -105,7 +106,7 @@ const Container = styled.div`
   flex-direction: column;
   font-family: ${(p) => p.theme.fontPop}px;
   width: ${(p) => p.theme.workflowPanelWidth}px;
-  height: 100vh;
+  height: calc(100vh - 2 * ${(p) => p.theme.workbenchMargin}px);
   max-width: ${(p) => p.theme.workflowPanelWidth}px;
   box-sizing: border-box;
   padding: 0 0 5px;
@@ -122,7 +123,7 @@ const TitleBar = styled.div`
 
 const Title = styled(Text).attrs({
   textLight: true,
-  bold: true
+  extraExtraLarge: true
 })`
   flex-grow: 1;
   padding: 0 1em;
@@ -141,16 +142,13 @@ const Content = styled.div`
   flex-direction: column;
   min-height: 0;
   padding-bottom: 4em;
-  ${addTerriaScrollbarStyles()}
+  ${(p) => scrollBars(p)}
 `;
 
 const CloseButton = styled(Button).attrs({
-  secondary: true
+  primary: true
 })`
-  border: 0px;
-  border-radius: 3px;
-  min-height: 0;
-  padding: 3px 12px;
+  font-size: 14px;
 `;
 
 const Error = styled.div`

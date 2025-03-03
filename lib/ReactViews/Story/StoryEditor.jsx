@@ -4,6 +4,9 @@ import classNames from "classnames";
 import Styles from "./story-editor.scss";
 import { withTranslation } from "react-i18next";
 import tinymce from "tinymce";
+import Text from "../../Styled/Text";
+import Box from "../../Styled/Box";
+import Button from "../../Styled/Button";
 
 // Lazy load the Editor component as the tinyMCE library is large
 const Editor = React.lazy(() => import("../Generic/Editor.jsx"));
@@ -155,35 +158,29 @@ class StoryEditor extends React.Component {
       >
         <div className={Styles.inner}>
           <div className={Styles.header}>
-            <input
-              ref={(titleInput) => (this.titleInput = titleInput)}
-              placeholder={t("story.editor.placeholder")}
-              autoComplete="off"
-              className={Styles.field}
-              type="text"
-              id="title"
-              value={this.state.title}
-              onChange={this.updateTitle}
-            />
-            <button
-              className={Styles.cancelBtn}
-              onClick={this.cancelEditing}
-              type="button"
-              title={t("story.editor.cancelBtn")}
-            >
-              {t("story.editor.cancelEditing")}
-            </button>
-            <button
-              disabled={!this.state.title.length}
-              className={Styles.saveBtn}
-              onClick={this.saveStory}
-              type="button"
-              title={t("story.editor.saveBtn")}
-            >
-              {t("story.editor.saveStory")}
-            </button>
+            <Text textLight as="h3" css={{ margin: "0" }}>
+              {t("story.editor.modalHeader")}
+            </Text>
           </div>
+          <label htmlFor="title">
+            <Text small textGreyLighter css={{ marginBottom: "8px" }}>
+              {t("story.editor.titleLabel")}
+            </Text>
+          </label>
+          <input
+            ref={(titleInput) => (this.titleInput = titleInput)}
+            placeholder={t("story.editor.placeholder")}
+            autoComplete="off"
+            className={Styles.field}
+            type="text"
+            id="title"
+            value={this.state.title}
+            onChange={this.updateTitle}
+          />
           <div className={Styles.body}>
+            <Text small textGreyLighter css={{ marginBottom: "8px" }}>
+              {t("story.editor.descriptionLabel")}
+            </Text>
             <Suspense fallback={<div>Loading...</div>}>
               <Editor
                 html={this.state.text}
@@ -200,6 +197,34 @@ class StoryEditor extends React.Component {
               />
             </Suspense>
           </div>
+          <Box centered gap={3}>
+            <Button
+              styledWidth={"240px"}
+              transparentBg
+              onClick={this.cancelEditing}
+              type="button"
+              title={t("story.editor.cancelBtn")}
+              textProps={{
+                textGreyLighter: true,
+                medium: true
+              }}
+            >
+              {t("story.editor.cancelEditing")}
+            </Button>
+            <Button
+              styledWidth={"240px"}
+              primary
+              disabled={!this.state.title.length}
+              onClick={this.saveStory}
+              type="button"
+              title={t("story.editor.saveBtn")}
+              textProps={{
+                medium: true
+              }}
+            >
+              {t("story.editor.saveStory")}
+            </Button>
+          </Box>
         </div>
       </div>
     );

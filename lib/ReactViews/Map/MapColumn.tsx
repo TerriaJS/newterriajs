@@ -14,6 +14,7 @@ import MenuBar from "./MenuBar/MenuBar";
 import { ProgressBar } from "./ProgressBar";
 import { TerriaViewerWrapper } from "./TerriaViewerWrapper";
 import Toast from "./Toast";
+import { useTheme } from "styled-components";
 
 interface IMapColumnProps {
   animationDuration: number;
@@ -27,6 +28,7 @@ interface IMapColumnProps {
 export const MapColumn: FC<IMapColumnProps> = observer(
   ({ customElements, animationDuration }) => {
     const viewState = useViewState();
+    const theme = useTheme();
     const { t } = useTranslation();
 
     return (
@@ -81,7 +83,6 @@ export const MapColumn: FC<IMapColumnProps> = observer(
           </Box>
           {!viewState.hideMapUi && (
             <>
-              <BottomLeftBar />
               <ActionBarPortal show={viewState.isActionBarVisible} />
               <SlideUpFadeIn isVisible={viewState.isMapZooming}>
                 <Toast>
@@ -95,13 +96,32 @@ export const MapColumn: FC<IMapColumnProps> = observer(
                   />
                 </Toast>
               </SlideUpFadeIn>
-              <Box
-                position="absolute"
-                fullWidth
-                css={{ bottom: "0", left: "0" }}
+              <div
+                css={`
+                  position: absolute;
+                  margin-left: ${viewState.useSmallScreenInterface
+                    ? `0px`
+                    : viewState.isMapFullScreen
+                    ? `${theme.workbenchMargin}px`
+                    : `calc(${theme.workbenchWidth}px + 2 * ${theme.workbenchMargin}px)`};
+                  margin-right: ${viewState.useSmallScreenInterface
+                    ? `0px`
+                    : `calc(34px + 2 *${theme.workbenchMargin}px)`};
+                  bottom: ${viewState.useSmallScreenInterface
+                    ? `0px`
+                    : `${theme.workbenchMargin}px`};
+                  left: 0;
+                  right: 0;
+                `}
               >
+                <BottomLeftBar />
+                <BottomDock
+                  terria={viewState.terria}
+                  viewState={viewState}
+                  elementConfig={viewState.terria.elements.get("bottom-dock")}
+                />
                 <BottomBar />
-              </Box>
+              </div>
 
               {viewState.terria.configParameters.printDisclaimer && (
                 <a
@@ -121,15 +141,6 @@ export const MapColumn: FC<IMapColumnProps> = observer(
             </>
           )}
         </Box>
-        <div>
-          {!viewState.hideMapUi && (
-            <BottomDock
-              terria={viewState.terria}
-              viewState={viewState}
-              elementConfig={viewState.terria.elements.get("bottom-dock")}
-            />
-          )}
-        </div>
       </Box>
     );
   }

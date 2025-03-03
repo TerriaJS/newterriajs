@@ -75,7 +75,7 @@ export const StyledButton = styled.button<IStyledButtonProps>`
     color: #fff;
     background-color: ${props.theme.colorPrimary};
     border: none;
-    border-radius:20px;
+    border-radius:4px;
   `}
   ${(props) => props.rounded && ` border-radius: 32px; `}
   ${(props) => props.roundLeft && `border-radius: 32px 0 0 32px;`}
@@ -87,7 +87,7 @@ export const StyledButton = styled.button<IStyledButtonProps>`
     // background-color: #4d5766;
     background-color: ${props.theme.textLight};
     color: ${props.theme.darkWithOverlay};
-    border-radius: 20px;
+    border-radius: 4px;
     border: 2px solid ${props.theme.darkWithOverlay};
   `}
   ${(props) =>

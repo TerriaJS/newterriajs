@@ -34,7 +34,7 @@
       "content": "## Location search\n\nEnter a locality or address to easily locate a point of interest on the map."
     },
     "exploreMapDataButton": {
-      "content": "## Explore map data\n\nBrowse the catalogue of available data and add it to the map here. You can add multiple datasets at any one time, and you’ll see them listed down below in the Workbench."
+      "content": "## Explore Digital Twin data\n\nBrowse the Terria Data Catalogue of available data and add it to the digital twin here. You can add multiple datasets at any one time, and you’ll see them listed down below in the Digital Twin Data panel."
     },
     "sidePanelUploadButton": {
       "content": "## Upload Data\n\nYou can upload your own data to the map to view it with other data sets. Upload a file or link to an existing online data set or data service. Supported data formats include CSV, GeoJSON, KML, GPX and CZML."
@@ -316,7 +316,7 @@
       "confirmText": "Yes",
       "denyText": "Maybe later"
     },
-    "showWorkbench": "Show Workbench",
+    "showWorkbench": "Explore Datasets [{{count}}]",
     "hideWorkbench": "Hide Workbench"
   },
   "featureInfo": {
@@ -380,6 +380,9 @@
     "captureSceneTitle": "capture current scene",
     "captureScene": "Capture Scene",
     "editor": {
+      "modalHeader": "Story Editor - Scene capture",
+      "titleLabel": "Title (required)",
+      "descriptionLabel": "Description",
       "placeholder": "Enter a title here",
       "cancelBtn": "cancel",
       "cancelEditing": "Cancel",
@@ -423,12 +426,14 @@
     "bodyV": "You can apply a range of styles, such as false-colour, to satellite imagery by clicking on the styles dropdown in your data workbench."
   },
   "addData": {
-    "addDataBtnText": "Explore map data",
+    "addDataBtnText": "Explore data",
     "btnHide": "Hide",
     "load": "Load local/web data",
     "closeDataPanel": "Close data panel",
     "done": "Done",
+    "data": "Data",
     "myData": "My Data",
+    "modalTitle": "Explore Data",
     "dataCatalogue": "Data Catalogue",
     "searchPlaceholderWhole": "Search whole catalogue",
     "searchPlaceholder": "Search the catalogue",
@@ -540,10 +545,12 @@
     "exportData": "Export",
     "removeFromMapTitle": "Remove this data",
     "removeFromMap": "Remove",
-    "label": "Data sets",
+    "label": "Datasets",
     "removeAll": "Remove All",
     "collapseAll": "Collapse All",
     "expandAll": "Expand All",
+    "disableAll": "Disable All",
+    "enableAll": "Enable All",
     "toggleVisibility": "Data show/hide",
     "addItemErrorTitle": "Catalog item could not be added to workbench.",
     "addItemErrorMessage": "An error occurred while loading the catalog item.",
@@ -613,10 +620,10 @@
     "loadingMessage": "Loading"
   },
   "emptyWorkbench": {
-    "emptyArea": "Your workbench is empty",
-    "helpfulHints": "Helpful hints",
-    "helpfulHintsOne": "Browse available data by selecting ‘Explore map data’ or click ‘Upload’ to add your own data to the map.",
-    "helpfulHintsTwo": "Once you’ve added data to the map, your active data sets are listed here in your workbench. The workbench will help you to interact with the data.",
+    "emptyArea": "<0>This is your Data</0><1>When you add a dataset to the map, you’ll see its legend (key) and settings right here so you can easily control how it looks.</1>",
+    "helpfulHints": "Helpful Hints",
+    "helpfulHintsOne": "Click 'Explore map data' to see available data or 'Upload' to add your own data to the map.",
+    "helpfulHintsTwo": "After adding data, you’ll find your active datasets in this panel. Here, you can:<1></1><2>Turn data visibility on or off</2><2>Adjust transparency (make it more see-through)</2><2>Use split-screen to compare data side-by-side</2><2>Change styles (like map colours or lines)</2><2>Move through different dates and times if the data allows it</2>",
     "helpfulHintsThree": "In the workbench you can toggle data sets on and off, change their opacity, activate the split screen comparison, change styles, and navigate through dates and times, if the data supports this functionality."
   },
   "dataCatalog": {
@@ -994,7 +1001,7 @@
       "unsupportedTypeMessage": "Could not create unknown model type {{type}}.",
       "unsupportedFileTypeTitle": "Unsupported file type",
       "unsupportedFileTypeMessage": "This file format is not supported by {{appName}}. Supported file formats include: <ul><li>.geojson</li><li>.kml, .kmz</li><li>.csv (in {{link}})</li><li>Shapefile (.zip)</li></ul>",
-      "upload": "Upload",
+      "upload": "Upload data",
       "mustHaveType": "Each item must have a type.",
       "compositesError": "Composites cannot include composite items.",
       "convertErrorTitle": "Could not upgrade catalog to V8",

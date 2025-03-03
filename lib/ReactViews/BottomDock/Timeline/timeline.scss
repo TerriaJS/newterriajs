@@ -7,13 +7,10 @@
   padding-top: 5px;
   padding-bottom: 5px;
   padding-right: 5px;
+  margin-top: 33px;
   font-family: variables.$font-base;
-
-  // @media (max-width: $mobile) {
-  //   position: fixed;
-  //   bottom: 0px;
-  //   background: $dark;
-  // }
+  background: variables.$dark;
+  backdrop-filter: variables.$blur;
 }
 
 .text-row {
@@ -21,12 +18,13 @@
   color: #fff;
   font-size: variables.$font-size-mid-small;
   position: absolute;
-  bottom: 44px;
+  bottom: 40px;
   left: 0px;
-  // background: $dark;
+  right: 0px;
+  // background: variables.$dark;
   padding: 3px 5px;
 
-  // @media (max-width: $mobile) {
+  // @media (max-width: variables.$mobile) {
   //   position: fixed;
   // }
 }
@@ -44,6 +42,7 @@
     overflow: hidden;
     white-space: nowrap;
   }
+
   @media (max-width: variables.$mobile) {
     max-width: 52vw;
   }

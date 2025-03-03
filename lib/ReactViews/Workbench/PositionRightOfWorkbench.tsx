@@ -35,14 +35,14 @@ const PositionRightOfWorkbench: React.FC<PositionRightOfWorkbenchProps> =
 
 const Container = styled.div<{ isMapFullScreen: boolean }>`
   position: absolute;
-  top: 120px;
+  top: 110px;
   left: 0;
   right: unset;
   bottom: unset;
   margin-left: ${(props) =>
     props.isMapFullScreen
-      ? 16
-      : parseInt(props.theme.workbenchWidth, 10) + 16}px};
+      ? 15
+      : parseInt(props.theme.workbenchWidth, 10) + 42}px};
   transition: margin-left 0.25s;
 `;
 

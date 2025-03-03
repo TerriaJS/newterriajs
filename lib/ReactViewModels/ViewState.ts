@@ -279,10 +279,18 @@ export default class ViewState {
   }
   @action
   setShowTour(bool: boolean): void {
-    this.showTour = bool;
     // If we're enabling the tour, make sure the trainer is collapsed
     if (bool) {
       this.setTrainerBarExpanded(false);
+      // Ensure workbench is shown
+      this.setIsMapFullScreen(false);
+      setTimeout(() => {
+        runInAction(() => {
+          this.showTour = bool;
+        });
+      }, animationDuration || 1);
+    } else {
+      this.showTour = bool;
     }
   }
   @action

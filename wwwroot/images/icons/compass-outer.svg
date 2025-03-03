@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="56" height="56" xmlns="http://www.w3.org/2000/svg">
   <g fill-rule="evenodd">
-    <path d="M28 0c15.464 0 28 12.536 28 28S43.464 56 28 56 0 43.464 0 28 12.536 0 28 0zm0 10c-9.941 0-18 8.059-18 18s8.059 18 18 18 18-8.059 18-18-8.059-18-18-18z" fill="#FFF"/>
-    <circle opacity=".75" cx="46" cy="13" r="1"/>
-    <circle opacity=".75" cx="46" cy="43" r="1"/>
-    <circle opacity=".75" cx="10" cy="43" r="1"/>
-    <circle opacity=".75" cx="10" cy="13" r="1"/>
-    <path stroke="#000" opacity=".75" stroke-linecap="round" d="M49 28h4M3 28h4M28 49v4"/>
-    <path d="M27.35 7V4.984c0-.244-.018-.652-.055-1.224h.026L29.185 7h1.154V2.717h-.818v2.027c0 .23.015.624.044 1.18h-.02l-1.86-3.207h-1.146V7h.812z" fill-rule="nonzero" opacity=".75"/>
+    <path stroke-width="0.5" stroke="#6B7280" d="M28 0c15.464 0 28 12.536 28 28S43.464 56 28 56 0 43.464 0 28 12.536 0 28 0zm0 10c-9.941 0-18 8.059-18 18s8.059 18 18 18 18-8.059 18-18-8.059-18-18-18z" fill="#11827"/>
+    <circle fill="#6B7280" stroke="#6B7280" opacity=".75" cx="46" cy="13" r="1"/>
+    <circle fill="#6B7280" stroke="#6B7280" opacity=".75" cx="46" cy="43" r="1"/>
+    <circle  fill="#6B7280" stroke="#6B7280" opacity=".75" cx="10" cy="43" r="1"/>
+    <circle  fill="#6B7280" stroke="#6B7280" opacity=".75" cx="10" cy="13" r="1"/>
+    <path stroke="#6B7280" opacity=".75" stroke-linecap="round" d="M49 28h4M3 28h4M28 49v4"/>
+    <style>
+      .N {    
+        font: 7px sans-serif;   
+        fill: white;
+      }
+    </style>
+    <text class="N" stroke="#FFFF" x="25.9" y="7" >N</text>
   </g>
 </svg>

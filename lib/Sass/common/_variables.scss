@@ -1,28 +1,37 @@
 @use "sass:meta";
 @use "sass:color";
 
-@import url("https://fonts.googleapis.com/css?family=Nunito:300,400,500,400italic,600,700&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Inter:300,400,500,400italic,600,700&display=swap");
 
-$font-pop: "Nunito", sans-serif;
-$font-base: "Nunito", sans-serif;
-$font-mono: monospace, sans-serif;
+$font-pop: "Inter", sans-serif;
+$font-base: "Inter", sans-serif;
+$font-mono: monospace;
 $font-feature-info: $font-mono;
 $font: $font-base;
 
-$color-primary: #519ac2;
+$color-primary: #35a7c4;
 $color-primary-disabled: #595b60;
+
 @function get-hover-color($base-color) {
   @return color.adjust($base-color, $lightness: 10%);
 }
-$color-secondary: #ff6f00;
+
+$color-secondary: #f59e0b;
 
 $animation-fast: 0.1s;
 
-$dark: #3f4854;
-$dark-with-overlay: #667080;
-$dark-lighter: #595b60;
-$grey: #888888;
-$grey-lighter: #ddd;
+$blur: blur(5px);
+
+$dark: #111827;
+$dark-with-overlay: #111827;
+$dark-mid: #1f2937;
+$dark-lighter: #374151;
+// See GobalTerriaStyles.ts on how these are derived
+$dark-alpha: 0.75;
+$transparent-dark: var(--theme-transparent-dark);
+
+$grey: #9ca3af;
+$grey-lighter: #d1d5db;
 // todo: Fix during overhaul
 $grey-lighter2: #e6e6e6;
 $grey-lightest: #f2f2f2;
@@ -51,12 +60,15 @@ $text-light-dimmed: #bbbbbb;
   @if meta.variable-exists(text-link) {
     @return $text-link;
   }
+
   @return $color-primary;
 }
+
 @function get-visited-link-color($bg-color) {
   @if meta.variable-exists(text-visited-link) {
     @return $text-visited-link;
   }
+
   @return get-link-color($bg-color);
 }
 
@@ -66,7 +78,7 @@ $info-color: #fed17f;
 $link-text-decoration: none;
 
 $padding: 10px;
-$padding-small: 5px;
+$padding-small: 4px;
 $padding-mini: 3px;
 $padding-tiny: 1px;
 
@@ -77,7 +89,7 @@ $input-glyph-height: 24px; // This value should be $input-height * 0.6
 $input-glyph-margin: 8px; // This value should be $input-height * 0.2
 
 $sm-logo-height: $input-height;
-$logo-height: 70px;
+$logo-height: 100px;
 $mobile-header-height: 50px;
 
 $modal-bg: #fff;
@@ -132,14 +144,15 @@ $font-weight-normal: 400;
 $font-weight-light: 100;
 
 $map-button-color: #9ca1aa;
-$map-button-top: 18px;
+$map-button-top: 21px;
 $trainer-height: 64px;
-$map-button-border-radius: 16px;
+$map-button-border-radius: 4px;
 $work-bench-width: 350px;
 $setting-panel: 300px;
 $share-panel-width: 450px;
 $share-panel-caret-left: 215px;
 $feature-info-panel-width: 500px;
+$panel-radius: 8px;
 
 $badge-height: $input-height;
 $story-title-height: $input-height;
@@ -150,6 +163,7 @@ $border-color: rgba(#fff, 0.15);
 $border-style: 1px solid $border-color;
 $box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.12), 0 2px 2px 0 rgba(0, 0, 0, 0.24);
 
+$radius-xlarge: 8px;
 $radius-large: 4px;
 $radius-medium: 3px;
 $radius-small: 2px;
@@ -174,7 +188,7 @@ $chart-line-color: #ccc;
 $chart-preview-line-color: $chart-line-color;
 $chart-darker: color.adjust($dark, $lightness: -8%);
 $chart-panel-background: $dark;
-$chart-panel-header: $chart-darker;
+$chart-panel-header: $dark-with-overlay;
 
 $charcoal-grey: #3f4854;
 $turquoise-blue: #08abd5;
@@ -189,3 +203,6 @@ $legend-padding: calc($legend-item-height / 2);
 $legend-spacer-height: calc($legend-padding / 2);
 
 $tool-primary-color: $color-primary;
+
+$scrollbar-color: $color-primary;
+$scrollbar-track-color: transparent;

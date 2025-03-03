@@ -1,11 +1,14 @@
 declare namespace VariablesExportScssNamespace {
   export interface IVariablesExportScss {
+    blur: string;
     charcoalGrey: string;
     colorPrimary: string;
     colorSecondary: string;
     compassWidth: string;
     dark: string;
+    darkAlpha: string;
     darkLighter: string;
+    darkMid: string;
     darkWithOverlay: string;
     font: string;
     fontBase: string;
@@ -37,10 +40,15 @@ declare namespace VariablesExportScssNamespace {
     notificationWindowZIndex: string;
     overlay: string;
     overlayInvert: string;
+    panelRadius: string;
     radius40Button: string;
     radiusLarge: string;
     radiusSmall: string;
+    radiusXL: string;
+    radiusXl: string;
     ringWidth: string;
+    scrollbarColor: string;
+    scrollbarTrackColor: string;
     sm: string;
     spacing: string;
     textBlack: string;
@@ -51,7 +59,9 @@ declare namespace VariablesExportScssNamespace {
     textLightTranslucent: string;
     toolPrimaryColor: string;
     trainerHeight: string;
+    transparentDark: string;
     turquoiseBlue: string;
+    workbenchMargin: string;
     workbenchWidth: string;
     workflowPanelWidth: string;
   }

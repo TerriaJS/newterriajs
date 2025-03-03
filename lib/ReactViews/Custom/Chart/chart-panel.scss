@@ -7,9 +7,11 @@
 .holder {
   left: 0;
   right: 0;
-  z-index: 10;
-  background: variables.$chart-panel-background;
-  padding-bottom: 13px;
+  background: variables.$transparent-dark;
+  backdrop-filter: variables.$blur;
+  padding-bottom: 40px; //hack to allow timeline visible
+  margin-bottom: 6px;
+  border-radius: 8px 8px 0 0;
 }
 
 .header {
@@ -19,6 +21,7 @@
   background-color: variables.$chart-panel-header;
   font-size: variables.$font-size-mid-small;
   fill: #fff;
+  border-radius: 8px 8px 0 0;
 }
 
 .chart {
@@ -78,6 +81,7 @@
 
 .loader {
   padding: 0px 0px 0px variables.$padding * 3 !important;
+
   &:before {
     top: 0px;
   }
@@ -89,11 +93,13 @@
   right: 0;
   top: 0;
   padding: 12px;
+
   svg {
     height: 15px;
     width: 15px;
     fill: #fff;
   }
+
   &:hover,
   &:focus {
     svg {

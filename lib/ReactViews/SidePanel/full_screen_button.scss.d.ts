@@ -5,6 +5,7 @@ declare namespace FullScreenButtonScssNamespace {
     exit: string;
     "full-screen": string;
     fullScreen: string;
+    fullScreenWrapper: string;
     isActive: string;
     minified: string;
     minifiedFullscreenBtnWrapper: string;

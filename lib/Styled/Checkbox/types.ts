@@ -23,6 +23,8 @@ export type ICheckboxProps = {
   title?: string;
   /** The name of the submitted field in a checkbox. */
   name?: string;
+  /** Whether to use "switch" icons instead */
+  isSwitch?: boolean;
   /**
    * Function that is called whenever the state of the checkbox changes. It will
    * be called with an object containing the react synthetic event. Use
@@ -50,6 +52,8 @@ export type ICheckboxProps = {
 };
 
 export interface CheckboxIconProps {
+  /* Override svg icon to use switch icon */
+  isSwitch?: boolean;
   /** Sets whether the checkbox is checked or unchecked. */
   isChecked?: boolean;
   /** Sets whether the checkbox is disabled. */

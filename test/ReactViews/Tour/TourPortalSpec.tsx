@@ -9,6 +9,7 @@ import TourPortal, {
   TourPreface
 } from "../../../lib/ReactViews/Tour/TourPortal";
 import { createWithContexts } from "../withContext";
+import { animationDuration } from "../../../lib/ReactViews/StandardUserInterface/StandardUserInterface";
 
 describe("TourPortal", function () {
   let terria: Terria;
@@ -55,78 +56,91 @@ describe("TourPortal", function () {
         expect(testRenderer.root.findByType(TourPreface)).toBeDefined();
         expect(() => testRenderer.root.findByType(TourExplanation)).toThrow();
       });
-      it("renders something using the TourGrouping path under showPortal conditions", function () {
-        const testRef: any = React.createRef();
-        const testRef2: any = React.createRef();
-        const testRef3: any = React.createRef();
-        act(() => {
-          testRenderer = createWithContexts(
-            viewState,
-            <div>
-              <div ref={testRef} />
-              <div ref={testRef2} />
-              <div ref={testRef3} />
-              <TourPortal />
-            </div>,
-            {
-              createNodeMock: (/* element: any */) => {
-                return {
-                  // This is not compulsory as we still render if we
-                  // can't get a rectangle, but we'll mock it anyway
-                  getBoundingClientRect: () => ({
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0
-                  })
-                };
-                // return document.createElement("div");
+      describe("With mocked timing", function () {
+        beforeEach(function () {
+          jasmine.clock().install();
+        });
+        afterEach(function () {
+          jasmine.clock().uninstall();
+        });
+        it("renders something using the TourGrouping path under showPortal conditions", function () {
+          const testRef: any = React.createRef();
+          const testRef2: any = React.createRef();
+          const testRef3: any = React.createRef();
+          act(() => {
+            testRenderer = createWithContexts(
+              viewState,
+              <div>
+                <div ref={testRef} />
+                <div ref={testRef2} />
+                <div ref={testRef3} />
+                <TourPortal />
+              </div>,
+              {
+                createNodeMock: (/* element: any */) => {
+                  return {
+                    // This is not compulsory as we still render if we
+                    // can't get a rectangle, but we'll mock it anyway
+                    getBoundingClientRect: () => ({
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0
+                    })
+                  };
+                  // return document.createElement("div");
+                }
               }
-            }
+            );
+          });
+          runInAction(() => {
+            viewState.setTourIndex(0);
+            viewState.setShowTour(true);
+
+            viewState.updateAppRef("TestRef", testRef);
+            viewState.updateAppRef("TestRef2", testRef2);
+            viewState.updateAppRef("TestRef3", testRef3);
+            viewState.tourPoints = [
+              {
+                appRefName: "TestRef",
+                priority: 10,
+                content: "## Best friends\n\nMochi and neko are best friends"
+              },
+              {
+                appRefName: "TestRef2",
+                priority: 20,
+                content: "## Motivated by food\n\nNeko loves food"
+              },
+              {
+                appRefName: "TestRef3",
+                priority: 30,
+                content: "## Lazy\n\nThey like to lounge around all day"
+              }
+            ];
+          });
+          act(() => {
+            testRenderer = createWithContexts(viewState, <TourPortal />);
+          });
+          jasmine.clock().tick(animationDuration); // wait for workbench hide animation
+          // 3 test tour points
+          expect(testRenderer.root.findAllByType(TourExplanation).length).toBe(
+            3
+          );
+
+          // Remove one tour point and we should only have 2 left
+          // (e.g. if you add a tour point on the compass,
+          // this is triggered when compass disappears between 2D<->3D modes)
+          runInAction(() => {
+            viewState.deleteAppRef("TestRef");
+          });
+          act(() => {
+            testRenderer = createWithContexts(viewState, <TourPortal />);
+          });
+          // 2 test tour points
+          expect(testRenderer.root.findAllByType(TourExplanation).length).toBe(
+            2
           );
         });
-        runInAction(() => {
-          viewState.setTourIndex(0);
-          viewState.setShowTour(true);
-          viewState.updateAppRef("TestRef", testRef);
-          viewState.updateAppRef("TestRef2", testRef2);
-          viewState.updateAppRef("TestRef3", testRef3);
-          viewState.tourPoints = [
-            {
-              appRefName: "TestRef",
-              priority: 10,
-              content: "## Best friends\n\nMochi and neko are best friends"
-            },
-            {
-              appRefName: "TestRef2",
-              priority: 20,
-              content: "## Motivated by food\n\nNeko loves food"
-            },
-            {
-              appRefName: "TestRef3",
-              priority: 30,
-              content: "## Lazy\n\nThey like to lounge around all day"
-            }
-          ];
-        });
-        act(() => {
-          testRenderer = createWithContexts(viewState, <TourPortal />);
-        });
-
-        // 3 test tour points
-        expect(testRenderer.root.findAllByType(TourExplanation).length).toBe(3);
-
-        // Remove one tour point and we should only have 2 left
-        // (e.g. if you add a tour point on the compass,
-        // this is triggered when compass disappears between 2D<->3D modes)
-        runInAction(() => {
-          viewState.deleteAppRef("TestRef");
-        });
-        act(() => {
-          testRenderer = createWithContexts(viewState, <TourPortal />);
-        });
-        // 2 test tour points
-        expect(testRenderer.root.findAllByType(TourExplanation).length).toBe(2);
       });
     });
   });

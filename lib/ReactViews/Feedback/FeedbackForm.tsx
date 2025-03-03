@@ -292,7 +292,6 @@ class FeedbackForm extends React.Component<IProps, IState> {
             <Button
               type="button"
               denyButton
-              rounded
               shortMinHeight
               styledMinWidth={"80px"}
               onClick={this.onDismiss}

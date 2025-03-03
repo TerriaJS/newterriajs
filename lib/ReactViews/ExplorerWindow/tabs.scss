@@ -8,8 +8,6 @@
   composes: list-reset from "../../Sass/common/_base.scss";
   composes: clearfix from "../../Sass/common/_base.scss";
   padding-right: 100px;
-  // background: $color-primary;
-  border-radius: 3px 3px 0 0;
 }
 
 .tab-list__item {
@@ -19,7 +17,8 @@
 
 .tab-panel {
   width: 100%;
-  height: variables.$modal-content-height;
+  // subtract height of new modal title
+  height: calc(variables.$modal-content-height - 64px);
 
   &:focus {
     outline: none;
@@ -34,7 +33,8 @@
   border-top: 1px solid variables.$grey-lighter;
   height: 100%;
   overflow: hidden;
-  border-radius: 3px;
+  border-bottom-left-radius: variables.$radius-xlarge;
+  border-bottom-right-radius: variables.$radius-xlarge;
 }
 
 .tab-left-col {
@@ -46,6 +46,7 @@
     background: variables.$modal-secondary-bg;
     display: flex;
     flex-direction: column;
+
     form {
       margin: variables.$padding 0;
     }

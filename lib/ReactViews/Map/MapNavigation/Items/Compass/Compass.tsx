@@ -348,12 +348,8 @@ class Compass extends React.PureComponent<PropTypes, IStateTypes> {
           <div style={outerCircleStyle}>
             <StyledIcon
               fillColor={this.props.theme.darkWithOverlay}
-              // if it's active, show a white circle only, as we need the base layer
-              glyph={
-                active
-                  ? Icon.GLYPHS.compassOuterSkeleton
-                  : Icon.GLYPHS.compassOuter
-              }
+              // if it's active hide outer ring
+              glyph={active ? null : Icon.GLYPHS.compassOuter}
             />
           </div>
         </StyledCompassOuterRing>

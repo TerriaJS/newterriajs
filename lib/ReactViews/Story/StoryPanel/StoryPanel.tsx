@@ -14,7 +14,6 @@ import getPath from "../../../Core/getPath";
 import TerriaError from "../../../Core/TerriaError";
 import Terria from "../../../Models/Terria";
 import Box from "../../../Styled/Box";
-import Hr from "../../../Styled/Hr";
 import { onStoryButtonClick } from "../../Map/MenuBar/StoryButton/StoryButton";
 import { WithViewState, withViewState } from "../../Context";
 import { Story } from "../Story";
@@ -255,25 +254,40 @@ class StoryPanel extends React.Component<Props, State> {
             ref={this.slideRef as React.RefObject<HTMLDivElement>}
             css={`
               @media (min-width: 992px) {
-                max-width: 60vw;
+                max-width: 36vw;
               }
+              border-radius: 6px;
+              overflow: hidden;
             `}
           >
-            <Box paddedHorizontally={3} paddedVertically={2.4} column>
+            <Box
+              backgroundColor={this.props.theme.dark}
+              css={{ color: "white" }}
+              paddedRatio={3}
+              column
+            >
               <TitleBar
                 title={story.title}
                 isCollapsed={this.state.isCollapsed}
                 collapseHandler={() => this.toggleCollapse()}
                 closeHandler={() => this.exitStory()}
               />
+            </Box>
+            <Box
+              backgroundColor={this.props.theme.dark}
+              css={{
+                backgroundColor: this.props.theme.transparentDark,
+                color: "white"
+              }}
+            >
               <StoryBody isCollapsed={this.state.isCollapsed} story={story} />
             </Box>
-            <Hr
+            <Box
+              backgroundColor={this.props.theme.dark}
+              css={{ color: "white" }}
+              paddedHorizontally={3}
               fullWidth
-              size={1}
-              borderBottomColor={this.props.theme.greyLighter}
-            />
-            <Box paddedHorizontally={3} fullWidth>
+            >
               <FooterBar
                 goPrev={() => this.goToPrevStory()}
                 goNext={() => this.goToNextStory()}

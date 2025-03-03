@@ -212,7 +212,9 @@ const StandardUserInterfaceBase: React.FC<StandardUserInterfaceProps> =
                   >
                     <FullScreenButton
                       minified={false}
-                      btnText={t("sui.showWorkbench")}
+                      btnText={t("sui.showWorkbench", {
+                        count: props.viewState.terria.workbench.items.length
+                      })}
                       animationDuration={animationDuration}
                       elementConfig={props.terria.elements.get(
                         "show-workbench"

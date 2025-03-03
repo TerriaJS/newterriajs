@@ -51,7 +51,10 @@ export default observer(function DataCatalogItem({
       .then((result) => result.raiseError(viewState.terria));
 
   const toggleEnable = async (event: React.MouseEvent<HTMLButtonElement>) => {
-    const keepCatalogOpen = event.shiftKey || event.ctrlKey;
+    const keepCatalogOpen =
+      viewState.terria.configParameters.keepCatalogOpen ||
+      event.shiftKey ||
+      event.ctrlKey;
     await toggleItemOnMapFromCatalog(viewState, item, keepCatalogOpen, {
       [ToggleOnMapOp.Add]: DataSourceAction.addFromCatalogue,
       [ToggleOnMapOp.Remove]: DataSourceAction.removeFromCatalogue

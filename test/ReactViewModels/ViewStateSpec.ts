@@ -7,6 +7,7 @@ import SimpleCatalogItem from "../Helpers/SimpleCatalogItem";
 import TerriaReference from "../../lib/Models/Catalog/CatalogReferences/TerriaReference";
 import CommonStrata from "../../lib/Models/Definition/CommonStrata";
 import CatalogIndexReference from "../../lib/Models/Catalog/CatalogReferences/CatalogIndexReference";
+import { animationDuration } from "../../lib/ReactViews/StandardUserInterface/StandardUserInterface";
 
 describe("ViewState", function () {
   let terria: Terria;
@@ -102,6 +103,12 @@ describe("ViewState", function () {
     });
   });
   describe("tour and trainer interaction", function () {
+    beforeEach(function () {
+      jasmine.clock().install();
+    });
+    afterEach(function () {
+      jasmine.clock().uninstall();
+    });
     it("disables trainer bar if turning on tour", function () {
       runInAction(() => {
         viewState.setTrainerBarExpanded(true);
@@ -114,6 +121,9 @@ describe("ViewState", function () {
       runInAction(() => {
         viewState.setShowTour(true);
       });
+
+      jasmine.clock().tick(animationDuration); // wait for workbench animation
+
       expect(viewState.trainerBarExpanded).toEqual(false);
       expect(viewState.trainerBarShowingAllSteps).toEqual(false);
       expect(viewState.showTour).toEqual(true);

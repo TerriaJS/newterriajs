@@ -13,7 +13,7 @@ import { RawButton } from "../../Styled/Button";
 import Icon, { StyledIcon } from "../../Styled/Icon";
 import Ul from "../../Styled/List";
 import Spacing from "../../Styled/Spacing";
-import Text from "../../Styled/Text";
+import Text, { TextSpan } from "../../Styled/Text";
 import parseCustomHtmlToReact from "../Custom/parseCustomHtmlToReact";
 
 export interface Story {
@@ -34,7 +34,7 @@ interface Props {
   openMenu: () => void;
   closeMenu: () => void;
   parentRef: any;
-
+  index: number;
   //props for react-anything-sortable
   className: any;
   style: any;
@@ -84,7 +84,7 @@ const StoryMenuButton = styled(RawButton)`
 
   border-radius: 0;
 
-  width: 114px;
+  width: 124px;
   // ensure we support long strings
   min-height: 32px;
   display: block;
@@ -257,6 +257,7 @@ const Story = (props: Props) => {
         css={`
           cursor: move;
           float: none !important;
+          border: 1px solid #baebf8;
         `}
         style={props.style}
         className={classNames(props.className)}
@@ -268,7 +269,7 @@ const Story = (props: Props) => {
           justifySpaceBetween
           padded
           verticalCenter
-          styledHeight={"40px"}
+          styledHeight={"57px"}
           backgroundColor={theme.darkWithOverlay}
           rounded
           css={`
@@ -277,11 +278,37 @@ const Story = (props: Props) => {
             border-bottom: 1px solid rgba(255, 255, 255, 0.15);
           `}
         >
-          <Text textLight medium>
-            {story.title && story.title.length > 0
-              ? story.title
-              : t("story.untitledScene")}
-          </Text>
+          <div
+            css={`
+              width: 100%;
+              overflow-x: hidden;
+              display: flex;
+            `}
+          >
+            <TextSpan
+              css={`
+                color: #baebf8;
+                margin-right: 8px;
+              `}
+              medium
+              bold
+            >
+              {props.index + 1}
+            </TextSpan>
+            <TextSpan
+              overflowEllipsis
+              textLight
+              medium
+              css={`
+                overflow-x: hidden;
+                white-space: nowrap;
+              `}
+            >
+              {story.title && story.title.length > 0
+                ? story.title
+                : t("story.untitledScene")}
+            </TextSpan>
+          </div>
           <Box>
             {props.recaptureStorySuccessful && (
               <RawButton>
@@ -307,13 +334,21 @@ const Story = (props: Props) => {
         </Box>
         {bodyText.length > 0 && (
           <Box paddedRatio={2} paddedHorizontally={3}>
-            <Text textLight medium>
+            <Text
+              overflowEllipsis
+              textLight
+              medium
+              css={`
+                overflow-x: hidden;
+                white-space: nowrap;
+              `}
+            >
               {bodyText}
             </Text>
           </Box>
         )}
       </Box>
-      <Spacing bottom={1} />
+      <Spacing bottom={3} />
     </>
   );
 };
@@ -321,7 +356,7 @@ const Story = (props: Props) => {
 const MenuButton = styled(RawButton)`
   padding: 0 10px 0 10px;
   min-height: 40px;
-  border-radius: ${(props) => props.theme.radiusLarge};
+  border-radius: ${(props) => props.theme.radiusSmall};
   background: transparent;
 
   &:hover,

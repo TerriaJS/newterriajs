@@ -9,17 +9,17 @@
   // TODO: find a better solution for this - some of these we need to provide as
   // numbers only so we can do math on them and add the unit afterwards 😵
   // screen sizes for media queries
-  // mobile: $mobile;
-  // sm: $sm;
-  // md: $md;
-  // lg: $lg;
+  // mobile: variables.$mobile;
+  // sm: variables.$sm;
+  // md: variables.$md;
+  // lg: variables.$lg;
   mobile: 767;
   sm: 768;
   md: 992;
   lg: 1300;
 
   // Compass styles
-  // compassWidth: $compass-width;
+  // compassWidth: variables.$compass-width;
   // We have to deviate from our "divide by 5" here, due to 55 being an odd number
   // and thus meaning some things will scale to contain half pixels
   // bumped up to 56 to hit an even number
@@ -35,6 +35,9 @@
   radius40Button: 20;
   radiusLarge: variables.$radius-large;
   radiusSmall: variables.$radius-small;
+  radiusLarge: variables.$radius-large;
+  radiusSmall: variables.$radius-small;
+  radiusXL: variables.$radius-xlarge;
 
   overlay: variables.$overlay;
   overlayInvert: variables.$overlay-invert;
@@ -49,8 +52,12 @@
   textDarker: variables.$text-darker;
   textBlack: variables.$text-black;
   turquoiseBlue: variables.$turquoise-blue;
+  darkAlpha: variables.$dark-alpha;
+  transparentDark: variables.$transparent-dark;
+  blur: variables.$blur;
   dark: variables.$dark;
   darkWithOverlay: variables.$dark-with-overlay;
+  darkMid: variables.$dark-mid;
   darkLighter: variables.$dark-lighter;
   grey: variables.$grey;
   greyLighter: variables.$grey-lighter;
@@ -69,21 +76,26 @@
   modalText: variables.$modal-text;
   modalHighlight: variables.$modal-highlight;
 
+  scrollbarColor: variables.$scrollbar-color;
+  scrollbarTrackColor: variables.$scrollbar-track-color;
+
   // TODO: fix, these are stopgaps & should get merged in with something else(?)
   mapButtonColor: variables.$map-button-color;
   mapButtonTop: 18;
   mapNavigationTop: 80;
 
   trainerHeight: 64;
+  workbenchMargin: 21;
   workbenchWidth: 350;
   workflowPanelWidth: 350;
+  panelRadius: variables.$panel-radius;
 
   toolPrimaryColor: variables.$tool-primary-color;
 
   // Branding
   logoHeight: variables.$logo-height;
   logoPaddingVertical: 15px;
-  logoPaddingHorizontal: 5px;
+  logoPaddingHorizontal: 15px;
 
   logoSmallHeight: variables.$input-height;
   logoSmallPaddingHorizontal: 0;

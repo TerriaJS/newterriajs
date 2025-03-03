@@ -4,12 +4,16 @@ import React from "react";
 import { useViewState } from "../Context";
 import ModalPopup from "./ModalPopup";
 import Tabs from "./Tabs";
+import Text from "../../Styled/Text";
+import Box from "../../Styled/Box";
+import { useTheme } from "styled-components";
+import { useTranslation } from "react-i18next";
 
 export const ExplorerWindowElementName = "AddData";
 
 export default observer<React.FC>(function ExplorerWindow() {
   const viewState = useViewState();
-
+  const theme = useTheme();
   const onClose = action(() => {
     viewState.closeCatalog();
     viewState.switchMobileView("nowViewing");
@@ -28,6 +32,8 @@ export default observer<React.FC>(function ExplorerWindow() {
     !viewState.hideMapUi &&
     viewState.explorerPanelIsVisible;
 
+  const { t } = useTranslation();
+
   return (
     <ModalPopup
       viewState={viewState}
@@ -37,6 +43,18 @@ export default observer<React.FC>(function ExplorerWindow() {
       onStartAnimatingIn={onStartAnimatingIn}
       onDoneAnimatingIn={onDoneAnimatingIn}
     >
+      <Box
+        css={`
+          background: ${theme.dark};
+          border-radius: ${theme.radiusXL} ${theme.radiusXL} 0 0;
+        `}
+        paddedRatio={4}
+        fullWidth
+      >
+        <Text extraExtraLarge textLight css={{ fontWeight: 500 }}>
+          {t("addData.dataCatalogue")}
+        </Text>
+      </Box>
       <Tabs terria={viewState.terria} viewState={viewState} />
     </ModalPopup>
   );

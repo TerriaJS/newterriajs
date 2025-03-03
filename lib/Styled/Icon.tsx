@@ -26,10 +26,14 @@ import checkboxOn from "../../wwwroot/images/icons/checkbox-on.svg";
 import close from "../../wwwroot/images/icons/close.svg";
 import closeLight from "../../wwwroot/images/icons/close-light.svg";
 import closed from "../../wwwroot/images/icons/closed.svg";
+import collapse from "../../wwwroot/images/icons/collapse.svg";
 import decrease from "../../wwwroot/images/icons/decrease.svg";
+import disable from "../../wwwroot/images/icons/disable.svg";
 import download from "../../wwwroot/images/icons/download.svg";
 import downloadNew from "../../wwwroot/images/icons/download-new.svg";
+import enable from "../../wwwroot/images/icons/enable.svg";
 import expand from "../../wwwroot/images/icons/expand.svg";
+import expandAll from "../../wwwroot/images/icons/expandAll.svg";
 import eye from "../../wwwroot/images/icons/eye.svg";
 import externalLink from "../../wwwroot/images/icons/external-link.svg";
 import feedback from "../../wwwroot/images/icons/feedback.svg";
@@ -138,6 +142,8 @@ import compareBothPanels from "../../wwwroot/images/icons/compare-both-panels.sv
 import closeCircle from "../../wwwroot/images/icons/close-circle.svg";
 import plusList from "../../wwwroot/images/icons/plus-list-20.svg";
 import minusList from "../../wwwroot/images/icons/dismiss-20.svg";
+import switchOn from "../../wwwroot/images/icons/switch-on.svg";
+import switchOff from "../../wwwroot/images/icons/switch-off.svg";
 
 // Icon
 export const GLYPHS = {
@@ -164,11 +170,15 @@ export const GLYPHS = {
   close,
   closeLight,
   closed,
+  collapse,
   decrease,
+  disable,
   download,
   downloadNew,
+  enable,
   expand,
   eye,
+  expandAll,
   externalLink,
   feedback,
   folder,
@@ -275,7 +285,9 @@ export const GLYPHS = {
   compareBothPanels,
   closeCircle,
   plusList,
-  minusList
+  minusList,
+  switchOn,
+  switchOff
 };
 
 export interface IconGlyph {

@@ -11,7 +11,9 @@ import WorkbenchItem from "./WorkbenchItem";
 import WorkbenchSplitScreen from "./WorkbenchSplitScreen";
 
 const StyledUl = styled(Ul)`
-  margin: 5px 0;
+  gap: 5px;
+  margin: 15px 0;
+  padding: 0 15px;
   li {
     &:first-child {
       margin-top: 0;
@@ -49,10 +51,9 @@ class WorkbenchList extends React.Component<IProps> {
         overflowY="auto"
         overflowX="hidden"
         scroll
-        paddedHorizontally
         fullWidth
-        fullHeight
         column
+        flex="1"
       >
         {this.props.terria.showSplitter && (
           <WorkbenchSplitScreen terria={this.props.terria} />
