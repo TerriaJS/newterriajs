@@ -9,7 +9,7 @@
   padding-right: 5px;
   margin-top: 33px;
   font-family: variables.$font-base;
-  background: variables.$transparent-dark;
+  background: variables.$dark;
   backdrop-filter: variables.$blur;
 }
 
@@ -18,8 +18,9 @@
   color: #fff;
   font-size: variables.$font-size-mid-small;
   position: absolute;
-  bottom: 41px;
+  bottom: 40px;
   left: 0px;
+  right: 0px;
   // background: variables.$dark;
   padding: 3px 5px;
 
